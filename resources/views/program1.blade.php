@@ -368,7 +368,7 @@ class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-no
 </div>
 </div>
 </div>
-<!-- Empty State (Minimalist) -->
+<!-- Empty State (Minimalis) -->
 <div id="globalEmptyState" class="empty-state">
 <div class="empty-state-icon">
 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
