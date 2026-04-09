@@ -44,9 +44,9 @@ transform: translateY(-10px) scale(0.95); transition: all 0.3s ease;
 .mobile-submenu a { font-size: 13px; color: #6B7280; padding: 8px 12px; }
 /* Unit Filter Dropdown */
 .unit-filter-dropdown {
-display: none; position: absolute; top: 100%; right: 0; margin-top: 8px;
-background: white; border-radius: 12px;
-box-shadow: 0 10px 40px rgba(0,0,0,0.15); padding: 12px; z-index: 200; min-width: 280px;
+    display: none; position: absolute; top: 100%; left: 0; margin-top: 8px;
+    background: white; border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15); padding: 12px; z-index: 200; min-width: 100%;
 }
 .unit-filter-dropdown.active { display: block; }
 .unit-option {
@@ -160,10 +160,11 @@ position: relative; display: inline-block; margin-bottom: 24px;
 }
 /* Clear Filter Button */
 .clear-filter {
-display: none; padding: 10px 20px; background: #FEF2F2; color: #C3110C;
-border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer;
-transition: all 0.2s; border: 2px solid transparent;
+    display: none; padding: 10px 16px; background: transparent; color: white;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; border: none;
 }
+.clear-filter.show { display: inline-flex; align-items: center; gap: 8px; }
 .clear-filter:hover { background: #FEE2E2; border-color: #FECACA; }
 .clear-filter.show { display: inline-flex; align-items: center; gap: 8px; }
 /* Responsive */
@@ -259,90 +260,96 @@ Hubungi Kami
             <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">Jadwal Pendaftaran</h1>
             <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-10">Rencanakan dan temukan jadwal pendaftaran sesuai dengan agenda mu</p>
             
-            <!-- Filter Bulan & Tanggal -->
-            <div class="flex flex-row items-start justify-center gap-3 w-full max-w-xl mx-auto">
-                <!-- Month Filter -->
-                <div class="relative w-1/2">
-                    <button id="monthFilterBtn" class="px-6 py-4 bg-white text-gray-800 font-bold rounded-xl hover:shadow-xl transition flex items-center gap-2 shadow-lg w-full justify-center">
-                        <span id="selectedMonthText">Bulan</span>
-                        <svg id="monthCaret" class="w-5 h-5 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="monthDropdown" class="month-filter-dropdown">
-                        <button class="month-btn" data-month="1" data-month-name="Jan">Jan</button>
-                        <button class="month-btn" data-month="2" data-month-name="Feb">Feb</button>
-                        <button class="month-btn" data-month="3" data-month-name="Mar">Mar</button>
-                        <button class="month-btn" data-month="4" data-month-name="Apr">Apr</button>
-                        <button class="month-btn" data-month="5" data-month-name="Mei">Mei</button>
-                        <button class="month-btn" data-month="6" data-month-name="Jun">Jun</button>
-                        <button class="month-btn" data-month="7" data-month-name="Jul">Jul</button>
-                        <button class="month-btn" data-month="8" data-month-name="Agu">Agu</button>
-                        <button class="month-btn" data-month="9" data-month-name="Sep">Sep</button>
-                        <button class="month-btn" data-month="10" data-month-name="Okt">Okt</button>
-                        <button class="month-btn" data-month="11" data-month-name="Nov">Nov</button>
-                        <button class="month-btn" data-month="12" data-month-name="Des">Des</button>
-                    </div>
-                </div>
-                
-                <!-- Calendar Button -->
-                <div class="relative w-1/2">
-                    <button id="calendarBtn" class="px-6 py-4 bg-white rounded-xl hover:shadow-xl transition shadow-lg w-full flex justify-center">
-                        <svg class="w-6 h-6 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                    </button>
-                    <div id="calendarContainer" class="calendar-container">
-                        <div class="calendar-header">
-                            <button id="prevMonth" class="calendar-nav-btn">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                                </svg>
-                            </button>
-                            <span id="calendarMonthYear" class="calendar-month-year"></span>
-                            <button id="nextMonth" class="calendar-nav-btn">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    
+                <!-- Filter Bulan & Tanggal -->
+                <div class="relative w-full max-w-sm mx-auto px-6">
+                    <div class="flex flex-row gap-3 items-center">
+                        <!-- Month Filter -->
+                        <div class="w-1/2">
+                            <button id="monthFilterBtn" class="px-6 py-3 bg-white text-gray-800 font-bold rounded-xl hover:shadow-xl transition flex items-center gap-2 shadow-lg w-full justify-center">
+                                <span id="selectedMonthText">Bulan</span>
+                                <svg id="monthCaret" class="w-5 h-5 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                 </svg>
                             </button>
                         </div>
-                        <div class="grid grid-cols-7 gap-1 mb-2">
-                            <div class="calendar-day-header">Min</div>
-                            <div class="calendar-day-header">Sen</div>
-                            <div class="calendar-day-header">Sel</div>
-                            <div class="calendar-day-header">Rab</div>
-                            <div class="calendar-day-header">Kam</div>
-                            <div class="calendar-day-header">Jum</div>
-                            <div class="calendar-day-header">Sab</div>
+                        <!-- Calendar Button -->
+                        <div class="w-1/2">
+                            <button id="calendarBtn" class="px-6 py-3 bg-white rounded-xl hover:shadow-xl transition shadow-lg w-full flex justify-center">
+                                <svg class="w-6 h-6 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </button>
                         </div>
-                        <div id="calendarDays" class="grid grid-cols-7 gap-1"></div>
-                        <div class="mt-4 pt-3 border-t border-gray-200 flex items-center justify-center gap-6 text-xs">
-                            <div class="flex items-center gap-2">
-                                <div class="w-3 h-3 rounded-full bg-red-700"></div>
-                                <span class="text-gray-600 font-medium">Ada Program</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <div class="w-3 h-3 rounded bg-gradient-to-br from-[#740A03] to-[#C3110C]"></div>
-                                <span class="text-gray-600 font-medium">Dipilih</span>
-                            </div>
-                        </div>
+                        <!-- Clear Filter - SEJAJAR di dalam flex row -->
+                        <button id="clearFilterBtn" class="clear-filter hidden px-4 py-2 text-gray-500 hover:text-red-600 transition bg-white rounded-lg shadow hover:shadow-md">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            <span class="font-medium text-sm">Reset</span>
+                        </button>
                     </div>
+
+                <!-- Month Dropdown - sejajar penuh kedua button -->
+                <div id="monthDropdown" class="month-filter-dropdown">
+                    <button class="month-btn" data-month="1" data-month-name="Jan">Jan</button>
+                    <button class="month-btn" data-month="2" data-month-name="Feb">Feb</button>
+                    <button class="month-btn" data-month="3" data-month-name="Mar">Mar</button>
+                    <button class="month-btn" data-month="4" data-month-name="Apr">Apr</button>
+                    <button class="month-btn" data-month="5" data-month-name="Mei">Mei</button>
+                    <button class="month-btn" data-month="6" data-month-name="Jun">Jun</button>
+                    <button class="month-btn" data-month="7" data-month-name="Jul">Jul</button>
+                    <button class="month-btn" data-month="8" data-month-name="Agu">Agu</button>
+                    <button class="month-btn" data-month="9" data-month-name="Sep">Sep</button>
+                    <button class="month-btn" data-month="10" data-month-name="Okt">Okt</button>
+                    <button class="month-btn" data-month="11" data-month-name="Nov">Nov</button>
+                    <button class="month-btn" data-month="12" data-month-name="Des">Des</button>
                 </div>
 
-                <!-- Clear Filter -->
-                <button id="clearFilterBtn" class="clear-filter hidden ml-2 px-4 py-2 text-gray-500 hover:text-red-600 transition bg-white rounded-lg shadow hover:shadow-md">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                    <span class="font-medium text-sm">Reset</span>
-                </button>
+                <!-- Calendar Container - sejajar penuh kedua button -->
+                <div id="calendarContainer" class="calendar-container">
+                    <div class="calendar-header">
+                        <button id="prevMonth" class="calendar-nav-btn">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <span id="calendarMonthYear" class="calendar-month-year"></span>
+                        <button id="nextMonth" class="calendar-nav-btn">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-7 gap-1 mb-2">
+                        <div class="calendar-day-header">Min</div>
+                        <div class="calendar-day-header">Sen</div>
+                        <div class="calendar-day-header">Sel</div>
+                        <div class="calendar-day-header">Rab</div>
+                        <div class="calendar-day-header">Kam</div>
+                        <div class="calendar-day-header">Jum</div>
+                        <div class="calendar-day-header">Sab</div>
+                    </div>
+                    <div id="calendarDays" class="grid grid-cols-7 gap-1"></div>
+                    <div class="mt-4 pt-3 border-t border-gray-200 flex items-center justify-center gap-6 text-xs">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-700"></div>
+                            <span class="text-gray-600 font-medium">Ada Program</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded bg-gradient-to-br from-[#740A03] to-[#C3110C]"></div>
+                            <span class="text-gray-600 font-medium">Dipilih</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 <!-- Content -->
 <div class="px-4 md:px-8 py-10 max-w-7xl mx-auto">
 <!-- Search & Filter Bar -->
-<div class="flex flex-col md:flex-row gap-4 mb-10">
+<div class="flex flex-row gap-4 mb-10">
 <div class="flex-1 relative">
 <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -361,10 +368,10 @@ class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-no
 </svg>
 </button>
 <div id="unitFilterDropdown" class="unit-filter-dropdown">
-<div class="unit-option active" data-unit="all">Semua Program</div>
-<div class="unit-option" data-unit="Pelatihan">Pelatihan</div>
-<!-- <div class="unit-option" data-unit="Sertifikasi">Sertifikasi</div>
-<div class="unit-option" data-unit="Bahasa">Bahasa</div> -->
+    <div class="unit-option active" data-unit="all">Semua Program</div>
+    <div class="unit-option" data-unit="Pelatihan">Pelatihan</div>
+    <div class="unit-option" data-unit="Sertifikasi">Sertifikasi</div>
+    <div class="unit-option" data-unit="Bahasa">Bahasa</div>
 </div>
 </div>
 </div>
@@ -765,15 +772,11 @@ const globalEmptyState = document.getElementById('globalEmptyState');
 const programsContainer = document.getElementById('programsContainer');
 // ===== MONTH FILTER =====
 monthFilterBtn.addEventListener('click', function(e) {
-e.stopPropagation();
-monthDropdown.classList.toggle('active');
-monthCaret.classList.toggle('rotate-180');
-});
-document.addEventListener('click', function(e) {
-if (!monthFilterBtn.contains(e.target) && !monthDropdown.contains(e.target)) {
-monthDropdown.classList.remove('active');
-monthCaret.classList.remove('rotate-180');
-}
+    e.stopPropagation();
+    monthDropdown.classList.toggle('active');
+    monthCaret.classList.toggle('rotate-180');
+    // Tutup kalender
+    calendarContainer.classList.remove('active');
 });
 monthBtns.forEach(btn => {
 btn.addEventListener('click', function() {
@@ -796,24 +799,25 @@ updateClearFilter();
 });
 // ===== CALENDAR =====
 calendarBtn.addEventListener('click', function(e) {
-e.stopPropagation();
-calendarContainer.classList.toggle('active');
-});
-document.addEventListener('click', function(e) {
-if (!calendarBtn.contains(e.target) && !calendarContainer.contains(e.target)) {
-calendarContainer.classList.remove('active');
-}
+    e.stopPropagation();
+    calendarContainer.classList.toggle('active');
+    // Tutup dropdown bulan
+    monthDropdown.classList.remove('active');
+    monthCaret.classList.remove('rotate-180');
 });
 function generateCalendar() {
-calendarDays.innerHTML = '';
-const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-calendarMonthYear.textContent = `${monthNames[calendarMonth]} ${calendarYear}`;
-const firstDay = new Date(calendarYear, calendarMonth, 1).getDay();
-const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
-for (let i = 0; i < firstDay; i++) {
-const emptyCell = document.createElement('div');
-emptyCell.className = 'calendar-day empty';
-calendarDays.appendChild(emptyCell);
+    if (isNaN(calendarYear) || !calendarYear) calendarYear = 2025;
+    if (isNaN(calendarMonth) || calendarMonth === null) calendarMonth = 0;
+    
+    calendarDays.innerHTML = '';
+    const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    calendarMonthYear.textContent = `${monthNames[calendarMonth]} ${calendarYear}`;
+    const firstDay = new Date(calendarYear, calendarMonth, 1).getDay();
+    const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+    for (let i = 0; i < firstDay; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'calendar-day empty';
+        calendarDays.appendChild(emptyCell);
 }
 const today = new Date();
 for (let day = 1; day <= daysInMonth; day++) {
@@ -836,10 +840,11 @@ hasEvent = true;
 if (hasEvent) dayCell.classList.add('has-event');
 if (selectedDate === dateStr) dayCell.classList.add('selected');
 dayCell.addEventListener('click', () => {
-selectedDate = (selectedDate === dateStr) ? null : dateStr;
-generateCalendar();
-filterPrograms();
-updateClearFilter();
+    selectedDate = (selectedDate === dateStr) ? null : dateStr;
+    calendarContainer.classList.remove('active'); // ← pindah ke sini, SEBELUM generateCalendar
+    generateCalendar();
+    filterPrograms();
+    updateClearFilter();
 });
 calendarDays.appendChild(dayCell);
 }
