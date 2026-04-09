@@ -258,17 +258,16 @@ Hubungi Kami
 </div>
         <div class="relative z-10 max-w-4xl mx-auto text-center">
             <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">Jadwal Pendaftaran</h1>
-            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto mb-10">Rencanakan dan temukan jadwal pendaftaran sesuai dengan agenda mu</p>
-            
-                    
-                <!-- Filter Bulan & Tanggal -->
-                <div class="relative w-full max-w-sm mx-auto px-6">
-                    <div class="flex flex-row gap-3 items-center">
-                        <!-- Month Filter -->
-                        <div class="w-1/2">
-                            <button id="monthFilterBtn" class="px-6 py-3 bg-white text-gray-800 font-bold rounded-xl hover:shadow-xl transition flex items-center gap-2 shadow-lg w-full justify-center">
-                                <span id="selectedMonthText">Bulan</span>
-                                <svg id="monthCaret" class="w-5 h-5 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <p class="text-white/90 text-sm md:text-base max-w-2xl mx-auto mb-10">Rencanakan dan temukan jadwal pendaftaran sesuai dengan agenda mu</p>
+
+            <!-- Filter Bulan & Tanggal -->
+            <div class="relative w-full max-w-sm mx-auto px-6">
+                <div class="flex flex-row gap-3 items-center">
+                    <!-- Month Filter -->
+                    <div class="w-1/2">
+                        <button id="monthFilterBtn" class="px-6 py-3 bg-white text-gray-800 font-bold rounded-xl hover:shadow-xl transition flex items-center gap-2 shadow-lg w-full justify-center">
+                            <span id="selectedMonthText">Bulan</span>
+                            <svg id="monthCaret" class="w-5 h-5 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                 </svg>
                             </button>
@@ -395,208 +394,202 @@ Reset Filter
 <div id="programsContainer">
 <!-- Section: Pelatihan -->
 <section class="mb-12" data-section="pelatihan">
-<h2 class="text-3xl font-bold text-gray-800 section-title">Pelatihan</h2>
-<div class="grid md:grid-cols-2 gap-6">
-<!-- Card 1 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3"
-data-category="Pelatihan" data-unit="Ekonomi dan Bisnis" data-month="2"
-data-date-start="2025-02-12" data-date-end="2025-03-12" data-title="Perpajakan & Asuransi">
-<div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Perpajakan & Asuransi" class="w-full h-48 object-cover">
-</div>
-<div class="p-6">
-<h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Perpajakan & Asuransi</h4>
-<p class="text-gray-600 text-sm text-center mb-4">Ekonomi dan Bisnis - Unit Pelatihan</p>
-<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-<span>12 Feb - 12 Mar</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-<span>Rp 2.000.000</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
-<span>22 Kuota</span>
-</div>
-</div>
-<a href="detail1"
-   class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">
-   Daftar Sekarang
-</a>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3"
-data-category="Pelatihan" data-unit="Teknologi Kreatif" data-month="2"
-data-date-start="2025-02-13" data-date-end="2025-03-29" data-title="UI/UX Design Fundamental">
-<div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-<img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop" alt="UI/UX Design Fundamental" class="w-full h-48 object-cover">
-</div>
-<div class="p-6">
-<h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">UI/UX Design Fundamental</h4>
-<p class="text-gray-600 text-sm text-center mb-4">Teknologi Kreatif - Unit Pelatihan</p>
-<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-<span>13 Feb - 29 Mar</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-<span>Rp 2.500.000</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
-<span>25 Kuota</span>
-</div>
-</div>
-<a href="detail3"
-   class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">
-   Daftar Sekarang
-</a>
-</div>
-</div>
-</div>
+    <!-- Judul: + pl-2.5 agar sejajar dengan card -->
+    <h2 class="text-3xl font-bold text-gray-800 section-title pl-2.5">Pelatihan</h2>
+    
+    <!-- Grid Container: px-2.5 = 10px spacing mobile -->
+    <div class="grid md:grid-cols-2 gap-6 px-2.5">
+        <!-- Card 1 -->
+        <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-full max-w-none mx-auto"
+        data-category="Pelatihan" data-unit="Ekonomi dan Bisnis" data-month="2"
+        data-date-start="2025-02-12" data-date-end="2025-03-12" data-title="Perpajakan & Asuransi">
+            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Perpajakan & Asuransi" class="w-full h-48 object-cover">
+            </div>
+            <div class="p-6">
+                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Perpajakan & Asuransi</h4>
+                <p class="text-gray-600 text-sm text-center mb-4">Ekonomi dan Bisnis - Unit Pelatihan</p>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        <span>12 Feb - 12 Mar</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
+                        <span>Rp 2.000.000</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                        <span>22 Kuota</span>
+                    </div>
+                </div>
+                <a href="detail1" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-full max-w-none mx-auto"
+        data-category="Pelatihan" data-unit="Teknologi Kreatif" data-month="2"
+        data-date-start="2025-02-13" data-date-end="2025-03-29" data-title="UI/UX Design Fundamental">
+            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop" alt="UI/UX Design Fundamental" class="w-full h-48 object-cover">
+            </div>
+            <div class="p-6">
+                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">UI/UX Design Fundamental</h4>
+                <p class="text-gray-600 text-sm text-center mb-4">Teknologi Kreatif - Unit Pelatihan</p>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        <span>13 Feb - 29 Mar</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
+                        <span>Rp 2.500.000</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                        <span>25 Kuota</span>
+                    </div>
+                </div>
+                <a href="detail3" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+            </div>
+        </div>
+    </div>
 </section>
+
 <!-- Section: Sertifikasi -->
 <section class="mb-12" data-section="sertifikasi">
-<h2 class="text-3xl font-bold text-gray-800 section-title">Sertifikasi</h2>
-<div class="grid md:grid-cols-2 gap-6">
-<!-- Card 3 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3"
-data-category="Sertifikasi" data-unit="Teknik & Industri" data-month="3"
-data-date-start="2025-03-10" data-date-end="2025-04-25" data-title="Sertifikasi Manajemen Proyek">
-<div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-<img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Sertifikasi Manajemen Proyek" class="w-full h-48 object-cover">
-</div>
-<div class="p-6">
-<h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Sertifikasi Manajemen Proyek</h4>
-<p class="text-gray-600 text-sm text-center mb-4">Teknik & Industri - Unit Sertifikasi</p>
-<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-<span>10 Mar - 25 Apr</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-<span>Rp 2.500.000</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
-<span>22 Kuota</span>
-</div>
-</div>
-<a href="detail3"
-   class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">
-   Daftar Sekarang
-</a>
-</div>
-</div>
-<!-- Card 4 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3"
-data-category="Sertifikasi" data-unit="Teknik & Industri" data-month="3"
-data-date-start="2025-03-15" data-date-end="2025-04-10" data-title="AutoCAD for Professional">
-<div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-<img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop" alt="AutoCAD for Professional" class="w-full h-48 object-cover">
-</div>
-<div class="p-6">
-<h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">AutoCAD for Professional</h4>
-<p class="text-gray-600 text-sm text-center mb-4">Teknik & Industri - Unit Sertifikasi</p>
-<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-<span>15 Mar - 10 Apr</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-<span>Rp 2.500.000</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
-<span>22 Kuota</span>
-</div>
-</div>
-<a href="detail4"
-   class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">
-   Daftar Sekarang
-</a>
-</div>
-</div>
-</div>
+    <!-- Judul: + pl-2.5 agar sejajar dengan card -->
+    <h2 class="text-3xl font-bold text-gray-800 section-title pl-2.5">Sertifikasi</h2>
+    
+    <!-- Grid Container: px-2.5 = 10px spacing mobile -->
+    <div class="grid md:grid-cols-2 gap-6 px-2.5">
+        <!-- Card 3 -->
+        <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-full max-w-none mx-auto"
+        data-category="Sertifikasi" data-unit="Teknik & Industri" data-month="3"
+        data-date-start="2025-03-10" data-date-end="2025-04-25" data-title="Sertifikasi Manajemen Proyek">
+            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Sertifikasi Manajemen Proyek" class="w-full h-48 object-cover">
+            </div>
+            <div class="p-6">
+                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Sertifikasi Manajemen Proyek</h4>
+                <p class="text-gray-600 text-sm text-center mb-4">Teknik & Industri - Unit Sertifikasi</p>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        <span>10 Mar - 25 Apr</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
+                        <span>Rp 2.500.000</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                        <span>22 Kuota</span>
+                    </div>
+                </div>
+                <a href="detail3" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+            </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-full max-w-none mx-auto"
+        data-category="Sertifikasi" data-unit="Teknik & Industri" data-month="3"
+        data-date-start="2025-03-15" data-date-end="2025-04-10" data-title="AutoCAD for Professional">
+            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop" alt="AutoCAD for Professional" class="w-full h-48 object-cover">
+            </div>
+            <div class="p-6">
+                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">AutoCAD for Professional</h4>
+                <p class="text-gray-600 text-sm text-center mb-4">Teknik & Industri - Unit Sertifikasi</p>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        <span>15 Mar - 10 Apr</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
+                        <span>Rp 2.500.000</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                        <span>22 Kuota</span>
+                    </div>
+                </div>
+                <a href="detail4" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+            </div>
+        </div>
+    </div>
 </section>
+
 <!-- Section: Bahasa -->
 <section class="mb-12" data-section="bahasa">
-<h2 class="text-3xl font-bold text-gray-800 section-title">Bahasa</h2>
-<div class="grid md:grid-cols-2 gap-6">
-<!-- Card 5 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3"
-data-category="Bahasa" data-unit="Unit Bahasa" data-month="2"
-data-date-start="2025-02-20" data-date-end="2025-03-30" data-title="TOEFL Preparation Program">
-<div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-<img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=600&fit=crop" alt="TOEFL Preparation Program" class="w-full h-48 object-cover">
-</div>
-<div class="p-6">
-<h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">TOEFL Preparation Program</h4>
-<p class="text-gray-600 text-sm text-center mb-4">Unit Bahasa</p>
-<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-<span>20 Feb - 30 Mar</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-<span>Rp 1.200.000</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
-<span>35 Kuota</span>
-</div>
-</div>
-<a href="detail5"
-   class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">
-   Daftar Sekarang
-</a>
-</div>
-</div>
-<!-- Card 6 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3"
-data-category="Bahasa" data-unit="Unit Bahasa" data-month="2"
-data-date-start="2025-02-28" data-date-end="2025-03-15" data-title="IELTS Intensive Coaching">
-<div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="IELTS Intensive Coaching" class="w-full h-48 object-cover">
-</div>
-<div class="p-6">
-<h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">IELTS Intensive Coaching</h4>
-<p class="text-gray-600 text-sm text-center mb-4">Unit Bahasa</p>
-<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-<span>28 Feb - 15 Mar</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-<span>Rp 2.500.000</span>
-</div>
-<div class="flex items-center gap-1">
-<svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
-<span>15 Kuota</span>
-</div>
-</div>
-<a href="detail6"
-   class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">
-   Daftar Sekarang
-</a>
-</div>
-</div>
-</div>
+    <!-- Judul: + pl-2.5 agar sejajar dengan card -->
+    <h2 class="text-3xl font-bold text-gray-800 section-title pl-2.5">Bahasa</h2>
+    
+    <!-- Grid Container: px-2.5 = 10px spacing mobile -->
+    <div class="grid md:grid-cols-2 gap-6 px-2.5">
+        <!-- Card 5 -->
+        <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-full max-w-none mx-auto"
+        data-category="Bahasa" data-unit="Unit Bahasa" data-month="2"
+        data-date-start="2025-02-20" data-date-end="2025-03-30" data-title="TOEFL Preparation Program">
+            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
+                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=600&fit=crop" alt="TOEFL Preparation Program" class="w-full h-48 object-cover">
+            </div>
+            <div class="p-6">
+                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">TOEFL Preparation Program</h4>
+                <p class="text-gray-600 text-sm text-center mb-4">Unit Bahasa</p>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        <span>20 Feb - 30 Mar</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
+                        <span>Rp 1.200.000</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                        <span>35 Kuota</span>
+                    </div>
+                </div>
+                <a href="detail5" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+            </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-full max-w-none mx-auto"
+        data-category="Bahasa" data-unit="Unit Bahasa" data-month="2"
+        data-date-start="2025-02-28" data-date-end="2025-03-15" data-title="IELTS Intensive Coaching">
+            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="IELTS Intensive Coaching" class="w-full h-48 object-cover">
+            </div>
+            <div class="p-6">
+                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">IELTS Intensive Coaching</h4>
+                <p class="text-gray-600 text-sm text-center mb-4">Unit Bahasa</p>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        <span>28 Feb - 15 Mar</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
+                        <span>Rp 2.500.000</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                        <span>15 Kuota</span>
+                    </div>
+                </div>
+                <a href="detail6" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- Program Segera Terbuka -->
 <section class="pt-12 border-t border-gray-200 mt-12" data-section="segera">
 <h2 class="text-3xl font-bold text-center text-[#C3110C] mb-10">Program Segera Terbuka</h2>
-<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Grid Container: px-2.5 = 10px spacing mobile -->
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 px-2.5">
 <!-- Card 1 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col"
+<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col w-full max-w-none mx-auto"
 data-category="Pelatihan" data-unit="Teknologi & Kreatif" data-month="" data-date-start="" data-date-end="" data-title="Data Analysis for Business">
 <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Data Analysis" class="w-full h-48 object-cover">
@@ -608,7 +601,7 @@ data-category="Pelatihan" data-unit="Teknologi & Kreatif" data-month="" data-dat
 </div>
 </div>
 <!-- Card 2 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col"
+<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col w-full max-w-none mx-auto"
 data-category="Sertifikasi" data-unit="Ekonomi dan Bisnis" data-month="" data-date-start="" data-date-end="" data-title="Human Resource Management">
 <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
 <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="HR Management" class="w-full h-48 object-cover">
@@ -620,7 +613,7 @@ data-category="Sertifikasi" data-unit="Ekonomi dan Bisnis" data-month="" data-da
 </div>
 </div>
 <!-- Card 3 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col"
+<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col w-full max-w-none mx-auto"
 data-category="Bahasa" data-unit="Program Pengembangan Bahasa Asing" data-month="" data-date-start="" data-date-end="" data-title="IELTS Preparation Program">
 <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
 <img src="https://images.unsplash.com/photo-1544979590-2c3518577655?w=600&h=400&fit=crop" alt="IELTS Prep" class="w-full h-48 object-cover">
@@ -632,7 +625,7 @@ data-category="Bahasa" data-unit="Program Pengembangan Bahasa Asing" data-month=
 </div>
 </div>
 <!-- Card 4 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col"
+<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col w-full max-w-none mx-auto"
 data-category="Sertifikasi" data-unit="Ekonomi dan Bisnis" data-month="" data-date-start="" data-date-end="" data-title="Leadership & Communication Skills">
 <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
 <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop" alt="Leadership" class="w-full h-full object-cover">
