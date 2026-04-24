@@ -226,8 +226,8 @@ Hubungi Kami
 </svg>
 </button>
 <div id="programSubmenu" class="mobile-submenu rounded-lg overflow-hidden hidden">
-<a href="{{ url('/program/nasional') }}" class="block hover:text-[#8B1A1A]">Nasional</a>
-<a href="{{ url('/program/internasional') }}" class="block hover:text-[#8B1A1A]">Internasional</a>
+<a href="{{ url('program1') }}" class="block hover:text-[#8B1A1A]">Nasional</a>
+<a href="{{ url('program2') }}" class="block hover:text-[#8B1A1A]">Internasional</a>
 </div>
 </div>
 <div class="mobile-menu-item py-2">

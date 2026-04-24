@@ -148,8 +148,8 @@
                 <!-- Mobile Menu Content -->
                 <div id="mobileMenu" class="mobile-menu">
                     <div class="flex flex-col py-2">
-                        <a href="{{ url('/') }}" class="mobile-menu-item text-sm font-semibold text-[#8B1A1A]">Beranda</a>
-                        <a href="{{ url('/profil') }}" class="mobile-menu-item text-sm font-medium text-gray-600">Profil</a>
+                        <a href="{{ url('/') }}" class="mobile-menu-item text-sm font-medium text-gray-600 hover:text-[#8B1A1A]">Beranda</a>
+                        <a href="{{ url('/profil') }}" class="mobile-menu-item text-sm font-semibold text-[#8B1A1A]">Profil</a>
                         
                         <!-- Program Submenu -->
                         <div class="mobile-menu-item py-0">
@@ -160,7 +160,7 @@
                                 </svg>
                             </button>
                             <div id="programSubmenu" class="mobile-submenu rounded-lg overflow-hidden hidden">
-                                <a href="{{ url('/program/nasional') }}" class="block hover:text-[#8B1A1A]">Nasional</a>
+                                <a href="{{ url('program1') }}" class="block hover:text-[#8B1A1A]">Nasional</a>
                                 <a href="{{ url('/program/internasional') }}" class="block hover:text-[#8B1A1A]">Internasional</a>
                             </div>
                         </div>
@@ -184,7 +184,7 @@
          HERO SECTION
          ============================== -->
     <section class="px-4 md:px-8 mt-6 mb-8">
-        <div class="relative hero-height h-[550px] md:h-[600px] rounded-3xl overflow-hidden flex items-center justify-center text-center">
+        <div class="relative hero-height h-[550px] md:h-[600px] rounded-3xl overflow-hidden flex flex-col items-center justify-center text-center">
             
             <!-- Layer 1: Background Image -->
             <img src="{{ asset('images/hero-bg.jpg') }}" alt="UISI Campus"
@@ -225,12 +225,12 @@
             <div class="absolute inset-0 opacity-[0.04]" style="z-index: 4; pointer-events: none; background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
 
             <!-- Layer 5: Content -->
-            <div class="relative max-w-5xl px-4 md:px-6 text-white mt-28 md:mt-40" style="z-index: 5;">
-                <h1 class="hero-title text-2xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-lg px-2">
+            <div class="relative max-w-3xl px-4 md:px-6 text-white text-center mt-28 md:mt-40" style="z-index: 5;">
+                <h1 class="hero-title text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-lg px-2 whitespace-nowrap">
                     <span class="gradient-title">Profil UISI Pusat Layanan</span>
                 </h1>
-                <div class="w-24 md:w-44 h-[2px] mx-auto mt-3 md:mt-5 bg-gradient-to-r from-transparent via-white to-transparent"></div>
-                <p class="hero-text text-white/90 mt-4 md:mt-6 text-xs md:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto px-3 md:px-0 drop-shadow-md">
+                <div class="w-32 md:w-44 h-[1.5px] mx-auto mt-2 md:mt-3 bg-gradient-to-r from-transparent via-white to-transparent"></div>
+                <p class="hero-text text-white/90 mt-4 md:mt-4 text-[5px] text-center md:text-base lg:text-lg leading-tight max-w-2xl mx-auto px-6 md:px-0 drop-shadow-md">
                     Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.
                 </p>
             </div>
@@ -240,7 +240,7 @@
 <!-- ==============================
 VISI & MISI SECTION
 ============================== -->
-<section class="px-4 md:px-8 py-20 relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
+<section class="relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%); padding: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 6vw, 3rem);">
     <!-- Circular White Textures -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none">
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1400px] md:h-[1400px] bg-white rounded-full" style="opacity: 0.02;"></div>
@@ -271,9 +271,9 @@ VISI & MISI SECTION
                 Misi
             </h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
             <!-- Misi Card 1 -->
-                <div class="bg-white p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300" 
+                <div class="bg-white p-6 md:p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300 max-w-[320px] md:max-w-none mx-auto w-full" 
                     style="border-radius: 20px 0 20px 0; border: 1px solid #FF0700; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed text-center">
                         Lorem ipsum dolor sit amet consectetur. Elit viverra felis nulla blandit.
@@ -281,7 +281,7 @@ VISI & MISI SECTION
                 </div>
 
                 <!-- Misi Card 2 -->
-                <div class="bg-white p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300" 
+                <div class="bg-white p-6 md:p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300 max-w-[320px] md:max-w-none mx-auto w-full" 
                     style="border-radius: 20px 0 20px 0; border: 1px solid #FF0700; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed text-center">
                         Lorem ipsum dolor sit amet consectetur. Elit viverra felis nulla blandit.
@@ -289,7 +289,7 @@ VISI & MISI SECTION
                 </div>
 
                 <!-- Misi Card 3 -->
-                <div class="bg-white p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300" 
+                <div class="bg-white p-6 md:p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300 max-w-[320px] md:max-w-none mx-auto w-full" 
                     style="border-radius: 20px 0 20px 0; border: 1px solid #FF0700; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed text-center">
                         Lorem ipsum dolor sit amet consectetur. Elit viverra felis nulla blandit.
@@ -302,17 +302,17 @@ VISI & MISI SECTION
 <!-- ==============================
 LAYANAN KAMI SECTION
 ============================== -->
-<section class="px-4 md:px-8 py-20 bg-white">
+<section class="bg-white" style="padding: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 6vw, 3rem);">
     <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#C3110C] mb-12">Layanan Kami</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-[#C3110C] mb-12 text-center">Layanan Kami</h2>
         
         <div class="grid lg:grid-cols-2 gap-8 items-center">
             <!-- Left: Service Cards -->
-            <div class="space-y-6">
+            <div class="space-y-6 order-2 lg:order-1">
                 <!-- Card 1: Pusat Unit Pelatihan -->
-                <a href="{{ url('program1') }}" class="block group transform hover:-translate-y-1 transition-all duration-300">
-                    <div class="flex items-center gap-5 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
-                        <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center" style="border-radius: 15px 0 15px 0;">
+                <a href="{{ url('program1') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                    <div class="flex flex-col lg:flex-row items-center lg:items-center text-center lg:text-left gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
+                        <div class="flex-shrink-0 w-16 h-16 lg:mx-0 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300" style="border-radius: 12px 0 12px 0;">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
@@ -328,9 +328,9 @@ LAYANAN KAMI SECTION
                 </a>
 
                 <!-- Card 2: Pusat Unit Sertifikasi -->
-                <a href="{{ url('program1') }}" class="block group transform hover:-translate-y-1 transition-all duration-300">
-                    <div class="flex items-center gap-5 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
-                        <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center" style="border-radius: 15px 0 15px 0;">
+                <a href="{{ url('program1') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                    <div class="flex flex-col lg:flex-row items-center lg:items-center text-center lg:text-left gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
+                        <div class="flex-shrink-0 w-16 h-16 lg:mx-0 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300" style="border-radius: 12px 0 12px 0;">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M6 20h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
@@ -345,9 +345,9 @@ LAYANAN KAMI SECTION
                 </a>
 
                 <!-- Card 3: Pusat Unit Bahasa -->
-                <a href="{{ url('program1') }}" class="block group transform hover:-translate-y-1 transition-all duration-300">
-                    <div class="flex items-center gap-5 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
-                        <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center" style="border-radius: 15px 0 15px 0;">
+                <a href="{{ url('program1') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                    <div class="flex flex-col lg:flex-row items-center lg:items-center text-center lg:text-left gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
+                        <div class="flex-shrink-0 w-16 h-16 lg:mx-0 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300" style="border-radius: 12px 0 12px 0;">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                             </svg>
@@ -363,17 +363,18 @@ LAYANAN KAMI SECTION
             </div>
 
             <!-- Right: Images -->
-            <div class="relative h-full min-h-[400px] flex items-center justify-center">
-                <div class="relative w-full h-full">
-                    <!-- Image 1 (Top) -->
-                    <div class="absolute top-0 right-0 w-[70%] h-[50%] transform rotate-2 hover:rotate-0 transition-transform duration-300" style="border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.12); border: 4px solid #C0C0C0;">
+            {{-- SESUDAH --}}
+            <div class="relative h-full min-h-[280px] lg:min-h-[400px] flex items-center justify-center order-1 lg:order-2">
+                <div class="relative w-full max-w-[300px] lg:max-w-none h-[300px] lg:h-[380px] mx-auto lg:mx-0">
+                    <!-- Image 1 (Top Left-ish on mobile, Top Right on desktop) -->
+                    <div class="absolute top-4 left-0 lg:left-auto lg:right-0 lg:top-0 w-[75%] lg:w-[70%] h-[55%] lg:h-[50%] transform -rotate-3 lg:rotate-2 hover:rotate-0 transition-transform duration-300 z-10" style="border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.15); border: 4px solid #FFFFFF;">
                         <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop" 
                              alt="Training Session" 
                              class="w-full h-full object-cover">
                     </div>
                     
-                    <!-- Image 2 (Bottom) -->
-                    <div class="absolute bottom-0 right-0 w-[70%] h-[50%] transform -rotate-2 hover:rotate-0 transition-transform duration-300" style="border-radius: 24px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.12); border: 4px solid #C0C0C0;">
+                    <!-- Image 2 (Bottom Right-ish) -->
+                    <div class="absolute bottom-4 right-0 lg:bottom-0 lg:right-0 w-[75%] lg:w-[70%] h-[55%] lg:h-[50%] transform rotate-3 lg:-rotate-2 hover:rotate-0 transition-transform duration-300 z-0" style="border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.15); border: 4px solid #FFFFFF;">
                         <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" 
                              alt="Meeting Session" 
                              class="w-full h-full object-cover">
@@ -386,7 +387,7 @@ LAYANAN KAMI SECTION
 <!-- ==============================
 KALENDER KEGIATAN SECTION
 ============================== -->
-<section class="px-4 md:px-8 py-20 relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
+<section class="relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%); padding: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 6vw, 3rem);">
     <!-- Circular White Textures - 6 Lingkaran Full -->
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none">
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[700px] md:h-[700px] bg-white rounded-full" style="opacity: 0.02;"></div>
@@ -418,7 +419,7 @@ KALENDER KEGIATAN SECTION
         <!-- ==============================
 FOOTER SECTION
 ============================== -->
-  <footer class="px-4 md:px-8 py-12 md:py-16 relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
+  <footer class="relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%); padding: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 6vw, 3rem);">
       
       <!-- Grain Texture -->
       <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
