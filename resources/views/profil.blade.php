@@ -129,9 +129,17 @@
                 </div>
 
                 <!-- Contact Button -->
-                <a href="{{ url('/kontak') }}" class="ml-2 bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md">
-                    Hubungi Kami
-                </a>
+                <div class="flex items-center gap-3 ml-2">
+                    <a href="{{ url('/kontak') }}"
+                        class="bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md whitespace-nowrap">
+                        Hubungi Kami
+                    </a>
+
+                    <!-- Language Switcher -->
+                    <button onclick="toggleLanguage()" class="flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
+                        <img id="flagIconDesktop" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
+                    </button>
+                </div>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -165,14 +173,17 @@
                             </div>
                         </div>
 
-                        <!-- Contact Button Mobile -->
-                        <div class="mobile-menu-item py-2">
-                            <a href="{{ url('/kontak') }}" class="inline-block w-full">
-                                <div class="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full"
-                                     style="background: linear-gradient(90deg, #740A03, #C3110C);">
+                        <!-- Contact Button & Language Mobile -->
+                        <div class="mobile-menu-item py-2 flex items-center gap-2">
+                            <a href="{{ url('/kontak') }}" class="flex-grow">
+                                <div class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full"
+                                    style="background: linear-gradient(90deg, #740A03, #C3110C);">
                                     Hubungi Kami
                                 </div>
                             </a>
+                            <button onclick="toggleLanguage()" class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
+                                <img id="flagIconMobile" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -310,7 +321,7 @@ LAYANAN KAMI SECTION
             <!-- Left: Service Cards -->
             <div class="space-y-6 order-2 lg:order-1">
                 <!-- Card 1: Pusat Unit Pelatihan -->
-                <a href="{{ url('program1') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                <a href="{{ url('program1?unit=Pelatihan') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
                     <div class="flex flex-col lg:flex-row items-center lg:items-center text-center lg:text-left gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
                         <div class="flex-shrink-0 w-16 h-16 lg:mx-0 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300" style="border-radius: 12px 0 12px 0;">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -328,7 +339,7 @@ LAYANAN KAMI SECTION
                 </a>
 
                 <!-- Card 2: Pusat Unit Sertifikasi -->
-                <a href="{{ url('program1') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                <a href="{{ url('program1?unit=Sertifikasi') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
                     <div class="flex flex-col lg:flex-row items-center lg:items-center text-center lg:text-left gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
                         <div class="flex-shrink-0 w-16 h-16 lg:mx-0 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300" style="border-radius: 12px 0 12px 0;">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -345,7 +356,7 @@ LAYANAN KAMI SECTION
                 </a>
 
                 <!-- Card 3: Pusat Unit Bahasa -->
-                <a href="{{ url('program1') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                <a href="{{ url('program1?unit=Bahasa') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
                     <div class="flex flex-col lg:flex-row items-center lg:items-center text-center lg:text-left gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
                         <div class="flex-shrink-0 w-16 h-16 lg:mx-0 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300" style="border-radius: 12px 0 12px 0;">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -579,5 +590,198 @@ FOOTER SECTION
             });
         });
     </script>
+
+    <!-- Language Switcher Script -->
+    <script>
+        const translations = {
+            'id': {
+                "Beranda": "Beranda",
+          "Profil UISI Pusat Layanan": "Profil UISI Pusat Layanan",
+          "Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.": "Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.",
+          "Visi": "Visi",
+          "Misi": "Misi",
+          "Layanan Kami": "Layanan Kami",
+          "Pusat Unit Pelatihan": "Pusat Unit Pelatihan",
+          "Program pelatihan untuk meningkatkan kompetensi dan kesiapan kerja.": "Program pelatihan untuk meningkatkan kompetensi dan kesiapan kerja.",
+          "Pusat Unit Sertifikasi": "Pusat Unit Sertifikasi",
+          "Sertifikasi kompetensi untuk mendukung daya saing profesional.": "Sertifikasi kompetensi untuk mendukung daya saing profesional.",
+          "Pusat Unit Bahasa": "Pusat Unit Bahasa",
+          "Layanan bahasa untuk persiapan studi, kerja, dan beasiswa luar negeri.": "Layanan bahasa untuk persiapan studi, kerja, dan beasiswa luar negeri.",
+          "Kalender Kegiatan": "Kalender Kegiatan",
+          "Jadwal Pendaftaran": "Jadwal Pendaftaran",
+          "Temukan program terbaik untuk menunjang karier dan akademikmu.": "Temukan program terbaik untuk menunjang karier dan akademikmu.",
+          "Detail Program": "Detail Program",
+          "Lihat Detail": "Lihat Detail",
+          "Semua Kategori": "Semua Kategori",
+          "Pelatihan": "Pelatihan",
+          "Sertifikasi": "Sertifikasi",
+          "Bahasa": "Bahasa",
+          "Cari program...": "Cari program...",
+          "Belum ada program yang tersedia saat ini.": "Belum ada program yang tersedia saat ini.",
+          "Biaya": "Biaya",
+          "Cari Program...": "Cari Program...",
+          "Home": "Beranda",
+          "Profile": "Profil",
+          "Programs": "Program",
+          "Contact Us": "Hubungi Kami",
+          "National": "Nasional",
+          "International": "Internasional",
+          "Participant Capacity": "Kuota Peserta",
+          "Delivery Method": "Metode",
+          "Online / Virtual Learning": "Online",
+          "Course Syllabus": "Silabus",
+          "Download PDF": "Download",
+          "Registration Deadline": "Batas Pendaftaran",
+          "Enroll Now": "Daftar Sekarang",
+          "Register Now": "Daftar Sekarang",
+          "Description": "Deskripsi",
+          "Taxation & Insurance": "Perpajakan & Asuransi",
+          "Economics and Business - Training Unit": "Ekonomi dan Bisnis - Unit Pelatihan",
+          "UI/UX Design Fundamental": "UI/UX Design Fundamental",
+          "Creative Technology - Training Unit": "Teknologi Kreatif - Unit Pelatihan",
+          "Project Management Certification": "Sertifikasi Manajemen Proyek",
+          "Engineering & Industry - Certification Unit": "Teknik & Industri - Unit Sertifikasi",
+          "AutoCAD for Professional": "AutoCAD for Professional",
+          "TOEFL Preparation Program": "TOEFL Preparation Program",
+          "Language Unit": "Unit Bahasa",
+          "IELTS Intensive Coaching": "IELTS Intensive Coaching",
+          "March 26, 2026": "26 Maret 2026",
+          "March 10, 2026": "10 Maret 2026",
+          "April 15, 2026": "15 April 2026",
+          "April 5, 2026": "5 April 2026",
+          "May 20, 2026": "20 Mei 2026",
+          "May 10, 2026": "10 Mei 2026",
+          "Contact Information": "Informasi Kontak",
+          "Contact Person": "Narahubung",
+          "Location": "Lokasi",
+          "Operating Hours": "Jam Operasional",
+          "Social Media": "Sosial Media",
+          "Veteran Street, PT Semen Indonesia Complex, Sidomoro,": "Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,",
+          "Kebomas District": "Kecamatan Kebomas",
+          "Gresik Regency": "Kabupaten Gresik",
+          "East Java": "Jawa Timur",
+          "Indonesia": "Indonesia",
+          "Change Language": "Ganti Bahasa",
+          "Test": "Test"
+},
+            'en': {
+          "Profil UISI Pusat Layanan": "UISI Service Center Profile",
+          "Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.": "A career development center providing training programs, certifications, and language services to support job readiness and further studies.",
+          "Visi": "Vision",
+          "Misi": "Mission",
+          "Layanan Kami": "Our Services",
+          "Pusat Unit Pelatihan": "Training Unit Center",
+          "Program pelatihan untuk meningkatkan kompetensi dan kesiapan kerja.": "Training programs to improve competencies and job readiness.",
+          "Pusat Unit Sertifikasi": "Certification Unit Center",
+          "Sertifikasi kompetensi untuk mendukung daya saing profesional.": "Competency certification to support professional competitiveness.",
+          "Pusat Unit Bahasa": "Language Unit Center",
+          "Layanan bahasa untuk persiapan studi, kerja, dan beasiswa luar negeri.": "Language services for study preparation, work, and scholarships abroad.",
+          "Kalender Kegiatan": "Activity Calendar",
+          "Jadwal Pendaftaran": "Registration Schedule",
+          "Temukan program terbaik untuk menunjang karier dan akademikmu.": "Find the best program to support your career and academics.",
+          "Detail Program": "Program Detail",
+          "Lihat Detail": "View Details",
+          "Semua Kategori": "All Categories",
+          "Pelatihan": "Training",
+          "Sertifikasi": "Certification",
+          "Bahasa": "Language",
+          "Cari program...": "Search programs...",
+          "Belum ada program yang tersedia saat ini.": "No programs available at the moment.",
+          "Biaya": "Fee",
+          "Cari Program...": "Search Programs...",
+          "Beranda": "Home",
+          "Profil": "Profile",
+          "Program": "Programs",
+          "Hubungi Kami": "Contact Us",
+          "Nasional": "National",
+          "Internasional": "International",
+          "Kuota Peserta": "Participant Capacity",
+          "Metode": "Delivery Method",
+          "Online": "Online / Virtual Learning",
+          "Silabus": "Course Syllabus",
+          "Download": "Download PDF",
+          "Batas Pendaftaran": "Registration Deadline",
+          "Daftar Sekarang": "Register Now",
+          "Deskripsi": "Description",
+          "Perpajakan & Asuransi": "Taxation & Insurance",
+          "Ekonomi dan Bisnis - Unit Pelatihan": "Economics and Business - Training Unit",
+          "UI/UX Design Fundamental": "UI/UX Design Fundamental",
+          "Teknologi Kreatif - Unit Pelatihan": "Creative Technology - Training Unit",
+          "Sertifikasi Manajemen Proyek": "Project Management Certification",
+          "Teknik & Industri - Unit Sertifikasi": "Engineering & Industry - Certification Unit",
+          "AutoCAD for Professional": "AutoCAD for Professional",
+          "TOEFL Preparation Program": "TOEFL Preparation Program",
+          "Unit Bahasa": "Language Unit",
+          "IELTS Intensive Coaching": "IELTS Intensive Coaching",
+          "26 Maret 2026": "March 26, 2026",
+          "10 Maret 2026": "March 10, 2026",
+          "15 April 2026": "April 15, 2026",
+          "5 April 2026": "April 5, 2026",
+          "20 Mei 2026": "May 20, 2026",
+          "10 Mei 2026": "May 10, 2026",
+          "Informasi Kontak": "Contact Information",
+          "Narahubung": "Contact Person",
+          "Lokasi": "Location",
+          "Jam Operasional": "Operating Hours",
+          "Sosial Media": "Social Media",
+          "Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,": "Veteran Street, PT Semen Indonesia Complex, Sidomoro,",
+          "Kecamatan Kebomas": "Kebomas District",
+          "Kabupaten Gresik": "Gresik Regency",
+          "Jawa Timur": "East Java",
+          "Indonesia": "Indonesia",
+          "Ganti Bahasa": "Change Language"
+}
+        };
+
+        let currentLang = 'id';
+
+        function toggleLanguage() {
+            const newLang = currentLang === 'id' ? 'en' : 'id';
+            const dict = translations[newLang];
+            
+            // Update Flags
+            const flagUrl = newLang === 'id' ? 'https://flagcdn.com/w40/id.png' : 'https://flagcdn.com/w40/gb.png';
+            const flagDesktop = document.getElementById('flagIconDesktop');
+            if(flagDesktop) flagDesktop.src = flagUrl;
+            
+            const flagMobile = document.getElementById('flagIconMobile');
+            if(flagMobile) flagMobile.src = flagUrl;
+            
+            const langTextMobile = document.getElementById('langTextMobile');
+            if(langTextMobile) {
+                langTextMobile.innerText = newLang === 'id' ? 'Ganti Bahasa' : 'Change Language';
+            }
+
+            // Translate Text Nodes
+            function translateNode(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    let text = node.nodeValue.trim().replace(/\s+/g, ' ');
+                    if (text && dict[text]) {
+                        const originalValue = node.nodeValue;
+                        const leadingSpaceMatch = originalValue.match(/^\s*/);
+                        const trailingSpaceMatch = originalValue.match(/\s*$/);
+                        
+                        const leadingSpace = leadingSpaceMatch ? leadingSpaceMatch[0] : '';
+                        const trailingSpace = trailingSpaceMatch ? trailingSpaceMatch[0] : '';
+                        
+                        node.nodeValue = leadingSpace + dict[text] + trailingSpace;
+                    }
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    // Also translate placeholders
+                    if (node.tagName === 'INPUT' && node.placeholder) {
+                        let text = node.placeholder.trim().replace(/\s+/g, ' ');
+                        if (dict[text]) node.placeholder = dict[text];
+                    }
+                    if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+                        node.childNodes.forEach(translateNode);
+                    }
+                }
+            }
+
+            translateNode(document.body);
+            currentLang = newLang;
+        }
+    </script>
+
 </body>
 </html>

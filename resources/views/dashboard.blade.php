@@ -27,6 +27,15 @@
             overflow-x: hidden;
         }
 
+        /* --- Horizontal Slider --- */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .slider-container {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
         /* ==============================
            DROPDOWN MENU
            ============================== */
@@ -248,11 +257,18 @@
                     </div>
                 </div>
 
-                <!-- Contact Button -->
-                <a href="{{ url('/kontak') }}"
-                    class="ml-2 bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md">
-                    Hubungi Kami
-                </a>
+                <div class="flex items-center gap-3 ml-2">
+                    <!-- Contact Button -->
+                    <a href="{{ url('/kontak') }}"
+                        class="bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md whitespace-nowrap">
+                        Hubungi Kami
+                    </a>
+
+                    <!-- Language Switcher -->
+                    <button onclick="toggleLanguage()" class="flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
+                        <img id="flagIconDesktop" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
+                    </button>
+                </div>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -293,14 +309,17 @@
                             </div>
                         </div>
 
-                        <!-- Contact Button Mobile -->
-                        <div class="mobile-menu-item py-2">
-                            <a href="{{ url('/kontak') }}" class="inline-block w-full">
-                                <div class="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full"
+                        <!-- Contact Button & Language Mobile -->
+                        <div class="mobile-menu-item py-2 flex items-center gap-2">
+                            <a href="{{ url('/kontak') }}" class="flex-grow">
+                                <div class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full"
                                     style="background: linear-gradient(90deg, #740A03, #C3110C);">
                                     Hubungi Kami
                                 </div>
                             </a>
+                            <button onclick="toggleLanguage()" class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
+                                <img id="flagIconMobile" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -465,7 +484,7 @@
 
                         <!-- Button -->
                         <div>
-                            <a href="program1"
+                            <a href="program1?unit=Pelatihan"
                                 class="inline-block px-5 py-2 md:px-6 md:py-2.5 text-xs md:text-sm font-semibold text-white transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
                                 style="background: linear-gradient(90deg, #740A03, #C3110C); border-radius: 10px 0 10px 0; border: 1px solid rgba(255,255,255,0.2);">
                                 Lihat Selengkapnya
@@ -495,7 +514,7 @@
 
                         <!-- Button -->
                         <div>
-                            <a href="program2"
+                            <a href="program1?unit=Sertifikasi"
                                 class="inline-block px-5 py-2 md:px-6 md:py-2.5 text-xs md:text-sm font-semibold text-white transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
                                 style="background: linear-gradient(90deg, #740A03, #C3110C); border-radius: 10px 0 10px 0; border: 1px solid rgba(255,255,255,0.2);">
                                 Lihat Selengkapnya
@@ -525,7 +544,7 @@
 
                         <!-- Button -->
                         <div>
-                            <a href="program3"
+                            <a href="program1?unit=Bahasa"
                                 class="inline-block px-5 py-2 md:px-6 md:py-2.5 text-xs md:text-sm font-semibold text-white transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
                                 style="background: linear-gradient(90deg, #740A03, #C3110C); border-radius: 10px 0 10px 0; border: 1px solid rgba(255,255,255,0.2);">
                                 Lihat Selengkapnya
@@ -608,11 +627,11 @@
 
         <div class="program-section mb-16 max-w-[340px] md:max-w-none mx-auto px-4 md:px-0" data-category="pelatihan">
             <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6">Pelatihan</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container">
 
                 <!-- Card 1 -->
                 <div
-                    class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 mb-4 md:mb-0 max-w-[340px] md:max-w-none mx-auto w-full">
+                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
                     <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
                         style="border-radius: 21px 21px 21px 21px;">
                         <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=200&fit=crop"
@@ -645,12 +664,12 @@
                                 <span>Rp 2.000.000</span>
                             </div>
                             <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-                                    </path>
-                                </svg>
-                                <span>22 Kuota</span>
+                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                                    </svg>
+                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">22</span></span>
+                                </div>
                             </div>
                         </div>
                         <a href="detail1"
@@ -661,7 +680,7 @@
 
                 <!-- Card 2 -->
                 <div
-                    class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 mb-4 md:mb-0 max-w-[340px] md:max-w-none mx-auto w-full">
+                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
                     <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
                         style="border-radius: 21px 21px 21px 21px;">
                         <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=200&fit=crop"
@@ -694,16 +713,66 @@
                                 <span>Rp 2.500.000</span>
                             </div>
                             <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-                                    </path>
-                                </svg>
-                                <span>25 Kuota</span>
+                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                                    </svg>
+                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">25</span></span>
+                                </div>
                             </div>
                         </div>
                         <a href="detail2"
                             class="w-full py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white font-semibold rounded-xl hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-block text-center shadow-md">Daftar
+                            Sekarang</a>
+                    </div>
+                </div>
+
+                <!-- Card 7 (New) -->
+                <div
+                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto"
+                    data-id="7">
+                    <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
+                        style="border-radius: 21px 21px 21px 21px;">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop"
+                            alt="Digital Marketing"
+                            class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Digital Marketing Specialist
+                        </h4>
+                        <p class="text-gray-600 text-sm text-center mb-4">Teknologi Kreatif - Unit Pelatihan</p>
+                        <div
+                            class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-6 pb-4 border-b border-gray-100 gap-3">
+                            <div class="flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>18 Mar - 20 Apr</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z">
+                                    </path>
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Rp 1.500.000</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                                    </svg>
+                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">15</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="detail6"
+                            class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar
                             Sekarang</a>
                     </div>
                 </div>
@@ -713,11 +782,11 @@
 
         <div class="program-section mb-16 max-w-[340px] md:max-w-none mx-auto px-4 md:px-0" data-category="sertifikasi">
             <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6">Sertifikasi</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container">
 
                 <!-- Card 3 -->
                 <div
-                    class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 mb-4 md:mb-0 max-w-[340px] md:max-w-none mx-auto w-full">
+                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
                     <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
                         style="border-radius: 21px 21px 21px 21px;">
                         <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=200&fit=crop"
@@ -750,12 +819,12 @@
                                 <span>Rp 2.500.000</span>
                             </div>
                             <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-                                    </path>
-                                </svg>
-                                <span>22 Kuota</span>
+                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                                    </svg>
+                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">22</span></span>
+                                </div>
                             </div>
                         </div>
                         <a href="detail3"
@@ -766,7 +835,7 @@
 
                 <!-- Card 4 -->
                 <div
-                    class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 mb-4 md:mb-0 max-w-[340px] md:max-w-none mx-auto w-full">
+                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
                     <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
                         style="border-radius: 21px 21px 21px 21px;">
                         <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=200&fit=crop"
@@ -799,12 +868,12 @@
                                 <span>Rp 2.500.000</span>
                             </div>
                             <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-                                    </path>
-                                </svg>
-                                <span>22 Kuota</span>
+                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                                    </svg>
+                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">22</span></span>
+                                </div>
                             </div>
                         </div>
                         <a href="detail4"
@@ -818,11 +887,11 @@
 
         <div class="program-section mb-16 max-w-[340px] md:max-w-none mx-auto px-4 md:px-0" data-category="bahasa">
             <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6">Bahasa</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container">
 
                 <!-- Card 5 -->
                 <div
-                    class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 mb-4 md:mb-0 max-w-[340px] md:max-w-none mx-auto w-full">
+                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
                     <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
                         style="border-radius: 21px 21px 21px 21px;">
                         <img src="https://images.unsplash.com/photo-1544979590-2c7188718e3a?w=400&h=200&fit=crop"
@@ -855,12 +924,12 @@
                                 <span>Rp 1.200.000</span>
                             </div>
                             <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-                                    </path>
-                                </svg>
-                                <span>35 Kuota</span>
+                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                                    </svg>
+                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">35</span></span>
+                                </div>
                             </div>
                         </div>
                         <a href="detail5"
@@ -871,7 +940,7 @@
 
                 <!-- Card 6 -->
                 <div
-                    class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 mb-4 md:mb-0 max-w-[340px] md:max-w-none mx-auto w-full">
+                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
                     <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
                         style="border-radius: 21px 21px 21px 21px;">
                         <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=200&fit=crop"
@@ -904,12 +973,12 @@
                                 <span>Rp 2.500.000</span>
                             </div>
                             <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-                                    </path>
-                                </svg>
-                                <span>15 Kuota</span>
+                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                                    </svg>
+                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">15</span></span>
+                                </div>
                             </div>
                         </div>
                         <a href="detail6"
@@ -1027,7 +1096,7 @@
                     <div>
                         <h4 class="text-white text-xl md:text-2xl font-bold mb-6">Informasi Kontak</h4>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container">
                             <!-- Contact Person -->
                             <div class="space-y-1">
                                 <h5 class="text-white font-semibold text-sm md:text-base">Narahubung</h5>
@@ -1203,6 +1272,187 @@
         document.addEventListener('DOMContentLoaded', function () {
             filterProgram('all');
         });
+    </script>
+
+    <!-- Language Switcher Script -->
+    <script>
+        const translations = {
+            'id': {
+                'Beranda': 'Beranda',
+                'Home': 'Beranda',
+                'Profile': 'Profil',
+                'Programs': 'Program',
+                'Contact Us': 'Hubungi Kami',
+                'National': 'Nasional',
+                'International': 'Internasional',
+                'Program Calendar': 'Kalender Program',
+                'Programs We Offer': 'Program yang Kami Tawarkan',
+                'Training Center Unit': 'Unit Pusat Pelatihan',
+                'Certification Center Unit': 'Unit Pusat Sertifikasi',
+                'Language Center Unit': 'Unit Pusat Bahasa',
+                'See More': 'Lihat Selengkapnya',
+                'Register Now': 'Daftar Sekarang',
+                'All': 'Semua',
+                'Training': 'Pelatihan',
+                'Certification': 'Sertifikasi',
+                'Language': 'Bahasa',
+                'Career development center providing training, certification, and language programs to support job readiness and further studies.': 'Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.',
+                'Industry-based competency development program to improve students technical and soft skills.': 'Program pengembangan kompetensi berbasis kebutuhan industri untuk meningkatkan keterampilan teknis dan soft skills mahasiswa.',
+                'Competency certification services to support career readiness and improve professional credibility.': 'Layanan sertifikasi kompetensi untuk mendukung kesiapan karier dan meningkatkan kredibilitas profesional.',
+                'Preparation programs for TOEFL, IELTS, and other foreign languages for further studies, work, and overseas scholarships.': 'Program persiapan TOEFL, IELTS, dan bahasa asing lainnya untuk kebutuhan studi lanjut, kerja, dan beasiswa luar negeri.',
+                'Taxation & Insurance': 'Perpajakan & Asuransi',
+                'Economics and Business - Training Unit': 'Ekonomi dan Bisnis - Unit Pelatihan',
+                'UI/UX Design Fundamental': 'UI/UX Design Fundamental',
+                'Creative Technology - Training Unit': 'Teknologi Kreatif - Unit Pelatihan',
+                'Project Management Certification': 'Sertifikasi Manajemen Proyek',
+                'Engineering & Industry - Certification Unit': 'Teknik & Industri - Unit Sertifikasi',
+                'AutoCAD for Professional': 'AutoCAD for Professional',
+                'TOEFL Preparation Program': 'TOEFL Preparation Program',
+                'Language Unit': 'Unit Bahasa',
+                'IELTS Intensive Coaching': 'IELTS Intensive Coaching',
+                'Program Benefits': 'Keuntungan Program',
+                'Industry-Based Curriculum': 'Kurikulum Berbasis Industri',
+                'Materials are designed according to industry needs so participants gain relevant and applicable competencies.': 'Materi dirancang sesuai kebutuhan dunia kerja sehingga peserta memperoleh kompetensi yang relevan dan aplikatif',
+                'Experienced Instructors': 'Instruktur Berpengalaman',
+                'Programs are guided by professionals and academics with experience in their fields.': 'Program dibimbing oleh praktisi dan akademisi profesional yang memiliki pengalaman di bidangnya.',
+                'Certificate & Competitiveness Improvement': 'Sertifikat & Peningkatan Daya Saing',
+                'Participants receive a certificate and skill improvements to support career readiness, further studies, or scholarships.': 'Peserta mendapatkan sertifikat serta peningkatan kompetensi yang mendukung kesiapan karier, studi lanjut, maupun beasiswa.',
+                'Contact Information': 'Informasi Kontak',
+                'Contact Person': 'Narahubung',
+                'Location': 'Lokasi',
+                'Veteran Street, PT Semen Indonesia Complex, Sidomoro,': 'Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,',
+                'Kebomas District': 'Kecamatan Kebomas',
+                'Gresik Regency': 'Kabupaten Gresik',
+                'East Java': 'Jawa Timur',
+                'Operating Hours': 'Jam Operasional',
+                'Social Media': 'Sosial Media',
+                '22 Quota': '22 Kuota',
+                '25 Quota': '25 Kuota',
+                '15 Quota': '15 Kuota',
+                '35 Quota': '35 Kuota',
+                'Indonesia': 'Indonesia',
+                'UISI Service Center': 'UISI Pusat Layanan',
+                'Sisa Kuota:': 'Sisa Kuota:'
+            },
+            'en': {
+                'Beranda': 'Home',
+                'Profil': 'Profile',
+                'Program': 'Programs',
+                'Hubungi Kami': 'Contact Us',
+                'Nasional': 'National',
+                'Internasional': 'International',
+                'Kalender Program': 'Program Calendar',
+                'Program yang Kami Tawarkan': 'Programs We Offer',
+                'Unit Pusat Pelatihan': 'Training Center Unit',
+                'Unit Pusat Sertifikasi': 'Certification Center Unit',
+                'Unit Pusat Bahasa': 'Language Center Unit',
+                'Lihat Selengkapnya': 'See More',
+                'Daftar Sekarang': 'Register Now',
+                'Semua': 'All',
+                'Pelatihan': 'Training',
+                'Sertifikasi': 'Certification',
+                'Bahasa': 'Language',
+                'Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.': 'Career development center providing training, certification, and language programs to support job readiness and further studies.',
+                'Program pengembangan kompetensi berbasis kebutuhan industri untuk meningkatkan keterampilan teknis dan soft skills mahasiswa.': 'Industry-based competency development program to improve students technical and soft skills.',
+                'Layanan sertifikasi kompetensi untuk mendukung kesiapan karier dan meningkatkan kredibilitas profesional.': 'Competency certification services to support career readiness and improve professional credibility.',
+                'Program persiapan TOEFL, IELTS, dan bahasa asing lainnya untuk kebutuhan studi lanjut, kerja, dan beasiswa luar negeri.': 'Preparation programs for TOEFL, IELTS, and other foreign languages for further studies, work, and overseas scholarships.',
+                'Perpajakan & Asuransi': 'Taxation & Insurance',
+                'Ekonomi dan Bisnis - Unit Pelatihan': 'Economics and Business - Training Unit',
+                'UI/UX Design Fundamental': 'UI/UX Design Fundamental',
+                'Teknologi Kreatif - Unit Pelatihan': 'Creative Technology - Training Unit',
+                'Sertifikasi Manajemen Proyek': 'Project Management Certification',
+                'Teknik & Industri - Unit Sertifikasi': 'Engineering & Industry - Certification Unit',
+                'AutoCAD for Professional': 'AutoCAD for Professional',
+                'TOEFL Preparation Program': 'TOEFL Preparation Program',
+                'Unit Bahasa': 'Language Unit',
+                'IELTS Intensive Coaching': 'IELTS Intensive Coaching',
+                'Keuntungan Program': 'Program Benefits',
+                'Kurikulum Berbasis Industri': 'Industry-Based Curriculum',
+                'Materi dirancang sesuai kebutuhan dunia kerja sehingga peserta memperoleh kompetensi yang relevan dan aplikatif': 'Materials are designed according to industry needs so participants gain relevant and applicable competencies.',
+                'Instruktur Berpengalaman': 'Experienced Instructors',
+                'Program dibimbing oleh praktisi dan akademisi profesional yang memiliki pengalaman di bidangnya.': 'Programs are guided by professionals and academics with experience in their fields.',
+                'Sertifikat & Peningkatan Daya Saing': 'Certificate & Competitiveness Improvement',
+                'Peserta mendapatkan sertifikat serta peningkatan kompetensi yang mendukung kesiapan karier, studi lanjut, maupun beasiswa.': 'Participants receive a certificate and skill improvements to support career readiness, further studies, or scholarships.',
+                'Informasi Kontak': 'Contact Information',
+                'Narahubung': 'Contact Person',
+                'Lokasi': 'Location',
+                'Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,': 'Veteran Street, PT Semen Indonesia Complex, Sidomoro,',
+                'Kecamatan Kebomas': 'Kebomas District',
+                'Kabupaten Gresik': 'Gresik Regency',
+                'Jawa Timur': 'East Java',
+                'Jam Operasional': 'Operating Hours',
+                'Sosial Media': 'Social Media',
+                '22 Kuota': '22 Quota',
+                '25 Kuota': '25 Quota',
+                '15 Kuota': '15 Quota',
+                '35 Kuota': '35 Quota',
+                'Indonesia': 'Indonesia',
+                'UISI Pusat Layanan': 'UISI Service Center',
+                'Sisa Kuota:': 'Remaining Quota:'
+            }
+        };
+
+        let currentLang = 'id';
+
+        function toggleLanguage() {
+            const newLang = currentLang === 'id' ? 'en' : 'id';
+            const dict = translations[newLang];
+            
+            // Update Flags
+            const flagUrl = newLang === 'id' ? 'https://flagcdn.com/w40/id.png' : 'https://flagcdn.com/w40/gb.png';
+            document.getElementById('flagIconDesktop').src = flagUrl;
+            if(document.getElementById('flagIconMobile')) {
+                document.getElementById('flagIconMobile').src = flagUrl;
+            }
+
+            // Translate Text Nodes
+            function translateNode(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    let text = node.nodeValue.trim().replace(/\s+/g, ' ');
+                    if (text && dict[text]) {
+                        const originalValue = node.nodeValue;
+                        const leadingSpaceMatch = originalValue.match(/^\s*/);
+                        const trailingSpaceMatch = originalValue.match(/\s*$/);
+                        
+                        const leadingSpace = leadingSpaceMatch ? leadingSpaceMatch[0] : '';
+                        const trailingSpace = trailingSpaceMatch ? trailingSpaceMatch[0] : '';
+                        
+                        node.nodeValue = leadingSpace + dict[text] + trailingSpace;
+                    }
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+                        node.childNodes.forEach(translateNode);
+                    }
+                }
+            }
+
+            translateNode(document.body);
+            currentLang = newLang;
+        }
+
+        // --- Correct Quota Management & Link Updater ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const initialQuotas = { '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15 };
+            let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
+            
+            for(let i = 1; i <= 6; i++) {
+                if(quotas[i] === undefined) quotas[i] = initialQuotas[i];
+            }
+            localStorage.setItem('uisi_quotas', JSON.stringify(quotas));
+
+            for(let i = 1; i <= 6; i++) {
+                // Keep the links pointing to the detail page (e.g., detail1, detail2, etc.)
+                // Now find the .kuota-number spans inside each card by ID matching
+                const cards = document.querySelectorAll('.program-card');
+                if (cards[i-1]) {
+                    const numberSpan = cards[i-1].querySelector('.kuota-number');
+                    if(numberSpan) {
+                        numberSpan.innerText = quotas[i];
+                    }
+                }
+            }
+        });
+        // ---------------------------------------------
     </script>
 
 </body>

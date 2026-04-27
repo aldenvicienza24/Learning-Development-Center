@@ -190,9 +190,17 @@ Program
 <a href="{{ url('program2') }}">Internasional</a>
 </div>
 </div>
-<a href="{{ url('/kontak') }}" class="ml-2 bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md">
-Hubungi Kami
-</a>
+                <div class="flex items-center gap-3 ml-2">
+                    <a href="{{ url('/kontak') }}"
+                        class="bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md whitespace-nowrap">
+                        Hubungi Kami
+                    </a>
+
+                    <!-- Language Switcher -->
+                    <button onclick="toggleLanguage()" class="flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
+                        <img id="flagIconDesktop" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
+                    </button>
+                </div>
 </div>
 <div class="mobile-menu-container md:hidden">
 <button id="mobileMenuBtn" class="p-2 text-gray-600 hover:text-[#8B1A1A] transition z-50">
@@ -219,13 +227,18 @@ Hubungi Kami
 <a href="{{ url('program2') }}" class="block hover:text-[#8B1A1A]">Internasional</a>
 </div>
 </div>
-<div class="mobile-menu-item py-2">
-<a href="{{ url('/kontak') }}" class="inline-block w-full">
-<div class="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full" style="background: linear-gradient(90deg, #740A03, #C3110C);">
-Hubungi Kami
-</div>
-</a>
-</div>
+                        <!-- Contact Button & Language Mobile -->
+                        <div class="mobile-menu-item py-2 flex items-center gap-2">
+                            <a href="{{ url('/kontak') }}" class="flex-grow">
+                                <div class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full"
+                                    style="background: linear-gradient(90deg, #740A03, #C3110C);">
+                                    Hubungi Kami
+                                </div>
+                            </a>
+                            <button onclick="toggleLanguage()" class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
+                                <img id="flagIconMobile" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
+                            </button>
+                        </div>
 </div>
 </div>
 </div>
@@ -239,7 +252,7 @@ Hubungi Kami
         <!-- Circular White Textures - 6 Lingkaran Full -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none">
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[700px] md:h-[700px] bg-white rounded-full" style="opacity: 0.02;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[850px] md:h-[850px] bg-white rounded-full" style="opacity: 0.025;"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[350px] md:h-[350px] bg-white rounded-full" style="opacity: 0.025;"></div>
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[1000px] md:h-[1000px] bg-white rounded-full" style="opacity: 0.03;"></div>
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[1150px] md:h-[1150px] bg-white rounded-full" style="opacity: 0.035;"></div>
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1300px] md:h-[1300px] bg-white rounded-full" style="opacity: 0.04;"></div>
@@ -385,11 +398,11 @@ Reset Filter
 <!-- Section: Professional Training -->
 <section class="mb-12" data-section="pelatihan">
     <h2 class="text-3xl font-bold text-gray-800 section-title pl-2.5">Professional Training</h2>
-    <div class="grid md:grid-cols-2 gap-6 px-2.5">
+    <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container px-2.5">
         <!-- Card 1 -->
-        <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-full max-w-none mx-auto"
+        <div class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-[280px] md:w-[calc(50%-12px)] max-w-none"
         data-category="Pelatihan" data-unit="Global Economics & Business" data-month="2"
-        data-date-start="2025-02-12" data-date-end="2025-03-12" data-title="Corporate Tax & Risk Management">
+        data-date-start="2025-02-12" data-date-end="2025-03-12"  data-id="a" data-title="Corporate Tax & Risk Management">
             <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
                 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Corporate Tax & Risk Management" class="w-full h-48 object-cover">
             </div>
@@ -402,12 +415,16 @@ Reset Filter
                         <span>Feb 12th – Mar 12th</span>
                     </div>
                     <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
+                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
                         <span>IDR 2,000,000 / $130 USD</span>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
-                        <span>22 Seats Remaining</span>
+                                        <div class="flex items-center gap-1.5">
+                        <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
+                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                            </svg>
+                            <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">22</span></span>
+                        </div>
                     </div>
                 </div>
                 <a href="detaila" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
@@ -419,54 +436,70 @@ Reset Filter
 <!-- Program Segera Terbuka -->
 <section class="pt-12 border-t border-gray-200 mt-12" data-section="segera">
 <h2 class="text-3xl font-bold text-center text-[#C3110C] mb-10">Program Segera Terbuka</h2>
-<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 px-2.5">
-<!-- Card 1 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col w-full max-w-none mx-auto"
-data-category="Pelatihan" data-unit="Technology & Creative" data-month="" data-date-start="" data-date-end="" data-title="Data Analysis for Business">
-<div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Data Analysis" class="w-full h-48 object-cover">
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Data Analysis for Business</h4>
-<p class="text-gray-600 text-sm text-center mb-4">Technology & Creative · Professional Workshop</p>
-<button class="w-full py-2.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white font-medium rounded-xl transition hover:shadow-lg mt-auto">Coming Soon</button>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col w-full max-w-none mx-auto"
-data-category="Sertifikasi" data-unit="Business & Leadership" data-month="" data-date-start="" data-date-end="" data-title="Strategic HR Management">
-<div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-<img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop" alt="Strategic HR Management" class="w-full h-48 object-cover">
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Strategic HR Management</h4>
-<p class="text-gray-600 text-sm text-center mb-4">Business & Leadership · Certification Track</p>
-<button class="w-full py-2.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white font-medium rounded-xl transition hover:shadow-lg mt-auto">Coming Soon</button>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col w-full max-w-none mx-auto"
-data-category="Bahasa" data-unit="Global Programs" data-month="" data-date-start="" data-date-end="" data-title="International Business Law">
-<div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-<img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=400&fit=crop" alt="International Business Law" class="w-full h-48 object-cover">
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">International Business Law</h4>
-<p class="text-gray-600 text-sm text-center mb-4">Global Programs · Professional Series</p>
-<button class="w-full py-2.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white font-medium rounded-xl transition hover:shadow-lg mt-auto">Coming Soon</button>
-</div>
-</div>
-<!-- Card 4 -->
-<div class="program-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 flex flex-col w-full max-w-none mx-auto"
-data-category="Pelatihan" data-unit="Language & Business" data-month="" data-date-start="" data-date-end="" data-title="Cross-Cultural Communication">
-<div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-<img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop" alt="Cross-Cultural Communication" class="w-full h-full object-cover">
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Cross-Cultural Communication</h4>
-<p class="text-gray-600 text-sm text-center mb-4">Language & Business · Executive Program</p>
-<button class="w-full py-2.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white font-medium rounded-xl transition hover:shadow-lg mt-auto">Coming Soon</button>
-</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-2.5">
+    <!-- Card 1: Pelatihan -->
+    <div class="program-card group bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col hover:border-red-200 hover:shadow-md transition-all duration-300"
+        data-category="Pelatihan" data-unit="Technology & Creative" data-title="Data Analysis for Business">
+        <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-100 transition-colors mx-auto">
+            <svg class="w-7 h-7 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+        </div>
+        <h4 class="text-lg font-bold text-gray-900 mb-2 leading-tight text-center">Data Analysis for Business</h4>
+        <p class="text-gray-500 text-sm mb-8 flex-grow italic text-center">Technology & Creative · Workshop</p>
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-400 rounded-xl text-[10px] font-bold w-full justify-center border border-gray-100">
+            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 animate-pulse"></div>
+            COMING SOON
+        </div>
+    </div>
+
+    <!-- Card 2: Sertifikasi -->
+    <div class="program-card group bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col hover:border-red-200 hover:shadow-md transition-all duration-300"
+        data-category="Sertifikasi" data-unit="Business & Leadership" data-title="Strategic HR Management">
+        <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-100 transition-colors mx-auto">
+            <svg class="w-7 h-7 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+        </div>
+        <h4 class="text-lg font-bold text-gray-900 mb-2 leading-tight text-center">Strategic HR Management</h4>
+        <p class="text-gray-500 text-sm mb-8 flex-grow italic text-center">Business & Leadership · Certification</p>
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-400 rounded-xl text-[10px] font-bold w-full justify-center border border-gray-100">
+            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 animate-pulse"></div>
+            COMING SOON
+        </div>
+    </div>
+
+    <!-- Card 3: Bahasa -->
+    <div class="program-card group bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col hover:border-red-200 hover:shadow-md transition-all duration-300"
+        data-category="Bahasa" data-unit="Global Programs" data-title="International Business Law">
+        <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-100 transition-colors mx-auto">
+            <svg class="w-7 h-7 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </div>
+        <h4 class="text-lg font-bold text-gray-900 mb-2 leading-tight text-center">International Business Law</h4>
+        <p class="text-gray-500 text-sm mb-8 flex-grow italic text-center">Global Programs · Executive</p>
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-400 rounded-xl text-[10px] font-bold w-full justify-center border border-gray-100">
+            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 animate-pulse"></div>
+            COMING SOON
+        </div>
+    </div>
+
+    <!-- Card 4: Pelatihan -->
+    <div class="program-card group bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col hover:border-red-200 hover:shadow-md transition-all duration-300"
+        data-category="Pelatihan" data-unit="Language & Business" data-title="Cross-Cultural Communication">
+        <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-100 transition-colors mx-auto">
+            <svg class="w-7 h-7 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+        </div>
+        <h4 class="text-lg font-bold text-gray-900 mb-2 leading-tight text-center">Cross-Cultural Communication</h4>
+        <p class="text-gray-500 text-sm mb-8 flex-grow italic text-center">Language & Business · Leadership</p>
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-400 rounded-xl text-[10px] font-bold w-full justify-center border border-gray-100">
+            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 animate-pulse"></div>
+            COMING SOON
+        </div>
+    </div>
 </div>
 </div>
 </section>
@@ -789,9 +822,239 @@ clearFilterBtn?.click();
 }
 });
 // Initialize
+const urlParams = new URLSearchParams(window.location.search);
+const unitParam = urlParams.get('unit');
+if (unitParam) {
+    const option = Array.from(unitOptions).find(opt => opt.dataset.unit.toLowerCase() === unitParam.toLowerCase());
+    if (option) {
+        selectedUnit = option.dataset.unit;
+        unitOptions.forEach(opt => opt.classList.remove('active'));
+        option.classList.add('active');
+        selectedUnitText.textContent = option.textContent;
+    }
+}
+
 generateCalendar();
 filterPrograms();
 });
 </script>
-</body>
+
+    <!-- Language Switcher Script -->
+    <script>
+                const translations = {
+            'id': {
+                "UISI Service Center Profile": "Profil UISI Pusat Layanan",
+                "A career development center providing training programs, certifications, and language services to support job readiness and further studies.": "Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.",
+                "Vision": "Visi",
+                "Mission": "Misi",
+                "Our Services": "Layanan Kami",
+                "Training Unit Center": "Pusat Unit Pelatihan",
+                "Training programs to improve competencies and job readiness.": "Program pelatihan untuk meningkatkan kompetensi dan kesiapan kerja.",
+                "Certification Unit Center": "Pusat Unit Sertifikasi",
+                "Competency certification to support professional competitiveness.": "Sertifikasi kompetensi untuk mendukung daya saing profesional.",
+                "Language Unit Center": "Pusat Unit Bahasa",
+                "Language services for study preparation, work, and scholarships abroad.": "Layanan bahasa untuk persiapan studi, kerja, dan beasiswa luar negeri.",
+                "Activity Calendar": "Kalender Kegiatan",
+                "Registration Schedule": "Jadwal Pendaftaran",
+                "Find the best program to support your career and academics.": "Temukan program terbaik untuk menunjang karier dan akademikmu.",
+                "Program Detail": "Detail Program",
+                "View Details": "Lihat Detail",
+                "All Categories": "Semua Program",
+                "Training": "Pelatihan",
+                "Certification": "Sertifikasi",
+                "Language": "Bahasa",
+                "Search programs...": "Cari program...",
+                "No programs available at the moment.": "Belum ada program yang tersedia saat ini.",
+                "Fee": "Biaya",
+                "Search Programs...": "Cari Program...",
+                "Home": "Beranda",
+                "Profile": "Profil",
+                "Programs": "Program",
+                "Contact Us": "Hubungi Kami",
+                "National": "Nasional",
+                "International": "Internasional",
+                "Participant Capacity": "Kuota Peserta",
+                "Delivery Method": "Metode",
+                "Online / Virtual Learning": "Online",
+                "Course Syllabus": "Silabus",
+                "Download PDF": "Download",
+                "Registration Deadline": "Batas Pendaftaran",
+                "Register Now": "Daftar Sekarang",
+                "Description": "Deskripsi",
+                "Taxation & Insurance": "Perpajakan & Asuransi",
+                "Economics and Business - Training Unit": "Ekonomi dan Bisnis - Unit Pelatihan",
+                "UI/UX Design Fundamental": "UI/UX Design Fundamental",
+                "Creative Technology - Training Unit": "Teknologi Kreatif - Unit Pelatihan",
+                "Project Management Certification": "Sertifikasi Manajemen Proyek",
+                "Engineering & Industry - Certification Unit": "Teknik & Industri - Unit Sertifikasi",
+                "AutoCAD for Professional": "AutoCAD for Professional",
+                "TOEFL Preparation Program": "TOEFL Preparation Program",
+                "Language Unit": "Unit Bahasa",
+                "IELTS Intensive Coaching": "IELTS Intensive Coaching",
+                "March 26, 2026": "26 Maret 2026",
+                "March 10, 2026": "10 Maret 2026",
+                "April 15, 2026": "15 April 2026",
+                "April 5, 2026": "5 April 2026",
+                "May 20, 2026": "20 Mei 2026",
+                "May 10, 2026": "10 Mei 2026",
+                "Contact Information": "Informasi Kontak",
+                "Contact Person": "Narahubung",
+                "Location": "Lokasi",
+                "Operating Hours": "Jam Operasional",
+                "Social Media": "Sosial Media",
+                "Veteran Street, PT Semen Indonesia Complex, Sidomoro,": "Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,",
+                "Kebomas District": "Kecamatan Kebomas",
+                "Gresik Regency": "Kabupaten Gresik",
+                "East Java": "Jawa Timur",
+                "Indonesia": "Indonesia",
+                "Change Language": "Ganti Bahasa",
+                "Remaining Seats:": "Sisa Kuota:"
+            },
+            'en': {
+                "Profil UISI Pusat Layanan": "UISI Service Center Profile",
+                "Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.": "A career development center providing training programs, certifications, and language services to support job readiness and further studies.",
+                "Visi": "Vision",
+                "Misi": "Mission",
+                "Layanan Kami": "Our Services",
+                "Pusat Unit Pelatihan": "Training Unit Center",
+                "Program pelatihan untuk meningkatkan kompetensi dan kesiapan kerja.": "Training programs to improve competencies and job readiness.",
+                "Pusat Unit Sertifikasi": "Certification Unit Center",
+                "Sertifikasi kompetensi untuk mendukung daya saing profesional.": "Competency certification to support professional competitiveness.",
+                "Pusat Unit Bahasa": "Language Unit Center",
+                "Layanan bahasa untuk persiapan studi, kerja, dan beasiswa luar negeri.": "Language services for study preparation, work, and scholarships abroad.",
+                "Kalender Kegiatan": "Activity Calendar",
+                "Jadwal Pendaftaran": "Registration Schedule",
+                "Temukan program terbaik untuk menunjang karier dan akademikmu.": "Find the best program to support your career and academics.",
+                "Detail Program": "Program Detail",
+                "Lihat Detail": "View Details",
+                "Semua Program": "All Categories",
+                "Pelatihan": "Training",
+                "Sertifikasi": "Certification",
+                "Bahasa": "Language",
+                "Cari program...": "Search programs...",
+                "Belum ada program yang tersedia saat ini.": "No programs available at the moment.",
+                "Biaya": "Fee",
+                "Cari Program...": "Search Programs...",
+                "Beranda": "Home",
+                "Profil": "Profile",
+                "Program": "Programs",
+                "Hubungi Kami": "Contact Us",
+                "Nasional": "National",
+                "Internasional": "International",
+                "Kuota Peserta": "Participant Capacity",
+                "Metode": "Delivery Method",
+                "Online": "Online / Virtual Learning",
+                "Silabus": "Course Syllabus",
+                "Download": "Download PDF",
+                "Batas Pendaftaran": "Registration Deadline",
+                "Daftar Sekarang": "Register Now",
+                "Deskripsi": "Description",
+                "Perpajakan & Asuransi": "Taxation & Insurance",
+                "Ekonomi dan Bisnis - Unit Pelatihan": "Economics and Business - Training Unit",
+                "UI/UX Design Fundamental": "UI/UX Design Fundamental",
+                "Teknologi Kreatif - Unit Pelatihan": "Creative Technology - Training Unit",
+                "Sertifikasi Manajemen Proyek": "Project Management Certification",
+                "Teknik & Industri - Unit Sertifikasi": "Engineering & Industry - Certification Unit",
+                "AutoCAD for Professional": "AutoCAD for Professional",
+                "TOEFL Preparation Program": "TOEFL Preparation Program",
+                "Unit Bahasa": "Language Unit",
+                "IELTS Intensive Coaching": "IELTS Intensive Coaching",
+                "26 Maret 2026": "March 26, 2026",
+                "10 Maret 2026": "March 10, 2026",
+                "15 April 2026": "April 15, 2026",
+                "5 April 2026": "April 5, 2026",
+                "20 Mei 2026": "May 20, 2026",
+                "10 Mei 2026": "May 10, 2026",
+                "Informasi Kontak": "Contact Information",
+                "Narahubung": "Contact Person",
+                "Lokasi": "Location",
+                "Jam Operasional": "Operating Hours",
+                "Sosial Media": "Social Media",
+                "Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,": "Veteran Street, PT Semen Indonesia Complex, Sidomoro,",
+                "Kecamatan Kebomas": "Kebomas District",
+                "Kabupaten Gresik": "Gresik Regency",
+                "Jawa Timur": "East Java",
+                "Indonesia": "Indonesia",
+                "Ganti Bahasa": "Change Language",
+                "Sisa Kuota:": "Remaining Seats:"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            const newLang = currentLang === 'id' ? 'en' : 'id';
+            const dict = translations[newLang];
+            
+            // Update Flags
+            const flagUrl = newLang === 'id' ? 'https://flagcdn.com/w40/id.png' : 'https://flagcdn.com/w40/gb.png';
+            const flagDesktop = document.getElementById('flagIconDesktop');
+            if(flagDesktop) flagDesktop.src = flagUrl;
+            
+            const flagMobile = document.getElementById('flagIconMobile');
+            if(flagMobile) flagMobile.src = flagUrl;
+            
+            const langTextMobile = document.getElementById('langTextMobile');
+            if(langTextMobile) {
+                langTextMobile.innerText = newLang === 'id' ? 'Ganti Bahasa' : 'Change Language';
+            }
+
+            // Translate Text Nodes
+            function translateNode(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    let text = node.nodeValue.trim().replace(/\s+/g, ' ');
+                    if (text && dict[text]) {
+                        const originalValue = node.nodeValue;
+                        const leadingSpaceMatch = originalValue.match(/^\s*/);
+                        const trailingSpaceMatch = originalValue.match(/\s*$/);
+                        
+                        const leadingSpace = leadingSpaceMatch ? leadingSpaceMatch[0] : '';
+                        const trailingSpace = trailingSpaceMatch ? trailingSpaceMatch[0] : '';
+                        
+                        node.nodeValue = leadingSpace + dict[text] + trailingSpace;
+                    }
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    // Also translate placeholders
+                    if (node.tagName === 'INPUT' && node.placeholder) {
+                        let text = node.placeholder.trim().replace(/\s+/g, ' ');
+                        if (dict[text]) node.placeholder = dict[text];
+                    }
+                    if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+                        node.childNodes.forEach(translateNode);
+                    }
+                }
+            }
+
+            translateNode(document.body);
+            currentLang = newLang;
+        }
+    </script>
+
+
+    <!-- Quota Sync Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const initialQuotas = { 
+                '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15,
+                'a': 22, 'b': 25, 'c': 22, 'd': 22, 'e': 35, 'f': 15 
+            };
+            let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
+            
+            // Sync initial quotas
+            Object.keys(initialQuotas).forEach(key => {
+                if (quotas[key] === undefined) quotas[key] = initialQuotas[key];
+            });
+            localStorage.setItem('uisi_quotas', JSON.stringify(quotas));
+
+            // Update UI
+            document.querySelectorAll('.program-card').forEach(card => {
+                const id = card.dataset.id;
+                if (id && quotas[id] !== undefined) {
+                    const numberSpan = card.querySelector('.kuota-number');
+                    if (numberSpan) numberSpan.innerText = quotas[id];
+                }
+            });
+        });
+    </script>
+    </body>
 </html>

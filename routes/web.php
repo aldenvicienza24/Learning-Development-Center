@@ -57,6 +57,10 @@ Route::get('/program?filter=pelatihan', function () {
     return view('/program?filter=pelatihan');
 })->name('/program?filter=pelatihan');
 
+Route::get('/pendaftaran', function () {
+    return view('pendaftaran');
+})->name('pendaftaran');
+
 
 
 // ✅ ROUTE DASHBOARD (Auth Required) - Halaman Utama

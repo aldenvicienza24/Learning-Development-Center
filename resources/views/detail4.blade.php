@@ -155,9 +155,17 @@
                 </div>
                 
                 <!-- Contact Button -->
-                <a href="{{ url('/kontak') }}" class="ml-2 bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md">
-                    Hubungi Kami
-                </a>
+                <div class="flex items-center gap-3 ml-2">
+                    <a href="{{ url('/kontak') }}"
+                        class="bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md whitespace-nowrap">
+                        Hubungi Kami
+                    </a>
+
+                    <!-- Language Switcher -->
+                    <button onclick="toggleLanguage()" class="flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
+                        <img id="flagIconDesktop" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
+                    </button>
+                </div>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -191,14 +199,17 @@
                             </div>
                         </div>
                         
-                        <!-- Contact Button Mobile -->
-                        <div class="mobile-menu-item py-2">
-                            <a href="{{ url('/kontak') }}" class="inline-block w-full">
-                                <div class="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full"
-                                     style="background: linear-gradient(90deg, #740A03, #C3110C);">
+                        <!-- Contact Button & Language Mobile -->
+                        <div class="mobile-menu-item py-2 flex items-center gap-2">
+                            <a href="{{ url('/kontak') }}" class="flex-grow">
+                                <div class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full"
+                                    style="background: linear-gradient(90deg, #740A03, #C3110C);">
                                     Hubungi Kami
                                 </div>
                             </a>
+                            <button onclick="toggleLanguage()" class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
+                                <img id="flagIconMobile" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -300,7 +311,7 @@
                 </div>
 
                 <!-- Daftar Sekarang Button -->
-                <a href="#">
+                <a href="{{ url('/pendaftaran') }}?id=4" class="block w-full">
                     <button class="w-full py-4 bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white font-semibold rounded-xl transition-all transform hover:-translate-y-0.5 shadow-lg text-base md:text-lg">
                         Daftar Sekarang
                     </button>
@@ -455,6 +466,182 @@
             programSubmenu?.classList.toggle('hidden');
             programCaret?.classList.toggle('rotate-180');
         });
+    </script>
+
+
+    <!-- Quota Update Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const initialQuotas = { '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15 };
+            let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
+            
+            let q = quotas['4'] !== undefined ? quotas['4'] : initialQuotas['4'];
+            
+            // Find the quota element by looking for the text ' Kuota' or ' Quota'
+            const ps = document.querySelectorAll('p');
+            ps.forEach(p => {
+                if (/^\d+\s+(Kuota|Quota)$/i.test(p.innerText.trim())) {
+                    p.innerText = q + ' Kuota';
+                    p.classList.add('font-bold', 'text-red-600');
+                    p.classList.remove('text-gray-400', 'text-gray-500');
+                }
+            });
+        });
+    </script>
+
+    <!-- Language Switcher Script -->
+    <script>
+        const translations = {
+            'id': {
+                'Home': 'Beranda',
+                'Profile': 'Profil',
+                'Programs': 'Program',
+                'Contact Us': 'Hubungi Kami',
+                'National': 'Nasional',
+                'International': 'Internasional',
+                'Participant Capacity': 'Kuota Peserta',
+                'Delivery Method': 'Metode',
+                'Online / Virtual Learning': 'Online',
+                'Course Syllabus': 'Silabus',
+                'Download PDF': 'Download',
+                'Registration Deadline': 'Batas Pendaftaran',
+                'Enroll Now': 'Daftar Sekarang',
+                'Register Now': 'Daftar Sekarang',
+                'Description': 'Deskripsi',
+                'Taxation & Insurance': 'Perpajakan & Asuransi',
+                'Economics and Business - Training Unit': 'Ekonomi dan Bisnis - Unit Pelatihan',
+                'UI/UX Design Fundamental': 'UI/UX Design Fundamental',
+                'Creative Technology - Training Unit': 'Teknologi Kreatif - Unit Pelatihan',
+                'Project Management Certification': 'Sertifikasi Manajemen Proyek',
+                'Engineering & Industry - Certification Unit': 'Teknik & Industri - Unit Sertifikasi',
+                'AutoCAD for Professional': 'AutoCAD for Professional',
+                'TOEFL Preparation Program': 'TOEFL Preparation Program',
+                'Language Unit': 'Unit Bahasa',
+                'IELTS Intensive Coaching': 'IELTS Intensive Coaching',
+                'March 26, 2026': '26 Maret 2026',
+                'March 10, 2026': '10 Maret 2026',
+                'April 15, 2026': '15 April 2026',
+                'April 5, 2026': '5 April 2026',
+                'May 20, 2026': '20 Mei 2026',
+                'May 10, 2026': '10 Mei 2026',
+                'Contact Information': 'Informasi Kontak',
+                'Contact Person': 'Narahubung',
+                'Location': 'Lokasi',
+                'Operating Hours': 'Jam Operasional',
+                'Social Media': 'Sosial Media',
+                'Veteran Street, PT Semen Indonesia Complex, Sidomoro,': 'Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,',
+                'Kebomas District': 'Kecamatan Kebomas',
+                'Gresik Regency': 'Kabupaten Gresik',
+                'East Java': 'Jawa Timur',
+                'Indonesia': 'Indonesia',
+                'Change Language': 'Ganti Bahasa',
+                "This training program is meticulously designed to provide a comprehensive understanding of corporate taxation and risk management fundamentals within the modern business landscape. Participants will master tax regulations, strategic calculations, and risk mitigation through insurance-based solutions.": "Program pelatihan ini dirancang untuk memberikan pemahaman komprehensif mengenai dasar-dasar perpajakan dan manajemen asuransi dalam konteks bisnis modern. Peserta akan mempelajari regulasi perpajakan, perhitungan pajak, hingga strategi pengelolaan risiko melalui asuransi.",
+                "This course is ideal for students, fresh graduates, and professionals aiming to elevate their practical competencies in the global economic and business sectors.": "Pelatihan ini cocok bagi mahasiswa, fresh graduate, maupun profesional yang ingin meningkatkan kompetensi di bidang ekonomi dan bisnis secara praktis dan aplikatif.",
+                "This program is designed to provide a deep understanding of the digital product design cycle, from user research, wireframing, to interactive visual design. Participants will learn industry-standard design tools to create optimal and aesthetic user experiences.": "Program ini dirancang untuk memberikan pemahaman mendalam tentang siklus desain produk digital, mulai dari riset pengguna, pembuatan wireframe, hingga desain visual yang interaktif. Peserta akan mempelajari alat desain standar industri untuk menciptakan pengalaman pengguna yang optimal dan estetis.",
+                "This certification program is designed to test and validate participants' competencies in engineering and industry according to professional standards. The program aims to increase credibility, job readiness, and the competitiveness of graduates in the industrial world.": "Program sertifikasi ini dirancang untuk menguji dan mengesahkan kompetensi peserta di bidang teknik dan industri sesuai dengan standar profesional. Program ini bertujuan meningkatkan kredibilitas, kesiapan kerja, serta daya saing lulusan di dunia industri.",
+                "This certification is suitable for final-year students, fresh graduates, and professionals who want to have official recognition of their competencies.": "Sertifikasi ini cocok bagi mahasiswa tingkat akhir, fresh graduate, maupun profesional yang ingin memiliki pengakuan kompetensi secara resmi.",
+                "Intensive technical training for mastering AutoCAD software. Participants will learn to create precise 2D and 3D technical designs, standardize working drawings, and efficient project documentation techniques for engineers and architects.": "Pelatihan teknis intensif untuk penguasaan perangkat lunak AutoCAD. Peserta akan belajar membuat rancangan teknis 2D dan 3D yang presisi, standarisasi gambar kerja, serta teknik dokumentasi proyek yang efisien bagi engineer dan arsitek.",
+                "The TOEFL Preparation Program is designed to help participants comprehensively improve their English skills and achieve an optimal TOEFL score. This program is suitable for students and professionals preparing for further studies, scholarships, and work administration needs.": "TOEFL Preparation Program dirancang untuk membantu peserta meningkatkan kemampuan bahasa Inggris secara komprehensif dan mencapai skor TOEFL yang optimal. Program ini cocok bagi mahasiswa dan profesional yang mempersiapkan studi lanjut, beasiswa, maupun kebutuhan administrasi kerja.",
+                "The material is arranged systematically with intensive exercises and test simulations to familiarize participants with the official exam format.": "Materi disusun secara sistematis dengan latihan intensif dan simulasi tes untuk membiasakan peserta dengan format ujian resmi.",
+                "An intensive course to prepare participants for the IELTS exam. Covers mastery of Listening, Reading, Writing, and Speaking techniques with real exam simulations to help participants achieve their target score needed for study or work abroad.": "Kursus intensif untuk mempersiapkan peserta menghadapi ujian IELTS. Mencakup penguasaan teknik Listening, Reading, Writing, and Speaking dengan simulasi ujian nyata untuk membantu peserta mencapai target skor yang dibutuhkan untuk studi atau kerja di luar negeri."
+            },
+            'en': {
+                'Beranda': 'Home',
+                'Profil': 'Profile',
+                'Program': 'Programs',
+                'Hubungi Kami': 'Contact Us',
+                'Nasional': 'National',
+                'Internasional': 'International',
+                'Kuota Peserta': 'Participant Capacity',
+                'Metode': 'Delivery Method',
+                'Online': 'Online / Virtual Learning',
+                'Silabus': 'Course Syllabus',
+                'Download': 'Download PDF',
+                'Batas Pendaftaran': 'Registration Deadline',
+                'Daftar Sekarang': 'Register Now',
+                'Deskripsi': 'Description',
+                'Perpajakan & Asuransi': 'Taxation & Insurance',
+                'Ekonomi dan Bisnis - Unit Pelatihan': 'Economics and Business - Training Unit',
+                'UI/UX Design Fundamental': 'UI/UX Design Fundamental',
+                'Teknologi Kreatif - Unit Pelatihan': 'Creative Technology - Training Unit',
+                'Sertifikasi Manajemen Proyek': 'Project Management Certification',
+                'Teknik & Industri - Unit Sertifikasi': 'Engineering & Industry - Certification Unit',
+                'AutoCAD for Professional': 'AutoCAD for Professional',
+                'TOEFL Preparation Program': 'TOEFL Preparation Program',
+                'Unit Bahasa': 'Language Unit',
+                'IELTS Intensive Coaching': 'IELTS Intensive Coaching',
+                '26 Maret 2026': 'March 26, 2026',
+                '10 Maret 2026': 'March 10, 2026',
+                '15 April 2026': 'April 15, 2026',
+                '5 April 2026': 'April 5, 2026',
+                '20 Mei 2026': 'May 20, 2026',
+                '10 Mei 2026': 'May 10, 2026',
+                'Informasi Kontak': 'Contact Information',
+                'Narahubung': 'Contact Person',
+                'Lokasi': 'Location',
+                'Jam Operasional': 'Operating Hours',
+                'Sosial Media': 'Social Media',
+                'Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,': 'Veteran Street, PT Semen Indonesia Complex, Sidomoro,',
+                'Kecamatan Kebomas': 'Kebomas District',
+                'Kabupaten Gresik': 'Gresik Regency',
+                'Jawa Timur': 'East Java',
+                'Indonesia': 'Indonesia',
+                'Ganti Bahasa': 'Change Language',
+                "Program pelatihan ini dirancang untuk memberikan pemahaman komprehensif mengenai dasar-dasar perpajakan dan manajemen asuransi dalam konteks bisnis modern. Peserta akan mempelajari regulasi perpajakan, perhitungan pajak, hingga strategi pengelolaan risiko melalui asuransi.": "This training program is meticulously designed to provide a comprehensive understanding of corporate taxation and risk management fundamentals within the modern business landscape. Participants will master tax regulations, strategic calculations, and risk mitigation through insurance-based solutions.",
+                "Pelatihan ini cocok bagi mahasiswa, fresh graduate, maupun profesional yang ingin meningkatkan kompetensi di bidang ekonomi dan bisnis secara praktis dan aplikatif.": "This course is ideal for students, fresh graduates, and professionals aiming to elevate their practical competencies in the global economic and business sectors.",
+                "Program ini dirancang untuk memberikan pemahaman mendalam tentang siklus desain produk digital, mulai dari riset pengguna, pembuatan wireframe, hingga desain visual yang interaktif. Peserta akan mempelajari alat desain standar industri untuk menciptakan pengalaman pengguna yang optimal dan estetis.": "This program is designed to provide a deep understanding of the digital product design cycle, from user research, wireframing, to interactive visual design. Participants will learn industry-standard design tools to create optimal and aesthetic user experiences.",
+                "Program sertifikasi ini dirancang untuk menguji dan mengesahkan kompetensi peserta di bidang teknik dan industri sesuai dengan standar profesional. Program ini bertujuan meningkatkan kredibilitas, kesiapan kerja, serta daya saing lulusan di dunia industri.": "This certification program is designed to test and validate participants' competencies in engineering and industry according to professional standards. The program aims to increase credibility, job readiness, and the competitiveness of graduates in the industrial world.",
+                "Sertifikasi ini cocok bagi mahasiswa tingkat akhir, fresh graduate, maupun profesional yang ingin memiliki pengakuan kompetensi secara resmi.": "This certification is suitable for final-year students, fresh graduates, and professionals who want to have official recognition of their competencies.",
+                "Pelatihan teknis intensif untuk penguasaan perangkat lunak AutoCAD. Peserta akan belajar membuat rancangan teknis 2D dan 3D yang presisi, standarisasi gambar kerja, serta teknik dokumentasi proyek yang efisien bagi engineer dan arsitek.": "Intensive technical training for mastering AutoCAD software. Participants will learn to create precise 2D and 3D technical designs, standardize working drawings, and efficient project documentation techniques for engineers and architects.",
+                "TOEFL Preparation Program dirancang untuk membantu peserta meningkatkan kemampuan bahasa Inggris secara komprehensif dan mencapai skor TOEFL yang optimal. Program ini cocok bagi mahasiswa dan profesional yang mempersiapkan studi lanjut, beasiswa, maupun kebutuhan administrasi kerja.": "The TOEFL Preparation Program is designed to help participants comprehensively improve their English skills and achieve an optimal TOEFL score. This program is suitable for students and professionals preparing for further studies, scholarships, and work administration needs.",
+                "Materi disusun secara sistematis dengan latihan intensif dan simulasi tes untuk membiasakan peserta dengan format ujian resmi.": "The material is arranged systematically with intensive exercises and test simulations to familiarize participants with the official exam format.",
+                "Kursus intensif untuk mempersiapkan peserta menghadapi ujian IELTS. Mencakup penguasaan teknik Listening, Reading, Writing, dan Speaking dengan simulasi ujian nyata untuk membantu peserta mencapai target skor yang dibutuhkan untuk studi atau kerja di luar negeri.": "An intensive course to prepare participants for the IELTS exam. Covers mastery of Listening, Reading, Writing, and Speaking techniques with real exam simulations to help participants achieve their target score needed for study or work abroad."
+            }
+        };
+
+        let currentLang = 'id';
+
+        function toggleLanguage() {
+            const newLang = currentLang === 'id' ? 'en' : 'id';
+            const dict = translations[newLang];
+            
+            // Update Flags
+            const flagUrl = newLang === 'id' ? 'https://flagcdn.com/w40/id.png' : 'https://flagcdn.com/w40/gb.png';
+            const flagDesktop = document.getElementById('flagIconDesktop');
+            if(flagDesktop) flagDesktop.src = flagUrl;
+            
+            const flagMobile = document.getElementById('flagIconMobile');
+            if(flagMobile) flagMobile.src = flagUrl;
+            
+            const langTextMobile = document.getElementById('langTextMobile');
+            if(langTextMobile) {
+                langTextMobile.innerText = newLang === 'id' ? 'Ganti Bahasa' : 'Change Language';
+            }
+
+            // Translate Text Nodes
+            function translateNode(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    let text = node.nodeValue.trim().replace(/\s+/g, ' ');
+                    if (text && dict[text]) {
+                        const originalValue = node.nodeValue;
+                        const leadingSpaceMatch = originalValue.match(/^\s*/);
+                        const trailingSpaceMatch = originalValue.match(/\s*$/);
+                        
+                        const leadingSpace = leadingSpaceMatch ? leadingSpaceMatch[0] : '';
+                        const trailingSpace = trailingSpaceMatch ? trailingSpaceMatch[0] : '';
+                        
+                        node.nodeValue = leadingSpace + dict[text] + trailingSpace;
+                    }
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+                        node.childNodes.forEach(translateNode);
+                    }
+                }
+            }
+
+            translateNode(document.body);
+            currentLang = newLang;
+        }
     </script>
 
 </body>
