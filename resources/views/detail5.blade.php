@@ -14,208 +14,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     {{-- Custom Styles --}}
-    <style>
-        * {
-            font-family: "Inter", sans-serif;
-        }
-        
-        body {
-            overflow-x: hidden;
-        }
-
-        /* Dropdown Menu */
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            margin-top: 10px;
-            min-width: 180px;
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            z-index: 50;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(8px);
-            transition: all 0.35s ease;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 11px 16px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #000000;
-        }
-
-        .dropdown-menu a:hover {
-            background: #f3f4f6;
-            color: #000000;
-        }
-
-        .dropdown-menu a + a {
-            border-top: 1px solid #f3f4f6;
-        }
-
-        .caret {
-            transition: transform 0.3s ease;
-        }
-
-        .dropdown:hover .caret {
-            transform: rotate(180deg);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-container {
-            position: relative;
-        }
-
-        .mobile-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 8px;
-            width: 280px;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            z-index: 100;
-            overflow: hidden;
-            max-height: 0;
-            opacity: 0;
-            transform: translateY(-10px) scale(0.95);
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu.active {
-            max-height: 500px;
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .mobile-menu-item {
-            padding: 12px 18px;
-            border-bottom: 1px solid #F3F4F6;
-        }
-
-        .mobile-menu-item:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-menu-item a {
-            display: block;
-            width: 100%;
-        }
-
-        .mobile-submenu {
-            padding-left: 18px;
-            background: #FAFAFA;
-        }
-
-        .mobile-submenu a {
-            font-size: 13px;
-            color: #000000;
-            padding: 8px 12px;
-        }
-    </style>
+    @include('partials.navbar-styles')
 </head>
 
 <body class="bg-[#FFFFFF] min-h-screen flex flex-col">
 
     <!-- ==============================
-         NAVBAR (Normal Black Text - No Red)
+         NAVBAR
          ============================== -->
-    <div class="px-4 md:px-8 pt-6">
-        <nav class="bg-[#FAFAFA] shadow-sm rounded-2xl h-14 w-full px-4 md:px-14 flex items-center justify-end relative">
-            
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-8">
-                <a href="{{ url('dashboard') }}" class="text-sm font-medium text-gray-600 hover:text-[#8B1A1A]">Beranda</a>
-                <a href="{{ url('profil') }}" class="text-sm font-medium text-gray-600 hover:text-[#8B1A1A]">Profil</a>
-                
-                <!-- Program Dropdown -->
-                <div class="dropdown relative">
-                    <button class="flex items-center gap-1 py-3 text-sm font-medium text-gray-600 hover:text-[#8B1A1A]">
-                        Program
-                        <svg class="caret w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="{{ url('program1') }}">Nasional</a>
-                        <a href="{{ url('program2') }}">Internasional</a>
-                    </div>
-                </div>
-                
-                <!-- Contact Button -->
-                <div class="flex items-center gap-3 ml-2">
-                    <a href="{{ url('/kontak') }}"
-                        class="bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md whitespace-nowrap">
-                        Hubungi Kami
-                    </a>
-
-                    <!-- Language Switcher -->
-                    <button onclick="toggleLanguage()" class="flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
-                        <img id="flagIconDesktop" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <div class="mobile-menu-container md:hidden">
-                <button id="mobileMenuBtn" class="p-2 text-black hover:text-gray-700 transition z-50">
-                    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                    <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-
-                <!-- Mobile Menu -->
-                <div id="mobileMenu" class="mobile-menu">
-                    <div class="flex flex-col py-2">
-                        <a href="{{ url('/') }}" class="mobile-menu-item text-sm font-semibold text-black">Beranda</a>
-                        <a href="{{ url('/profil') }}" class="mobile-menu-item text-sm font-medium text-black">Profil</a>
-                        
-                        <!-- Program Submenu -->
-                        <div class="mobile-menu-item py-0">
-                            <button id="programToggle" class="w-full flex items-center justify-between text-sm font-medium text-black py-3">
-                                <span>Program</span>
-                                <svg id="programCaret" class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </button>
-                            <div id="programSubmenu" class="mobile-submenu rounded-lg overflow-hidden hidden">
-                                <a href="{{ url('/program/nasional') }}" class="block hover:text-gray-700">Nasional</a>
-                                <a href="{{ url('/program/internasional') }}" class="block hover:text-gray-700">Internasional</a>
-                            </div>
-                        </div>
-                        
-                        <!-- Contact Button & Language Mobile -->
-                        <div class="mobile-menu-item py-2 flex items-center gap-2">
-                            <a href="{{ url('/kontak') }}" class="flex-grow">
-                                <div class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full"
-                                    style="background: linear-gradient(90deg, #740A03, #C3110C);">
-                                    Hubungi Kami
-                                </div>
-                            </a>
-                            <button onclick="toggleLanguage()" class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
-                                <img id="flagIconMobile" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
+    @include('partials.navbar')
 
     <!-- ==============================
          MAIN CONTENT CONTAINER
@@ -230,95 +37,94 @@
                      class="w-full h-full object-cover">
             </div>
 
-            <!-- Content -->
-            <div class="p-6 md:p-10">
-                <!-- Title -->
-                <div class="text-center mb-10">
-                    <h1 class="text-2xl md:text-4xl font-bold text-gray-900 mb-2">
-                        TOEFL Preparation Program
-                    </h1>
-                    <p class="text-gray-600 text-base md:text-xl">
-                        Unit Bahasa
-                    </p>
-                </div>
-
-                <!-- Two Column Layout: Deskripsi & Info Boxes -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+                                                                                    <!-- Content -->
+            <div class="p-6 md:p-8 lg:p-12">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
                     
-                    <!-- Left Column: Deskripsi (2/3 width) -->
+                    <!-- LEFT COLUMN: Content (2/3 width) -->
                     <div class="lg:col-span-2">
-                        <h2 class="text-xl font-bold text-gray-900 mb-4">Deskripsi</h2>
-                        <div class="space-y-4 text-gray-600 text-sm md:text-base leading-relaxed">
-                            <p>
+                        
+                        <!-- Header inside the left column -->
+                        <div class="mb-8">
+                            <span class="inline-block px-3 py-1 mb-4 bg-red-50 text-[#C3110C] text-xs font-semibold uppercase tracking-wider rounded-md border border-red-100/50">
+                                BAHASA
+                            </span>
+                            <h1 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight leading-snug mb-4">
+                                TOEFL Preparation Program
+                            </h1>
+                            
+                        </div>
+
+                        <!-- Subtle Separator -->
+                        <div class="w-full h-px bg-slate-100 mb-8"></div>
+
+                        <!-- Description -->
+                        <div>
+                            <h2 class="text-lg md:text-xl font-semibold text-slate-800 mb-4">Tentang Program</h2>
+                            <div class="space-y-4 text-slate-600 text-base leading-relaxed">
+                                <p>
                                 TOEFL Preparation Program dirancang untuk membantu peserta meningkatkan kemampuan bahasa Inggris secara komprehensif dan mencapai skor TOEFL yang optimal. Program ini cocok bagi mahasiswa dan profesional yang mempersiapkan studi lanjut, beasiswa, maupun kebutuhan administrasi kerja.
-                            </p>
-                            <p>
+                                </p>
+                                <p>
                                 Materi disusun secara sistematis dengan latihan intensif dan simulasi tes untuk membiasakan peserta dengan format ujian resmi.
-                            </p>
+                                </p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Right Column: Info Boxes (1/3 width) -->
-                    <div class="space-y-4">
-                        <!-- Kuota Peserta -->
-                        <div class="flex items-center gap-4 p-4 bg-[#FAFAFA] rounded-xl border border-gray-100">
-                            <div class="w-12 h-12 bg-gradient-to-br from-[#740A03] to-[#C3110C] rounded-lg flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold text-gray-900">Kuota Peserta</p>
-                                <p class="text-xs text-gray-500">30 Kuota</p>
-                            </div>
-                        </div>
+                    <!-- RIGHT COLUMN: Registration Card (1/3 width) -->
+                    <div class="lg:col-span-1">
+                        <!-- Sticky Wrapper -->
+                        <div class="sticky top-24">
+                            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                                
+                                <!-- Price -->
+                                <div class="mb-6">
+                                    <p class="text-xs font-medium text-slate-500 mb-1.5 uppercase tracking-wider">Biaya Investasi</p>
+                                    <p class="text-3xl font-bold text-slate-800 tracking-tight">Rp. 1.250.000</p>
+                                </div>
 
-                        <!-- Metode -->
-                        <div class="flex items-center gap-4 p-4 bg-[#FAFAFA] rounded-xl border border-gray-100">
-                            <div class="w-12 h-12 bg-gradient-to-br from-[#740A03] to-[#C3110C] rounded-lg flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold text-gray-900">Metode</p>
-                                <p class="text-xs text-gray-500">Online</p>
-                            </div>
-                        </div>
+                                <!-- Spec List -->
+                                <div class="space-y-1 mb-6">
+                                    <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                                        <span class="text-sm text-slate-500 flex items-center gap-2.5">
+                                            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                            Kuota
+                                        </span>
+                                        <p class="text-sm font-semibold text-slate-800">30 Kuota</p>
+                                    </div>
+                                    <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                                        <span class="text-sm text-slate-500 flex items-center gap-2.5">
+                                            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                            Metode
+                                        </span>
+                                        <span class="text-sm font-semibold text-slate-800">Online</span>
+                                    </div>
+                                    <div class="flex items-center justify-between py-3">
+                                        <span class="text-sm text-slate-500 flex items-center gap-2.5">
+                                            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                            Batas Akhir
+                                        </span>
+                                        <span class="text-sm font-semibold text-slate-800">30 Maret 2026</span>
+                                    </div>
+                                </div>
 
-                        <!-- Silabus -->
-                        <div class="flex items-center gap-4 p-4 bg-[#FAFAFA] rounded-xl border border-gray-100">
-                            <div class="w-12 h-12 bg-gradient-to-br from-[#740A03] to-[#C3110C] rounded-lg flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold text-gray-900">Silabus</p>
-                                <a href="#" class="text-xs text-gray-500 hover:text-[#C3110C] transition">Download</a>
+                                <!-- Buttons -->
+                                <div class="space-y-3">
+                                    <a href="{{ url('/pendaftaran') }}?id=5" class="flex items-center justify-center w-full py-3.5 bg-[#C3110C] hover:bg-[#A00E0A] text-white text-sm font-semibold rounded-lg transition-colors active:scale-[0.98]">
+                                        Daftar Sekarang
+                                    </a>
+                                    <a href="#" class="flex items-center justify-center w-full py-3.5 bg-slate-50 text-slate-600 hover:text-[#C3110C] text-sm font-medium rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-white transition-colors active:scale-[0.98]">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                        Unduh Silabus
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
 
                 </div>
-
-                <!-- Bottom Section: Batas Pendaftaran & Harga -->
-                <div class="flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-100 mb-6">
-                    <div class="mb-4 sm:mb-0 text-center sm:text-left">
-                        <p class="text-sm text-gray-500 mb-1">Batas Pendaftaran</p>
-                        <p class="text-base font-bold text-gray-900">30 Maret 2026</p>
-                    </div>
-                    <div class="text-center sm:text-right">
-                        <p class="text-2xl md:text-3xl font-bold text-gray-900">Rp. 1.250.000</p>
-                    </div>
-                </div>
-
-                <!-- Daftar Sekarang Button -->
-                <a href="{{ url('/pendaftaran') }}?id=5" class="block w-full">
-                    <button class="w-full py-4 bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white font-semibold rounded-xl transition-all transform hover:-translate-y-0.5 shadow-lg text-base md:text-lg">
-                        Daftar Sekarang
-                    </button>
-                </a>
             </div>
         </div>
     </main>
@@ -439,37 +245,7 @@
     <!-- ==============================
          JAVASCRIPT
          ============================== -->
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuIcon = document.getElementById('menuIcon');
-        const closeIcon = document.getElementById('closeIcon');
-        const programToggle = document.getElementById('programToggle');
-        const programSubmenu = document.getElementById('programSubmenu');
-        const programCaret = document.getElementById('programCaret');
-
-        mobileMenuBtn?.addEventListener('click', function(e) {
-            e.stopPropagation();
-            mobileMenu?.classList.toggle('active');
-            menuIcon?.classList.toggle('hidden');
-            closeIcon?.classList.toggle('hidden');
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!mobileMenu?.contains(e.target) && !mobileMenuBtn?.contains(e.target)) {
-                mobileMenu?.classList.remove('active');
-                menuIcon?.classList.remove('hidden');
-                closeIcon?.classList.add('hidden');
-            }
-        });
-
-        programToggle?.addEventListener('click', function(e) {
-            e.stopPropagation();
-            programSubmenu?.classList.toggle('hidden');
-            programCaret?.classList.toggle('rotate-180');
-        });
-    </script>
+    
 
 
     <!-- Quota Update Script -->
@@ -493,159 +269,7 @@
     </script>
 
     <!-- Language Switcher Script -->
-    <script>
-        const translations = {
-            'id': {
-                'Home': 'Beranda',
-                'Profile': 'Profil',
-                'Programs': 'Program',
-                'Contact Us': 'Hubungi Kami',
-                'National': 'Nasional',
-                'International': 'Internasional',
-                'Participant Capacity': 'Kuota Peserta',
-                'Delivery Method': 'Metode',
-                'Online / Virtual Learning': 'Online',
-                'Course Syllabus': 'Silabus',
-                'Download PDF': 'Download',
-                'Registration Deadline': 'Batas Pendaftaran',
-                'Enroll Now': 'Daftar Sekarang',
-                'Register Now': 'Daftar Sekarang',
-                'Description': 'Deskripsi',
-                'Taxation & Insurance': 'Perpajakan & Asuransi',
-                'Economics and Business - Training Unit': 'Ekonomi dan Bisnis - Unit Pelatihan',
-                'UI/UX Design Fundamental': 'UI/UX Design Fundamental',
-                'Creative Technology - Training Unit': 'Teknologi Kreatif - Unit Pelatihan',
-                'Project Management Certification': 'Sertifikasi Manajemen Proyek',
-                'Engineering & Industry - Certification Unit': 'Teknik & Industri - Unit Sertifikasi',
-                'AutoCAD for Professional': 'AutoCAD for Professional',
-                'TOEFL Preparation Program': 'TOEFL Preparation Program',
-                'Language Unit': 'Unit Bahasa',
-                'IELTS Intensive Coaching': 'IELTS Intensive Coaching',
-                'March 26, 2026': '26 Maret 2026',
-                'March 10, 2026': '10 Maret 2026',
-                'April 15, 2026': '15 April 2026',
-                'April 5, 2026': '5 April 2026',
-                'May 20, 2026': '20 Mei 2026',
-                'May 10, 2026': '10 Mei 2026',
-                'Contact Information': 'Informasi Kontak',
-                'Contact Person': 'Narahubung',
-                'Location': 'Lokasi',
-                'Operating Hours': 'Jam Operasional',
-                'Social Media': 'Sosial Media',
-                'Veteran Street, PT Semen Indonesia Complex, Sidomoro,': 'Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,',
-                'Kebomas District': 'Kecamatan Kebomas',
-                'Gresik Regency': 'Kabupaten Gresik',
-                'East Java': 'Jawa Timur',
-                'Indonesia': 'Indonesia',
-                'Change Language': 'Ganti Bahasa',
-                "This training program is meticulously designed to provide a comprehensive understanding of corporate taxation and risk management fundamentals within the modern business landscape. Participants will master tax regulations, strategic calculations, and risk mitigation through insurance-based solutions.": "Program pelatihan ini dirancang untuk memberikan pemahaman komprehensif mengenai dasar-dasar perpajakan dan manajemen asuransi dalam konteks bisnis modern. Peserta akan mempelajari regulasi perpajakan, perhitungan pajak, hingga strategi pengelolaan risiko melalui asuransi.",
-                "This course is ideal for students, fresh graduates, and professionals aiming to elevate their practical competencies in the global economic and business sectors.": "Pelatihan ini cocok bagi mahasiswa, fresh graduate, maupun profesional yang ingin meningkatkan kompetensi di bidang ekonomi dan bisnis secara praktis dan aplikatif.",
-                "This program is designed to provide a deep understanding of the digital product design cycle, from user research, wireframing, to interactive visual design. Participants will learn industry-standard design tools to create optimal and aesthetic user experiences.": "Program ini dirancang untuk memberikan pemahaman mendalam tentang siklus desain produk digital, mulai dari riset pengguna, pembuatan wireframe, hingga desain visual yang interaktif. Peserta akan mempelajari alat desain standar industri untuk menciptakan pengalaman pengguna yang optimal dan estetis.",
-                "This certification program is designed to test and validate participants' competencies in engineering and industry according to professional standards. The program aims to increase credibility, job readiness, and the competitiveness of graduates in the industrial world.": "Program sertifikasi ini dirancang untuk menguji dan mengesahkan kompetensi peserta di bidang teknik dan industri sesuai dengan standar profesional. Program ini bertujuan meningkatkan kredibilitas, kesiapan kerja, serta daya saing lulusan di dunia industri.",
-                "This certification is suitable for final-year students, fresh graduates, and professionals who want to have official recognition of their competencies.": "Sertifikasi ini cocok bagi mahasiswa tingkat akhir, fresh graduate, maupun profesional yang ingin memiliki pengakuan kompetensi secara resmi.",
-                "Intensive technical training for mastering AutoCAD software. Participants will learn to create precise 2D and 3D technical designs, standardize working drawings, and efficient project documentation techniques for engineers and architects.": "Pelatihan teknis intensif untuk penguasaan perangkat lunak AutoCAD. Peserta akan belajar membuat rancangan teknis 2D dan 3D yang presisi, standarisasi gambar kerja, serta teknik dokumentasi proyek yang efisien bagi engineer dan arsitek.",
-                "The TOEFL Preparation Program is designed to help participants comprehensively improve their English skills and achieve an optimal TOEFL score. This program is suitable for students and professionals preparing for further studies, scholarships, and work administration needs.": "TOEFL Preparation Program dirancang untuk membantu peserta meningkatkan kemampuan bahasa Inggris secara komprehensif dan mencapai skor TOEFL yang optimal. Program ini cocok bagi mahasiswa dan profesional yang mempersiapkan studi lanjut, beasiswa, maupun kebutuhan administrasi kerja.",
-                "The material is arranged systematically with intensive exercises and test simulations to familiarize participants with the official exam format.": "Materi disusun secara sistematis dengan latihan intensif dan simulasi tes untuk membiasakan peserta dengan format ujian resmi.",
-                "An intensive course to prepare participants for the IELTS exam. Covers mastery of Listening, Reading, Writing, and Speaking techniques with real exam simulations to help participants achieve their target score needed for study or work abroad.": "Kursus intensif untuk mempersiapkan peserta menghadapi ujian IELTS. Mencakup penguasaan teknik Listening, Reading, Writing, and Speaking dengan simulasi ujian nyata untuk membantu peserta mencapai target skor yang dibutuhkan untuk studi atau kerja di luar negeri."
-            },
-            'en': {
-                'Beranda': 'Home',
-                'Profil': 'Profile',
-                'Program': 'Programs',
-                'Hubungi Kami': 'Contact Us',
-                'Nasional': 'National',
-                'Internasional': 'International',
-                'Kuota Peserta': 'Participant Capacity',
-                'Metode': 'Delivery Method',
-                'Online': 'Online / Virtual Learning',
-                'Silabus': 'Course Syllabus',
-                'Download': 'Download PDF',
-                'Batas Pendaftaran': 'Registration Deadline',
-                'Daftar Sekarang': 'Register Now',
-                'Deskripsi': 'Description',
-                'Perpajakan & Asuransi': 'Taxation & Insurance',
-                'Ekonomi dan Bisnis - Unit Pelatihan': 'Economics and Business - Training Unit',
-                'UI/UX Design Fundamental': 'UI/UX Design Fundamental',
-                'Teknologi Kreatif - Unit Pelatihan': 'Creative Technology - Training Unit',
-                'Sertifikasi Manajemen Proyek': 'Project Management Certification',
-                'Teknik & Industri - Unit Sertifikasi': 'Engineering & Industry - Certification Unit',
-                'AutoCAD for Professional': 'AutoCAD for Professional',
-                'TOEFL Preparation Program': 'TOEFL Preparation Program',
-                'Unit Bahasa': 'Language Unit',
-                'IELTS Intensive Coaching': 'IELTS Intensive Coaching',
-                '26 Maret 2026': 'March 26, 2026',
-                '10 Maret 2026': 'March 10, 2026',
-                '15 April 2026': 'April 15, 2026',
-                '5 April 2026': 'April 5, 2026',
-                '20 Mei 2026': 'May 20, 2026',
-                '10 Mei 2026': 'May 10, 2026',
-                'Informasi Kontak': 'Contact Information',
-                'Narahubung': 'Contact Person',
-                'Lokasi': 'Location',
-                'Jam Operasional': 'Operating Hours',
-                'Sosial Media': 'Social Media',
-                'Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,': 'Veteran Street, PT Semen Indonesia Complex, Sidomoro,',
-                'Kecamatan Kebomas': 'Kebomas District',
-                'Kabupaten Gresik': 'Gresik Regency',
-                'Jawa Timur': 'East Java',
-                'Indonesia': 'Indonesia',
-                'Ganti Bahasa': 'Change Language',
-                "Program pelatihan ini dirancang untuk memberikan pemahaman komprehensif mengenai dasar-dasar perpajakan dan manajemen asuransi dalam konteks bisnis modern. Peserta akan mempelajari regulasi perpajakan, perhitungan pajak, hingga strategi pengelolaan risiko melalui asuransi.": "This training program is meticulously designed to provide a comprehensive understanding of corporate taxation and risk management fundamentals within the modern business landscape. Participants will master tax regulations, strategic calculations, and risk mitigation through insurance-based solutions.",
-                "Pelatihan ini cocok bagi mahasiswa, fresh graduate, maupun profesional yang ingin meningkatkan kompetensi di bidang ekonomi dan bisnis secara praktis dan aplikatif.": "This course is ideal for students, fresh graduates, and professionals aiming to elevate their practical competencies in the global economic and business sectors.",
-                "Program ini dirancang untuk memberikan pemahaman mendalam tentang siklus desain produk digital, mulai dari riset pengguna, pembuatan wireframe, hingga desain visual yang interaktif. Peserta akan mempelajari alat desain standar industri untuk menciptakan pengalaman pengguna yang optimal dan estetis.": "This program is designed to provide a deep understanding of the digital product design cycle, from user research, wireframing, to interactive visual design. Participants will learn industry-standard design tools to create optimal and aesthetic user experiences.",
-                "Program sertifikasi ini dirancang untuk menguji dan mengesahkan kompetensi peserta di bidang teknik dan industri sesuai dengan standar profesional. Program ini bertujuan meningkatkan kredibilitas, kesiapan kerja, serta daya saing lulusan di dunia industri.": "This certification program is designed to test and validate participants' competencies in engineering and industry according to professional standards. The program aims to increase credibility, job readiness, and the competitiveness of graduates in the industrial world.",
-                "Sertifikasi ini cocok bagi mahasiswa tingkat akhir, fresh graduate, maupun profesional yang ingin memiliki pengakuan kompetensi secara resmi.": "This certification is suitable for final-year students, fresh graduates, and professionals who want to have official recognition of their competencies.",
-                "Pelatihan teknis intensif untuk penguasaan perangkat lunak AutoCAD. Peserta akan belajar membuat rancangan teknis 2D dan 3D yang presisi, standarisasi gambar kerja, serta teknik dokumentasi proyek yang efisien bagi engineer dan arsitek.": "Intensive technical training for mastering AutoCAD software. Participants will learn to create precise 2D and 3D technical designs, standardize working drawings, and efficient project documentation techniques for engineers and architects.",
-                "TOEFL Preparation Program dirancang untuk membantu peserta meningkatkan kemampuan bahasa Inggris secara komprehensif dan mencapai skor TOEFL yang optimal. Program ini cocok bagi mahasiswa dan profesional yang mempersiapkan studi lanjut, beasiswa, maupun kebutuhan administrasi kerja.": "The TOEFL Preparation Program is designed to help participants comprehensively improve their English skills and achieve an optimal TOEFL score. This program is suitable for students and professionals preparing for further studies, scholarships, and work administration needs.",
-                "Materi disusun secara sistematis dengan latihan intensif dan simulasi tes untuk membiasakan peserta dengan format ujian resmi.": "The material is arranged systematically with intensive exercises and test simulations to familiarize participants with the official exam format.",
-                "Kursus intensif untuk mempersiapkan peserta menghadapi ujian IELTS. Mencakup penguasaan teknik Listening, Reading, Writing, dan Speaking dengan simulasi ujian nyata untuk membantu peserta mencapai target skor yang dibutuhkan untuk studi atau kerja di luar negeri.": "An intensive course to prepare participants for the IELTS exam. Covers mastery of Listening, Reading, Writing, and Speaking techniques with real exam simulations to help participants achieve their target score needed for study or work abroad."
-            }
-        };
-
-        let currentLang = 'id';
-
-        function toggleLanguage() {
-            const newLang = currentLang === 'id' ? 'en' : 'id';
-            const dict = translations[newLang];
-            
-            // Update Flags
-            const flagUrl = newLang === 'id' ? 'https://flagcdn.com/w40/id.png' : 'https://flagcdn.com/w40/gb.png';
-            const flagDesktop = document.getElementById('flagIconDesktop');
-            if(flagDesktop) flagDesktop.src = flagUrl;
-            
-            const flagMobile = document.getElementById('flagIconMobile');
-            if(flagMobile) flagMobile.src = flagUrl;
-            
-            const langTextMobile = document.getElementById('langTextMobile');
-            if(langTextMobile) {
-                langTextMobile.innerText = newLang === 'id' ? 'Ganti Bahasa' : 'Change Language';
-            }
-
-            // Translate Text Nodes
-            function translateNode(node) {
-                if (node.nodeType === Node.TEXT_NODE) {
-                    let text = node.nodeValue.trim().replace(/\s+/g, ' ');
-                    if (text && dict[text]) {
-                        const originalValue = node.nodeValue;
-                        const leadingSpaceMatch = originalValue.match(/^\s*/);
-                        const trailingSpaceMatch = originalValue.match(/\s*$/);
-                        
-                        const leadingSpace = leadingSpaceMatch ? leadingSpaceMatch[0] : '';
-                        const trailingSpace = trailingSpaceMatch ? trailingSpaceMatch[0] : '';
-                        
-                        node.nodeValue = leadingSpace + dict[text] + trailingSpace;
-                    }
-                } else if (node.nodeType === Node.ELEMENT_NODE) {
-                    if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
-                        node.childNodes.forEach(translateNode);
-                    }
-                }
-            }
-
-            translateNode(document.body);
-            currentLang = newLang;
-        }
-    </script>
+    @include('partials.navbar-scripts')
 
 </body>
 </html>

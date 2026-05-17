@@ -63,8 +63,10 @@ Route::get('/pendaftaran', function () {
 
 
 
+use App\Http\Controllers\ProgramController;
+
 // ✅ ROUTE DASHBOARD (Auth Required) - Halaman Utama
-Route::view('dashboard', 'dashboard')
+Route::get('dashboard', [ProgramController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 

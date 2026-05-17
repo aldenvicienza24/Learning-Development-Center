@@ -17,35 +17,6 @@ body { overflow-x: hidden; }
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .slider-container { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
-/* --- Dropdown & Menu Styles --- */
-.dropdown-menu {
-position: absolute; top: 100%; left: 0; margin-top: 10px;
-min-width: 180px; background: #ffffff; border-radius: 10px;
-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); overflow: hidden; z-index: 50;
-opacity: 0; visibility: hidden; transform: translateY(8px);
-transition: all 0.35s ease;
-}
-.dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-.dropdown-menu a { display: block; padding: 11px 16px; font-size: 13px; font-weight: 500; color: #374151; }
-.dropdown-menu a:hover { background: #fef2f2; color: #8B1A1A; }
-.dropdown-menu a + a { border-top: 1px solid #f3f4f6; }
-.caret { transition: transform 0.3s ease; }
-.dropdown:hover .caret { transform: rotate(180deg); }
-/* Mobile Menu */
-.mobile-menu-container { position: relative; }
-.mobile-menu {
-position: absolute; top: 100%; right: 0; margin-top: 8px; width: 280px;
-background: #ffffff; border-radius: 16px;
-box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); z-index: 100;
-overflow: hidden; max-height: 0; opacity: 0;
-transform: translateY(-10px) scale(0.95); transition: all 0.3s ease;
-}
-.mobile-menu.active { max-height: 500px; opacity: 1; transform: translateY(0) scale(1); }
-.mobile-menu-item { padding: 12px 18px; border-bottom: 1px solid #F3F4F6; }
-.mobile-menu-item:last-child { border-bottom: none; }
-.mobile-menu-item a { display: block; width: 100%; }
-.mobile-submenu { padding-left: 18px; background: #FAFAFA; }
-.mobile-submenu a { font-size: 13px; color: #6B7280; padding: 8px 12px; }
 /* Unit Filter Dropdown */
 .unit-filter-dropdown {
     display: none; position: absolute; top: 100%; left: 0; margin-top: 8px;
@@ -185,80 +156,11 @@ position: relative; display: inline-block; margin-bottom: 24px;
 .hero-title { font-size: 1.5rem !important; }
 }
 </style>
+    @include('partials.navbar-styles')
 </head>
-<body class="bg-white min-h-screen flex flex-col">
+<body class="bg-white min-h-screen">
 <!-- NAVBAR -->
-<div class="px-4 md:px-8 pt-6">
-<nav class="bg-[#FAFAFA] shadow-sm rounded-2xl h-14 w-full px-4 md:px-14 flex items-center justify-end relative">
-<div class="hidden md:flex items-center gap-8">
-<a href="{{ url('dashboard') }}" class="text-sm font-medium text-gray-600 hover:text-[#8B1A1A] transition">Beranda</a>
-<a href="{{ url('profil') }}" class="text-sm font-medium text-gray-600 hover:text-[#8B1A1A] transition">Profil</a>
-<div class="dropdown relative">
-<button class="flex items-center gap-1 py-3 text-sm font-semibold text-[#8B1A1A]">
-Program
-<svg class="caret w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-<polyline points="6 9 12 15 18 9"></polyline>
-</svg>
-</button>
-<div class="dropdown-menu">
-<a href="{{ url('program1') }}">Nasional</a>
-<a href="{{ url('program2') }}">Internasional</a>
-</div>
-</div>
-                <div class="flex items-center gap-3 ml-2">
-                    <a href="{{ url('/kontak') }}"
-                        class="bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md whitespace-nowrap">
-                        Hubungi Kami
-                    </a>
-
-                    <!-- Language Switcher -->
-                    <button onclick="toggleLanguage()" class="flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
-                        <img id="flagIconDesktop" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
-                    </button>
-                </div>
-</div>
-<div class="mobile-menu-container md:hidden">
-<button id="mobileMenuBtn" class="p-2 text-gray-600 hover:text-[#8B1A1A] transition z-50">
-<svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-</svg>
-<svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-</svg>
-</button>
-<div id="mobileMenu" class="mobile-menu">
-<div class="flex flex-col py-2">
-<a href="{{ url('/') }}" class="mobile-menu-item text-sm font-semibold text-[#8B1A1A]">Beranda</a>
-<a href="{{ url('/profil') }}" class="mobile-menu-item text-sm font-medium text-gray-600">Profil</a>
-<div class="mobile-menu-item py-0">
-<button id="programToggle" class="w-full flex items-center justify-between text-sm font-medium text-gray-600 py-3">
-<span>Program</span>
-<svg id="programCaret" class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<polyline points="6 9 12 15 18 9"></polyline>
-</svg>
-</button>
-<div id="programSubmenu" class="mobile-submenu rounded-lg overflow-hidden hidden">
-<a href="{{ url('program1') }}" class="block hover:text-[#8B1A1A]">Nasional</a>
-<a href="{{ url('program2') }}" class="block hover:text-[#8B1A1A]">Internasional</a>
-</div>
-</div>
-                        <!-- Contact Button & Language Mobile -->
-                        <div class="mobile-menu-item py-2 flex items-center gap-2">
-                            <a href="{{ url('/kontak') }}" class="flex-grow">
-                                <div class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full"
-                                    style="background: linear-gradient(90deg, #740A03, #C3110C);">
-                                    Hubungi Kami
-                                </div>
-                            </a>
-                            <button onclick="toggleLanguage()" class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
-                                <img id="flagIconMobile" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
-                            </button>
-                        </div>
-</div>
-</div>
-</div>
-</nav>
-</div>
+@include('partials.navbar')
 <!-- MAIN CONTENT -->
 <main class="flex-grow">
     <!-- Header Section -->
@@ -411,100 +313,112 @@ Reset Filter
 <div id="programsContainer">
     <section data-section="pelatihan">
         <h2 class="text-2xl md:text-3xl font-bold text-gray-800 section-title pl-2.5">Pelatihan</h2>
-        <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container px-2.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-6 program-grid">
         <!-- Card 1 -->
-        <div class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-[280px] md:w-[calc(50%-12px)] max-w-none"
+        <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full"
         data-category="Pelatihan" data-unit="Ekonomi dan Bisnis" data-month="2"
         data-date-start="2025-02-12" data-date-end="2025-03-12"  data-id="1" data-title="Perpajakan & Asuransi">
-            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Perpajakan & Asuransi" class="w-full h-48 object-cover">
+            <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Perpajakan & Asuransi" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
-            <div class="p-6">
-                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Perpajakan & Asuransi</h4>
-                <p class="text-gray-600 text-sm text-center mb-4">Ekonomi dan Bisnis - Unit Pelatihan</p>
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+            <div class="px-2 pb-2 text-center sm:text-left">
+                <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">Perpajakan & Asuransi</h4>
+                <p class="text-gray-500 text-[10px] mb-3 uppercase tracking-wider font-semibold">Pelatihan - Ekonomi dan Bisnis</p>
+                
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-y-2 gap-x-8 text-xs text-gray-600 mb-8 pt-2 border-t border-gray-900/10">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         <span>12 Feb - 12 Mar</span>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-                        <span>Rp 2.000.000</span>
-                    </div>
-                                        <div class="flex items-center gap-1.5">
-                        <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                            </svg>
-                            <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">22</span></span>
-                        </div>
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span class="font-bold text-gray-900">Rp 2.000.000</span>
                     </div>
                 </div>
-                <a href="detail1" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#C3110C] animate-pulse"></span>
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">22</span></span>
+                    </div>
+                    <a href="detail1" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                </div>
             </div>
         </div>
+
         <!-- Card 2 -->
-        <div class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-[280px] md:w-[calc(50%-12px)] max-w-none"
+        <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full"
         data-category="Pelatihan" data-unit="Teknologi Kreatif" data-month="2"
         data-date-start="2025-02-13" data-date-end="2025-03-29"  data-id="2" data-title="UI/UX Design Fundamental">
-            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop" alt="UI/UX Design Fundamental" class="w-full h-48 object-cover">
+            <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop" alt="UI/UX Design Fundamental" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
-            <div class="p-6">
-                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">UI/UX Design Fundamental</h4>
-                <p class="text-gray-600 text-sm text-center mb-4">Teknologi Kreatif - Unit Pelatihan</p>
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+            <div class="px-2 pb-2 text-center sm:text-left">
+                <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">UI/UX Design Fundamental</h4>
+                <p class="text-gray-500 text-[10px] mb-3 uppercase tracking-wider font-semibold">Pelatihan - Teknologi Kreatif</p>
+                
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-y-2 gap-x-8 text-xs text-gray-600 mb-8 pt-2 border-t border-gray-900/10">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         <span>13 Feb - 29 Mar</span>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-                        <span>Rp 2.500.000</span>
-                    </div>
-                                        <div class="flex items-center gap-1.5">
-                        <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                            </svg>
-                            <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">25</span></span>
-                        </div>
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span class="font-bold text-gray-900">Rp 2.500.000</span>
                     </div>
                 </div>
-                <a href="detail2" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#C3110C] animate-pulse"></span>
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">25</span></span>
+                    </div>
+                    <a href="detail2" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                </div>
             </div>
         </div>
-        <!-- Card 7 (New) -->
-        <div class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-[280px] md:w-[calc(50%-12px)] max-w-none"
+
+        <!-- Card 7 -->
+        <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full"
         data-category="Pelatihan" data-unit="Teknologi Kreatif" data-month="3"
         data-date-start="2025-03-18" data-date-end="2025-04-20"  data-id="7" data-title="Digital Marketing Specialist">
-            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Digital Marketing Specialist" class="w-full h-48 object-cover">
+            <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Digital Marketing Specialist" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
-            <div class="p-6">
-                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Digital Marketing Specialist</h4>
-                <p class="text-gray-600 text-sm text-center mb-4">Teknologi Kreatif - Unit Pelatihan</p>
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+            <div class="px-2 pb-2 text-center sm:text-left">
+                <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">Digital Marketing Specialist</h4>
+                <p class="text-gray-500 text-[10px] mb-3 uppercase tracking-wider font-semibold">Pelatihan - Teknologi Kreatif</p>
+                
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-y-2 gap-x-8 text-xs text-gray-600 mb-8 pt-2 border-t border-gray-900/10">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         <span>18 Mar - 20 Apr</span>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-                        <span>Rp 1.500.000</span>
-                    </div>
-                                        <div class="flex items-center gap-1.5">
-                        <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                            </svg>
-                            <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">15</span></span>
-                        </div>
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span class="font-bold text-gray-900">Rp 1.500.000</span>
                     </div>
                 </div>
-                <a href="detail6" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#C3110C] animate-pulse"></span>
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">15</span></span>
+                    </div>
+                    <a href="detail6" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                </div>
             </div>
         </div>
+    </div>
+    
+    <!-- View All Button -->
+    <div class="flex justify-end mt-4 view-all-container hidden">
+        <button class="view-all-btn px-4 py-1.5 border-2 border-[#C3110C] text-[#C3110C] text-xs font-semibold rounded-lg hover:bg-[#C3110C] hover:text-white transition-all transform active:scale-95 flex items-center gap-1.5">
+            <span>Lihat Semua</span>
+            <svg class="w-3.5 h-3.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
     </div>
 </section>
 
@@ -513,137 +427,159 @@ Reset Filter
 
     <section data-section="sertifikasi">
         <h2 class="text-2xl md:text-3xl font-bold text-gray-800 section-title pl-2.5 mt-12 pt-12 border-t border-gray-100">Sertifikasi</h2>
-        <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container px-2.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-6 program-grid">
         <!-- Card 3 -->
-        <div class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-[280px] md:w-[calc(50%-12px)] max-w-none"
+        <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full"
         data-category="Sertifikasi" data-unit="Teknik & Industri" data-month="3"
         data-date-start="2025-03-10" data-date-end="2025-04-25"  data-id="3" data-title="Sertifikasi Manajemen Proyek">
-            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Sertifikasi Manajemen Proyek" class="w-full h-48 object-cover">
+            <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Sertifikasi Manajemen Proyek" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
-            <div class="p-6">
-                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Sertifikasi Manajemen Proyek</h4>
-                <p class="text-gray-600 text-sm text-center mb-4">Teknik & Industri - Unit Sertifikasi</p>
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+            <div class="px-2 pb-2 text-center sm:text-left">
+                <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">Sertifikasi Manajemen Proyek</h4>
+                <p class="text-gray-500 text-[10px] mb-3 uppercase tracking-wider font-semibold">Sertifikasi - Teknik & Industri</p>
+                
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-y-2 gap-x-8 text-xs text-gray-600 mb-8 pt-2 border-t border-gray-900/10">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         <span>10 Mar - 25 Apr</span>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-                        <span>Rp 2.500.000</span>
-                    </div>
-                                        <div class="flex items-center gap-1.5">
-                        <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                            </svg>
-                            <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">22</span></span>
-                        </div>
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span class="font-bold text-gray-900">Rp 2.500.000</span>
                     </div>
                 </div>
-                <a href="detail3" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#C3110C] animate-pulse"></span>
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">22</span></span>
+                    </div>
+                    <a href="detail3" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                </div>
             </div>
         </div>
+
         <!-- Card 4 -->
-        <div class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-[280px] md:w-[calc(50%-12px)] max-w-none"
+        <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full"
         data-category="Sertifikasi" data-unit="Teknik & Industri" data-month="3"
         data-date-start="2025-03-15" data-date-end="2025-04-10"  data-id="4" data-title="AutoCAD for Professional">
-            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop" alt="AutoCAD for Professional" class="w-full h-48 object-cover">
+            <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop" alt="AutoCAD for Professional" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
-            <div class="p-6">
-                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">AutoCAD for Professional</h4>
-                <p class="text-gray-600 text-sm text-center mb-4">Teknik & Industri - Unit Sertifikasi</p>
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+            <div class="px-2 pb-2 text-center sm:text-left">
+                <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">AutoCAD for Professional</h4>
+                <p class="text-gray-500 text-[10px] mb-3 uppercase tracking-wider font-semibold">Sertifikasi - Teknik & Industri</p>
+                
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-y-2 gap-x-8 text-xs text-gray-600 mb-8 pt-2 border-t border-gray-900/10">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         <span>15 Mar - 10 Apr</span>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-                        <span>Rp 2.500.000</span>
-                    </div>
-                                        <div class="flex items-center gap-1.5">
-                        <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                            </svg>
-                            <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">22</span></span>
-                        </div>
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span class="font-bold text-gray-900">Rp 2.500.000</span>
                     </div>
                 </div>
-                <a href="detail4" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#C3110C] animate-pulse"></span>
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">22</span></span>
+                    </div>
+                    <a href="detail4" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                </div>
             </div>
         </div>
+    </div>
+    
+    <!-- View All Button -->
+    <div class="flex justify-end mt-4 view-all-container hidden">
+        <button class="view-all-btn px-4 py-1.5 border-2 border-[#C3110C] text-[#C3110C] text-xs font-semibold rounded-lg hover:bg-[#C3110C] hover:text-white transition-all transform active:scale-95 flex items-center gap-1.5">
+            <span>Lihat Semua</span>
+            <svg class="w-3.5 h-3.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
     </div>
 </section>
 
     <section data-section="bahasa">
         <h2 class="text-2xl md:text-3xl font-bold text-gray-800 section-title pl-2.5 mt-12 pt-12 border-t border-gray-100">Bahasa</h2>
-        <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container px-2.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-6 program-grid">
         <!-- Card 5 -->
-        <div class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-[280px] md:w-[calc(50%-12px)] max-w-none"
+        <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full"
         data-category="Bahasa" data-unit="Unit Bahasa" data-month="2"
         data-date-start="2025-02-20" data-date-end="2025-03-30"  data-id="5" data-title="TOEFL Preparation Program">
-            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=600&fit=crop" alt="TOEFL Preparation Program" class="w-full h-48 object-cover">
+            <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
+                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=600&fit=crop" alt="TOEFL Preparation Program" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
-            <div class="p-6">
-                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">TOEFL Preparation Program</h4>
-                <p class="text-gray-600 text-sm text-center mb-4">Unit Bahasa</p>
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+            <div class="px-2 pb-2 text-center sm:text-left">
+                <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">TOEFL Preparation Program</h4>
+                <p class="text-gray-500 text-[10px] mb-3 uppercase tracking-wider font-semibold">Unit Bahasa</p>
+                
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-y-2 gap-x-8 text-xs text-gray-600 mb-8 pt-2 border-t border-gray-900/10">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         <span>20 Feb - 30 Mar</span>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-                        <span>Rp 1.200.000</span>
-                    </div>
-                                        <div class="flex items-center gap-1.5">
-                        <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                            </svg>
-                            <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">35</span></span>
-                        </div>
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span class="font-bold text-gray-900">Rp 1.200.000</span>
                     </div>
                 </div>
-                <a href="detail5" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="px-3 py-2.5 bg-red-50 text-red-700 border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-red-700 animate-pulse"></span>
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">35</span></span>
+                    </div>
+                    <a href="detail5" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                </div>
             </div>
         </div>
+
         <!-- Card 6 -->
-        <div class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 w-[280px] md:w-[calc(50%-12px)] max-w-none"
+        <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full"
         data-category="Bahasa" data-unit="Unit Bahasa" data-month="2"
         data-date-start="2025-02-28" data-date-end="2025-03-15"  data-id="6" data-title="IELTS Intensive Coaching">
-            <div class="rounded-[21px] overflow-hidden mb-3 shadow-md">
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="IELTS Intensive Coaching" class="w-full h-48 object-cover">
+            <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="IELTS Intensive Coaching" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
-            <div class="p-6">
-                <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">IELTS Intensive Coaching</h4>
-                <p class="text-gray-600 text-sm text-center mb-4">Unit Bahasa</p>
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-4 pb-4 border-b border-gray-200 gap-2">
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+            <div class="px-2 pb-2 text-center sm:text-left">
+                <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">IELTS Intensive Coaching</h4>
+                <p class="text-gray-500 text-[10px] mb-3 uppercase tracking-wider font-semibold">Unit Bahasa</p>
+                
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-y-2 gap-x-8 text-xs text-gray-600 mb-8 pt-2 border-t border-gray-900/10">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         <span>28 Feb - 15 Mar</span>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567-.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-                        <span>Rp 2.500.000</span>
-                    </div>
-                                        <div class="flex items-center gap-1.5">
-                        <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                            </svg>
-                            <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">15</span></span>
-                        </div>
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span class="font-bold text-gray-900">Rp 2.500.000</span>
                     </div>
                 </div>
-                <a href="detail6" class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar Sekarang</a>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="px-3 py-2.5 bg-red-50 text-red-700 border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-red-700 animate-pulse"></span>
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">15</span></span>
+                    </div>
+                    <a href="detail6" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                </div>
             </div>
         </div>
+    </div>
+    
+    <!-- View All Button -->
+    <div class="flex justify-end mt-4 view-all-container hidden">
+        <button class="view-all-btn px-4 py-1.5 border-2 border-[#C3110C] text-[#C3110C] text-xs font-semibold rounded-lg hover:bg-[#C3110C] hover:text-white transition-all transform active:scale-95 flex items-center gap-1.5">
+            <span>Lihat Semua</span>
+            <svg class="w-3.5 h-3.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
     </div>
     </section>
 </div><!-- End programsContainer -->
@@ -786,35 +722,10 @@ Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,
 </div>
 </div>
 </footer>
-<!-- JAVASCRIPT -->
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-// ===== MOBILE MENU =====
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-const menuIcon = document.getElementById('menuIcon');
-const closeIcon = document.getElementById('closeIcon');
-const programToggle = document.getElementById('programToggle');
-const programSubmenu = document.getElementById('programSubmenu');
-const programCaret = document.getElementById('programCaret');
-mobileMenuBtn?.addEventListener('click', function(e) {
-e.stopPropagation();
-mobileMenu?.classList.toggle('active');
-menuIcon?.classList.toggle('hidden');
-closeIcon?.classList.toggle('hidden');
-});
-document.addEventListener('click', function(e) {
-if (!mobileMenu?.contains(e.target) && !mobileMenuBtn?.contains(e.target)) {
-mobileMenu?.classList.remove('active');
-menuIcon?.classList.remove('hidden');
-closeIcon?.classList.add('hidden');
-}
-});
-programToggle?.addEventListener('click', function(e) {
-e.stopPropagation();
-programSubmenu?.classList.toggle('hidden');
-programCaret?.classList.toggle('rotate-180');
-});
+// ===== FILTER VARIABLES =====
 // ===== FILTER VARIABLES =====
 let selectedMonth = null;
 let selectedYear = 2025;
@@ -1056,215 +967,8 @@ filterPrograms();
 });
 </script>
 
-    <!-- Language Switcher Script -->
-    <script>
-                const translations = {
-            'id': {
-                "UISI Service Center Profile": "Profil UISI Pusat Layanan",
-                "A career development center providing training programs, certifications, and language services to support job readiness and further studies.": "Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.",
-                "Vision": "Visi",
-                "Mission": "Misi",
-                "Our Services": "Layanan Kami",
-                "Training Unit Center": "Pusat Unit Pelatihan",
-                "Training programs to improve competencies and job readiness.": "Program pelatihan untuk meningkatkan kompetensi dan kesiapan kerja.",
-                "Certification Unit Center": "Pusat Unit Sertifikasi",
-                "Competency certification to support professional competitiveness.": "Sertifikasi kompetensi untuk mendukung daya saing profesional.",
-                "Language Unit Center": "Pusat Unit Bahasa",
-                "Language services for study preparation, work, and scholarships abroad.": "Layanan bahasa untuk persiapan studi, kerja, dan beasiswa luar negeri.",
-                "Activity Calendar": "Kalender Kegiatan",
-                "Registration Schedule": "Jadwal Pendaftaran",
-                "Find the best program to support your career and academics.": "Temukan program terbaik untuk menunjang karier dan akademikmu.",
-                "Program Detail": "Detail Program",
-                "View Details": "Lihat Detail",
-                "All Categories": "Semua Program",
-                "Training": "Pelatihan",
-                "Certification": "Sertifikasi",
-                "Language": "Bahasa",
-                "Search programs...": "Cari program...",
-                "No programs available at the moment.": "Belum ada program yang tersedia saat ini.",
-                "Fee": "Biaya",
-                "Search Programs...": "Cari Program...",
-                "Home": "Beranda",
-                "Profile": "Profil",
-                "Programs": "Program",
-                "Contact Us": "Hubungi Kami",
-                "National": "Nasional",
-                "International": "Internasional",
-                "Participant Capacity": "Kuota Peserta",
-                "Delivery Method": "Metode",
-                "Online / Virtual Learning": "Online",
-                "Course Syllabus": "Silabus",
-                "Download PDF": "Download",
-                "Registration Deadline": "Batas Pendaftaran",
-                "Register Now": "Daftar Sekarang",
-                "Description": "Deskripsi",
-                "Taxation & Insurance": "Perpajakan & Asuransi",
-                "Economics and Business - Training Unit": "Ekonomi dan Bisnis - Unit Pelatihan",
-                "UI/UX Design Fundamental": "UI/UX Design Fundamental",
-                "Creative Technology - Training Unit": "Teknologi Kreatif - Unit Pelatihan",
-                "Project Management Certification": "Sertifikasi Manajemen Proyek",
-                "Engineering & Industry - Certification Unit": "Teknik & Industri - Unit Sertifikasi",
-                "AutoCAD for Professional": "AutoCAD for Professional",
-                "TOEFL Preparation Program": "TOEFL Preparation Program",
-                "Language Unit": "Unit Bahasa",
-                "IELTS Intensive Coaching": "IELTS Intensive Coaching",
-                "March 26, 2026": "26 Maret 2026",
-                "March 10, 2026": "10 Maret 2026",
-                "April 15, 2026": "15 April 2026",
-                "April 5, 2026": "5 April 2026",
-                "May 20, 2026": "20 Mei 2026",
-                "May 10, 2026": "10 Mei 2026",
-                "Contact Information": "Informasi Kontak",
-                "Contact Person": "Narahubung",
-                "Location": "Lokasi",
-                "Operating Hours": "Jam Operasional",
-                "Social Media": "Sosial Media",
-                "Veteran Street, PT Semen Indonesia Complex, Sidomoro,": "Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,",
-                "Kebomas District": "Kecamatan Kebomas",
-                "Gresik Regency": "Kabupaten Gresik",
-                "East Java": "Jawa Timur",
-                "Indonesia": "Indonesia",
-                "Change Language": "Ganti Bahasa",
-                "Remaining Seats:": "Sisa Kuota:",
-                "Digital Marketing Specialist": "Digital Marketing Specialist",
-                "Digital Marketing Specialist Program": "Program Digital Marketing Specialist",
-                "Creative Technology - Training Unit": "Teknologi Kreatif - Unit Pelatihan"
-            },
-            'en': {
-                "Profil UISI Pusat Layanan": "UISI Service Center Profile",
-                "Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.": "A career development center providing training programs, certifications, and language services to support job readiness and further studies.",
-                "Visi": "Vision",
-                "Misi": "Mission",
-                "Layanan Kami": "Our Services",
-                "Pusat Unit Pelatihan": "Training Unit Center",
-                "Program pelatihan untuk meningkatkan kompetensi dan kesiapan kerja.": "Training programs to improve competencies and job readiness.",
-                "Pusat Unit Sertifikasi": "Certification Unit Center",
-                "Sertifikasi kompetensi untuk mendukung daya saing profesional.": "Competency certification to support professional competitiveness.",
-                "Pusat Unit Bahasa": "Language Unit Center",
-                "Layanan bahasa untuk persiapan studi, kerja, dan beasiswa luar negeri.": "Language services for study preparation, work, and scholarships abroad.",
-                "Kalender Kegiatan": "Activity Calendar",
-                "Jadwal Pendaftaran": "Registration Schedule",
-                "Temukan program terbaik untuk menunjang karier dan akademikmu.": "Find the best program to support your career and academics.",
-                "Detail Program": "Program Detail",
-                "Lihat Detail": "View Details",
-                "Semua Program": "All Categories",
-                "Pelatihan": "Training",
-                "Sertifikasi": "Certification",
-                "Bahasa": "Language",
-                "Cari program...": "Search programs...",
-                "Belum ada program yang tersedia saat ini.": "No programs available at the moment.",
-                "Biaya": "Fee",
-                "Cari Program...": "Search Programs...",
-                "Beranda": "Home",
-                "Profil": "Profile",
-                "Program": "Programs",
-                "Hubungi Kami": "Contact Us",
-                "Nasional": "National",
-                "Internasional": "International",
-                "Kuota Peserta": "Participant Capacity",
-                "Metode": "Delivery Method",
-                "Online": "Online / Virtual Learning",
-                "Silabus": "Course Syllabus",
-                "Download": "Download PDF",
-                "Batas Pendaftaran": "Registration Deadline",
-                "Daftar Sekarang": "Register Now",
-                "Deskripsi": "Description",
-                "Perpajakan & Asuransi": "Taxation & Insurance",
-                "Ekonomi dan Bisnis - Unit Pelatihan": "Economics and Business - Training Unit",
-                "UI/UX Design Fundamental": "UI/UX Design Fundamental",
-                "Teknologi Kreatif - Unit Pelatihan": "Creative Technology - Training Unit",
-                "Sertifikasi Manajemen Proyek": "Project Management Certification",
-                "Teknik & Industri - Unit Sertifikasi": "Engineering & Industry - Certification Unit",
-                "AutoCAD for Professional": "AutoCAD for Professional",
-                "TOEFL Preparation Program": "TOEFL Preparation Program",
-                "Unit Bahasa": "Language Unit",
-                "IELTS Intensive Coaching": "IELTS Intensive Coaching",
-                "26 Maret 2026": "March 26, 2026",
-                "10 Maret 2026": "March 10, 2026",
-                "15 April 2026": "April 15, 2026",
-                "5 April 2026": "April 5, 2026",
-                "20 Mei 2026": "May 20, 2026",
-                "10 Mei 2026": "May 10, 2026",
-                "Informasi Kontak": "Contact Information",
-                "Narahubung": "Contact Person",
-                "Lokasi": "Location",
-                "Jam Operasional": "Operating Hours",
-                "Sosial Media": "Social Media",
-                "Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,": "Veteran Street, PT Semen Indonesia Complex, Sidomoro,",
-                "Kecamatan Kebomas": "Kebomas District",
-                "Kabupaten Gresik": "Gresik Regency",
-                "Jawa Timur": "East Java",
-                "Indonesia": "Indonesia",
-                "Ganti Bahasa": "Change Language",
-                "Sisa Kuota:": "Remaining Seats:",
-                "Digital Marketing Specialist": "Digital Marketing Specialist",
-                "Digital Marketing Specialist Program": "Digital Marketing Specialist Program",
-                "Teknologi Kreatif - Unit Pelatihan": "Creative Technology - Training Unit"
-            }
-        };
+    @include('partials.navbar-scripts')
 
-        let currentLang = 'id';
-
-        function toggleLanguage() {
-            const newLang = currentLang === 'id' ? 'en' : 'id';
-            const dict = translations[newLang];
-            
-            // Update Flags
-            const flagUrl = newLang === 'id' ? 'https://flagcdn.com/w40/id.png' : 'https://flagcdn.com/w40/gb.png';
-            const flagDesktop = document.getElementById('flagIconDesktop');
-            if(flagDesktop) flagDesktop.src = flagUrl;
-            
-            const flagMobile = document.getElementById('flagIconMobile');
-            if(flagMobile) flagMobile.src = flagUrl;
-            
-            const langTextMobile = document.getElementById('langTextMobile');
-            if(langTextMobile) {
-                langTextMobile.innerText = newLang === 'id' ? 'Ganti Bahasa' : 'Change Language';
-            }
-
-            // Translate Text Nodes
-            function translateNode(node) {
-                if (node.nodeType === Node.TEXT_NODE) {
-                    let text = node.nodeValue.trim().replace(/\s+/g, ' ');
-                    if (text && dict[text]) {
-                        const originalValue = node.nodeValue;
-                        const leadingSpaceMatch = originalValue.match(/^\s*/);
-                        const trailingSpaceMatch = originalValue.match(/\s*$/);
-                        
-                        const leadingSpace = leadingSpaceMatch ? leadingSpaceMatch[0] : '';
-                        const trailingSpace = trailingSpaceMatch ? trailingSpaceMatch[0] : '';
-                        
-                        node.nodeValue = leadingSpace + dict[text] + trailingSpace;
-                    }
-                } else if (node.nodeType === Node.ELEMENT_NODE) {
-                    // Also translate placeholders
-                    if (node.tagName === 'INPUT' && node.placeholder) {
-                        let text = node.placeholder.trim().replace(/\s+/g, ' ');
-                        if (dict[text]) node.placeholder = dict[text];
-                    }
-                    if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
-                        node.childNodes.forEach(translateNode);
-                    }
-                }
-            }
-
-            translateNode(document.body);
-            currentLang = newLang;
-        }
-
-        function scrollSlider(id, direction) {
-            const slider = document.getElementById(id);
-            const scrollAmount = slider.offsetWidth * 0.8;
-            if (direction === 'left') {
-                slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            } else {
-                slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            }
-        }
-    </script>
-
-
-    <!-- Quota Sync Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const initialQuotas = { 
@@ -1273,13 +977,11 @@ filterPrograms();
             };
             let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
             
-            // Sync initial quotas
             Object.keys(initialQuotas).forEach(key => {
                 if (quotas[key] === undefined) quotas[key] = initialQuotas[key];
             });
             localStorage.setItem('uisi_quotas', JSON.stringify(quotas));
 
-            // Update UI
             document.querySelectorAll('.program-card').forEach(card => {
                 const id = card.dataset.id;
                 if (id && quotas[id] !== undefined) {
@@ -1289,5 +991,70 @@ filterPrograms();
             });
         });
     </script>
-    </body>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section[data-section]');
+            
+            sections.forEach(section => {
+                const grid = section.querySelector('.program-grid');
+                if (!grid) return;
+                
+                const cards = grid.querySelectorAll('.program-card');
+                const container = section.querySelector('.view-all-container');
+                const btn = section.querySelector('.view-all-btn');
+                
+                if (cards.length > 2) {
+                    // Show the button container
+                    container.classList.remove('hidden');
+                    
+                    // Initially hide cards beyond index 1 (the first 2)
+                    cards.forEach((card, index) => {
+                        if (index >= 2) {
+                            card.classList.add('hidden', 'opacity-0', 'transform', 'translate-y-4');
+                            card.style.transition = 'all 0.5s ease';
+                        }
+                    });
+
+                    btn.addEventListener('click', function() {
+                        const isExpanded = btn.getAttribute('data-expanded') === 'true';
+                        const btnText = btn.querySelector('span');
+                        const btnIcon = btn.querySelector('svg');
+
+                        if (!isExpanded) {
+                            // Expand
+                            cards.forEach((card, index) => {
+                                if (index >= 2) {
+                                    card.classList.remove('hidden');
+                                    // Small delay for animation
+                                    setTimeout(() => {
+                                        card.classList.remove('opacity-0', 'translate-y-4');
+                                    }, 10 * (index - 2));
+                                }
+                            });
+                            btnText.textContent = 'Sembunyikan';
+                            btnIcon.classList.add('rotate-180');
+                            btn.setAttribute('data-expanded', 'true');
+                        } else {
+                            // Collapse
+                            cards.forEach((card, index) => {
+                                if (index >= 2) {
+                                    card.classList.add('opacity-0', 'translate-y-4');
+                                    setTimeout(() => {
+                                        card.classList.add('hidden');
+                                    }, 500);
+                                }
+                            });
+                            btnText.textContent = 'Lihat Semua';
+                            btnIcon.classList.remove('rotate-180');
+                            btn.setAttribute('data-expanded', 'false');
+                            
+                            // Scroll back to top of section
+                            section.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
 </html>

@@ -16,6 +16,95 @@
 
     {{-- Custom Styles --}}
     <style>
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-spin-slow {
+            animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes pulse-ripple {
+            0%, 100% { opacity: 0.02; }
+            50% { opacity: 0.12; }
+        }
+
+        .animate-ripple {
+            animation: pulse-ripple 3s ease-in-out infinite;
+        }
+
+        .reveal {
+            opacity: 0 !important;
+            transform: translateY(40px) !important;
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backface-visibility: hidden;
+        }
+
+        .reveal-down {
+            opacity: 0 !important;
+            transform: translateY(-40px) !important;
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backface-visibility: hidden;
+        }
+
+        .reveal-left {
+            opacity: 0 !important;
+            transform: translateX(-50px) !important;
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backface-visibility: hidden;
+        }
+
+        .reveal-right {
+            opacity: 0 !important;
+            transform: translateX(50px) !important;
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backface-visibility: hidden;
+        }
+
+        .reveal.reveal-active, .reveal-down.reveal-active, .reveal-left.reveal-active, .reveal-right.reveal-active {
+            opacity: 1 !important;
+            transform: translate3d(0, 0, 0) !important;
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .delay-300 { transition-delay: 300ms; }
+        .delay-500 { transition-delay: 500ms; }
+        .delay-600 { transition-delay: 600ms; }
+        .delay-700 { transition-delay: 700ms; }
+        .delay-900 { transition-delay: 900ms; }
+        .delay-1000 { transition-delay: 1000ms; }
+        .delay-1200 { transition-delay: 1200ms; }
+        .delay-1500 { transition-delay: 1500ms; }
+
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
         /* ==============================
            GLOBAL SETTINGS
            ============================== */
@@ -37,119 +126,13 @@
         }
 
         /* ==============================
-           DROPDOWN MENU
-           ============================== */
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            margin-top: 10px;
-            min-width: 180px;
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            z-index: 50;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(8px);
-            transition: all 0.35s ease;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 11px 16px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #374151;
-        }
-
-        .dropdown-menu a:hover {
-            background: #fef2f2;
-            color: #8B1A1A;
-        }
-
-        .dropdown-menu a+a {
-            border-top: 1px solid #f3f4f6;
-        }
-
-        .caret {
-            transition: transform 0.3s ease;
-        }
-
-        .dropdown:hover .caret {
-            transform: rotate(180deg);
-        }
-
-        /* ==============================
            GRADIENT TITLE
            ============================== */
         .gradient-title {
-            background: linear-gradient(90deg, #ffffff, #f0f0f0, #ffffff);
+            background: linear-gradient(135deg, #ffffff, #f0f0f0, #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-
-        /* ==============================
-           MOBILE MENU
-           ============================== */
-        .mobile-menu-container {
-            position: relative;
-        }
-
-        .mobile-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 8px;
-            width: 280px;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            z-index: 100;
-            overflow: hidden;
-            max-height: 0;
-            opacity: 0;
-            transform: translateY(-10px) scale(0.95);
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu.active {
-            max-height: 500px;
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .mobile-menu-item {
-            padding: 12px 18px;
-            border-bottom: 1px solid #F3F4F6;
-        }
-
-        .mobile-menu-item:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-menu-item a {
-            display: block;
-            width: 100%;
-        }
-
-        .mobile-submenu {
-            padding-left: 18px;
-            background: #FAFAFA;
-        }
-
-        .mobile-submenu a {
-            font-size: 13px;
-            color: #6B7280;
-            padding: 8px 12px;
         }
 
         /* ==============================
@@ -188,14 +171,6 @@
                 height: 450px !important;
             }
 
-            .hero-title {
-                font-size: 1.75rem !important;
-            }
-
-            .hero-text {
-                font-size: 0.875rem !important;
-            }
-
             .program-card-mobile {
                 width: 100% !important;
                 max-width: 100%;
@@ -205,10 +180,6 @@
         @media (max-width: 640px) {
             .hero-height {
                 height: 400px !important;
-            }
-
-            .hero-title {
-                font-size: 1.5rem !important;
             }
         }
 
@@ -225,6 +196,7 @@
             /* Firefox */
         }
     </style>
+    @include('partials.navbar-styles')
 </head>
 
 <body class="bg-white min-h-screen">
@@ -232,100 +204,8 @@
     <!-- ==============================
          NAVBAR
          ============================== -->
-    <div class="px-4 md:px-8 pt-6">
-        <nav
-            class="bg-[#FAFAFA] shadow-sm rounded-2xl h-14 w-full px-4 md:px-14 flex items-center justify-end relative">
+    @include('partials.navbar')
 
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-8">
-                <a href="{{ url('/') }}" class="text-sm font-semibold text-[#8B1A1A]">Beranda</a>
-                <a href="{{ url('profil') }}"
-                    class="text-sm font-medium text-gray-600 hover:text-[#8B1A1A] transition">Profil</a>
-
-                <!-- Program Dropdown -->
-                <div class="dropdown relative">
-                    <button class="flex items-center gap-1 py-3 text-sm font-medium text-gray-600 hover:text-[#8B1A1A]">
-                        Program
-                        <svg class="caret w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="{{ url('program1') }}">Nasional</a>
-                        <a href="{{ url('program2') }}">Internasional</a>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-3 ml-2">
-                    <!-- Contact Button -->
-                    <a href="{{ url('/kontak') }}"
-                        class="bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md whitespace-nowrap">
-                        Hubungi Kami
-                    </a>
-
-                    <!-- Language Switcher -->
-                    <button onclick="toggleLanguage()" class="flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
-                        <img id="flagIconDesktop" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <div class="mobile-menu-container md:hidden">
-                <button id="mobileMenuBtn" class="p-2 text-gray-600 hover:text-[#8B1A1A] transition z-50">
-                    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                    <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
-
-                <!-- Mobile Menu -->
-                <div id="mobileMenu" class="mobile-menu">
-                    <div class="flex flex-col py-2">
-                        <a href="{{ url('/') }}"
-                            class="mobile-menu-item text-sm font-semibold text-[#8B1A1A]">Beranda</a>
-                        <a href="{{ url('/profil') }}"
-                            class="mobile-menu-item text-sm font-medium text-gray-600">Profil</a>
-
-                        <!-- Program Submenu -->
-                        <div class="mobile-menu-item py-0">
-                            <button id="programToggle"
-                                class="w-full flex items-center justify-between text-sm font-medium text-gray-600 py-3">
-                                <span>Program</span>
-                                <svg id="programCaret" class="w-4 h-4 transition-transform" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
-                            </button>
-                            <div id="programSubmenu" class="mobile-submenu rounded-lg overflow-hidden hidden">
-                                <a href="{{ url('program1') }}" class="block hover:text-[#8B1A1A]">Nasional</a>
-                                <a href="{{ url('program2') }}"
-                                    class="block hover:text-[#8B1A1A]">Internasional</a>
-                            </div>
-                        </div>
-
-                        <!-- Contact Button & Language Mobile -->
-                        <div class="mobile-menu-item py-2 flex items-center gap-2">
-                            <a href="{{ url('/kontak') }}" class="flex-grow">
-                                <div class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full"
-                                    style="background: linear-gradient(90deg, #740A03, #C3110C);">
-                                    Hubungi Kami
-                                </div>
-                            </a>
-                            <button onclick="toggleLanguage()" class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
-                                <img id="flagIconMobile" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
 
     <!-- ==============================
          HERO SECTION
@@ -339,55 +219,55 @@
                 class="absolute inset-0 w-full h-full object-cover object-center" style="z-index: 1;">
 
             <!-- Layer 2: Dark Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40" style="z-index: 2;">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/70" style="z-index: 2;">
             </div>
 
             <!-- Layer 3: Circular White Textures (Desktop) -->
-            <div class="absolute top-1/2 left-[5%] -translate-y-1/2 w-0 h-0 hidden md:block"
+            <div class="absolute top-0 left-0 w-0 h-0 hidden md:block"
                 style="z-index: 3; pointer-events: none;">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[800px] md:h-[800px] bg-white rounded-full"
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[800px] md:h-[800px] bg-white rounded-full"
                     style="opacity: 0.08;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] md:w-[650px] md:h-[650px] bg-white rounded-full"
-                    style="opacity: 0.06;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-white rounded-full"
-                    style="opacity: 0.04;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[350px] md:h-[350px] bg-white rounded-full"
-                    style="opacity: 0.02;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] md:w-[650px] md:h-[650px] bg-white rounded-full"
+                    style="opacity: 0.06; animation-delay: 0.4s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-white rounded-full"
+                    style="opacity: 0.04; animation-delay: 0.8s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[350px] md:h-[350px] bg-white rounded-full"
+                    style="opacity: 0.02; animation-delay: 1.2s;"></div>
             </div>
 
             <div class="absolute bottom-0 right-0 w-[1px] h-[1px] hidden md:block"
                 style="z-index: 3; pointer-events: none;">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-white rounded-full"
-                    style="opacity: 0.08;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[400px] md:h-[400px] bg-white rounded-full"
-                    style="opacity: 0.06;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-white rounded-full"
-                    style="opacity: 0.04;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] md:w-[200px] md:h-[200px] bg-white rounded-full"
-                    style="opacity: 0.02;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-white rounded-full"
+                    style="opacity: 0.08; animation-delay: 0.2s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[400px] md:h-[400px] bg-white rounded-full"
+                    style="opacity: 0.06; animation-delay: 0.6s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-white rounded-full"
+                    style="opacity: 0.04; animation-delay: 1.0s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] md:w-[200px] md:h-[200px] bg-white rounded-full"
+                    style="opacity: 0.02; animation-delay: 1.4s;"></div>
             </div>
 
             <!-- Layer 3: Circular White Textures (Mobile) -->
-            <div class="absolute top-[12%] left-[1%] w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-white rounded-full"
+            <div class="absolute top-0 left-0 w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-white rounded-full"
                     style="opacity: 0.06;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] bg-white rounded-full"
-                    style="opacity: 0.05;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] bg-white rounded-full"
-                    style="opacity: 0.04;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] bg-white rounded-full"
-                    style="opacity: 0.03;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] bg-white rounded-full"
+                    style="opacity: 0.05; animation-delay: 0.4s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] bg-white rounded-full"
+                    style="opacity: 0.04; animation-delay: 0.8s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] bg-white rounded-full"
+                    style="opacity: 0.03; animation-delay: 1.2s;"></div>
             </div>
 
-            <div class="absolute bottom-[10%] right-[5%] w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-white rounded-full"
-                    style="opacity: 0.05;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[140px] bg-white rounded-full"
-                    style="opacity: 0.04;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90px] h-[90px] bg-white rounded-full"
-                    style="opacity: 0.03;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] bg-white rounded-full"
-                    style="opacity: 0.02;"></div>
+            <div class="absolute bottom-0 right-0 w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-white rounded-full"
+                    style="opacity: 0.05; animation-delay: 0.2s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[140px] bg-white rounded-full"
+                    style="opacity: 0.04; animation-delay: 0.6s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90px] h-[90px] bg-white rounded-full"
+                    style="opacity: 0.03; animation-delay: 1.0s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] bg-white rounded-full"
+                    style="opacity: 0.02; animation-delay: 1.4s;"></div>
             </div>
 
             <!-- Layer 4: Grain Texture -->
@@ -396,31 +276,29 @@
             </div>
 
             <!-- Layer 5: Content -->
-            <div class="relative max-w-3xl px-4 md:px-6 text-white text-center mt-28 md:mt-40" style="z-index: 5;">
-                <h1 class="hero-title text-2xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-lg px-2">
-                    <span class="gradient-title">UISI Pusat Layanan</span>
+            <div class="relative max-w-3xl px-4 md:px-6 text-white text-center mt-32 md:mt-52" style="z-index: 5;">
+                <h1 class="reveal-down delay-300 text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
+                    UISI Pusat Layanan
                 </h1>
-                <div
-                    class="w-32 md:w-44 h-[1.5px] mx-auto mt-2 md:mt-3 bg-gradient-to-r from-transparent via-white to-transparent">
+                <div class="reveal-down delay-500 w-32 md:w-44 h-[1.5px] mx-auto mt-2 md:mt-3 bg-gradient-to-r from-transparent via-white to-transparent">
                 </div>
-                <p
-                    class="hero-text text-white/90 mt-4 md:mt-4 text-[5px] text-center md:text-base lg:text-lg leading-tight max-w-2xl mx-auto px-6 md:px-0 drop-shadow-md">
-                    Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk
-                    mendukung kesiapan kerja serta studi lanjut.
+                <p class="reveal-down delay-700 hero-text text-white/90 mt-3 text-sm md:text-lg leading-relaxed max-w-[260px] sm:max-w-2xl mx-auto px-4 md:px-0 font-normal">
+                    Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.
                 </p>
 
-                <!-- Hero Button -->
-                <div class="mt-6 md:mt-10">
-                    <a href="{{ url('/kalender-program') }}"
-                        class="inline-flex items-center justify-center gap-2 px-7 py-3 md:px-8 md:py-3.5 text-sm md:text-base font-semibold text-white rounded-xl transition-all hover:shadow-xl transform hover:-translate-y-0.5 active:scale-95"
-                        style="background: linear-gradient(90deg, #740A03, #C3110C) padding-box, linear-gradient(90deg, #C3110C, #ffffff) border-box; border: 1.5px solid transparent;">
-                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                            </path>
-                        </svg>
-                        <span class="whitespace-nowrap">Kalender Program</span>
-                    </a>
+                <!-- Hero Button with Animated Border -->
+                <div class="reveal-down delay-1000 mt-6 md:mt-10 flex justify-center">
+                    <div class="relative p-[1.5px] overflow-hidden rounded-xl group hover:scale-105 transition-transform duration-300 shadow-lg active:scale-95">
+                        <div class="absolute inset-[-1000%] bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#C3110C_25%,#740A03_50%,#C3110C_75%,#ffffff_100%)] animate-spin-slow"></div>
+                        <a href="{{ url('/kalender-program') }}"
+                            class="relative flex items-center justify-center gap-2 px-5 py-2.5 md:px-8 md:py-3.5 text-xs md:text-base font-bold text-white rounded-[11px] transition-all"
+                            style="background: linear-gradient(135deg, #740A03, #C3110C);">
+                            <svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>Kalender Program</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -434,18 +312,18 @@
 
         <!-- Circular White Textures (Centered) -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1400px] md:h-[1400px] bg-white rounded-full"
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1400px] md:h-[1400px] bg-white rounded-full"
                 style="opacity: 0.02;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[680px] md:w-[1200px] md:h-[1200px] bg-white rounded-full"
-                style="opacity: 0.03;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] md:w-[1000px] md:h-[1000px] bg-white rounded-full"
-                style="opacity: 0.04;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] md:w-[800px] md:h-[800px] bg-white rounded-full"
-                style="opacity: 0.05;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] md:w-[600px] md:h-[600px] bg-white rounded-full"
-                style="opacity: 0.06;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-white rounded-full"
-                style="opacity: 0.07;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[680px] md:w-[1200px] md:h-[1200px] bg-white rounded-full"
+                style="opacity: 0.03; animation-delay: 0.4s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] md:w-[1000px] md:h-[1000px] bg-white rounded-full"
+                style="opacity: 0.04; animation-delay: 0.8s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] md:w-[800px] md:h-[800px] bg-white rounded-full"
+                style="opacity: 0.05; animation-delay: 1.2s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] md:w-[600px] md:h-[600px] bg-white rounded-full"
+                style="opacity: 0.06; animation-delay: 1.6s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-white rounded-full"
+                style="opacity: 0.07; animation-delay: 2.0s;"></div>
         </div>
 
         <!-- Grain Texture -->
@@ -454,8 +332,8 @@
 
         <div class="relative z-10 max-w-7xl mx-auto">
             <!-- Section Title -->
-            <div class="text-center mb-12 md:mb-16 max-w-[340px] md:max-w-none mx-auto px-4 md:px-0">
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+            <div class="reveal text-center mb-12 md:mb-16 w-full px-4 md:px-0">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 drop-shadow-lg">
                     Program yang Kami Tawarkan
                 </h2>
             </div>
@@ -465,19 +343,19 @@
 
                 <!-- Card 1: Unit Pusat Pelatihan -->
                 <div
-                    class="flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                    class="reveal delay-300 flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
                     <div class="flex-grow flex flex-col bg-white shadow-xl relative pt-8 pb-5 px-4 md:pt-10 md:pb-6 md:px-5 text-center"
                         style="border-radius: 15px 0 15px 0;">
                         <!-- Badge Title -->
                         <div class="absolute -top-4 left-4 right-4 md:left-6 md:right-6">
                             <div class="px-3 py-2.5 md:px-4 md:py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] shadow-lg border border-white/20"
                                 style="border-radius: 12px 0 12px 0;">
-                                <h3 class="text-white text-xs md:text-base font-bold">Unit Pusat Pelatihan</h3>
+                                <h3 class="text-white text-base md:text-lg font-bold">Unit Pusat Pelatihan</h3>
                             </div>
                         </div>
 
                         <!-- Description -->
-                        <p class="text-gray-600 text-xs md:text-base leading-relaxed mb-6 md:mb-8 flex-grow">
+                        <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-6 md:mb-8 flex-grow">
                             Program pengembangan kompetensi berbasis kebutuhan industri untuk meningkatkan keterampilan
                             teknis dan soft skills mahasiswa.
                         </p>
@@ -485,8 +363,8 @@
                         <!-- Button -->
                         <div>
                             <a href="program1?unit=Pelatihan"
-                                class="inline-block px-5 py-2 md:px-6 md:py-2.5 text-xs md:text-sm font-semibold text-white transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
-                                style="background: linear-gradient(90deg, #740A03, #C3110C); border-radius: 10px 0 10px 0; border: 1px solid rgba(255,255,255,0.2);">
+                                class="inline-block px-5 py-2 md:px-6 md:py-2.5 text-sm font-semibold text-white transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
+                                style="background: linear-gradient(135deg, #740A03, #C3110C); border-radius: 10px 0 10px 0; border: 1px solid rgba(255,255,255,0.2);">
                                 Lihat Selengkapnya
                             </a>
                         </div>
@@ -495,19 +373,19 @@
 
                 <!-- Card 2: Unit Pusat Sertifikasi -->
                 <div
-                    class="flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                    class="reveal delay-600 flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
                     <div class="flex-grow flex flex-col bg-white shadow-xl relative pt-8 pb-5 px-4 md:pt-10 md:pb-6 md:px-5 text-center"
                         style="border-radius: 15px 0 15px 0;">
                         <!-- Badge Title -->
                         <div class="absolute -top-4 left-4 right-4 md:left-6 md:right-6">
                             <div class="px-3 py-2.5 md:px-4 md:py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] shadow-lg border border-white/20"
                                 style="border-radius: 12px 0 12px 0;">
-                                <h3 class="text-white text-xs md:text-base font-bold">Unit Pusat Sertifikasi</h3>
+                                <h3 class="text-white text-base md:text-lg font-bold">Unit Pusat Sertifikasi</h3>
                             </div>
                         </div>
 
                         <!-- Description -->
-                        <p class="text-gray-600 text-xs md:text-base leading-relaxed mb-6 md:mb-8 flex-grow">
+                        <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-6 md:mb-8 flex-grow">
                             Layanan sertifikasi kompetensi untuk mendukung kesiapan karier dan meningkatkan kredibilitas
                             profesional.
                         </p>
@@ -515,8 +393,8 @@
                         <!-- Button -->
                         <div>
                             <a href="program1?unit=Sertifikasi"
-                                class="inline-block px-5 py-2 md:px-6 md:py-2.5 text-xs md:text-sm font-semibold text-white transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
-                                style="background: linear-gradient(90deg, #740A03, #C3110C); border-radius: 10px 0 10px 0; border: 1px solid rgba(255,255,255,0.2);">
+                                class="inline-block px-5 py-2 md:px-6 md:py-2.5 text-sm font-semibold text-white transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
+                                style="background: linear-gradient(135deg, #740A03, #C3110C); border-radius: 10px 0 10px 0; border: 1px solid rgba(255,255,255,0.2);">
                                 Lihat Selengkapnya
                             </a>
                         </div>
@@ -525,28 +403,28 @@
 
                 <!-- Card 3: Unit Pusat Bahasa -->
                 <div
-                    class="flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                    class="reveal delay-900 flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
                     <div class="flex-grow flex flex-col bg-white shadow-xl relative pt-8 pb-5 px-4 md:pt-10 md:pb-6 md:px-5 text-center"
                         style="border-radius: 15px 0 15px 0;">
                         <!-- Badge Title -->
                         <div class="absolute -top-4 left-4 right-4 md:left-6 md:right-6">
                             <div class="px-3 py-2.5 md:px-4 md:py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] shadow-lg border border-white/20"
                                 style="border-radius: 12px 0 12px 0;">
-                                <h3 class="text-white text-xs md:text-base font-bold">Unit Pusat Bahasa</h3>
+                                <h3 class="text-white text-base md:text-lg font-bold">Unit Pusat Bahasa</h3>
                             </div>
                         </div>
 
                         <!-- Description -->
-                        <p class="text-gray-600 text-xs md:text-base leading-relaxed mb-6 md:mb-8 flex-grow">
-                            Program persiapan TOEFL, IELTS, dan bahasa asing lainnya untuk kebutuhan studi lanjut,
-                            kerja, dan beasiswa luar negeri.
+                        <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-6 md:mb-8 flex-grow">
+                            Program persiapan TOEFL, IELTS, dan bahasa asing lainnya untuk kebutuhan studi lanjut, kerja,
+                            dan beasiswa luar negeri.
                         </p>
 
                         <!-- Button -->
                         <div>
                             <a href="program1?unit=Bahasa"
-                                class="inline-block px-5 py-2 md:px-6 md:py-2.5 text-xs md:text-sm font-semibold text-white transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
-                                style="background: linear-gradient(90deg, #740A03, #C3110C); border-radius: 10px 0 10px 0; border: 1px solid rgba(255,255,255,0.2);">
+                                class="inline-block px-5 py-2 md:px-6 md:py-2.5 text-sm font-semibold text-white transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
+                                style="background: linear-gradient(135deg, #740A03, #C3110C); border-radius: 10px 0 10px 0; border: 1px solid rgba(255,255,255,0.2);">
                                 Lihat Selengkapnya
                             </a>
                         </div>
@@ -555,8 +433,6 @@
 
             </div>
         </div>
-    </section>
-    </div>
     </section>
 
     <!-- ==============================
@@ -567,8 +443,8 @@
         <div class="max-w-7xl mx-auto">
 
             <!-- Main Title -->
-            <div class="text-center mb-12 max-w-[340px] md:max-w-none mx-auto px-4 md:px-0">
-                <h2 class="text-3xl md:text-4xl font-bold text-red-700 mb-8">Program Pendaftaran Terbuka</h2>
+            <div class="reveal text-center mb-12 w-full px-4 md:px-0">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#C3110C] mb-8">Program Pendaftaran Terbuka</h2>
             </div>
 
             <!-- Category Filter Tabs - Responsive (Very Compact 2x2 Grid on Mobile, Horizontal on Desktop) -->
@@ -576,8 +452,8 @@
                 <div class="grid grid-cols-2 lg:flex lg:justify-center gap-3 md:gap-4 max-w-[280px] md:max-w-none mx-auto"
                     id="categoryFilters">
                     <button onclick="filterProgram('all')"
-                        class="filter-btn active flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 text-xs md:text-base whitespace-nowrap"
-                        data-category="all" style="background-color: #DC2626; color: white; border-color: #DC2626;">
+                        class="reveal delay-300 filter-btn active flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 text-sm md:text-base whitespace-nowrap"
+                        data-category="all" style="background: linear-gradient(135deg, #740A03, #C3110C); color: white; border: none;">
                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             style="color: white;">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -587,7 +463,7 @@
                         <span class="font-medium">Semua</span>
                     </button>
                     <button onclick="filterProgram('pelatihan')"
-                        class="filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 border-transparent hover:border-red-300 text-xs md:text-base whitespace-nowrap"
+                        class="reveal delay-500 filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 border-transparent hover:border-red-300 text-sm md:text-base whitespace-nowrap"
                         data-category="pelatihan" style="background-color: #F3F4F6; color: #4B5563;">
                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             style="color: #DC2626;">
@@ -600,7 +476,7 @@
                         <span class="font-medium">Pelatihan</span>
                     </button>
                     <button onclick="filterProgram('sertifikasi')"
-                        class="filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 border-transparent hover:border-red-300 text-xs md:text-base whitespace-nowrap"
+                        class="reveal delay-700 filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 border-transparent hover:border-red-300 text-sm md:text-base whitespace-nowrap"
                         data-category="sertifikasi" style="background-color: #F3F4F6; color: #4B5563;">
                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             style="color: #DC2626;">
@@ -611,7 +487,7 @@
                         <span class="font-medium">Sertifikasi</span>
                     </button>
                     <button onclick="filterProgram('bahasa')"
-                        class="filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 border-transparent hover:border-red-300 text-xs md:text-base whitespace-nowrap"
+                        class="reveal delay-900 filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 border-transparent hover:border-red-300 text-sm md:text-base whitespace-nowrap"
                         data-category="bahasa" style="background-color: #F3F4F6; color: #4B5563;">
                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             style="color: #DC2626;">
@@ -625,428 +501,301 @@
             </div>
         </div>
 
-        <div class="program-section mb-16 max-w-[340px] md:max-w-none mx-auto px-4 md:px-0" data-category="pelatihan">
-            <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6">Pelatihan</h3>
-            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container">
-
-                <!-- Card 1 -->
-                <div
-                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
-                    <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
-                        style="border-radius: 21px 21px 21px 21px;">
-                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=200&fit=crop"
-                            alt="Perpajakan"
-                            class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-4 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Perpajakan & Asuransi
-                        </h4>
-                        <p class="text-gray-600 text-sm text-center mb-4">Ekonomi dan Bisnis - Unit Pelatihan</p>
-                        <div
-                            class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-6 pb-4 border-b border-gray-100 gap-3">
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>12 Feb - 12 Mar</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z">
-                                    </path>
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Rp 2.000.000</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+        <div class="program-section mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-category="pelatihan">
+            <div class="max-w-6xl mx-auto">
+                <div class="reveal-left flex items-center gap-4 mb-8">
+                    <div class="w-1.5 h-8 bg-[#C3110C] rounded-full"></div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Pelatihan</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-6 program-grid">
+                    @foreach($programs->filter(fn($p) => strtolower($p->category) == 'pelatihan')->values() as $index => $program)
+                    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}">
+                        <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
+                            <img src="{{ $program->image_url }}" 
+                                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80';" 
+                                 alt="{{ $program->title }}" 
+                                 class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="px-2 pb-2 text-center sm:text-left">
+                            <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-0 line-clamp-2">{{ $program->title }}</h4>
+                            <p class="text-gray-500 text-[10px] md:text-xs mb-3 uppercase tracking-wider font-semibold">{{ $program->category }}</p>
+                            
+                            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-y-2 gap-x-8 text-xs text-gray-600 mb-8 pt-2 border-t border-gray-900/10">
+                                <div class="flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
-                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">22</span></span>
+                                    <span class="text-[10px] md:text-xs font-medium">{{ $program->registration_date }}</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span class="font-bold text-gray-900 text-[10px] md:text-xs">Rp {{ number_format($program->price, 0, ',', '.') }}</span>
                                 </div>
                             </div>
-                        </div>
-                        <a href="detail1"
-                            class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar
-                            Sekarang</a>
-                    </div>
-                </div>
 
-                <!-- Card 2 -->
-                <div
-                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
-                    <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
-                        style="border-radius: 21px 21px 21px 21px;">
-                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=200&fit=crop"
-                            alt="UI/UX Design"
-                            class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-4 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">UI/UX Design Fundamental
-                        </h4>
-                        <p class="text-gray-600 text-sm text-center mb-4">Teknologi Kreatif - Unit Pelatihan</p>
-                        <div
-                            class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-6 pb-4 border-b border-gray-100 gap-3">
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>13 Feb - 29 Mar</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z">
-                                    </path>
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Rp 2.500.000</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                                    </svg>
-                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">25</span></span>
+                            <div class="flex items-center justify-between gap-3">
+                                @php
+                                    $quota = $program->quota;
+                                    $total = $program->total_quota ?? 100;
+                                    $ratio = $total > 0 ? ($quota / $total) : 0;
+                                    
+                                    if ($ratio <= 0.25) {
+                                        $badgeClasses = 'bg-red-50 text-[#C3110C] border-red-100';
+                                    } elseif ($ratio <= 0.50) {
+                                        $badgeClasses = 'bg-yellow-50 text-yellow-700 border-yellow-100';
+                                    } else {
+                                        $badgeClasses = 'bg-green-50 text-green-700 border-green-100';
+                                    }
+                                @endphp
+                                <div class="px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
+                                    <span>Sisa: {{ $quota }}</span>
                                 </div>
+                                <a href="{{ $program->detail_url }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                             </div>
                         </div>
-                        <a href="detail2"
-                            class="w-full py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white font-semibold rounded-xl hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-block text-center shadow-md">Daftar
-                            Sekarang</a>
                     </div>
+                    @endforeach
                 </div>
 
-                <!-- Card 7 (New) -->
-                <div
-                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto"
-                    data-id="7">
-                    <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
-                        style="border-radius: 21px 21px 21px 21px;">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop"
-                            alt="Digital Marketing"
-                            class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-4 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Digital Marketing Specialist
-                        </h4>
-                        <p class="text-gray-600 text-sm text-center mb-4">Teknologi Kreatif - Unit Pelatihan</p>
-                        <div
-                            class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-6 pb-4 border-b border-gray-100 gap-3">
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>18 Mar - 20 Apr</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z">
-                                    </path>
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Rp 1.500.000</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                                    </svg>
-                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">15</span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="detail6"
-                            class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar
-                            Sekarang</a>
-                    </div>
+                <!-- View All Button -->
+                @if($programs->filter(fn($p) => strtolower($p->category) == 'pelatihan')->count() > 2)
+                <div class="flex justify-end mt-4 view-all-container">
+                    <button class="view-all-btn px-4 py-1.5 border-2 border-[#C3110C] text-[#C3110C] text-xs md:text-sm font-semibold rounded-lg hover:bg-[#C3110C] hover:text-white transition-all transform active:scale-95 flex items-center gap-1.5">
+                        <span>Lihat Semua</span>
+                        <svg class="w-3.5 h-3.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
                 </div>
-
+                @endif
             </div>
         </div>
 
-        <div class="program-section mb-16 max-w-[340px] md:max-w-none mx-auto px-4 md:px-0" data-category="sertifikasi">
-            <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6">Sertifikasi</h3>
-            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container">
+        <div class="program-section mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-category="sertifikasi">
+            <div class="max-w-6xl mx-auto">
+                <div class="reveal-left flex items-center gap-4 mb-8">
+                    <div class="w-1.5 h-8 bg-[#C3110C] rounded-full"></div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Sertifikasi</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-6 program-grid">
 
-                <!-- Card 3 -->
-                <div
-                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
-                    <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
-                        style="border-radius: 21px 21px 21px 21px;">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=200&fit=crop"
-                            alt="Manajemen Proyek"
-                            class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-4 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">Sertifikasi Manajemen
-                            Proyek</h4>
-                        <p class="text-gray-600 text-sm text-center mb-4">Teknik & Industri - Unit Sertifikasi</p>
-                        <div
-                            class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-6 pb-4 border-b border-gray-100 gap-3">
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>10 Mar - 25 Apr</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z">
-                                    </path>
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Rp 2.500.000</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                    @foreach($programs->filter(fn($p) => strtolower($p->category) == 'sertifikasi')->values() as $index => $program)
+                    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}">
+                        <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
+                            <img src="{{ $program->image_url }}" 
+                                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80';" 
+                                 alt="{{ $program->title }}" 
+                                 class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="px-2 pb-2 text-center sm:text-left">
+                            <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-0 line-clamp-2">{{ $program->title }}</h4>
+                            <p class="text-gray-500 text-[10px] md:text-xs mb-3 uppercase tracking-wider font-semibold">{{ $program->category }}</p>
+                            
+                            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-y-2 gap-x-8 text-xs text-gray-600 mb-8 pt-2 border-t border-gray-900/10">
+                                <div class="flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
-                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">22</span></span>
+                                    <span class="text-[10px] md:text-xs font-medium">{{ $program->registration_date }}</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span class="font-bold text-gray-900 text-[10px] md:text-xs">Rp {{ number_format($program->price, 0, ',', '.') }}</span>
                                 </div>
                             </div>
-                        </div>
-                        <a href="detail3"
-                            class="w-full py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white font-semibold rounded-xl hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-block text-center shadow-md">Daftar
-                            Sekarang</a>
-                    </div>
-                </div>
 
-                <!-- Card 4 -->
-                <div
-                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
-                    <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
-                        style="border-radius: 21px 21px 21px 21px;">
-                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=200&fit=crop"
-                            alt="AutoCAD"
-                            class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-4 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">AutoCAD for Professional
-                        </h4>
-                        <p class="text-gray-600 text-sm text-center mb-4">Teknik & Industri - Unit Sertifikasi</p>
-                        <div
-                            class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-6 pb-4 border-b border-gray-100 gap-3">
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>15 Mar - 10 Apr</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z">
-                                    </path>
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Rp 2.500.000</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                                    </svg>
-                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">22</span></span>
+                            <div class="flex items-center justify-between gap-3">
+                                @php
+                                    $quota = $program->quota;
+                                    $total = $program->total_quota ?? 100;
+                                    $ratio = $total > 0 ? ($quota / $total) : 0;
+                                    
+                                    if ($ratio <= 0.25) {
+                                        $badgeClasses = 'bg-red-50 text-[#C3110C] border-red-100';
+                                    } elseif ($ratio <= 0.50) {
+                                        $badgeClasses = 'bg-yellow-50 text-yellow-700 border-yellow-100';
+                                    } else {
+                                        $badgeClasses = 'bg-green-50 text-green-700 border-green-100';
+                                    }
+                                @endphp
+                                <div class="px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
+                                    <span>Sisa: {{ $quota }}</span>
                                 </div>
+                                <a href="{{ $program->detail_url }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                             </div>
                         </div>
-                        <a href="detail4"
-                            class="w-full py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white font-semibold rounded-xl hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-block text-center shadow-md">Daftar
-                            Sekarang</a>
                     </div>
+                    @endforeach
+
                 </div>
 
+                <!-- View All Button -->
+                @if($programs->filter(fn($p) => strtolower($p->category) == 'sertifikasi')->count() > 2)
+                <div class="flex justify-end mt-4 view-all-container">
+                    <button class="view-all-btn px-4 py-1.5 border-2 border-[#C3110C] text-[#C3110C] text-xs font-semibold rounded-lg hover:bg-[#C3110C] hover:text-white transition-all transform active:scale-95 flex items-center gap-1.5">
+                        <span>Lihat Semua</span>
+                        <svg class="w-3.5 h-3.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                </div>
+                @endif
             </div>
         </div>
 
-        <div class="program-section mb-16 max-w-[340px] md:max-w-none mx-auto px-4 md:px-0" data-category="bahasa">
-            <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6">Bahasa</h3>
-            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container">
+        <div class="program-section mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-category="bahasa">
+            <div class="max-w-6xl mx-auto">
+                <div class="reveal-left flex items-center gap-4 mb-8">
+                    <div class="w-1.5 h-8 bg-[#C3110C] rounded-full"></div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Bahasa</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-6 program-grid">
 
-                <!-- Card 5 -->
-                <div
-                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
-                    <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
-                        style="border-radius: 21px 21px 21px 21px;">
-                        <img src="https://images.unsplash.com/photo-1544979590-2c7188718e3a?w=400&h=200&fit=crop"
-                            alt="TOEFL"
-                            class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-4 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">TOEFL Preparation
-                            Program</h4>
-                        <p class="text-gray-600 text-sm text-center mb-4">Unit Bahasa</p>
-                        <div
-                            class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-6 pb-4 border-b border-gray-100 gap-3">
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>20 Feb - 30 Mar</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z">
-                                    </path>
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Rp 1.200.000</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                    @foreach($programs->filter(fn($p) => strtolower($p->category) == 'bahasa')->values() as $index => $program)
+                    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}">
+                        <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
+                            <img src="{{ str_contains(strtolower($program->title), 'toefl') ? 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800' : ($program->image_url ?: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800') }}" 
+                                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1513258496099-48168024adb0?w=800';" 
+                                 alt="{{ $program->title }}" 
+                                 class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="px-2 pb-2 text-center sm:text-left">
+                            <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-0 line-clamp-2">{{ $program->title }}</h4>
+                            <p class="text-gray-500 text-[10px] md:text-xs mb-3 uppercase tracking-wider font-semibold">{{ $program->category }}</p>
+                            
+                            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-y-2 gap-x-8 text-xs text-gray-600 mb-8 pt-2 border-t border-gray-900/10">
+                                <div class="flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
-                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">35</span></span>
+                                    <span class="text-[10px] md:text-xs font-medium">{{ $program->registration_date }}</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span class="font-bold text-gray-900 text-[10px] md:text-xs">Rp {{ number_format($program->price, 0, ',', '.') }}</span>
                                 </div>
                             </div>
-                        </div>
-                        <a href="detail5"
-                            class="w-full py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white font-semibold rounded-xl hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-block text-center shadow-md">Daftar
-                            Sekarang</a>
-                    </div>
-                </div>
 
-                <!-- Card 6 -->
-                <div
-                    class="program-card snap-start flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-3 max-w-none w-[280px] md:w-[calc(50%-12px)] mx-auto">
-                    <div class="rounded-[21px] overflow-hidden mb-3 shadow-md"
-                        style="border-radius: 21px 21px 21px 21px;">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=200&fit=crop"
-                            alt="IELTS"
-                            class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-4 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-gray-900 text-center mb-1">IELTS Intensive Coaching
-                        </h4>
-                        <p class="text-gray-600 text-sm text-center mb-4">Unit Bahasa</p>
-                        <div
-                            class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-gray-600 mb-6 pb-4 border-b border-gray-100 gap-3">
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>30 Feb - 15 Mar</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z">
-                                    </path>
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Rp 2.500.000</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <div class="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-200 flex items-center gap-1.5 shadow-sm">
-                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                                    </svg>
-                                    <span class="sisa-kuota-text">Sisa Kuota: <span class="kuota-number">15</span></span>
+                            <div class="flex items-center justify-between gap-3">
+                                @php
+                                    $quota = $program->quota;
+                                    $total = $program->total_quota ?? 100;
+                                    $ratio = $total > 0 ? ($quota / $total) : 0;
+                                    
+                                    if ($ratio <= 0.25) {
+                                        $badgeClasses = 'bg-red-50 text-[#C3110C] border-red-100';
+                                    } elseif ($ratio <= 0.50) {
+                                        $badgeClasses = 'bg-yellow-50 text-yellow-700 border-yellow-100';
+                                    } else {
+                                        $badgeClasses = 'bg-green-50 text-green-700 border-green-100';
+                                    }
+                                @endphp
+                                <div class="px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
+                                    <span>Sisa: {{ $quota }}</span>
                                 </div>
+                                <a href="{{ $program->detail_url }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                             </div>
                         </div>
-                        <a href="detail6"
-                            class="w-full py-2.5 bg-gradient-to-r from-red-800 to-red-600 text-white font-medium rounded hover:shadow-lg transition-all inline-block text-center">Daftar
-                            Sekarang</a>
                     </div>
-                </div>
+                    @endforeach
 
+                </div>
             </div>
+
+            <!-- View All Button -->
+            @if($programs->filter(fn($p) => strtolower($p->category) == 'bahasa')->count() > 2)
+            <div class="flex justify-end mt-4 view-all-container">
+                <div class="max-w-6xl mx-auto w-full flex justify-end">
+                    <button class="view-all-btn px-4 py-1.5 border-2 border-[#C3110C] text-[#C3110C] text-xs font-semibold rounded-lg hover:bg-[#C3110C] hover:text-white transition-all transform active:scale-95 flex items-center gap-1.5">
+                        <span>Lihat Semua</span>
+                        <svg class="w-3.5 h-3.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            @endif
         </div>
 
         <!-- ============================================
                  KEUNTUNGAN PROGRAM SECTION
                  ============================================ -->
-        <div class="mt-14 max-w-[340px] md:max-w-none mx-auto px-4 md:px-0">
-            <h3 class="text-2xl md:text-3xl font-bold text-red-700 text-center mb-8">Keuntungan Program</h3>
+        <div class="reveal mt-16 w-full px-4 md:px-0">
+            <h3 class="text-2xl md:text-3xl font-bold text-[#C3110C] text-center mb-10">Keuntungan Program</h3>
         </div>
-        <div class="space-y-6">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
 
             <!-- Benefit 1 -->
-            <div class="flex flex-col md:flex-row items-center md:items-start gap-5 p-6 md:p-8 bg-gray-50 border border-gray-200 hover:shadow-md transition-shadow max-w-[340px] md:max-w-none mx-auto w-full"
-                style="border-radius: 23px 0 23px 0;">
-                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300"
+            <div class="reveal group relative flex flex-col items-center justify-center text-center p-6 md:p-8 bg-gray-50 border border-gray-200 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full overflow-hidden"
+                style="border-radius: 20px 0 20px 0;">
+                <!-- Internal Rotating Stroke (Non-intrusive) -->
+                <div class="absolute inset-0 pointer-events-none" style="padding: 1px;">
+                    <div class="absolute inset-[-1000%] bg-[conic-gradient(from_90deg_at_50%_50%,#E2E8F0_0%,#FFFFFF_50%,#E2E8F0_100%)] animate-spin-slow opacity-30"></div>
+                </div>
+
+                <div class="animate-float relative z-10 flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg mb-6"
                     style="border-radius: 12px 0 12px 0;">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
                         </path>
                     </svg>
                 </div>
-                <div class="text-center md:text-left">
-                    <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-2">Kurikulum Berbasis Industri</h4>
+                <div>
+                    <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-3">Kurikulum Berbasis Industri</h4>
                     <p class="text-gray-600 leading-relaxed text-sm md:text-base">Materi dirancang sesuai kebutuhan
                         dunia kerja sehingga peserta memperoleh kompetensi yang relevan dan aplikatif</p>
                 </div>
             </div>
 
             <!-- Benefit 2 -->
-            <div class="flex flex-col md:flex-row items-center md:items-start gap-5 p-6 md:p-8 bg-gray-50 border border-gray-200 hover:shadow-md transition-shadow max-w-[340px] md:max-w-none mx-auto w-full"
-                style="border-radius: 23px 0 23px 0;">
-                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300"
+            <div class="reveal group relative flex flex-col items-center justify-center text-center p-6 md:p-8 bg-gray-50 border border-gray-200 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full overflow-hidden"
+                style="border-radius: 20px 0 20px 0;">
+                <!-- Internal Rotating Stroke (Non-intrusive) -->
+                <div class="absolute inset-0 pointer-events-none" style="padding: 1px;">
+                    <div class="absolute inset-[-1000%] bg-[conic-gradient(from_90deg_at_50%_50%,#E2E8F0_0%,#FFFFFF_50%,#E2E8F0_100%)] animate-spin-slow opacity-30"></div>
+                </div>
+
+                <div class="animate-float relative z-10 flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg mb-6"
                     style="border-radius: 12px 0 12px 0;">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                         </path>
                     </svg>
                 </div>
-                <div class="text-center md:text-left">
-                    <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-2">Instruktur Berpengalaman</h4>
+                <div>
+                    <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-3">Instruktur Berpengalaman</h4>
                     <p class="text-gray-600 leading-relaxed text-sm md:text-base">Program dibimbing oleh praktisi dan
                         akademisi profesional yang memiliki pengalaman di bidangnya.</p>
                 </div>
             </div>
 
             <!-- Benefit 3 -->
-            <div class="flex flex-col md:flex-row items-center md:items-start gap-5 p-6 md:p-8 bg-gray-50 border border-gray-200 hover:shadow-md transition-shadow max-w-[340px] md:max-w-none mx-auto w-full"
-                style="border-radius: 23px 0 23px 0;">
-                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300"
+            <div class="reveal group relative flex flex-col items-center justify-center text-center p-6 md:p-8 bg-gray-50 border border-gray-200 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full overflow-hidden"
+                style="border-radius: 20px 0 20px 0;">
+                <!-- Internal Rotating Stroke (Non-intrusive) -->
+                <div class="absolute inset-0 pointer-events-none" style="padding: 1px;">
+                    <div class="absolute inset-[-1000%] bg-[conic-gradient(from_90deg_at_50%_50%,#E2E8F0_0%,#FFFFFF_50%,#E2E8F0_100%)] animate-spin-slow opacity-30"></div>
+                </div>
+
+                <div class="animate-float relative z-10 flex-shrink-0 w-16 h-16 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg mb-6"
                     style="border-radius: 12px 0 12px 0;">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z">
                         </path>
                     </svg>
                 </div>
-                <div class="text-center md:text-left">
-                    <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-2">Sertifikat & Peningkatan Daya Saing</h4>
+                <div>
+                    <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-3">Sertifikat & Peningkatan Daya Saing</h4>
                     <p class="text-gray-600 leading-relaxed text-sm md:text-base">Peserta mendapatkan sertifikat serta
                         peningkatan kompetensi yang mendukung kesiapan karier, studi lanjut, maupun beasiswa.</p>
                 </div>
@@ -1192,42 +941,9 @@
     <!-- ==============================
          JAVASCRIPT
          ============================== -->
+    @include('partials.navbar-scripts')
+
     <script>
-        /**
-         * Mobile Menu Toggle
-         */
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuIcon = document.getElementById('menuIcon');
-        const closeIcon = document.getElementById('closeIcon');
-        const programToggle = document.getElementById('programToggle');
-        const programSubmenu = document.getElementById('programSubmenu');
-        const programCaret = document.getElementById('programCaret');
-
-        // Toggle main mobile menu
-        mobileMenuBtn?.addEventListener('click', function (e) {
-            e.stopPropagation();
-            mobileMenu?.classList.toggle('active');
-            menuIcon?.classList.toggle('hidden');
-            closeIcon?.classList.toggle('hidden');
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function (e) {
-            if (!mobileMenu?.contains(e.target) && !mobileMenuBtn?.contains(e.target)) {
-                mobileMenu?.classList.remove('active');
-                menuIcon?.classList.remove('hidden');
-                closeIcon?.classList.add('hidden');
-            }
-        });
-
-        // Toggle program submenu
-        programToggle?.addEventListener('click', function (e) {
-            e.stopPropagation();
-            programSubmenu?.classList.toggle('hidden');
-            programCaret?.classList.toggle('rotate-180');
-        });
-
         /**
          * Program Filter Function
          */
@@ -1235,20 +951,17 @@
             // Update active button state
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => {
+                const svg = btn.querySelector('svg');
                 if (btn.dataset.category === category) {
-                    // Active: Red background, white text/icons, red border
-                    btn.style.backgroundColor = '#DC2626';
+                    btn.style.background = 'linear-gradient(135deg, #740A03, #C3110C)';
                     btn.style.color = 'white';
-                    btn.style.borderColor = '#DC2626';
-                    const svg = btn.querySelector('svg');
+                    btn.style.border = 'none';
                     if (svg) svg.style.color = 'white';
                 } else {
-                    // Inactive: Gray background, gray text, red icon, transparent border
-                    btn.style.backgroundColor = '#F3F4F6';
+                    btn.style.background = '#F3F4F6';
                     btn.style.color = '#4B5563';
-                    btn.style.borderColor = 'transparent';
-                    const svg = btn.querySelector('svg');
-                    if (svg) svg.style.color = '#DC2626';
+                    btn.style.border = '2px solid transparent';
+                    if (svg) svg.style.color = '#C3110C';
                 }
             });
 
@@ -1257,9 +970,8 @@
             sections.forEach(section => {
                 if (category === 'all' || section.dataset.category === category) {
                     section.style.display = 'block';
-                    // Remove and re-add animation class to trigger animation
                     section.classList.remove('animate-fadeIn');
-                    void section.offsetWidth; // Trigger reflow
+                    void section.offsetWidth; 
                     section.classList.add('animate-fadeIn');
                 } else {
                     section.style.display = 'none';
@@ -1268,193 +980,90 @@
             });
         }
 
-        // Initialize filter on page load
-        document.addEventListener('DOMContentLoaded', function () {
+        // Initial filter
+        document.addEventListener('DOMContentLoaded', function() {
             filterProgram('all');
         });
     </script>
 
-    <!-- Language Switcher Script -->
     <script>
-        const translations = {
-            'id': {
-                'Beranda': 'Beranda',
-                'Home': 'Beranda',
-                'Profile': 'Profil',
-                'Programs': 'Program',
-                'Contact Us': 'Hubungi Kami',
-                'National': 'Nasional',
-                'International': 'Internasional',
-                'Program Calendar': 'Kalender Program',
-                'Programs We Offer': 'Program yang Kami Tawarkan',
-                'Training Center Unit': 'Unit Pusat Pelatihan',
-                'Certification Center Unit': 'Unit Pusat Sertifikasi',
-                'Language Center Unit': 'Unit Pusat Bahasa',
-                'See More': 'Lihat Selengkapnya',
-                'Register Now': 'Daftar Sekarang',
-                'All': 'Semua',
-                'Training': 'Pelatihan',
-                'Certification': 'Sertifikasi',
-                'Language': 'Bahasa',
-                'Career development center providing training, certification, and language programs to support job readiness and further studies.': 'Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.',
-                'Industry-based competency development program to improve students technical and soft skills.': 'Program pengembangan kompetensi berbasis kebutuhan industri untuk meningkatkan keterampilan teknis dan soft skills mahasiswa.',
-                'Competency certification services to support career readiness and improve professional credibility.': 'Layanan sertifikasi kompetensi untuk mendukung kesiapan karier dan meningkatkan kredibilitas profesional.',
-                'Preparation programs for TOEFL, IELTS, and other foreign languages for further studies, work, and overseas scholarships.': 'Program persiapan TOEFL, IELTS, dan bahasa asing lainnya untuk kebutuhan studi lanjut, kerja, dan beasiswa luar negeri.',
-                'Taxation & Insurance': 'Perpajakan & Asuransi',
-                'Economics and Business - Training Unit': 'Ekonomi dan Bisnis - Unit Pelatihan',
-                'UI/UX Design Fundamental': 'UI/UX Design Fundamental',
-                'Creative Technology - Training Unit': 'Teknologi Kreatif - Unit Pelatihan',
-                'Project Management Certification': 'Sertifikasi Manajemen Proyek',
-                'Engineering & Industry - Certification Unit': 'Teknik & Industri - Unit Sertifikasi',
-                'AutoCAD for Professional': 'AutoCAD for Professional',
-                'TOEFL Preparation Program': 'TOEFL Preparation Program',
-                'Language Unit': 'Unit Bahasa',
-                'IELTS Intensive Coaching': 'IELTS Intensive Coaching',
-                'Program Benefits': 'Keuntungan Program',
-                'Industry-Based Curriculum': 'Kurikulum Berbasis Industri',
-                'Materials are designed according to industry needs so participants gain relevant and applicable competencies.': 'Materi dirancang sesuai kebutuhan dunia kerja sehingga peserta memperoleh kompetensi yang relevan dan aplikatif',
-                'Experienced Instructors': 'Instruktur Berpengalaman',
-                'Programs are guided by professionals and academics with experience in their fields.': 'Program dibimbing oleh praktisi dan akademisi profesional yang memiliki pengalaman di bidangnya.',
-                'Certificate & Competitiveness Improvement': 'Sertifikat & Peningkatan Daya Saing',
-                'Participants receive a certificate and skill improvements to support career readiness, further studies, or scholarships.': 'Peserta mendapatkan sertifikat serta peningkatan kompetensi yang mendukung kesiapan karier, studi lanjut, maupun beasiswa.',
-                'Contact Information': 'Informasi Kontak',
-                'Contact Person': 'Narahubung',
-                'Location': 'Lokasi',
-                'Veteran Street, PT Semen Indonesia Complex, Sidomoro,': 'Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,',
-                'Kebomas District': 'Kecamatan Kebomas',
-                'Gresik Regency': 'Kabupaten Gresik',
-                'East Java': 'Jawa Timur',
-                'Operating Hours': 'Jam Operasional',
-                'Social Media': 'Sosial Media',
-                '22 Quota': '22 Kuota',
-                '25 Quota': '25 Kuota',
-                '15 Quota': '15 Kuota',
-                '35 Quota': '35 Kuota',
-                'Indonesia': 'Indonesia',
-                'UISI Service Center': 'UISI Pusat Layanan',
-                'Sisa Kuota:': 'Sisa Kuota:'
-            },
-            'en': {
-                'Beranda': 'Home',
-                'Profil': 'Profile',
-                'Program': 'Programs',
-                'Hubungi Kami': 'Contact Us',
-                'Nasional': 'National',
-                'Internasional': 'International',
-                'Kalender Program': 'Program Calendar',
-                'Program yang Kami Tawarkan': 'Programs We Offer',
-                'Unit Pusat Pelatihan': 'Training Center Unit',
-                'Unit Pusat Sertifikasi': 'Certification Center Unit',
-                'Unit Pusat Bahasa': 'Language Center Unit',
-                'Lihat Selengkapnya': 'See More',
-                'Daftar Sekarang': 'Register Now',
-                'Semua': 'All',
-                'Pelatihan': 'Training',
-                'Sertifikasi': 'Certification',
-                'Bahasa': 'Language',
-                'Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.': 'Career development center providing training, certification, and language programs to support job readiness and further studies.',
-                'Program pengembangan kompetensi berbasis kebutuhan industri untuk meningkatkan keterampilan teknis dan soft skills mahasiswa.': 'Industry-based competency development program to improve students technical and soft skills.',
-                'Layanan sertifikasi kompetensi untuk mendukung kesiapan karier dan meningkatkan kredibilitas profesional.': 'Competency certification services to support career readiness and improve professional credibility.',
-                'Program persiapan TOEFL, IELTS, dan bahasa asing lainnya untuk kebutuhan studi lanjut, kerja, dan beasiswa luar negeri.': 'Preparation programs for TOEFL, IELTS, and other foreign languages for further studies, work, and overseas scholarships.',
-                'Perpajakan & Asuransi': 'Taxation & Insurance',
-                'Ekonomi dan Bisnis - Unit Pelatihan': 'Economics and Business - Training Unit',
-                'UI/UX Design Fundamental': 'UI/UX Design Fundamental',
-                'Teknologi Kreatif - Unit Pelatihan': 'Creative Technology - Training Unit',
-                'Sertifikasi Manajemen Proyek': 'Project Management Certification',
-                'Teknik & Industri - Unit Sertifikasi': 'Engineering & Industry - Certification Unit',
-                'AutoCAD for Professional': 'AutoCAD for Professional',
-                'TOEFL Preparation Program': 'TOEFL Preparation Program',
-                'Unit Bahasa': 'Language Unit',
-                'IELTS Intensive Coaching': 'IELTS Intensive Coaching',
-                'Keuntungan Program': 'Program Benefits',
-                'Kurikulum Berbasis Industri': 'Industry-Based Curriculum',
-                'Materi dirancang sesuai kebutuhan dunia kerja sehingga peserta memperoleh kompetensi yang relevan dan aplikatif': 'Materials are designed according to industry needs so participants gain relevant and applicable competencies.',
-                'Instruktur Berpengalaman': 'Experienced Instructors',
-                'Program dibimbing oleh praktisi dan akademisi profesional yang memiliki pengalaman di bidangnya.': 'Programs are guided by professionals and academics with experience in their fields.',
-                'Sertifikat & Peningkatan Daya Saing': 'Certificate & Competitiveness Improvement',
-                'Peserta mendapatkan sertifikat serta peningkatan kompetensi yang mendukung kesiapan karier, studi lanjut, maupun beasiswa.': 'Participants receive a certificate and skill improvements to support career readiness, further studies, or scholarships.',
-                'Informasi Kontak': 'Contact Information',
-                'Narahubung': 'Contact Person',
-                'Lokasi': 'Location',
-                'Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,': 'Veteran Street, PT Semen Indonesia Complex, Sidomoro,',
-                'Kecamatan Kebomas': 'Kebomas District',
-                'Kabupaten Gresik': 'Gresik Regency',
-                'Jawa Timur': 'East Java',
-                'Jam Operasional': 'Operating Hours',
-                'Sosial Media': 'Social Media',
-                '22 Kuota': '22 Quota',
-                '25 Kuota': '25 Quota',
-                '15 Kuota': '15 Quota',
-                '35 Kuota': '35 Quota',
-                'Indonesia': 'Indonesia',
-                'UISI Pusat Layanan': 'UISI Service Center',
-                'Sisa Kuota:': 'Remaining Quota:'
-            }
-        };
-
-        let currentLang = 'id';
-
-        function toggleLanguage() {
-            const newLang = currentLang === 'id' ? 'en' : 'id';
-            const dict = translations[newLang];
-            
-            // Update Flags
-            const flagUrl = newLang === 'id' ? 'https://flagcdn.com/w40/id.png' : 'https://flagcdn.com/w40/gb.png';
-            document.getElementById('flagIconDesktop').src = flagUrl;
-            if(document.getElementById('flagIconMobile')) {
-                document.getElementById('flagIconMobile').src = flagUrl;
-            }
-
-            // Translate Text Nodes
-            function translateNode(node) {
-                if (node.nodeType === Node.TEXT_NODE) {
-                    let text = node.nodeValue.trim().replace(/\s+/g, ' ');
-                    if (text && dict[text]) {
-                        const originalValue = node.nodeValue;
-                        const leadingSpaceMatch = originalValue.match(/^\s*/);
-                        const trailingSpaceMatch = originalValue.match(/\s*$/);
-                        
-                        const leadingSpace = leadingSpaceMatch ? leadingSpaceMatch[0] : '';
-                        const trailingSpace = trailingSpaceMatch ? trailingSpaceMatch[0] : '';
-                        
-                        node.nodeValue = leadingSpace + dict[text] + trailingSpace;
-                    }
-                } else if (node.nodeType === Node.ELEMENT_NODE) {
-                    if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
-                        node.childNodes.forEach(translateNode);
-                    }
-                }
-            }
-
-            translateNode(document.body);
-            currentLang = newLang;
-        }
-
-        // --- Correct Quota Management & Link Updater ---
         document.addEventListener('DOMContentLoaded', function() {
-            const initialQuotas = { '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15 };
-            let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
+            const sections = document.querySelectorAll('.program-section');
             
-            for(let i = 1; i <= 6; i++) {
-                if(quotas[i] === undefined) quotas[i] = initialQuotas[i];
-            }
-            localStorage.setItem('uisi_quotas', JSON.stringify(quotas));
+            sections.forEach(section => {
+                const grid = section.querySelector('.program-grid');
+                const cards = grid.querySelectorAll('.program-card');
+                const container = section.querySelector('.view-all-container');
+                const btn = section.querySelector('.view-all-btn');
+                
+                if (cards.length > 2) {
+                    // Show the button container
+                    container.classList.remove('hidden');
+                    
+                    // Initially hide cards beyond index 1 (the first 2)
+                    cards.forEach((card, index) => {
+                        if (index >= 2) {
+                            card.classList.add('hidden', 'opacity-0', 'transform', 'translate-y-4');
+                            card.style.transition = 'all 0.5s ease';
+                        }
+                    });
 
-            for(let i = 1; i <= 6; i++) {
-                // Keep the links pointing to the detail page (e.g., detail1, detail2, etc.)
-                // Now find the .kuota-number spans inside each card by ID matching
-                const cards = document.querySelectorAll('.program-card');
-                if (cards[i-1]) {
-                    const numberSpan = cards[i-1].querySelector('.kuota-number');
-                    if(numberSpan) {
-                        numberSpan.innerText = quotas[i];
-                    }
+                    btn.addEventListener('click', function() {
+                        const isExpanded = btn.getAttribute('data-expanded') === 'true';
+                        const btnText = btn.querySelector('span');
+                        const btnIcon = btn.querySelector('svg');
+
+                        if (!isExpanded) {
+                            // Expand
+                            cards.forEach((card, index) => {
+                                if (index >= 2) {
+                                    card.classList.remove('hidden');
+                                    // Small delay for animation
+                                    setTimeout(() => {
+                                        card.classList.remove('opacity-0', 'translate-y-4');
+                                    }, 10 * (index - 2));
+                                }
+                            });
+                            btnText.textContent = 'Sembunyikan';
+                            btnIcon.classList.add('rotate-180');
+                            btn.setAttribute('data-expanded', 'true');
+                        } else {
+                            // Collapse
+                            cards.forEach((card, index) => {
+                                if (index >= 2) {
+                                    card.classList.add('opacity-0', 'translate-y-4');
+                                    setTimeout(() => {
+                                        card.classList.add('hidden');
+                                    }, 500);
+                                }
+                            });
+                            btnText.textContent = 'Lihat Semua';
+                            btnIcon.classList.remove('rotate-180');
+                            btn.setAttribute('data-expanded', 'false');
+                            
+                            // Scroll back to top of section
+                            section.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
                 }
-            }
+            });
         });
-        // ---------------------------------------------
+        // Reveal animation on scroll
+        const reveal = () => {
+            const reveals = document.querySelectorAll('.reveal, .reveal-down, .reveal-left, .reveal-right');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('reveal-active');
+                }
+            });
+        };
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('load', reveal);
+        // Initial check
+        setTimeout(reveal, 100);
     </script>
-
 </body>
-
 </html>

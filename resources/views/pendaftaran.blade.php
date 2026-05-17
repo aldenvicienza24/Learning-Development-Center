@@ -152,6 +152,21 @@
             z-index: -1;
             opacity: 0.6;
         }
+
+        .upload-area {
+            border: 2px dashed #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover, .upload-area.dragover {
+            border-color: #C3110C;
+            background: rgba(195, 17, 12, 0.02);
+        }
+
+        .payment-card {
+            background: linear-gradient(145deg, #ffffff, #f1f5f9);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
@@ -274,6 +289,64 @@
                     </div>
                 </div>
 
+                <!-- Payment Section -->
+                <div class="space-y-4 pt-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-1 bg-red-600 rounded-full"></div>
+                        <h4 class="text-sm font-extrabold text-gray-900 uppercase tracking-widest">Informasi Pembayaran</h4>
+                    </div>
+                    
+                    <!-- Bank Account Info -->
+                    <div class="payment-card p-5 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center p-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/id/thumb/f/fa/Bank_Mandiri_logo.svg/1200px-Bank_Mandiri_logo.svg.png" alt="Mandiri" class="w-full h-auto object-contain">
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-gray-400 uppercase tracking-tight">Transfer ke Rekening</p>
+                                <p class="text-lg font-extrabold text-gray-900">142-00-1234567-8</p>
+                                <p class="text-sm font-medium text-gray-600">A.N. UISI Pusat Layanan</p>
+                            </div>
+                        </div>
+                        <button type="button" onclick="copyAccount()" class="text-xs font-bold text-red-600 bg-red-50 px-4 py-2 rounded-lg hover:bg-red-100 transition active:scale-95">
+                            Salin No. Rek
+                        </button>
+                    </div>
+
+                    <!-- Upload Proof -->
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-gray-700 ml-1">Unggah Bukti Pembayaran</label>
+                        <div id="dropzone" class="upload-area rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer relative group">
+                            <input type="file" id="payment_proof" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*,.pdf" required onchange="handleFileSelect(this)">
+                            <div id="uploadPlaceholder" class="text-center">
+                                <div class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center mb-3 mx-auto group-hover:scale-110 transition duration-300">
+                                    <svg class="w-6 h-6 text-gray-400 group-hover:text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                                    </svg>
+                                </div>
+                                <p class="text-sm font-bold text-gray-900 mb-1">Klik untuk unggah atau seret file</p>
+                                <p class="text-xs text-gray-500">Format: JPG, PNG, atau PDF (Maks. 2MB)</p>
+                            </div>
+                            <div id="filePreview" class="hidden w-full flex items-center gap-4 bg-white p-3 rounded-xl border border-green-100">
+                                <div class="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 overflow-hidden">
+                                    <p id="fileName" class="text-sm font-bold text-gray-900 truncate">file-name.jpg</p>
+                                    <p class="text-xs text-green-600 font-medium">Siap diunggah</p>
+                                </div>
+                                <button type="button" onclick="resetFile()" class="text-gray-400 hover:text-red-600 transition">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Terms Checkbox -->
                 <div class="flex items-start gap-3 mt-4">
                     <div class="flex items-center h-6">
@@ -371,6 +444,15 @@
                 localStorage.setItem('uisi_quotas', JSON.stringify(quotas));
             }
 
+            // Set Registration Status for Notifications
+            const registrationData = {
+                id: programId,
+                name: programs[programId].name,
+                status: 'pending',
+                timestamp: new Date().getTime()
+            };
+            localStorage.setItem('uisi_registration_data', JSON.stringify(registrationData));
+
             // Trigger Success Animation
             const overlay = document.getElementById('successOverlay');
             overlay.classList.remove('pointer-events-none', 'opacity-0');
@@ -381,6 +463,62 @@
                 window.location.href = "{{ url('/') }}";
             }, 3000);
         }
+
+        // Copy Account Number
+        function copyAccount() {
+            navigator.clipboard.writeText('1420012345678');
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.innerText = 'Tersalin!';
+            btn.classList.replace('text-red-600', 'text-green-600');
+            btn.classList.replace('bg-red-50', 'bg-green-50');
+            
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.replace('text-green-600', 'text-red-600');
+                btn.classList.replace('bg-green-50', 'bg-red-50');
+            }, 2000);
+        }
+
+        // Handle File Selection
+        function handleFileSelect(input) {
+            const placeholder = document.getElementById('uploadPlaceholder');
+            const preview = document.getElementById('filePreview');
+            const fileNameDisplay = document.getElementById('fileName');
+            
+            if (input.files && input.files[0]) {
+                placeholder.classList.add('hidden');
+                preview.classList.remove('hidden');
+                fileNameDisplay.innerText = input.files[0].name;
+            }
+        }
+
+        // Reset File
+        function resetFile() {
+            const input = document.getElementById('payment_proof');
+            const placeholder = document.getElementById('uploadPlaceholder');
+            const preview = document.getElementById('filePreview');
+            
+            input.value = '';
+            placeholder.classList.remove('hidden');
+            preview.classList.add('hidden');
+        }
+
+        // Drag & Drop effects
+        const dropzone = document.getElementById('dropzone');
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropzone.classList.add('dragover');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropzone.classList.remove('dragover');
+            }, false);
+        });
     </script>
 </body>
 </html>

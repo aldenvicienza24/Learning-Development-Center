@@ -14,117 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     {{-- Custom Styles --}}
-    <style>
-        * {
-            font-family: "Inter", sans-serif;
-        }
-        
-        body {
-            overflow-x: hidden;
-        }
-
-        /* Dropdown Menu */
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            margin-top: 10px;
-            min-width: 180px;
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            z-index: 50;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(8px);
-            transition: all 0.35s ease;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 11px 16px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #000000;
-        }
-
-        .dropdown-menu a:hover {
-            background: #f3f4f6;
-            color: #000000;
-        }
-
-        .dropdown-menu a + a {
-            border-top: 1px solid #f3f4f6;
-        }
-
-        .caret {
-            transition: transform 0.3s ease;
-        }
-
-        .dropdown:hover .caret {
-            transform: rotate(180deg);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-container {
-            position: relative;
-        }
-
-        .mobile-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 8px;
-            width: 280px;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            z-index: 100;
-            overflow: hidden;
-            max-height: 0;
-            opacity: 0;
-            transform: translateY(-10px) scale(0.95);
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu.active {
-            max-height: 500px;
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .mobile-menu-item {
-            padding: 12px 18px;
-            border-bottom: 1px solid #F3F4F6;
-        }
-
-        .mobile-menu-item:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-menu-item a {
-            display: block;
-            width: 100%;
-        }
-
-        .mobile-submenu {
-            padding-left: 18px;
-            background: #FAFAFA;
-        }
-
-        .mobile-submenu a {
-            font-size: 13px;
-            color: #000000;
-            padding: 8px 12px;
-        }
-    </style>
+    @include('partials.navbar-styles')
 </head>
 
 <body class="bg-[#FFFFFF] min-h-screen flex flex-col">
@@ -219,8 +109,8 @@
             <div class="p-6 md:p-10">
                 <div class="text-center mb-10">
                     <h1 class="text-2xl md:text-4xl font-bold text-gray-900 mb-2">
-                        Digital Marketing Specialist
-                    </h1>
+                                Digital Marketing Specialist
+                            </h1>
                     <p class="text-gray-600 text-base md:text-xl">
                         Pelatihan Bidang Teknologi Kreatif
                     </p>
