@@ -7,12 +7,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>UISI Pusat Layanan</title>
+    <link rel="icon" href="/favicon.svg?v={{ time() }}" type="image/svg+xml">
 
     {{-- External Resources --}}
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    {{-- Custom Styles --}}
+        {{-- Custom Styles --}}
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-spin-slow {
+            animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes pulse-ripple {
+            0%, 100% { opacity: 0.02; }
+            50% { opacity: 0.12; }
+        }
+
+        .animate-ripple {
+            animation: pulse-ripple 3s ease-in-out infinite;
+        }
+
+        .reveal {
+            opacity: 0 !important;
+            transform: translateY(40px) !important;
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backface-visibility: hidden;
+        }
+
+        .reveal-down {
+            opacity: 0 !important;
+            transform: translateY(-40px) !important;
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backface-visibility: hidden;
+        }
+
+        .reveal-left {
+            opacity: 0 !important;
+            transform: translateX(-50px) !important;
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backface-visibility: hidden;
+        }
+
+        .reveal-right {
+            opacity: 0 !important;
+            transform: translateX(50px) !important;
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backface-visibility: hidden;
+        }
+
+        .reveal.reveal-active, .reveal-down.reveal-active, .reveal-left.reveal-active, .reveal-right.reveal-active {
+            opacity: 1 !important;
+            transform: translate3d(0, 0, 0) !important;
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .delay-300 { transition-delay: 300ms; }
+        .delay-500 { transition-delay: 500ms; }
+        .delay-600 { transition-delay: 600ms; }
+        .delay-700 { transition-delay: 700ms; }
+        .delay-900 { transition-delay: 900ms; }
+        .delay-1000 { transition-delay: 1000ms; }
+        .delay-1200 { transition-delay: 1200ms; }
+        .delay-1500 { transition-delay: 1500ms; }
+
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        /* ==============================
+           GLOBAL SETTINGS
+           ============================= */
+        * {
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* ==============================
+           GRADIENT TITLE
+           ============================= */
+        .gradient-title {
+            background: linear-gradient(135deg, #ffffff, #f0f0f0, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ==============================
+           RESPONSIVE IMPROVEMENTS
+           ============================= */
+        @media (max-width: 768px) {
+            .hero-height {
+                height: 450px !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-height {
+                height: 400px !important;
+            }
+        }
+    </style>
     @include('partials.navbar-styles')
 </head>
 
@@ -34,46 +160,46 @@
                  class="absolute inset-0 w-full h-full object-cover object-center" style="z-index: 1;">
             
             <!-- Layer 2: Dark Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40" style="z-index: 2;"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/70" style="z-index: 2;"></div>
             
             <!-- Layer 3: Circular White Textures (Desktop) -->
-            <div class="absolute top-1/2 left-[5%] -translate-y-1/2 w-0 h-0 hidden md:block" style="z-index: 3; pointer-events: none;">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[800px] md:h-[800px] bg-white rounded-full" style="opacity: 0.08;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] md:w-[650px] md:h-[650px] bg-white rounded-full" style="opacity: 0.06;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-white rounded-full" style="opacity: 0.04;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[350px] md:h-[350px] bg-white rounded-full" style="opacity: 0.02;"></div>
+            <div class="absolute top-0 left-0 w-0 h-0 hidden md:block" style="z-index: 3; pointer-events: none;">
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[800px] md:h-[800px] bg-white rounded-full" style="opacity: 0.08;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] md:w-[650px] md:h-[650px] bg-white rounded-full" style="opacity: 0.06; animation-delay: 0.4s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 0.8s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[350px] md:h-[350px] bg-white rounded-full" style="opacity: 0.02; animation-delay: 1.2s;"></div>
             </div>
             <div class="absolute bottom-0 right-0 w-[1px] h-[1px] hidden md:block" style="z-index: 3; pointer-events: none;">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-white rounded-full" style="opacity: 0.08;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[400px] md:h-[400px] bg-white rounded-full" style="opacity: 0.06;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-white rounded-full" style="opacity: 0.04;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] md:w-[200px] md:h-[200px] bg-white rounded-full" style="opacity: 0.02;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-white rounded-full" style="opacity: 0.08; animation-delay: 0.2s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[400px] md:h-[400px] bg-white rounded-full" style="opacity: 0.06; animation-delay: 0.6s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 1.0s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] md:w-[200px] md:h-[200px] bg-white rounded-full" style="opacity: 0.02; animation-delay: 1.4s;"></div>
             </div>
 
             <!-- Layer 3: Circular White Textures (Mobile) -->
-            <div class="absolute top-[12%] left-[1%] w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-white rounded-full" style="opacity: 0.06;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] bg-white rounded-full" style="opacity: 0.05;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] bg-white rounded-full" style="opacity: 0.04;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] bg-white rounded-full" style="opacity: 0.03;"></div>
+            <div class="absolute top-0 left-0 w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-white rounded-full" style="opacity: 0.06;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] bg-white rounded-full" style="opacity: 0.05; animation-delay: 0.4s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 0.8s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] bg-white rounded-full" style="opacity: 0.03; animation-delay: 1.2s;"></div>
             </div>
-            <div class="absolute bottom-[10%] right-[5%] w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-white rounded-full" style="opacity: 0.05;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[140px] bg-white rounded-full" style="opacity: 0.04;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90px] h-[90px] bg-white rounded-full" style="opacity: 0.03;"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] bg-white rounded-full" style="opacity: 0.02;"></div>
+            <div class="absolute bottom-0 right-0 w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-white rounded-full" style="opacity: 0.05; animation-delay: 0.2s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[140px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 0.6s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90px] h-[90px] bg-white rounded-full" style="opacity: 0.03; animation-delay: 1.0s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] bg-white rounded-full" style="opacity: 0.02; animation-delay: 1.4s;"></div>
             </div>
 
             <!-- Layer 4: Grain Texture -->
             <div class="absolute inset-0 opacity-[0.04]" style="z-index: 4; pointer-events: none; background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
 
             <!-- Layer 5: Content -->
-            <div class="relative max-w-3xl px-4 md:px-6 text-white text-center mt-28 md:mt-40" style="z-index: 5;">
-                <h1 class="hero-title text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-lg px-2 whitespace-nowrap">
-                    <span class="gradient-title">Profil UISI Pusat Layanan</span>
+            <div class="relative max-w-3xl px-4 md:px-6 text-white text-center mt-32 md:mt-52 animate-fadeIn" style="z-index: 5;">
+                <h1 class="reveal-down delay-300 text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight px-2">
+                    Profil UISI Pusat Layanan
                 </h1>
-                <div class="w-32 md:w-44 h-[1.5px] mx-auto mt-2 md:mt-3 bg-gradient-to-r from-transparent via-white to-transparent"></div>
-                <p class="hero-text text-white/90 mt-4 md:mt-4 text-[5px] text-center md:text-base lg:text-lg leading-tight max-w-2xl mx-auto px-6 md:px-0 drop-shadow-md">
+                <div class="reveal-down delay-500 w-32 md:w-44 h-[1.5px] mx-auto mt-2 md:mt-3 bg-gradient-to-r from-transparent via-white to-transparent"></div>
+                <p class="reveal-down delay-700 hero-text text-white/90 mt-3 text-sm md:text-lg leading-relaxed max-w-[260px] sm:max-w-2xl mx-auto px-4 md:px-0 font-normal drop-shadow-md">
                     Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.
                 </p>
             </div>
@@ -86,12 +212,12 @@ VISI & MISI SECTION
 <section class="relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%); padding: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 6vw, 3rem);">
     <!-- Circular White Textures -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1400px] md:h-[1400px] bg-white rounded-full" style="opacity: 0.02;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[680px] md:w-[1200px] md:h-[1200px] bg-white rounded-full" style="opacity: 0.03;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] md:w-[1000px] md:h-[1000px] bg-white rounded-full" style="opacity: 0.04;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] md:w-[800px] md:h-[800px] bg-white rounded-full" style="opacity: 0.05;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] md:w-[600px] md:h-[600px] bg-white rounded-full" style="opacity: 0.06;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-white rounded-full" style="opacity: 0.07;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1400px] md:h-[1400px] bg-white rounded-full" style="opacity: 0.08; animation-delay: 2.0s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[680px] md:w-[1200px] md:h-[1200px] bg-white rounded-full" style="opacity: 0.06; animation-delay: 1.6s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] md:w-[1000px] md:h-[1000px] bg-white rounded-full" style="opacity: 0.05; animation-delay: 1.2s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] md:w-[800px] md:h-[800px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 0.8s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] md:w-[600px] md:h-[600px] bg-white rounded-full" style="opacity: 0.03; animation-delay: 0.4s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-white rounded-full" style="opacity: 0.02; animation-delay: 0s;"></div>
         </div>
     
     <!-- Grain Texture -->
@@ -100,23 +226,23 @@ VISI & MISI SECTION
     <div class="relative z-10 max-w-6xl mx-auto">
         <!-- Visi Section -->
         <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+            <h2 class="reveal-down text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg">
                 Visi
             </h2>
-            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-4">
+            <p class="reveal delay-300 text-white/90 text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-4">
                 Lorem ipsum dolor sit amet consectetur. Elit viverra felis nulla blandit. Magnis est sit porttitor aliquet porttitor sagittis egestas aliquet.
             </p>
         </div>
 
         <!-- Misi Section -->
         <div class="mb-12">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-10 text-center drop-shadow-lg">
+            <h2 class="reveal-down delay-600 text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-10 text-center drop-shadow-lg">
                 Misi
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
             <!-- Misi Card 1 -->
-                <div class="bg-white p-6 md:p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300 max-w-[320px] md:max-w-none mx-auto w-full" 
+                <div class="reveal delay-900 bg-white p-6 md:p-8 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full" 
                     style="border-radius: 20px 0 20px 0; border: 1px solid #FF0700; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed text-center">
                         Lorem ipsum dolor sit amet consectetur. Elit viverra felis nulla blandit.
@@ -124,7 +250,7 @@ VISI & MISI SECTION
                 </div>
 
                 <!-- Misi Card 2 -->
-                <div class="bg-white p-6 md:p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300 max-w-[320px] md:max-w-none mx-auto w-full" 
+                <div class="reveal delay-1000 bg-white p-6 md:p-8 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full" 
                     style="border-radius: 20px 0 20px 0; border: 1px solid #FF0700; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed text-center">
                         Lorem ipsum dolor sit amet consectetur. Elit viverra felis nulla blandit.
@@ -132,7 +258,7 @@ VISI & MISI SECTION
                 </div>
 
                 <!-- Misi Card 3 -->
-                <div class="bg-white p-6 md:p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300 max-w-[320px] md:max-w-none mx-auto w-full" 
+                <div class="reveal delay-1200 bg-white p-6 md:p-8 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full" 
                     style="border-radius: 20px 0 20px 0; border: 1px solid #FF0700; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed text-center">
                         Lorem ipsum dolor sit amet consectetur. Elit viverra felis nulla blandit.
@@ -147,13 +273,13 @@ LAYANAN KAMI SECTION
 ============================== -->
 <section class="bg-white" style="padding: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 6vw, 3rem);">
     <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#C3110C] mb-12 text-center">Layanan Kami</h2>
+        <h2 class="reveal-down text-3xl md:text-4xl font-bold text-[#C3110C] mb-12 text-center">Layanan Kami</h2>
         
         <div class="grid lg:grid-cols-2 gap-8 items-center">
             <!-- Left: Service Cards -->
             <div class="space-y-6 order-2 lg:order-1">
                 <!-- Card 1: Pusat Unit Pelatihan -->
-                <a href="{{ url('program1?unit=Pelatihan') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                <a href="{{ url('program1?unit=Pelatihan') }}" class="reveal-left delay-300 block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
                     <div class="flex flex-col lg:flex-row items-center lg:items-center text-center lg:text-left gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
                         <div class="flex-shrink-0 w-16 h-16 lg:mx-0 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300" style="border-radius: 12px 0 12px 0;">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,7 +297,7 @@ LAYANAN KAMI SECTION
                 </a>
 
                 <!-- Card 2: Pusat Unit Sertifikasi -->
-                <a href="{{ url('program1?unit=Sertifikasi') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                <a href="{{ url('program1?unit=Sertifikasi') }}" class="reveal-left delay-500 block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
                     <div class="flex flex-col lg:flex-row items-center lg:items-center text-center lg:text-left gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
                         <div class="flex-shrink-0 w-16 h-16 lg:mx-0 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300" style="border-radius: 12px 0 12px 0;">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,7 +314,7 @@ LAYANAN KAMI SECTION
                 </a>
 
                 <!-- Card 3: Pusat Unit Bahasa -->
-                <a href="{{ url('program1?unit=Bahasa') }}" class="block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                <a href="{{ url('program1?unit=Bahasa') }}" class="reveal-left delay-700 block group transform hover:-translate-y-1 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
                     <div class="flex flex-col lg:flex-row items-center lg:items-center text-center lg:text-left gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 w-full" style="border-radius: 20px 0 20px 0; border: 2px solid transparent; background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FFFFFF 0%, #DFDFDF 100%) border-box;">
                         <div class="flex-shrink-0 w-16 h-16 lg:mx-0 bg-gradient-to-br from-[#740A03] to-[#C3110C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300" style="border-radius: 12px 0 12px 0;">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -207,7 +333,7 @@ LAYANAN KAMI SECTION
 
             <!-- Right: Images -->
             {{-- SESUDAH --}}
-            <div class="relative h-full min-h-[280px] lg:min-h-[400px] flex items-center justify-center order-1 lg:order-2">
+            <div class="reveal-right delay-400 relative h-full min-h-[280px] lg:min-h-[400px] flex items-center justify-center order-1 lg:order-2">
                 <div class="relative w-full max-w-[300px] lg:max-w-none h-[300px] lg:h-[380px] mx-auto lg:mx-0">
                     <!-- Image 1 (Top Left-ish on mobile, Top Right on desktop) -->
                     <div class="absolute top-4 left-0 lg:left-auto lg:right-0 lg:top-0 w-[75%] lg:w-[70%] h-[55%] lg:h-[50%] transform -rotate-3 lg:rotate-2 hover:rotate-0 transition-transform duration-300 z-10" style="border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.15); border: 4px solid #FFFFFF;">
@@ -233,26 +359,26 @@ KALENDER KEGIATAN SECTION
 <section class="relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%); padding: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 6vw, 3rem);">
     <!-- Circular White Textures - 6 Lingkaran Full -->
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[700px] md:h-[700px] bg-white rounded-full" style="opacity: 0.02;"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[850px] md:h-[850px] bg-white rounded-full" style="opacity: 0.025;"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[1000px] md:h-[1000px] bg-white rounded-full" style="opacity: 0.03;"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[1150px] md:h-[1150px] bg-white rounded-full" style="opacity: 0.035;"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1300px] md:h-[1300px] bg-white rounded-full" style="opacity: 0.04;"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] md:w-[1450px] md:h-[1450px] bg-white rounded-full" style="opacity: 0.045;"></div>
+    <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[700px] md:h-[700px] bg-white rounded-full" style="opacity: 0.02; animation-delay: 0s;"></div>
+    <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[850px] md:h-[850px] bg-white rounded-full" style="opacity: 0.03; animation-delay: 0.4s;"></div>
+    <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[1000px] md:h-[1000px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 0.8s;"></div>
+    <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[1150px] md:h-[1150px] bg-white rounded-full" style="opacity: 0.05; animation-delay: 1.2s;"></div>
+    <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1300px] md:h-[1300px] bg-white rounded-full" style="opacity: 0.06; animation-delay: 1.6s;"></div>
+    <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] md:w-[1450px] md:h-[1450px] bg-white rounded-full" style="opacity: 0.08; animation-delay: 2.0s;"></div>
 </div>
     
     <!-- Grain Texture -->
     <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
     
     <div class="relative z-10 max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+        <h2 class="reveal-down text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg">
             Kalender Kegiatan
         </h2>
-        <p class="text-white/90 text-base md:text-lg mb-10 leading-relaxed px-4">
+        <p class="reveal delay-300 text-white/90 text-base md:text-lg mb-10 leading-relaxed px-4">
             Lorem ipsum dolor sit amet consectetur. Elit viverra felis nulla blandit.
         </p>
         <a href="{{ url('/kalender-program') }}" 
-           class="inline-block bg-white text-[#C3110C] px-10 py-4 rounded-xl font-semibold text-base md:text-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+           class="reveal-down delay-500 inline-block bg-white text-[#C3110C] px-10 py-4 rounded-xl font-semibold text-base md:text-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
            style="border-radius: 15px 0 15px 0;">
             Kalender Kegiatan
         </a>
@@ -274,7 +400,7 @@ FOOTER SECTION
               <div class="space-y-8">
                   <!-- Logo UISI -->
                   <div class="flex items-center justify-center lg:justify-start">
-                      <img src="https://materi.uisi.ac.id/img/logo.png" alt="UISI Logo" class="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain">
+                      <img src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
                   </div>
                   
                   <!-- Map -->
@@ -387,3 +513,22 @@ FOOTER SECTION
          JAVASCRIPT
          ============================== -->
     @include('partials.navbar-scripts')
+
+    <script>
+        // Reveal animation on scroll
+        const reveal = () => {
+            const reveals = document.querySelectorAll('.reveal, .reveal-down, .reveal-left, .reveal-right');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('reveal-active');
+                }
+            });
+        };
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('load', reveal);
+        // Initial check
+        setTimeout(reveal, 100);
+    </script>

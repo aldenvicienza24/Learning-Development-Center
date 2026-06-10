@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>International Program - UISI Pusat Layanan</title>
+    <link rel="icon" href="/favicon.svg?v={{ time() }}" type="image/svg+xml">
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
 <!-- Google Fonts -->
@@ -13,6 +14,72 @@
 <style>
 * { font-family: "Inter", sans-serif; }
 body { overflow-x: hidden; }
+
+/* ==============================
+   SCROLL REVEAL ANIMATIONS
+   ============================== */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+@keyframes pulse-ripple {
+    0%, 100% { opacity: 0.02; }
+    50% { opacity: 0.12; }
+}
+.animate-ripple {
+    animation: pulse-ripple 3s ease-in-out infinite;
+}
+.reveal {
+    opacity: 0 !important;
+    transform: translateY(40px) !important;
+    transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    backface-visibility: hidden;
+}
+.reveal-down {
+    opacity: 0 !important;
+    transform: translateY(-40px) !important;
+    transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    backface-visibility: hidden;
+}
+.reveal-left {
+    opacity: 0 !important;
+    transform: translateX(-50px) !important;
+    transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    backface-visibility: hidden;
+}
+.reveal-right {
+    opacity: 0 !important;
+    transform: translateX(50px) !important;
+    transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    backface-visibility: hidden;
+}
+.reveal.reveal-active, .reveal-down.reveal-active, .reveal-left.reveal-active, .reveal-right.reveal-active {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+}
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+.delay-300 { transition-delay: 300ms !important; }
+.delay-500 { transition-delay: 500ms !important; }
+.delay-600 { transition-delay: 600ms !important; }
+.delay-700 { transition-delay: 700ms !important; }
+.delay-900 { transition-delay: 900ms !important; }
+.delay-1000 { transition-delay: 1000ms !important; }
+.delay-1200 { transition-delay: 1200ms !important; }
+.delay-1500 { transition-delay: 1500ms !important; }
+.hover-lift {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hover-lift:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
 /* --- Horizontal Slider --- */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -172,19 +239,19 @@ position: relative; display: inline-block; margin-bottom: 24px;
         <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
         <!-- Circular White Textures - 6 Lingkaran Full -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[700px] md:h-[700px] bg-white rounded-full" style="opacity: 0.02;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[350px] md:h-[350px] bg-white rounded-full" style="opacity: 0.025;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[1000px] md:h-[1000px] bg-white rounded-full" style="opacity: 0.03;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[1150px] md:h-[1150px] bg-white rounded-full" style="opacity: 0.035;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1300px] md:h-[1300px] bg-white rounded-full" style="opacity: 0.04;"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] md:w-[1450px] md:h-[1450px] bg-white rounded-full" style="opacity: 0.045;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[700px] md:h-[700px] bg-white rounded-full" style="opacity: 0.02;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[350px] md:h-[350px] bg-white rounded-full" style="opacity: 0.025; animation-delay: 0.4s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[1000px] md:h-[1000px] bg-white rounded-full" style="opacity: 0.03; animation-delay: 0.8s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[1150px] md:h-[1150px] bg-white rounded-full" style="opacity: 0.035; animation-delay: 1.2s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1300px] md:h-[1300px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 1.6s;"></div>
+            <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] md:w-[1450px] md:h-[1450px] bg-white rounded-full" style="opacity: 0.045; animation-delay: 2.0s;"></div>
         </div>
         <div class="relative z-10 max-w-4xl mx-auto text-center">
-            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">Jadwal Pendaftaran</h1>
-            <p class="text-white/90 text-sm md:text-base max-w-2xl mx-auto mb-10">Rencanakan dan temukan jadwal pendaftaran sesuai dengan agenda mu</p>
+            <h1 class="reveal-down delay-300 text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">Jadwal Pendaftaran</h1>
+            <p class="reveal-down delay-500 text-white/90 text-sm md:text-base max-w-2xl mx-auto mb-10">Rencanakan dan temukan jadwal pendaftaran sesuai dengan agenda mu</p>
 
             <!-- Filter Bulan & Tanggal -->
-            <div class="relative w-full max-w-sm mx-auto px-6">
+            <div class="reveal-down delay-700 relative w-full max-w-sm mx-auto px-6">
                 <div class="flex flex-row gap-3 items-center">
                     <!-- Month Filter -->
                     <div class="w-1/2">
@@ -271,7 +338,7 @@ position: relative; display: inline-block; margin-bottom: 24px;
 <!-- Content -->
 <div class="px-4 md:px-8 py-10 max-w-7xl mx-auto">
 <!-- Search & Filter Bar -->
-<div class="flex flex-row gap-4 mb-10">
+<div class="reveal delay-300 flex flex-row gap-4 mb-10">
 <div class="flex-1 relative">
 <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -279,7 +346,7 @@ position: relative; display: inline-block; margin-bottom: 24px;
 <input type="text" id="searchInput" placeholder="Search programs..."
 class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent">
 </div>
-<div class="relative">
+<div class="reveal-right delay-500 relative">
 <button id="unitFilterBtn" class="w-full md:w-auto px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-xl font-semibold text-gray-700 transition flex items-center justify-center gap-2">
 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
@@ -318,7 +385,7 @@ Reset Filter
 
 <!-- Section: Professional Training -->
 <section class="mb-12" data-section="pelatihan">
-    <h2 class="text-3xl font-bold text-gray-800 section-title pl-2.5">Professional Training</h2>
+    <h2 class="reveal-left text-3xl font-bold text-gray-800 section-title pl-2.5">Professional Training</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-6 program-grid">
         <!-- Card 1 -->
         <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full"
@@ -343,8 +410,7 @@ Reset Filter
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div class="px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#C3110C] animate-pulse"></span>
+                    <div class="kuota-badge px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
                         <span class="sisa-kuota-text">Sisa: <span class="kuota-number">22</span></span>
                     </div>
                     <a href="detaila" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
@@ -365,11 +431,13 @@ Reset Filter
 </section>
 
 <!-- Program Segera Terbuka -->
-<section class="pt-12 border-t border-gray-200 mt-12" data-section="segera">
-<h2 class="text-3xl font-bold text-center text-[#C3110C] mb-10">Program Segera Terbuka</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 pb-6 program-grid">
-    <!-- Card 1: Pelatihan -->
-    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-6 flex flex-col"
+<section class="pt-16 pb-8 border-t border-gray-200 mt-16" data-section="segera">
+<div class="max-w-7xl mx-auto px-4 md:px-8">
+    <h2 class="reveal text-3xl font-bold text-center text-[#C3110C] mb-12">Program Segera Terbuka</h2>
+    <div class="relative w-full group">
+        <div class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-6 pb-6 pt-2 slider-container program-slider">
+            <!-- Card 1: Pelatihan -->
+            <div class="reveal delay-300 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] flex-none snap-start program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:border-red-200 hover:shadow-xl transition-all duration-300 p-8 flex flex-col"
         data-category="Pelatihan" data-unit="Technology & Creative" data-title="Data Analysis for Business">
         <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-100 transition-colors mx-auto">
             <svg class="w-7 h-7 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -379,13 +447,12 @@ Reset Filter
         <h4 class="text-xl font-bold text-gray-900 mb-2 leading-tight text-center">Data Analysis for Business</h4>
         <p class="text-gray-500 text-sm mb-8 flex-grow italic text-center">Technology & Creative · Workshop</p>
         <div class="inline-flex items-center gap-2 px-4 py-3 bg-gray-50 text-gray-400 rounded-xl text-xs font-bold w-full justify-center border border-gray-100">
-            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 animate-pulse"></div>
             COMING SOON
         </div>
     </div>
 
     <!-- Card 2: Sertifikasi -->
-    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-6 flex flex-col"
+    <div class="reveal delay-500 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] flex-none snap-start program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:border-red-200 hover:shadow-xl transition-all duration-300 p-8 flex flex-col"
         data-category="Sertifikasi" data-unit="Business & Leadership" data-title="Strategic HR Management">
         <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-100 transition-colors mx-auto">
             <svg class="w-7 h-7 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -395,13 +462,12 @@ Reset Filter
         <h4 class="text-xl font-bold text-gray-900 mb-2 leading-tight text-center">Strategic HR Management</h4>
         <p class="text-gray-500 text-sm mb-8 flex-grow italic text-center">Business & Leadership · Certification</p>
         <div class="inline-flex items-center gap-2 px-4 py-3 bg-gray-50 text-gray-400 rounded-xl text-xs font-bold w-full justify-center border border-gray-100">
-            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 animate-pulse"></div>
             COMING SOON
         </div>
     </div>
 
     <!-- Card 3: Bahasa -->
-    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-6 flex flex-col"
+    <div class="reveal delay-700 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] flex-none snap-start program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:border-red-200 hover:shadow-xl transition-all duration-300 p-8 flex flex-col"
         data-category="Bahasa" data-unit="Global Programs" data-title="International Business Law">
         <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-100 transition-colors mx-auto">
             <svg class="w-7 h-7 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -411,13 +477,12 @@ Reset Filter
         <h4 class="text-xl font-bold text-gray-900 mb-2 leading-tight text-center">International Business Law</h4>
         <p class="text-gray-500 text-sm mb-8 flex-grow italic text-center">Global Programs · Executive</p>
         <div class="inline-flex items-center gap-2 px-4 py-3 bg-gray-50 text-gray-400 rounded-xl text-xs font-bold w-full justify-center border border-gray-100">
-            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 animate-pulse"></div>
             COMING SOON
         </div>
     </div>
 
     <!-- Card 4: Pelatihan -->
-    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-6 flex flex-col"
+    <div class="reveal delay-900 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] flex-none snap-start program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:border-red-200 hover:shadow-xl transition-all duration-300 p-8 flex flex-col"
         data-category="Pelatihan" data-unit="Language & Business" data-title="Cross-Cultural Communication">
         <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-100 transition-colors mx-auto">
             <svg class="w-7 h-7 text-[#C3110C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -427,21 +492,11 @@ Reset Filter
         <h4 class="text-xl font-bold text-gray-900 mb-2 leading-tight text-center">Cross-Cultural Communication</h4>
         <p class="text-gray-500 text-sm mb-8 flex-grow italic text-center">Language & Business · Leadership</p>
         <div class="inline-flex items-center gap-2 px-4 py-3 bg-gray-50 text-gray-400 rounded-xl text-xs font-bold w-full justify-center border border-gray-100">
-            <div class="w-1.5 h-1.5 rounded-full bg-gray-300 animate-pulse"></div>
             COMING SOON
         </div>
     </div>
-</div>
-
-<!-- View All Button -->
-<div class="flex justify-end mt-4 view-all-container hidden">
-    <button class="view-all-btn px-4 py-1.5 border-2 border-[#C3110C] text-[#C3110C] text-xs font-semibold rounded-lg hover:bg-[#C3110C] hover:text-white transition-all transform active:scale-95 flex items-center gap-1.5">
-        <span>Lihat Semua</span>
-        <svg class="w-3.5 h-3.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-        </svg>
-    </button>
-</div>
+        </div>
+    </div>
 </div>
 </section>
 
@@ -455,7 +510,7 @@ Reset Filter
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 <div class="space-y-8">
 <div class="flex items-center justify-center lg:justify-start">
-<img src="https://materi.uisi.ac.id/img/logo.png" alt="UISI Logo" class="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain">
+<img src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
 </div>
 <div class="rounded-xl overflow-hidden shadow-lg border-2 border-white/20" style="border-radius: 10px;">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.1234567890123!2d112.12345678901234!3d-7.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMDcnMjQuNCJTIDExMsKwMDcnMjQuNCJF!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -767,11 +822,17 @@ generateCalendar();
 filterPrograms();
 });
 </script>
-@include('partials.navbar-scripts')    <!-- Quota Sync Script -->
+@include('partials.navbar-scripts')
+    <!-- Quota Sync Script -->
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const initialQuotas = { 
                 '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15, '7': 15,
                 'a': 22, 'b': 25, 'c': 22, 'd': 22, 'e': 35, 'f': 15 
+            };
+            const maxQuotas = {
+                '1': 30, '2': 30, '3': 30, '4': 30, '5': 40, '6': 20, '7': 20,
+                'a': 30, 'b': 30
             };
             let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
             
@@ -785,8 +846,35 @@ filterPrograms();
             document.querySelectorAll('.program-card').forEach(card => {
                 const id = card.dataset.id;
                 if (id && quotas[id] !== undefined) {
+                    const q = quotas[id];
+                    const maxQ = maxQuotas[id] || 30;
+                    const ratio = q / maxQ;
+                    
                     const numberSpan = card.querySelector('.kuota-number');
-                    if (numberSpan) numberSpan.innerText = quotas[id];
+                    if (numberSpan) {
+                        numberSpan.innerText = q;
+                        
+                        const badge = numberSpan.closest('.kuota-badge');
+                        if (badge) {
+                            badge.classList.remove(
+                                'bg-red-50', 'text-[#C3110C]', 'border-red-100',
+                                'text-red-700',
+                                'bg-yellow-50', 'text-yellow-700', 'border-yellow-100',
+                                'bg-green-50', 'text-green-700', 'border-green-100',
+                                'bg-slate-50', 'text-slate-700', 'border-slate-100'
+                            );
+                            
+                            if (q === 0) {
+                                badge.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-100');
+                            } else if (ratio <= 0.25) {
+                                badge.classList.add('bg-red-50', 'text-[#C3110C]', 'border-red-100');
+                            } else if (ratio <= 0.50) {
+                                badge.classList.add('bg-yellow-50', 'text-yellow-700', 'border-yellow-100');
+                            } else {
+                                badge.classList.add('bg-green-50', 'text-green-700', 'border-green-100');
+                            }
+                        }
+                    }
                 }
             });
 
@@ -807,55 +895,105 @@ filterPrograms();
                 const container = section.querySelector('.view-all-container');
                 const btn = section.querySelector('.view-all-btn');
                 
-                if (cards.length > 2) {
+                if (cards.length > 2 && section.dataset.section !== 'segera') {
                     // Show the button container
-                    container.classList.remove('hidden');
+                    if(container) container.classList.remove('hidden');
                     
                     // Initially hide cards beyond index 1 (the first 2)
                     cards.forEach((card, index) => {
                         if (index >= 2) {
                             card.classList.add('hidden', 'opacity-0', 'transform', 'translate-y-4');
+                            card.classList.remove('reveal', 'reveal-active'); // Prevent scroll reveal from interfering
                             card.style.transition = 'all 0.5s ease';
                         }
                     });
 
-                    btn.addEventListener('click', function() {
-                        const isExpanded = btn.getAttribute('data-expanded') === 'true';
-                        const btnText = btn.querySelector('span');
-                        const btnIcon = btn.querySelector('svg');
+                    if(btn) {
+                        btn.addEventListener('click', function() {
+                            const isExpanded = btn.getAttribute('data-expanded') === 'true';
+                            const btnText = btn.querySelector('span');
+                            const btnIcon = btn.querySelector('svg');
 
-                        if (!isExpanded) {
-                            // Expand
-                            cards.forEach((card, index) => {
-                                if (index >= 2) {
-                                    card.classList.remove('hidden');
-                                    // Small delay for animation
-                                    setTimeout(() => {
-                                        card.classList.remove('opacity-0', 'translate-y-4');
-                                    }, 10 * (index - 2));
-                                }
-                            });
-                            btnText.textContent = 'Sembunyikan';
-                            btnIcon.classList.add('rotate-180');
-                            btn.setAttribute('data-expanded', 'true');
-                        } else {
-                            // Collapse
-                            cards.forEach((card, index) => {
-                                if (index >= 2) {
-                                    card.classList.add('opacity-0', 'translate-y-4');
-                                    setTimeout(() => {
-                                        card.classList.add('hidden');
-                                    }, 500);
-                                }
-                            });
-                            btnText.textContent = 'Lihat Semua';
-                            btnIcon.classList.remove('rotate-180');
-                            btn.setAttribute('data-expanded', 'false');
-                            
-                            // Scroll back to top of section
-                            section.scrollIntoView({ behavior: 'smooth' });
-                        }
+                            if (!isExpanded) {
+                                // Expand
+                                cards.forEach((card, index) => {
+                                    if (index >= 2) {
+                                        card.classList.remove('hidden');
+                                        // Use setTimeout to ensure display:block applies before animating
+                                        setTimeout(() => {
+                                            card.classList.remove('opacity-0', 'translate-y-4');
+                                        }, 50);
+                                    }
+                                });
+                                btnText.textContent = 'Sembunyikan';
+                                btnIcon.classList.add('rotate-180');
+                                btn.setAttribute('data-expanded', 'true');
+                            } else {
+                                // Collapse
+                                cards.forEach((card, index) => {
+                                    if (index >= 2) {
+                                        card.classList.add('opacity-0', 'translate-y-4');
+                                        setTimeout(() => {
+                                            card.classList.add('hidden');
+                                        }, 500);
+                                    }
+                                });
+                                btnText.textContent = 'Lihat Semua';
+                                btnIcon.classList.remove('rotate-180');
+                                btn.setAttribute('data-expanded', 'false');
+                                
+                                // Scroll back to top of section
+                                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+    
+    <!-- Reveal Animation on Scroll -->
+    <script>
+        const reveal = () => {
+            const reveals = document.querySelectorAll('.reveal, .reveal-down, .reveal-left, .reveal-right');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('reveal-active');
+                }
+            });
+        };
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('load', reveal);
+        // Initial check
+        setTimeout(reveal, 100);
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Slider Logic
+            document.querySelectorAll('.program-slider').forEach(slider => {
+                const container = slider.parentElement;
+                const prevBtn = container.querySelector('.prev-btn');
+                const nextBtn = container.querySelector('.next-btn');
+
+                if(prevBtn && nextBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        slider.scrollBy({ left: -320, behavior: 'smooth' });
                     });
+                    nextBtn.addEventListener('click', () => {
+                        slider.scrollBy({ left: 320, behavior: 'smooth' });
+                    });
+
+                    // Update button state on scroll
+                    slider.addEventListener('scroll', () => {
+                        prevBtn.disabled = slider.scrollLeft <= 0;
+                        nextBtn.disabled = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1;
+                    });
+                    
+                    // Initial state
+                    prevBtn.disabled = true;
                 }
             });
         });

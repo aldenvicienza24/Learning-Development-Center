@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendaftaran Program - UISI Pusat Layanan</title>
+    <link rel="icon" href="/favicon.svg?v={{ time() }}" type="image/svg+xml">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -402,7 +403,10 @@
             '3': { name: 'Sertifikasi Manajemen Proyek', category: 'Teknik & Industri - Sertifikasi', initialQuota: 22 },
             '4': { name: 'AutoCAD for Professional', category: 'Teknik & Industri - Sertifikasi', initialQuota: 22 },
             '5': { name: 'TOEFL Preparation Program', category: 'Unit Bahasa', initialQuota: 35 },
-            '6': { name: 'IELTS Intensive Coaching', category: 'Unit Bahasa', initialQuota: 15 }
+            '6': { name: 'IELTS Intensive Coaching', category: 'Unit Bahasa', initialQuota: 15 },
+            '7': { name: 'Digital Marketing Specialist', category: 'Teknologi Kreatif - Pelatihan', initialQuota: 15 },
+            'a': { name: 'Corporate Tax & Risk Management', category: 'Global Economics & Business - Pelatihan', initialQuota: 22 },
+            'b': { name: 'UI/UX Design Fundamental (Intl)', category: 'Creative Technology - Pelatihan', initialQuota: 25 }
         };
 
         // Initialize UI from URL

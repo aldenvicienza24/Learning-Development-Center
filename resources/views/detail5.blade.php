@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>TOEFL Preparation Program - UISI Pusat Layanan</title>
+    <link rel="icon" href="/favicon.svg?v={{ time() }}" type="image/svg+xml">
     
     {{-- External Resources --}}
     <script src="https://cdn.tailwindcss.com"></script>
@@ -144,7 +145,7 @@
                 <div class="space-y-6">
                     <!-- Logo UISI -->
                     <div class="flex items-center justify-center lg:justify-start">
-                        <img src="https://materi.uisi.ac.id/img/logo.png" alt="UISI Logo" class="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain">
+                        <img src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
                     </div>
                     
                     <!-- Map -->
@@ -251,18 +252,52 @@
     <!-- Quota Update Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const initialQuotas = { '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15 };
+            const initialQuotas = { 
+                '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15, '7': 15,
+                'a': 22, 'b': 25, 'c': 22, 'd': 22, 'e': 35, 'f': 15 
+            };
+            const maxQuotas = {
+                '1': 30, '2': 30, '3': 30, '4': 30, '5': 40, '6': 20, '7': 20,
+                'a': 30, 'b': 30
+            };
             let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
             
-            let q = quotas['5'] !== undefined ? quotas['5'] : initialQuotas['5'];
-            
+            // Sync initial quotas
+            Object.keys(initialQuotas).forEach(key => {
+                if (quotas[key] === undefined) quotas[key] = initialQuotas[key];
+            });
+            localStorage.setItem('uisi_quotas', JSON.stringify(quotas));
+
+            const pageId = '5';
+            const q = quotas[pageId];
+            const maxQ = maxQuotas[pageId] || 30;
+            const ratio = q / maxQ;
+
             // Find the quota element by looking for the text ' Kuota' or ' Quota'
-            const ps = document.querySelectorAll('p');
+            const ps = document.querySelectorAll('p, span');
             ps.forEach(p => {
-                if (/^\d+\s+(Kuota|Quota)$/i.test(p.innerText.trim())) {
-                    p.innerText = q + ' Kuota';
-                    p.classList.add('font-bold', 'text-red-600');
-                    p.classList.remove('text-gray-400', 'text-gray-500');
+                if (/^\d+\s+(Kuota|Quota)$/i.test(p.innerText.trim()) && !p.classList.contains('quota-detail-badge')) {
+                    p.innerHTML = q + ' Kuota';
+                    p.classList.add('font-bold', 'flex', 'items-center', 'gap-2');
+                    
+                    // Create and append badge
+                    const badge = document.createElement('span');
+                    badge.className = 'quota-detail-badge px-2 py-0.5 text-[10px] font-bold rounded-full border whitespace-nowrap';
+                    
+                    if (q === 0) {
+                        badge.innerText = 'Penuh';
+                        badge.className += ' bg-slate-50 text-slate-700 border-slate-100';
+                    } else if (ratio <= 0.25) {
+                        badge.innerText = 'Sisa Sedikit!';
+                        badge.className += ' bg-red-50 text-red-700 border-red-100';
+                    } else if (ratio <= 0.50) {
+                        badge.innerText = 'Terbatas';
+                        badge.className += ' bg-yellow-50 text-yellow-700 border-yellow-100';
+                    } else {
+                        badge.innerText = 'Tersedia';
+                        badge.className += ' bg-green-50 text-green-700 border-green-100';
+                    }
+                    p.appendChild(badge);
                 }
             });
         });

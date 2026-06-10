@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>UISI Pusat Layanan</title>
+    <link rel="icon" href="/favicon.svg?v={{ time() }}" type="image/svg+xml">
 
     {{-- External Resources --}}
     <script src="https://cdn.tailwindcss.com"></script>
@@ -89,14 +90,14 @@
             animation: float 4s ease-in-out infinite;
         }
 
-        .delay-300 { transition-delay: 300ms; }
-        .delay-500 { transition-delay: 500ms; }
-        .delay-600 { transition-delay: 600ms; }
-        .delay-700 { transition-delay: 700ms; }
-        .delay-900 { transition-delay: 900ms; }
-        .delay-1000 { transition-delay: 1000ms; }
-        .delay-1200 { transition-delay: 1200ms; }
-        .delay-1500 { transition-delay: 1500ms; }
+        .delay-300 { transition-delay: 300ms !important; }
+        .delay-500 { transition-delay: 500ms !important; }
+        .delay-600 { transition-delay: 600ms !important; }
+        .delay-700 { transition-delay: 700ms !important; }
+        .delay-900 { transition-delay: 900ms !important; }
+        .delay-1000 { transition-delay: 1000ms !important; }
+        .delay-1200 { transition-delay: 1200ms !important; }
+        .delay-1500 { transition-delay: 1500ms !important; }
 
         .hover-lift {
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -509,7 +510,20 @@
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-6 program-grid">
                     @foreach($programs->filter(fn($p) => strtolower($p->category) == 'pelatihan')->values() as $index => $program)
-                    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}">
+                    @php
+                        $pId = '';
+                        if ($program->detail_url == 'detail1') $pId = '1';
+                        elseif ($program->detail_url == 'detail2') $pId = '2';
+                        elseif ($program->detail_url == 'detail3') $pId = '3';
+                        elseif ($program->detail_url == 'detail4') $pId = '4';
+                        elseif ($program->detail_url == 'detail5') $pId = '5';
+                        elseif ($program->detail_url == 'detail6') {
+                            $pId = (strtolower($program->category) == 'pelatihan') ? '7' : '6';
+                        }
+                        elseif ($program->detail_url == 'detaila') $pId = 'a';
+                        elseif ($program->detail_url == 'detailb') $pId = 'b';
+                    @endphp
+                    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}" data-id="{{ $pId }}">
                         <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
                             <img src="{{ $program->image_url }}" 
                                  onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80';" 
@@ -549,8 +563,8 @@
                                         $badgeClasses = 'bg-green-50 text-green-700 border-green-100';
                                     }
                                 @endphp
-                                <div class="px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
-                                    <span>Sisa: {{ $quota }}</span>
+                                <div class="kuota-badge px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
+                                    <span>Sisa: <span class="kuota-number">{{ $quota }}</span></span>
                                 </div>
                                 <a href="{{ $program->detail_url }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                             </div>
@@ -582,7 +596,20 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-6 program-grid">
 
                     @foreach($programs->filter(fn($p) => strtolower($p->category) == 'sertifikasi')->values() as $index => $program)
-                    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}">
+                    @php
+                        $pId = '';
+                        if ($program->detail_url == 'detail1') $pId = '1';
+                        elseif ($program->detail_url == 'detail2') $pId = '2';
+                        elseif ($program->detail_url == 'detail3') $pId = '3';
+                        elseif ($program->detail_url == 'detail4') $pId = '4';
+                        elseif ($program->detail_url == 'detail5') $pId = '5';
+                        elseif ($program->detail_url == 'detail6') {
+                            $pId = (strtolower($program->category) == 'pelatihan') ? '7' : '6';
+                        }
+                        elseif ($program->detail_url == 'detaila') $pId = 'a';
+                        elseif ($program->detail_url == 'detailb') $pId = 'b';
+                    @endphp
+                    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}" data-id="{{ $pId }}">
                         <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
                             <img src="{{ $program->image_url }}" 
                                  onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80';" 
@@ -622,8 +649,8 @@
                                         $badgeClasses = 'bg-green-50 text-green-700 border-green-100';
                                     }
                                 @endphp
-                                <div class="px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
-                                    <span>Sisa: {{ $quota }}</span>
+                                <div class="kuota-badge px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
+                                    <span>Sisa: <span class="kuota-number">{{ $quota }}</span></span>
                                 </div>
                                 <a href="{{ $program->detail_url }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                             </div>
@@ -656,7 +683,20 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-6 program-grid">
 
                     @foreach($programs->filter(fn($p) => strtolower($p->category) == 'bahasa')->values() as $index => $program)
-                    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}">
+                    @php
+                        $pId = '';
+                        if ($program->detail_url == 'detail1') $pId = '1';
+                        elseif ($program->detail_url == 'detail2') $pId = '2';
+                        elseif ($program->detail_url == 'detail3') $pId = '3';
+                        elseif ($program->detail_url == 'detail4') $pId = '4';
+                        elseif ($program->detail_url == 'detail5') $pId = '5';
+                        elseif ($program->detail_url == 'detail6') {
+                            $pId = (strtolower($program->category) == 'pelatihan') ? '7' : '6';
+                        }
+                        elseif ($program->detail_url == 'detaila') $pId = 'a';
+                        elseif ($program->detail_url == 'detailb') $pId = 'b';
+                    @endphp
+                    <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}" data-id="{{ $pId }}">
                         <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
                             <img src="{{ str_contains(strtolower($program->title), 'toefl') ? 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800' : ($program->image_url ?: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800') }}" 
                                  onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1513258496099-48168024adb0?w=800';" 
@@ -696,8 +736,8 @@
                                         $badgeClasses = 'bg-green-50 text-green-700 border-green-100';
                                     }
                                 @endphp
-                                <div class="px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
-                                    <span>Sisa: {{ $quota }}</span>
+                                <div class="kuota-badge px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
+                                    <span>Sisa: <span class="kuota-number">{{ $quota }}</span></span>
                                 </div>
                                 <a href="{{ $program->detail_url }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                             </div>
@@ -824,8 +864,8 @@
                 <div class="space-y-6">
                     <!-- Logo UISI - Only Logo, Bigger Size -->
                     <div class="flex items-center justify-center lg:justify-start">
-                        <img src="https://materi.uisi.ac.id/img/logo.png" alt="UISI Logo"
-                            class="w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 object-contain">
+                        <img src="/images/LogoUISI.png" alt="UISI Logo"
+                            class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
                     </div>
 
                     <!-- Map -->
@@ -1048,7 +1088,62 @@
                 }
             });
         });
-        // Reveal animation on scroll
+         // Quota Sync Script
+         document.addEventListener('DOMContentLoaded', function() {
+             const initialQuotas = { 
+                 '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15, '7': 15,
+                 'a': 22, 'b': 25, 'c': 22, 'd': 22, 'e': 35, 'f': 15 
+             };
+             const maxQuotas = {
+                 '1': 30, '2': 30, '3': 30, '4': 30, '5': 40, '6': 20, '7': 20,
+                 'a': 30, 'b': 30
+             };
+             let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
+             
+             // Sync initial quotas
+             Object.keys(initialQuotas).forEach(key => {
+                 if (quotas[key] === undefined) quotas[key] = initialQuotas[key];
+             });
+             localStorage.setItem('uisi_quotas', JSON.stringify(quotas));
+
+             // Update UI
+             document.querySelectorAll('.program-card').forEach(card => {
+                 const id = card.dataset.id;
+                 if (id && quotas[id] !== undefined) {
+                     const q = quotas[id];
+                     const maxQ = maxQuotas[id] || 30;
+                     const ratio = q / maxQ;
+                     
+                     const numberSpan = card.querySelector('.kuota-number');
+                     if (numberSpan) {
+                         numberSpan.innerText = q;
+                         
+                         const badge = numberSpan.closest('.kuota-badge');
+                         if (badge) {
+                             badge.classList.remove(
+                                 'bg-red-50', 'text-[#C3110C]', 'border-red-100',
+                                 'text-red-700',
+                                 'bg-yellow-50', 'text-yellow-700', 'border-yellow-100',
+                                 'bg-green-50', 'text-green-700', 'border-green-100',
+                                 'bg-slate-50', 'text-slate-700', 'border-slate-100'
+                             );
+                             
+                             if (q === 0) {
+                                 badge.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-100');
+                             } else if (ratio <= 0.25) {
+                                 badge.classList.add('bg-red-50', 'text-[#C3110C]', 'border-red-100');
+                             } else if (ratio <= 0.50) {
+                                 badge.classList.add('bg-yellow-50', 'text-yellow-700', 'border-yellow-100');
+                             } else {
+                                 badge.classList.add('bg-green-50', 'text-green-700', 'border-green-100');
+                             }
+                         }
+                     }
+                 }
+             });
+         });
+
+         // Reveal animation on scroll
         const reveal = () => {
             const reveals = document.querySelectorAll('.reveal, .reveal-down, .reveal-left, .reveal-right');
             reveals.forEach(el => {
