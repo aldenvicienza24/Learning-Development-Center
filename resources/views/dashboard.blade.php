@@ -216,7 +216,7 @@
             class="relative hero-height h-[550px] md:h-[600px] rounded-3xl overflow-hidden flex flex-col items-center justify-center text-center">
 
             <!-- Layer 1: Background Image -->
-            <img src="{{ asset('images/hero-bg.jpg') }}" alt="UISI Campus"
+            <img data-ms-ignore="true" style="pointer-events: none;" src="{{ asset('images/hero-bg.jpg') }}" alt="UISI Campus"
                 class="absolute inset-0 w-full h-full object-cover object-center" style="z-index: 1;">
 
             <!-- Layer 2: Dark Overlay -->
@@ -525,7 +525,7 @@
                     @endphp
                     <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}" data-id="{{ $pId }}">
                         <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                            <img src="{{ $program->image_url }}" 
+                            <img data-ms-ignore="true" style="pointer-events: none;" src="{{ $program->image_url }}" 
                                  onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80';" 
                                  alt="{{ $program->title }}" 
                                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
@@ -611,7 +611,7 @@
                     @endphp
                     <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}" data-id="{{ $pId }}">
                         <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                            <img src="{{ $program->image_url }}" 
+                            <img data-ms-ignore="true" style="pointer-events: none;" src="{{ $program->image_url }}" 
                                  onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80';" 
                                  alt="{{ $program->title }}" 
                                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
@@ -698,7 +698,7 @@
                     @endphp
                     <div class="program-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 p-3 w-full {{ $index >= 2 ? 'hidden extra-card' : '' }}" data-id="{{ $pId }}">
                         <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                            <img src="{{ str_contains(strtolower($program->title), 'toefl') ? 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800' : ($program->image_url ?: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800') }}" 
+                            <img data-ms-ignore="true" style="pointer-events: none;" src="{{ str_contains(strtolower($program->title), 'toefl') ? 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800' : ($program->image_url ?: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800') }}" 
                                  onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1513258496099-48168024adb0?w=800';" 
                                  alt="{{ $program->title }}" 
                                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
@@ -858,14 +858,14 @@
             style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
 
         <div class="relative z-10 max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
 
                 <!-- Left Column: Logo & Map -->
-                <div class="space-y-6">
-                    <!-- Logo UISI - Only Logo, Bigger Size -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- Logo UISI -->
                     <div class="flex items-center justify-center lg:justify-start">
-                        <img src="/images/LogoUISI.png" alt="UISI Logo"
-                            class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
+                        <img data-ms-ignore="true" style="pointer-events: none;" src="/images/LogoUISI.png" alt="UISI Logo"
+                            class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain pointer-events-none select-none" data-pin-nopin="true" data-ms-ignore="true">
                     </div>
 
                     <!-- Map -->
@@ -880,20 +880,20 @@
                 </div>
 
                 <!-- Right Column: Contact Info & Social Media -->
-                <div class="space-y-8">
+                <div class="lg:col-span-7 space-y-8 lg:pl-8 flex flex-col justify-center">
                     <!-- Contact Information -->
                     <div>
                         <h4 class="text-white text-xl md:text-2xl font-bold mb-6">Informasi Kontak</h4>
 
-                        <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 hide-scrollbar slider-container">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <!-- Contact Person -->
                             <div class="space-y-1">
                                 <h5 class="text-white font-semibold text-sm md:text-base">Narahubung</h5>
-                                <p class="text-white/90 text-sm md:text-base">+628494655565165</p>
+                                <a href="https://wa.me/6285800695077" target="_blank" rel="noopener noreferrer" class="text-white/90 text-sm md:text-base hover:text-white hover:underline transition-all block">+62 858-0069-5077<br>(Rahastri Rengganis)</a>
                             </div>
 
                             <!-- Location -->
-                            <div class="space-y-1">
+                            <div class="space-y-1 sm:col-span-1">
                                 <h5 class="text-white font-semibold text-sm md:text-base">Lokasi</h5>
                                 <p class="text-white/90 text-sm md:text-base leading-relaxed">
                                     Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,

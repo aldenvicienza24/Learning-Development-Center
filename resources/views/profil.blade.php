@@ -156,7 +156,7 @@
         <div class="relative hero-height h-[550px] md:h-[600px] rounded-3xl overflow-hidden flex flex-col items-center justify-center text-center">
             
             <!-- Layer 1: Background Image -->
-            <img src="{{ asset('images/hero-bg.jpg') }}" alt="UISI Campus"
+            <img data-ms-ignore="true" style="pointer-events: none;" src="{{ asset('images/hero-bg.jpg') }}" alt="UISI Campus"
                  class="absolute inset-0 w-full h-full object-cover object-center" style="z-index: 1;">
             
             <!-- Layer 2: Dark Overlay -->
@@ -337,14 +337,14 @@ LAYANAN KAMI SECTION
                 <div class="relative w-full max-w-[300px] lg:max-w-none h-[300px] lg:h-[380px] mx-auto lg:mx-0">
                     <!-- Image 1 (Top Left-ish on mobile, Top Right on desktop) -->
                     <div class="absolute top-4 left-0 lg:left-auto lg:right-0 lg:top-0 w-[75%] lg:w-[70%] h-[55%] lg:h-[50%] transform -rotate-3 lg:rotate-2 hover:rotate-0 transition-transform duration-300 z-10" style="border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.15); border: 4px solid #FFFFFF;">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop" 
+                        <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop" 
                              alt="Training Session" 
                              class="w-full h-full object-cover">
                     </div>
                     
                     <!-- Image 2 (Bottom Right-ish) -->
                     <div class="absolute bottom-4 right-0 lg:bottom-0 lg:right-0 w-[75%] lg:w-[70%] h-[55%] lg:h-[50%] transform rotate-3 lg:-rotate-2 hover:rotate-0 transition-transform duration-300 z-0" style="border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.15); border: 4px solid #FFFFFF;">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" 
+                        <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" 
                              alt="Meeting Session" 
                              class="w-full h-full object-cover">
                     </div>
@@ -400,7 +400,7 @@ FOOTER SECTION
               <div class="space-y-8">
                   <!-- Logo UISI -->
                   <div class="flex items-center justify-center lg:justify-start">
-                      <img src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
+                      <img data-ms-ignore="true" style="pointer-events: none;" src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
                   </div>
                   
                   <!-- Map -->
@@ -428,7 +428,7 @@ FOOTER SECTION
                           <!-- Contact Person -->
                           <div class="space-y-2">
                               <h5 class="text-white/70 text-xs font-semibold uppercase tracking-wider">Narahubung</h5>
-                              <a href="tel:+628494655565165" class="text-white font-semibold text-base hover:text-white/80 transition block">
+                              <a href="tel:+62 858-0069-5077 (Rahastri Rengganis)" class="text-white font-semibold text-base hover:text-white/80 transition block">
                                   +62 849-4655-565165
                               </a>
                           </div>

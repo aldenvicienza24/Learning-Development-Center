@@ -213,12 +213,12 @@
             
             <div class="flex items-center gap-4">
                 <div class="flex -space-x-4">
-                    <img class="w-12 h-12 rounded-full border-2 border-red-800" src="https://i.pravatar.cc/100?img=1" alt="User">
-                    <img class="w-12 h-12 rounded-full border-2 border-red-800" src="https://i.pravatar.cc/100?img=2" alt="User">
-                    <img class="w-12 h-12 rounded-full border-2 border-red-800" src="https://i.pravatar.cc/100?img=3" alt="User">
+                    <img data-ms-ignore="true" style="pointer-events: none;" class="w-12 h-12 rounded-full border-2 border-red-800 object-cover" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80" alt="Mahasiswa">
+                    <img data-ms-ignore="true" style="pointer-events: none;" class="w-12 h-12 rounded-full border-2 border-red-800 object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="Pekerja">
+                    <img data-ms-ignore="true" style="pointer-events: none;" class="w-12 h-12 rounded-full border-2 border-red-800 object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Mahasiswa">
                 </div>
                 <div class="text-sm">
-                    <p class="font-bold">+5,000 Alumni</p>
+                    <p class="font-bold">+50 Anggota</p>
                     <p class="text-white/70">Telah bergabung</p>
                 </div>
             </div>
@@ -301,15 +301,15 @@
                     <div class="payment-card p-5 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center p-2">
-                                <img src="https://upload.wikimedia.org/wikipedia/id/thumb/f/fa/Bank_Mandiri_logo.svg/1200px-Bank_Mandiri_logo.svg.png" alt="Mandiri" class="w-full h-auto object-contain">
+                                <img data-ms-ignore="true" style="pointer-events: none;" src="{{ asset('images/LogoBSI.jpg') }}" alt="BSI" class="w-full h-auto object-contain">
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-gray-400 uppercase tracking-tight">Transfer ke Rekening</p>
-                                <p class="text-lg font-extrabold text-gray-900">142-00-1234567-8</p>
-                                <p class="text-sm font-medium text-gray-600">A.N. UISI Pusat Layanan</p>
+                                <p class="text-xs font-bold text-gray-400 uppercase tracking-tight">Transfer ke Rekening (BSI)</p>
+                                <p class="text-lg font-extrabold text-gray-900" id="rekNumber">7111889998</p>
+                                <p class="text-sm font-medium text-gray-600">A.N. Universitas Internasional Semen Indonesia</p>
                             </div>
                         </div>
-                        <button type="button" onclick="copyAccount()" class="text-xs font-bold text-red-600 bg-red-50 px-4 py-2 rounded-lg hover:bg-red-100 transition active:scale-95">
+                        <button type="button" onclick="copyAccount(this)" class="text-xs font-bold text-red-600 bg-red-50 px-4 py-2 rounded-lg hover:bg-red-100 transition active:scale-95">
                             Salin No. Rek
                         </button>
                     </div>
@@ -469,19 +469,39 @@
         }
 
         // Copy Account Number
-        function copyAccount() {
-            navigator.clipboard.writeText('1420012345678');
-            const btn = event.target;
-            const originalText = btn.innerText;
-            btn.innerText = 'Tersalin!';
-            btn.classList.replace('text-red-600', 'text-green-600');
-            btn.classList.replace('bg-red-50', 'bg-green-50');
-            
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.classList.replace('text-green-600', 'text-red-600');
-                btn.classList.replace('bg-green-50', 'bg-red-50');
-            }, 2000);
+        function copyAccount(btn) {
+            const rek = '7111889998';
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(rek);
+            } else {
+                let textArea = document.createElement("textarea");
+                textArea.value = rek;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                textArea.style.top = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                }
+                document.body.removeChild(textArea);
+            }
+
+            if(btn) {
+                const originalText = btn.innerText;
+                btn.innerText = 'Tersalin!';
+                btn.classList.replace('text-red-600', 'text-green-600');
+                btn.classList.replace('bg-red-50', 'bg-green-50');
+                
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.replace('text-green-600', 'text-red-600');
+                    btn.classList.replace('bg-green-50', 'bg-red-50');
+                }, 2000);
+            }
         }
 
         // Handle File Selection

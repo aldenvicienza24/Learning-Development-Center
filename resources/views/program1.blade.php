@@ -402,7 +402,7 @@ Reset Filter
         data-category="Pelatihan" data-unit="Ekonomi dan Bisnis" data-month="2"
         data-date-start="2025-02-12" data-date-end="2025-03-12"  data-id="1" data-title="Perpajakan & Asuransi">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Perpajakan & Asuransi" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Perpajakan & Asuransi" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">Perpajakan & Asuransi</h4>
@@ -433,7 +433,7 @@ Reset Filter
         data-category="Pelatihan" data-unit="Teknologi Kreatif" data-month="2"
         data-date-start="2025-02-13" data-date-end="2025-03-29"  data-id="2" data-title="UI/UX Design Fundamental">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop" alt="UI/UX Design Fundamental" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop" alt="UI/UX Design Fundamental" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">UI/UX Design Fundamental</h4>
@@ -464,7 +464,7 @@ Reset Filter
         data-category="Pelatihan" data-unit="Teknologi Kreatif" data-month="3"
         data-date-start="2025-03-18" data-date-end="2025-04-20"  data-id="7" data-title="Digital Marketing Specialist">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Digital Marketing Specialist" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Digital Marketing Specialist" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">Digital Marketing Specialist</h4>
@@ -513,7 +513,7 @@ Reset Filter
         data-category="Sertifikasi" data-unit="Teknik & Industri" data-month="3"
         data-date-start="2025-03-10" data-date-end="2025-04-25"  data-id="3" data-title="Sertifikasi Manajemen Proyek">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Sertifikasi Manajemen Proyek" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Sertifikasi Manajemen Proyek" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">Sertifikasi Manajemen Proyek</h4>
@@ -544,7 +544,7 @@ Reset Filter
         data-category="Sertifikasi" data-unit="Teknik & Industri" data-month="3"
         data-date-start="2025-03-15" data-date-end="2025-04-10"  data-id="4" data-title="AutoCAD for Professional">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop" alt="AutoCAD for Professional" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop" alt="AutoCAD for Professional" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">AutoCAD for Professional</h4>
@@ -590,7 +590,7 @@ Reset Filter
         data-category="Bahasa" data-unit="Unit Bahasa" data-month="2"
         data-date-start="2025-02-20" data-date-end="2025-03-30"  data-id="5" data-title="TOEFL Preparation Program">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=600&fit=crop" alt="TOEFL Preparation Program" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=600&fit=crop" alt="TOEFL Preparation Program" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">TOEFL Preparation Program</h4>
@@ -621,7 +621,7 @@ Reset Filter
         data-category="Bahasa" data-unit="Unit Bahasa" data-month="2"
         data-date-start="2025-02-28" data-date-end="2025-03-15"  data-id="6" data-title="IELTS Intensive Coaching">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="IELTS Intensive Coaching" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="IELTS Intensive Coaching" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">IELTS Intensive Coaching</h4>
@@ -761,7 +761,7 @@ Reset Filter
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 <div class="space-y-8">
 <div class="flex items-center justify-center lg:justify-start">
-<img src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
+<img data-ms-ignore="true" style="pointer-events: none;" src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
 </div>
 <div class="rounded-xl overflow-hidden shadow-lg border-2 border-white/20" style="border-radius: 10px;">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.1234567890123!2d112.12345678901234!3d-7.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMDcnMjQuNCJTIDExMsKwMDcnMjQuNCJF!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -773,7 +773,7 @@ Reset Filter
 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-20">
 <div class="space-y-2">
 <h5 class="text-white/70 text-xs font-semibold uppercase tracking-wider">Narahubung</h5>
-<a href="tel:+628494655565165" class="text-white font-semibold text-base hover:text-white/80 transition block">+62 849-4655-565165</a>
+<a href="tel:+62 858-0069-5077 (Rahastri Rengganis)" class="text-white font-semibold text-base hover:text-white/80 transition block">+62 849-4655-565165</a>
 </div>
 <div class="space-y-2">
 <h5 class="text-white/70 text-xs font-semibold uppercase tracking-wider">Jam Operasional</h5>

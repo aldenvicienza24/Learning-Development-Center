@@ -43,12 +43,12 @@
                 </div>
                 
                 <div class="flex items-center gap-3 ml-2">
-                    <a href="{{ url('/kontak') }}"
+                    <a href="https://wa.me/6285800695077" target="_blank" rel="noopener noreferrer"
                         class="bg-gradient-to-r from-[#740A03] to-[#C3110C] hover:from-[#8B0C04] hover:to-[#D6120D] text-white text-sm font-semibold px-4 py-2 rounded-md transition shadow-md whitespace-nowrap">
                         Hubungi Kami
                     </a>
                     <button onclick="toggleLanguage()" class="flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
-                        <img id="flagIconDesktop" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
+                        <img data-ms-ignore="true" style="pointer-events: none;" id="flagIconDesktop" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
                     </button>
                 </div>
             </div>
@@ -81,14 +81,14 @@
                             </div>
                         </div>
                         <div class="mobile-menu-item py-2 flex items-center gap-2">
-                            <a href="{{ url('/kontak') }}" class="flex-grow">
+                            <a href="https://wa.me/6285800695077" class="flex-grow" target="_blank" rel="noopener noreferrer">
                                 <div class="flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg w-full"
                                     style="background: linear-gradient(90deg, #740A03, #C3110C);">
                                     Hubungi Kami
                                 </div>
                             </a>
                             <button onclick="toggleLanguage()" class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-white border border-gray-200 shadow-sm transition hover:bg-gray-50" style="border-radius: 10px;" title="Ganti Bahasa">
-                                <img id="flagIconMobile" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
+                                <img data-ms-ignore="true" style="pointer-events: none;" id="flagIconMobile" src="https://flagcdn.com/w40/id.png" alt="ID" class="w-5 rounded-sm">
                             </button>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
         <div class="max-w-5xl mx-auto bg-white rounded-3xl overflow-hidden shadow-lg p-[10px]">
             
             <div class="relative h-64 md:h-80 overflow-hidden rounded-[10px] mb-[10px]">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop" 
+                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop" 
                      alt="Digital Marketing Specialist" 
                      class="w-full h-full object-cover">
             </div>
@@ -195,7 +195,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
                 <div class="space-y-6">
                     <div class="flex items-center justify-center lg:justify-start">
-                        <img src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
+                        <img data-ms-ignore="true" style="pointer-events: none;" src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
                     </div>
                     <div class="rounded-xl overflow-hidden shadow-lg border-2 border-white/20" style="border-radius: 10px;">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.1234567890123!2d112.12345678901234!3d-7.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMDcnMjQuNCJTIDExMsKwMDcnMjQuNCJF!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -207,7 +207,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="space-y-1">
                                 <h5 class="text-white font-semibold text-sm md:text-base">Narahubung</h5>
-                                <p class="text-white/90 text-sm md:text-base">+628494655565165</p>
+                                <a href="https://wa.me/6285800695077" target="_blank" rel="noopener noreferrer" class="text-white/90 text-sm md:text-base hover:text-white hover:underline transition-all block">+62 858-0069-5077 (Rahastri Rengganis)</a>
                             </div>
                             <div class="space-y-1">
                                 <h5 class="text-white font-semibold text-sm md:text-base">Lokasi</h5>

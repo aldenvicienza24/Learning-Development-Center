@@ -392,7 +392,7 @@ Reset Filter
         data-category="Pelatihan" data-unit="Global Economics & Business" data-month="2"
         data-date-start="2025-02-12" data-date-end="2025-03-12"  data-id="a" data-title="Corporate Tax & Risk Management">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Corporate Tax & Risk Management" class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Corporate Tax & Risk Management" class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">Corporate Tax & Risk Management</h4>
@@ -510,7 +510,7 @@ Reset Filter
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 <div class="space-y-8">
 <div class="flex items-center justify-center lg:justify-start">
-<img src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
+<img data-ms-ignore="true" style="pointer-events: none;" src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
 </div>
 <div class="rounded-xl overflow-hidden shadow-lg border-2 border-white/20" style="border-radius: 10px;">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.1234567890123!2d112.12345678901234!3d-7.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMDcnMjQuNCJTIDExMsKwMDcnMjQuNCJF!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -522,7 +522,7 @@ Reset Filter
 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-20">
 <div class="space-y-2">
 <h5 class="text-white/70 text-xs font-semibold uppercase tracking-wider">Narahubung</h5>
-<a href="tel:+628494655565165" class="text-white font-semibold text-base hover:text-white/80 transition block">+62 849-4655-565165</a>
+<a href="tel:+62 858-0069-5077 (Rahastri Rengganis)" class="text-white font-semibold text-base hover:text-white/80 transition block">+62 849-4655-565165</a>
 </div>
 <div class="space-y-2">
 <h5 class="text-white/70 text-xs font-semibold uppercase tracking-wider">Jam Operasional</h5>

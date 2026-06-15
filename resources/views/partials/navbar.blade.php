@@ -1,6 +1,12 @@
 <!-- resources/views/partials/navbar.blade.php -->
 <div class="navbar-wrapper" style="padding: 1.5rem 1rem 0; position: relative; z-index: 999;">
-    <nav style="background: #FAFAFA; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-radius: 1rem; height: 56px; width: 100%; padding: 0 1rem; display: flex; align-items: center; justify-content: flex-end; position: relative; z-index: 999;">
+    <nav style="background: #FAFAFA; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-radius: 1rem; height: 56px; width: 100%; padding: 0 1rem; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 999;">
+
+        <!-- Logo -->
+        <a href="{{ url('/') }}" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+            <img data-ms-ignore="true" style="pointer-events: none;" src="{{ asset('favicon.svg') }}" alt="Logo UISI" style="height: 26px; width: 26px; object-fit: contain;">
+            <span style="font-weight: 600; font-size: 0.95rem; color: #C3110C; letter-spacing: 0;">UISI Pusat Layanan</span>
+        </a>
 
         <!-- Desktop Menu -->
         <div class="nav-desktop-menu" style="display: none; align-items: center; gap: 2rem;">
@@ -21,25 +27,9 @@
                 </div>
             </div>
 
-            <!-- Contact & Notification -->
+            <!-- Contact -->
             <div style="display: flex; align-items: center; gap: 0.75rem; margin-left: 0.5rem;">
-                <a href="{{ url('/kontak') }}" class="nav-cta-btn">Hubungi Kami</a>
-
-                <!-- Notification Bell -->
-                <div style="position: relative;">
-                    <button id="notificationBtn" class="nav-notif-btn" title="Notifikasi">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="pointer-events:none;">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                        </svg>
-                        <div id="notifBadge" class="nav-notif-badge" style="display:none;"></div>
-                    </button>
-                    <div id="notificationMenu" class="nav-notif-panel">
-                        <h5 style="font-size:14px;font-weight:700;color:#111;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #eee;">Notifikasi</h5>
-                        <div id="notifContent">
-                            <p style="font-size:12px;color:#9ca3af;text-align:center;padding:16px 0;">Tidak ada notifikasi baru</p>
-                        </div>
-                    </div>
-                </div>
+                <a href="https://wa.me/6285800695077" class="nav-cta-btn" target="_blank" rel="noopener noreferrer">Hubungi Kami</a>
             </div>
         </div>
 
@@ -74,24 +64,9 @@
                         </div>
                     </div>
 
-                    <!-- Contact & Notif Mobile -->
+                    <!-- Contact Mobile -->
                     <div style="padding: 16px 24px; display:flex; flex-direction:column; gap:12px;">
-                        <a href="{{ url('/kontak') }}" class="nav-mobile-cta">Hubungi Kami</a>
-                        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:#f9fafb;border-radius:12px;">
-                            <span style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.1em;">Notifikasi</span>
-                            <button id="notificationBtnMobile" class="nav-notif-btn" type="button">
-                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="pointer-events:none;">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                                </svg>
-                                <div id="notifBadgeMobile" class="nav-notif-badge" style="display:none;"></div>
-                            </button>
-                        </div>
-                        <div id="notificationMenuMobile" style="display:none;margin-top:8px;padding:16px;background:#f9fafb;border-radius:12px;border:1px solid #f3f4f6;">
-                            <h5 style="font-size:11px;font-weight:700;color:#111;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #eee;text-transform:uppercase;letter-spacing:0.05em;">Notifikasi Terbaru</h5>
-                            <div id="notifContentMobile">
-                                <p style="font-size:12px;color:#9ca3af;text-align:center;padding:8px 0;">Tidak ada notifikasi</p>
-                            </div>
-                        </div>
+                        <a href="https://wa.me/6285800695077" class="nav-mobile-cta" target="_blank" rel="noopener noreferrer">Hubungi Kami</a>
                     </div>
                 </div>
             </div>
@@ -154,64 +129,8 @@
             if (mobileMenu && mobileMenuBtn && !mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
                 closeMenu();
             }
-            var nm = document.getElementById('notificationMenu');
-            var nb = document.getElementById('notificationBtn');
-            if (nm && nb && !nm.contains(e.target) && !nb.contains(e.target)) { nm.classList.remove('is-open'); }
-            var nmm = document.getElementById('notificationMenuMobile');
-            var nbm = document.getElementById('notificationBtnMobile');
-            if (nmm && nbm && !nmm.contains(e.target) && !nbm.contains(e.target)) { nmm.style.display = 'none'; }
         });
 
-        // Notification system
-        window.updateNotifications = function() {
-            var raw = localStorage.getItem('uisi_registration_data');
-            var data = raw ? JSON.parse(raw) : null;
-            var contents = [document.getElementById('notifContent'), document.getElementById('notifContentMobile')];
-            var badges = [document.getElementById('notifBadge'), document.getElementById('notifBadgeMobile')];
-            if (data && data.status === 'pending') {
-                badges.forEach(function(b) { if(b) b.style.display = 'block'; });
-                var h = '<div style="padding:12px;background:#fef2f2;border-radius:12px;border:1px solid #fecaca;text-align:left;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><div style="width:8px;height:8px;background:#dc2626;border-radius:50%;"></div><span style="font-size:10px;font-weight:700;color:#dc2626;text-transform:uppercase;">Menunggu Validasi</span></div><p style="font-size:12px;font-weight:700;color:#111;margin-bottom:4px;">' + data.name + '</p><p style="font-size:10px;color:#6b7280;">Pembayaran sedang diverifikasi.</p></div>';
-                contents.forEach(function(c) { if(c) c.innerHTML = h; });
-            } else {
-                badges.forEach(function(b) { if(b) b.style.display = 'none'; });
-                contents.forEach(function(c) { if(c) c.innerHTML = '<p style="font-size:12px;color:#9ca3af;text-align:center;padding:16px 0;">Tidak ada notifikasi baru</p>'; });
-            }
-        };
-
-        // Bell animation function
-        function triggerBell(btnId) {
-            var btn = document.getElementById(btnId);
-            if (!btn) return;
-            btn.classList.add('bell-animate');
-            setTimeout(function() {
-                btn.classList.remove('bell-animate');
-            }, 800);
-        }
-
-        // Desktop notification toggle
-        var nBtn = document.getElementById('notificationBtn');
-        var nMenu = document.getElementById('notificationMenu');
-        if (nBtn && nMenu) { 
-            nBtn.addEventListener('click', function(e) { 
-                e.stopPropagation(); 
-                nMenu.classList.toggle('is-open'); 
-                triggerBell('notificationBtn');
-            }); 
-        }
-
-        // Mobile notification toggle
-        var nBtnM = document.getElementById('notificationBtnMobile');
-        var nMenuM = document.getElementById('notificationMenuMobile');
-        if (nBtnM && nMenuM) { 
-            nBtnM.addEventListener('click', function(e) { 
-                e.stopPropagation(); 
-                nMenuM.style.display = nMenuM.style.display === 'block' ? 'none' : 'block'; 
-                triggerBell('notificationBtnMobile');
-            }); 
-        }
-
-        updateNotifications();
-        window.addEventListener('storage', function(e) { if (e.key === 'uisi_registration_data') updateNotifications(); });
     });
 })();
 </script>
