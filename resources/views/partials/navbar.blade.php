@@ -4,7 +4,7 @@
 
         <!-- Logo -->
         <a href="{{ url('/') }}" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
-            <img data-ms-ignore="true" style="pointer-events: none;" src="{{ asset('favicon.svg') }}" alt="Logo UISI" style="height: 26px; width: 26px; object-fit: contain;">
+            <img data-ms-ignore="true" style="pointer-events: none; height: 24px; width: 24px; object-fit: contain;" src="{{ asset('favicon.svg') }}" alt="Logo UISI">
             <span style="font-weight: 600; font-size: 0.95rem; color: #C3110C; letter-spacing: 0;">UISI Pusat Layanan</span>
         </a>
 
