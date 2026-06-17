@@ -211,7 +211,7 @@
     <!-- ==============================
          HERO SECTION
          ============================== -->
-    <section class="px-4 md:px-8 mt-6 mb-8">
+    <section class="px- md:px-8 mt-6 mb-8">
         <div
             class="relative hero-height h-[550px] md:h-[600px] rounded-3xl overflow-hidden flex flex-col items-center justify-center text-center">
 
@@ -297,7 +297,7 @@
                             <svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
-                            <span>Kalender Program</span>
+                            <span>Kalender program</span>
                         </a>
                     </div>
                 </div>
