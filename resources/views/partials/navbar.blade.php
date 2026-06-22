@@ -1,6 +1,6 @@
 <!-- resources/views/partials/navbar.blade.php -->
-<div class="navbar-wrapper" style="padding: 1.5rem 1rem 0; position: relative; z-index: 999;">
-    <nav style="background: #FAFAFA; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-radius: 1rem; height: 56px; width: 100%; padding: 0 1rem; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 999;">
+<div class="navbar-wrapper" style="padding: 1.5rem 1rem 0; position: relative; z-index: 5000;">
+    <nav style="background: #FAFAFA; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-radius: 1rem; height: 56px; width: 100%; padding: 0 1rem; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 5000;">
 
         <!-- Logo -->
         <a href="{{ url('/') }}" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
@@ -22,8 +22,8 @@
                     </svg>
                 </button>
                 <div class="nav-dropdown-content">
-                    <a href="{{ url('program1') }}">Nasional</a>
-                    <a href="{{ url('program2') }}">Internasional</a>
+                    <a href="{{ route('program.nasional') }}">Nasional</a>
+                    <a href="{{ route('program.internasional') }}">Internasional</a>
                 </div>
             </div>
 
@@ -59,8 +59,8 @@
                             </svg>
                         </button>
                         <div id="programSubmenu" class="nav-mobile-submenu" style="display:none;">
-                            <a href="{{ url('program1') }}" class="nav-mobile-sublink">Nasional</a>
-                            <a href="{{ url('program2') }}" class="nav-mobile-sublink">Internasional</a>
+                            <a href="{{ route('program.nasional') }}" class="nav-mobile-sublink">Nasional</a>
+                            <a href="{{ route('program.internasional') }}" class="nav-mobile-sublink">Internasional</a>
                         </div>
                     </div>
 

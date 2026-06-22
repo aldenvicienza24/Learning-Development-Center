@@ -32,7 +32,7 @@
         color: #4b5563;
         cursor: pointer;
         position: relative;
-        z-index: 1001;
+        z-index: 5002;
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
     }
@@ -87,7 +87,7 @@
         visibility: hidden;
         transform: translateY(8px);
         transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-        z-index: 1000;
+        z-index: 5001;
         overflow: hidden;
     }
     .nav-dropdown:hover .nav-dropdown-content {
@@ -178,7 +178,7 @@
         visibility: hidden;
         transform: translateY(8px);
         transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-        z-index: 1000;
+        z-index: 5001;
     }
     .nav-notif-panel.is-open {
         opacity: 1;
@@ -201,7 +201,7 @@
         border-radius: 16px;
         box-shadow: 0 10px 40px rgba(0,0,0,0.18);
         border: 1px solid #f3f4f6;
-        z-index: 1000;
+        z-index: 5001;
         max-height: 0;
         opacity: 0;
         transform: scale(0.95);
@@ -323,8 +323,38 @@
     }
 
     /* --- Responsive padding for nav wrapper --- */
-    @media (min-width: 768px) {
-        .navbar-wrapper { padding-left: 2rem; padding-right: 2rem; }
+    @media (max-width: 768px) {
+        .mobile-x-20 {
+            padding-left: 35px !important;
+            padding-right: 35px !important;
+        }
+
+        .navbar-wrapper {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        .navbar-wrapper nav {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        .mobile-x-20 > .max-w-7xl,
+        .mobile-x-20 > .max-w-6xl,
+        .mobile-x-20 > .max-w-5xl,
+        .mobile-x-20 > .max-w-4xl {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .mobile-x-20,
+        .navbar-wrapper {
+            padding-left: 60px !important;
+            padding-right: 60px !important;
+        }
+
         .navbar-wrapper nav { padding-left: 2rem; padding-right: 2rem; }
     }
 </style>

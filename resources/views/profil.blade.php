@@ -129,13 +129,60 @@
            ============================= */
         @media (max-width: 768px) {
             .hero-height {
-                height: 450px !important;
+                height: 540px !important;
+            }
+
+            .profile-hero-section {
+                padding-left: 35px;
+                padding-right: 35px;
+                margin-top: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            section,
+            footer {
+                padding-left: 35px !important;
+                padding-right: 35px !important;
+            }
+
+            .profile-hero-content {
+                margin-top: 14.5rem !important;
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+            }
+
+            .profile-hero-image {
+                object-position: 42% center;
+            }
+
+            .profile-hero-overlay {
+                background: linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.20) 38%, rgba(0,0,0,0.82) 100%) !important;
+            }
+
+            .profile-hero-title {
+                font-size: 1.75rem !important;
+                line-height: 2.1rem !important;
+            }
+
+            .profile-hero-text {
+                max-width: 18rem !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                line-height: 1.65 !important;
             }
         }
 
         @media (max-width: 640px) {
             .hero-height {
-                height: 400px !important;
+                height: 520px !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            section,
+            footer {
+                padding-left: 60px !important;
+                padding-right: 60px !important;
             }
         }
     </style>
@@ -152,15 +199,15 @@
     <!-- ==============================
          HERO SECTION
          ============================== -->
-    <section class="px-4 md:px-8 mt-6 mb-8">
+    <section class="profile-hero-section px-4 md:px-8 mt-6 mb-8">
         <div class="relative hero-height h-[550px] md:h-[600px] rounded-3xl overflow-hidden flex flex-col items-center justify-center text-center">
             
             <!-- Layer 1: Background Image -->
             <img data-ms-ignore="true" style="pointer-events: none;" src="{{ asset('images/hero-bg.jpg') }}" alt="UISI Campus"
-                 class="absolute inset-0 w-full h-full object-cover object-center" style="z-index: 1;">
+                 class="profile-hero-image absolute inset-0 w-full h-full object-cover object-center" style="z-index: 1;">
             
             <!-- Layer 2: Dark Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/70" style="z-index: 2;"></div>
+            <div class="profile-hero-overlay absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/70" style="z-index: 2;"></div>
             
             <!-- Layer 3: Circular White Textures (Desktop) -->
             <div class="absolute top-0 left-0 w-0 h-0 hidden md:block" style="z-index: 3; pointer-events: none;">
@@ -178,29 +225,30 @@
 
             <!-- Layer 3: Circular White Textures (Mobile) -->
             <div class="absolute top-0 left-0 w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-white rounded-full" style="opacity: 0.06;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] bg-white rounded-full" style="opacity: 0.05; animation-delay: 0.4s;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 0.8s;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] bg-white rounded-full" style="opacity: 0.03; animation-delay: 1.2s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[620px] h-[620px] bg-white rounded-full" style="opacity: 0.06;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white rounded-full" style="opacity: 0.05; animation-delay: 0.4s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 0.8s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] bg-white rounded-full" style="opacity: 0.03; animation-delay: 1.2s;"></div>
             </div>
             <div class="absolute bottom-0 right-0 w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-white rounded-full" style="opacity: 0.05; animation-delay: 0.2s;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[140px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 0.6s;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90px] h-[90px] bg-white rounded-full" style="opacity: 0.03; animation-delay: 1.0s;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] bg-white rounded-full" style="opacity: 0.02; animation-delay: 1.4s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] bg-white rounded-full" style="opacity: 0.05; animation-delay: 0.2s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 0.6s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[230px] h-[230px] bg-white rounded-full" style="opacity: 0.03; animation-delay: 1.0s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] bg-white rounded-full" style="opacity: 0.02; animation-delay: 1.4s;"></div>
             </div>
 
             <!-- Layer 4: Grain Texture -->
             <div class="absolute inset-0 opacity-[0.04]" style="z-index: 4; pointer-events: none; background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
 
             <!-- Layer 5: Content -->
-            <div class="relative max-w-3xl px-4 md:px-6 text-white text-center mt-32 md:mt-52 animate-fadeIn" style="z-index: 5;">
-                <h1 class="reveal-down delay-300 text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight px-2">
+            <div class="profile-hero-content relative max-w-3xl px-4 md:px-6 text-white text-center mt-32 md:mt-52 animate-fadeIn" style="z-index: 5;">
+                <h1 class="profile-hero-title reveal-down delay-300 text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight px-2">
                     Profil UISI Pusat Layanan
                 </h1>
                 <div class="reveal-down delay-500 w-32 md:w-44 h-[1.5px] mx-auto mt-2 md:mt-3 bg-gradient-to-r from-transparent via-white to-transparent"></div>
-                <p class="reveal-down delay-700 hero-text text-white/90 mt-3 text-sm md:text-lg leading-relaxed max-w-[260px] sm:max-w-2xl mx-auto px-4 md:px-0 font-normal drop-shadow-md">
-                    Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.
+                <p class="profile-hero-text reveal-down delay-700 hero-text text-white/90 mt-3 text-sm md:text-lg leading-relaxed max-w-[260px] sm:max-w-2xl mx-auto px-4 md:px-0 font-normal drop-shadow-md">
+                    <span class="md:hidden">Kenali layanan pelatihan, sertifikasi, dan bahasa UISI.</span>
+                    <span class="hidden md:inline">Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.</span>
                 </p>
             </div>
         </div>

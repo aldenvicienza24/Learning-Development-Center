@@ -160,8 +160,163 @@
             box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
         }
 
+        .filter-btn:not(.active):hover {
+            background: #FFFFFF !important;
+            color: #C3110C !important;
+            box-shadow: 0 6px 16px rgba(195, 17, 12, 0.10);
+        }
+
         .filter-btn:active {
             transform: translateY(0);
+        }
+
+        .category-filter-btn {
+            transition:
+                transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 160ms ease,
+                color 160ms ease,
+                background-color 160ms ease;
+        }
+
+        .category-filter-btn svg {
+            transition: color 160ms ease, transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .category-filter-btn:not(.active):hover svg {
+            transform: translateY(-1px) scale(1.06);
+        }
+
+        .category-filter-btn.active {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-filter-btn.active::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.24) 45%, transparent 70%);
+            transform: translateX(-120%);
+            animation: filterShine 900ms ease 180ms both;
+            pointer-events: none;
+        }
+
+        @keyframes filterEnter {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes filterShine {
+            to {
+                transform: translateX(120%);
+            }
+        }
+
+        .category-filter-btn {
+            animation: filterEnter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .category-filter-btn:nth-child(2) {
+            animation-delay: 45ms;
+        }
+
+        .category-filter-btn:nth-child(3) {
+            animation-delay: 90ms;
+        }
+
+        .category-filter-btn:nth-child(4) {
+            animation-delay: 135ms;
+        }
+
+        @keyframes facultyCardEnter {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .faculty-card {
+            animation: facultyCardEnter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+            transition:
+                transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 220ms ease,
+                background-color 220ms ease;
+        }
+
+        .faculty-card:nth-child(2) {
+            animation-delay: 90ms;
+        }
+
+        .faculty-card:nth-child(3) {
+            animation-delay: 180ms;
+        }
+
+        .faculty-card:nth-child(4) {
+            animation-delay: 270ms;
+        }
+
+        .faculty-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 4px;
+            background: linear-gradient(90deg, #740A03, #C3110C);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 220ms ease;
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 24px 44px -20px rgba(40, 12, 12, 0.45);
+        }
+
+        .faculty-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .faculty-card-icon,
+        .faculty-card-arrow,
+        .faculty-card-count {
+            transition:
+                transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+                background-color 220ms ease,
+                color 220ms ease,
+                box-shadow 220ms ease;
+        }
+
+        .faculty-card:hover .faculty-card-icon {
+            transform: translateY(-2px) scale(1.06) rotate(-2deg);
+            box-shadow: 0 14px 28px -14px rgba(195, 17, 12, 0.9);
+        }
+
+        .faculty-card:hover .faculty-card-count {
+            transform: scale(1.08);
+            background: #FEE2E2;
+        }
+
+        .faculty-card:hover .faculty-card-arrow {
+            transform: translateX(4px);
+        }
+
+        .faculty-class-chip {
+            transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+        }
+
+        .faculty-card:hover .faculty-class-chip {
+            background: #FEF2F2;
+            color: #7F1D1D;
+            transform: translateX(2px);
         }
 
         /* ==============================
@@ -169,18 +324,146 @@
            ============================== */
         @media (max-width: 768px) {
             .hero-height {
-                height: 450px !important;
+                height: 540px !important;
             }
 
             .program-card-mobile {
                 width: 100% !important;
                 max-width: 100%;
             }
+
+            .dashboard-hero-section {
+                padding-left: 35px;
+                padding-right: 35px;
+                margin-top: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .dashboard-hero-content {
+                margin-top: 14.5rem !important;
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+            }
+
+            .dashboard-hero-image {
+                object-position: 42% center;
+            }
+
+            .dashboard-hero-overlay {
+                background: linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.20) 38%, rgba(0,0,0,0.82) 100%) !important;
+            }
+
+            .dashboard-hero-title {
+                font-size: 1.75rem !important;
+                line-height: 2.1rem !important;
+            }
+
+            .dashboard-hero-text {
+                max-width: 18rem !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                line-height: 1.65 !important;
+            }
+
+            .offers-section {
+                padding-top: 3.25rem !important;
+                padding-bottom: 4rem !important;
+                padding-left: 35px !important;
+                padding-right: 35px !important;
+            }
+
+            .program-list-section {
+                padding-left: 35px !important;
+                padding-right: 35px !important;
+            }
+
+            .program-list-section > .max-w-7xl,
+            .offers-section > .max-w-7xl,
+            .offers-title {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+
+            .program-section {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+
+            #fakultasKelas,
+            .dashboard-benefit-grid,
+            footer {
+                padding-left: 35px !important;
+                padding-right: 35px !important;
+            }
+
+            .offers-title {
+                margin-bottom: 3rem !important;
+            }
+
+            .offer-card {
+                max-width: 340px !important;
+                transition-delay: 0ms !important;
+            }
+
+            .offers-grid {
+                gap: 2.25rem !important;
+            }
+
+            .offers-grid .offer-card.reveal {
+                opacity: 0 !important;
+                transform: translateY(14px) !important;
+                transition:
+                    opacity 360ms ease,
+                    transform 360ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+                transition-delay: 0ms !important;
+            }
+
+            .offers-grid .offer-card.reveal.reveal-active {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+
+            .offers-grid .offer-card:hover {
+                transform: translateY(0) !important;
+            }
+
+            .offer-card-panel {
+                padding-top: 2.75rem !important;
+            }
+
+            .offer-card-badge-wrap {
+                position: absolute !important;
+                top: -1rem !important;
+                left: 1rem !important;
+                right: 1rem !important;
+                margin: 0 !important;
+            }
+
+            .offer-card-badge {
+                box-shadow: 0 8px 18px rgba(116, 10, 3, 0.18) !important;
+            }
         }
 
         @media (max-width: 640px) {
             .hero-height {
-                height: 400px !important;
+                height: 520px !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .dashboard-hero-section,
+            .offers-section,
+            .program-list-section,
+            #fakultasKelas,
+            .dashboard-benefit-grid,
+            footer {
+                padding-left: 60px !important;
+                padding-right: 60px !important;
+            }
+
+            .program-section {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
             }
         }
 
@@ -211,16 +494,16 @@
     <!-- ==============================
          HERO SECTION
          ============================== -->
-    <section class="px- md:px-8 mt-6 mb-8">
+    <section class="dashboard-hero-section px-4 md:px-8 mt-6 mb-8">
         <div
             class="relative hero-height h-[550px] md:h-[600px] rounded-3xl overflow-hidden flex flex-col items-center justify-center text-center">
 
             <!-- Layer 1: Background Image -->
             <img data-ms-ignore="true" style="pointer-events: none;" src="{{ asset('images/hero-bg.jpg') }}" alt="UISI Campus"
-                class="absolute inset-0 w-full h-full object-cover object-center" style="z-index: 1;">
+                class="dashboard-hero-image absolute inset-0 w-full h-full object-cover object-center" style="z-index: 1;">
 
             <!-- Layer 2: Dark Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/70" style="z-index: 2;">
+            <div class="dashboard-hero-overlay absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/70" style="z-index: 2;">
             </div>
 
             <!-- Layer 3: Circular White Textures (Desktop) -->
@@ -250,24 +533,24 @@
 
             <!-- Layer 3: Circular White Textures (Mobile) -->
             <div class="absolute top-0 left-0 w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-white rounded-full"
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[620px] h-[620px] bg-white rounded-full"
                     style="opacity: 0.06;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] bg-white rounded-full"
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white rounded-full"
                     style="opacity: 0.05; animation-delay: 0.4s;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] bg-white rounded-full"
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] bg-white rounded-full"
                     style="opacity: 0.04; animation-delay: 0.8s;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] bg-white rounded-full"
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] bg-white rounded-full"
                     style="opacity: 0.03; animation-delay: 1.2s;"></div>
             </div>
 
             <div class="absolute bottom-0 right-0 w-0 h-0 md:hidden" style="z-index: 3; pointer-events: none;">
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-white rounded-full"
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] bg-white rounded-full"
                     style="opacity: 0.05; animation-delay: 0.2s;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[140px] bg-white rounded-full"
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-white rounded-full"
                     style="opacity: 0.04; animation-delay: 0.6s;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90px] h-[90px] bg-white rounded-full"
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[230px] h-[230px] bg-white rounded-full"
                     style="opacity: 0.03; animation-delay: 1.0s;"></div>
-                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] bg-white rounded-full"
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] bg-white rounded-full"
                     style="opacity: 0.02; animation-delay: 1.4s;"></div>
             </div>
 
@@ -277,14 +560,15 @@
             </div>
 
             <!-- Layer 5: Content -->
-            <div class="relative max-w-3xl px-4 md:px-6 text-white text-center mt-32 md:mt-52" style="z-index: 5;">
-                <h1 class="reveal-down delay-300 text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
+            <div class="dashboard-hero-content relative max-w-3xl px-4 md:px-6 text-white text-center mt-32 md:mt-52" style="z-index: 5;">
+                <h1 class="dashboard-hero-title reveal-down delay-300 text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
                     UISI Pusat Layanan
                 </h1>
                 <div class="reveal-down delay-500 w-32 md:w-44 h-[1.5px] mx-auto mt-2 md:mt-3 bg-gradient-to-r from-transparent via-white to-transparent">
                 </div>
-                <p class="reveal-down delay-700 hero-text text-white/90 mt-3 text-sm md:text-lg leading-relaxed max-w-[260px] sm:max-w-2xl mx-auto px-4 md:px-0 font-normal">
-                    Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.
+                <p class="dashboard-hero-text reveal-down delay-700 hero-text text-white/90 mt-3 text-sm md:text-lg leading-relaxed max-w-[260px] sm:max-w-2xl mx-auto px-4 md:px-0 font-normal">
+                    <span class="md:hidden">Program pelatihan, sertifikasi, dan bahasa untuk kesiapan kariermu.</span>
+                    <span class="hidden md:inline">Pusat pengembangan karier yang menyediakan program pelatihan, sertifikasi, dan layanan bahasa untuk mendukung kesiapan kerja serta studi lanjut.</span>
                 </p>
 
                 <!-- Hero Button with Animated Border -->
@@ -297,7 +581,7 @@
                             <svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
-                            <span>Kalender program</span>
+                            <span>Kalender Program</span>
                         </a>
                     </div>
                 </div>
@@ -308,7 +592,7 @@
     <!-- ==============================
          PROGRAM SECTION
          ============================== -->
-    <section class="relative overflow-hidden"
+    <section class="offers-section relative overflow-hidden"
         style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%); padding: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 6vw, 3rem);">
 
         <!-- Circular White Textures (Centered) -->
@@ -333,23 +617,23 @@
 
         <div class="relative z-10 max-w-7xl mx-auto">
             <!-- Section Title -->
-            <div class="reveal text-center mb-12 md:mb-16 w-full px-4 md:px-0">
+            <div class="offers-title reveal text-center mb-12 md:mb-16 w-full px-4 md:px-0">
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 drop-shadow-lg">
                     Program yang Kami Tawarkan
                 </h2>
             </div>
 
             <!-- Cards Container - Responsive -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6">
+            <div class="offers-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6">
 
                 <!-- Card 1: Unit Pusat Pelatihan -->
                 <div
-                    class="reveal delay-300 flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
-                    <div class="flex-grow flex flex-col bg-white shadow-xl relative pt-8 pb-5 px-4 md:pt-10 md:pb-6 md:px-5 text-center"
+                    class="offer-card reveal flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                    <div class="offer-card-panel flex-grow flex flex-col bg-white shadow-xl relative pt-10 pb-6 px-5 md:pt-10 md:pb-6 md:px-5 text-center"
                         style="border-radius: 15px 0 15px 0;">
                         <!-- Badge Title -->
-                        <div class="absolute -top-4 left-4 right-4 md:left-6 md:right-6">
-                            <div class="px-3 py-2.5 md:px-4 md:py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] shadow-lg border border-white/20"
+                        <div class="offer-card-badge-wrap absolute -top-4 left-4 right-4 md:left-6 md:right-6">
+                            <div class="offer-card-badge px-3 py-2.5 md:px-4 md:py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] shadow-lg border border-white/20"
                                 style="border-radius: 12px 0 12px 0;">
                                 <h3 class="text-white text-base md:text-lg font-bold">Unit Pusat Pelatihan</h3>
                             </div>
@@ -374,12 +658,12 @@
 
                 <!-- Card 2: Unit Pusat Sertifikasi -->
                 <div
-                    class="reveal delay-600 flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
-                    <div class="flex-grow flex flex-col bg-white shadow-xl relative pt-8 pb-5 px-4 md:pt-10 md:pb-6 md:px-5 text-center"
+                    class="offer-card reveal flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                    <div class="offer-card-panel flex-grow flex flex-col bg-white shadow-xl relative pt-10 pb-6 px-5 md:pt-10 md:pb-6 md:px-5 text-center"
                         style="border-radius: 15px 0 15px 0;">
                         <!-- Badge Title -->
-                        <div class="absolute -top-4 left-4 right-4 md:left-6 md:right-6">
-                            <div class="px-3 py-2.5 md:px-4 md:py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] shadow-lg border border-white/20"
+                        <div class="offer-card-badge-wrap absolute -top-4 left-4 right-4 md:left-6 md:right-6">
+                            <div class="offer-card-badge px-3 py-2.5 md:px-4 md:py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] shadow-lg border border-white/20"
                                 style="border-radius: 12px 0 12px 0;">
                                 <h3 class="text-white text-base md:text-lg font-bold">Unit Pusat Sertifikasi</h3>
                             </div>
@@ -404,12 +688,12 @@
 
                 <!-- Card 3: Unit Pusat Bahasa -->
                 <div
-                    class="reveal delay-900 flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
-                    <div class="flex-grow flex flex-col bg-white shadow-xl relative pt-8 pb-5 px-4 md:pt-10 md:pb-6 md:px-5 text-center"
+                    class="offer-card reveal flex flex-col h-full group transform hover:-translate-y-2 transition-all duration-300 max-w-[320px] md:max-w-none mx-auto w-full">
+                    <div class="offer-card-panel flex-grow flex flex-col bg-white shadow-xl relative pt-10 pb-6 px-5 md:pt-10 md:pb-6 md:px-5 text-center"
                         style="border-radius: 15px 0 15px 0;">
                         <!-- Badge Title -->
-                        <div class="absolute -top-4 left-4 right-4 md:left-6 md:right-6">
-                            <div class="px-3 py-2.5 md:px-4 md:py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] shadow-lg border border-white/20"
+                        <div class="offer-card-badge-wrap absolute -top-4 left-4 right-4 md:left-6 md:right-6">
+                            <div class="offer-card-badge px-3 py-2.5 md:px-4 md:py-3 bg-gradient-to-r from-[#740A03] to-[#C3110C] shadow-lg border border-white/20"
                                 style="border-radius: 12px 0 12px 0;">
                                 <h3 class="text-white text-base md:text-lg font-bold">Unit Pusat Bahasa</h3>
                             </div>
@@ -439,7 +723,7 @@
     <!-- ==============================
          PROGRAM PENDAFTARAN TERBUKA
          ============================== -->
-    <section class="bg-white" id="programPendaftaran"
+    <section class="program-list-section bg-white" id="programPendaftaran"
         style="padding: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 6vw, 3rem);">
         <div class="max-w-7xl mx-auto">
 
@@ -453,7 +737,7 @@
                 <div class="grid grid-cols-2 lg:flex lg:justify-center gap-3 md:gap-4 max-w-[280px] md:max-w-none mx-auto"
                     id="categoryFilters">
                     <button onclick="filterProgram('all')"
-                        class="reveal delay-300 filter-btn active flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 text-sm md:text-base whitespace-nowrap"
+                        class="filter-btn category-filter-btn active flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base whitespace-nowrap"
                         data-category="all" style="background: linear-gradient(135deg, #740A03, #C3110C); color: white; border: none;">
                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             style="color: white;">
@@ -464,8 +748,8 @@
                         <span class="font-medium">Semua</span>
                     </button>
                     <button onclick="filterProgram('pelatihan')"
-                        class="reveal delay-500 filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 border-transparent hover:border-red-300 text-sm md:text-base whitespace-nowrap"
-                        data-category="pelatihan" style="background-color: #F3F4F6; color: #4B5563;">
+                        class="filter-btn category-filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base whitespace-nowrap"
+                        data-category="pelatihan" style="background-color: #FAFAFA; color: #4B5563; border: none;">
                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             style="color: #DC2626;">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -477,19 +761,22 @@
                         <span class="font-medium">Pelatihan</span>
                     </button>
                     <button onclick="filterProgram('sertifikasi')"
-                        class="reveal delay-700 filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 border-transparent hover:border-red-300 text-sm md:text-base whitespace-nowrap"
-                        data-category="sertifikasi" style="background-color: #F3F4F6; color: #4B5563;">
+                        class="filter-btn category-filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base whitespace-nowrap"
+                        data-category="sertifikasi" style="background-color: #FAFAFA; color: #4B5563; border: none;">
                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             style="color: #DC2626;">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4M6 20h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                d="M9 12l2 2 4-4">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3l7 3v5c0 4.5-2.9 8.5-7 10-4.1-1.5-7-5.5-7-10V6l7-3z">
                             </path>
                         </svg>
                         <span class="font-medium">Sertifikasi</span>
                     </button>
                     <button onclick="filterProgram('bahasa')"
-                        class="reveal delay-900 filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 border-2 border-transparent hover:border-red-300 text-sm md:text-base whitespace-nowrap"
-                        data-category="bahasa" style="background-color: #F3F4F6; color: #4B5563;">
+                        class="filter-btn category-filter-btn flex items-center justify-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base whitespace-nowrap"
+                        data-category="bahasa" style="background-color: #FAFAFA; color: #4B5563; border: none;">
                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             style="color: #DC2626;">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -517,9 +804,8 @@
                         elseif ($program->detail_url == 'detail3') $pId = '3';
                         elseif ($program->detail_url == 'detail4') $pId = '4';
                         elseif ($program->detail_url == 'detail5') $pId = '5';
-                        elseif ($program->detail_url == 'detail6') {
-                            $pId = (strtolower($program->category) == 'pelatihan') ? '7' : '6';
-                        }
+                        elseif ($program->detail_url == 'detail6') $pId = '7';
+                        elseif ($program->detail_url == 'detail7') $pId = '6';
                         elseif ($program->detail_url == 'detaila') $pId = 'a';
                         elseif ($program->detail_url == 'detailb') $pId = 'b';
                     @endphp
@@ -555,7 +841,9 @@
                                     $total = $program->total_quota ?? 100;
                                     $ratio = $total > 0 ? ($quota / $total) : 0;
                                     
-                                    if ($ratio <= 0.25) {
+                                    if ($quota <= 0) {
+                                        $badgeClasses = 'bg-slate-50 text-slate-700 border-slate-100';
+                                    } elseif ($ratio <= 0.25) {
                                         $badgeClasses = 'bg-red-50 text-[#C3110C] border-red-100';
                                     } elseif ($ratio <= 0.50) {
                                         $badgeClasses = 'bg-yellow-50 text-yellow-700 border-yellow-100';
@@ -566,7 +854,7 @@
                                 <div class="kuota-badge px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
                                     <span>Sisa: <span class="kuota-number">{{ $quota }}</span></span>
                                 </div>
-                                <a href="{{ $program->detail_url }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                                <a href="{{ url('/pendaftaran') }}?id={{ $pId }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                             </div>
                         </div>
                     </div>
@@ -603,9 +891,8 @@
                         elseif ($program->detail_url == 'detail3') $pId = '3';
                         elseif ($program->detail_url == 'detail4') $pId = '4';
                         elseif ($program->detail_url == 'detail5') $pId = '5';
-                        elseif ($program->detail_url == 'detail6') {
-                            $pId = (strtolower($program->category) == 'pelatihan') ? '7' : '6';
-                        }
+                        elseif ($program->detail_url == 'detail6') $pId = '7';
+                        elseif ($program->detail_url == 'detail7') $pId = '6';
                         elseif ($program->detail_url == 'detaila') $pId = 'a';
                         elseif ($program->detail_url == 'detailb') $pId = 'b';
                     @endphp
@@ -641,7 +928,9 @@
                                     $total = $program->total_quota ?? 100;
                                     $ratio = $total > 0 ? ($quota / $total) : 0;
                                     
-                                    if ($ratio <= 0.25) {
+                                    if ($quota <= 0) {
+                                        $badgeClasses = 'bg-slate-50 text-slate-700 border-slate-100';
+                                    } elseif ($ratio <= 0.25) {
                                         $badgeClasses = 'bg-red-50 text-[#C3110C] border-red-100';
                                     } elseif ($ratio <= 0.50) {
                                         $badgeClasses = 'bg-yellow-50 text-yellow-700 border-yellow-100';
@@ -652,7 +941,7 @@
                                 <div class="kuota-badge px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
                                     <span>Sisa: <span class="kuota-number">{{ $quota }}</span></span>
                                 </div>
-                                <a href="{{ $program->detail_url }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                                <a href="{{ url('/pendaftaran') }}?id={{ $pId }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                             </div>
                         </div>
                     </div>
@@ -690,9 +979,8 @@
                         elseif ($program->detail_url == 'detail3') $pId = '3';
                         elseif ($program->detail_url == 'detail4') $pId = '4';
                         elseif ($program->detail_url == 'detail5') $pId = '5';
-                        elseif ($program->detail_url == 'detail6') {
-                            $pId = (strtolower($program->category) == 'pelatihan') ? '7' : '6';
-                        }
+                        elseif ($program->detail_url == 'detail6') $pId = '7';
+                        elseif ($program->detail_url == 'detail7') $pId = '6';
                         elseif ($program->detail_url == 'detaila') $pId = 'a';
                         elseif ($program->detail_url == 'detailb') $pId = 'b';
                     @endphp
@@ -728,7 +1016,9 @@
                                     $total = $program->total_quota ?? 100;
                                     $ratio = $total > 0 ? ($quota / $total) : 0;
                                     
-                                    if ($ratio <= 0.25) {
+                                    if ($quota <= 0) {
+                                        $badgeClasses = 'bg-slate-50 text-slate-700 border-slate-100';
+                                    } elseif ($ratio <= 0.25) {
                                         $badgeClasses = 'bg-red-50 text-[#C3110C] border-red-100';
                                     } elseif ($ratio <= 0.50) {
                                         $badgeClasses = 'bg-yellow-50 text-yellow-700 border-yellow-100';
@@ -739,7 +1029,7 @@
                                 <div class="kuota-badge px-3 py-2.5 {{ $badgeClasses }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm whitespace-nowrap">
                                     <span>Sisa: <span class="kuota-number">{{ $quota }}</span></span>
                                 </div>
-                                <a href="{{ $program->detail_url }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                                <a href="{{ url('/pendaftaran') }}?id={{ $pId }}" class="flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs md:text-sm font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                             </div>
                         </div>
                     </div>
@@ -762,6 +1052,87 @@
             </div>
             @endif
         </div>
+    </section>
+
+        <!-- ============================================
+                 BIDANG STUDI / FAKULTAS SECTION
+                 ============================================ -->
+        <section class="relative overflow-hidden mt-0 md:mt-12" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%); padding: clamp(4rem, 8vw, 6rem) 0;">
+            <!-- Circular White Textures (Centered) -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none">
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1400px] md:h-[1400px] bg-white rounded-full" style="opacity: 0.02;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[680px] md:w-[1200px] md:h-[1200px] bg-white rounded-full" style="opacity: 0.03; animation-delay: 0.4s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] md:w-[1000px] md:h-[1000px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 0.8s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] md:w-[800px] md:h-[800px] bg-white rounded-full" style="opacity: 0.05; animation-delay: 1.2s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] md:w-[600px] md:h-[600px] bg-white rounded-full" style="opacity: 0.06; animation-delay: 1.6s;"></div>
+                <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-white rounded-full" style="opacity: 0.07; animation-delay: 2.0s;"></div>
+            </div>
+
+            <!-- Grain Texture -->
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+
+            <div id="fakultasKelas" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="reveal text-center mb-12">
+                    <span class="inline-block py-1.5 px-4 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold tracking-widest uppercase mb-4 backdrop-blur-sm">Eksplorasi</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight drop-shadow-md">Program Bidang Studi</h2>
+                    <p class="text-white/80 text-sm md:text-base max-w-2xl mx-auto font-medium">Temukan program unggulan yang dirancang khusus untuk memenuhi kebutuhan industri dan mengasah potensi terbaikmu.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8">
+                    @foreach($faculties as $faculty)
+                    <a href="{{ route('faculty.show', $faculty['slug']) }}"
+                       class="faculty-card group flex flex-col p-6 md:p-7 bg-white rounded-[20px] shadow-lg h-full relative overflow-hidden ring-1 ring-black/5">
+                        
+                        {{-- Top Row: Icon, Count & Code Badge --}}
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="faculty-card-icon w-12 h-12 rounded-xl bg-gradient-to-br from-[#740A03] to-[#C3110C] shadow-sm flex items-center justify-center">
+                                @if($faculty['icon'] === 'finance')
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                @elseif($faculty['icon'] === 'industry')
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                                @elseif($faculty['icon'] === 'language')
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+                                @else
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                                @endif
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="inline-flex items-center gap-1.5 rounded-full bg-red-50 px-3 py-1.5 text-xs font-extrabold text-[#C3110C]">
+                                    {{ $faculty['program_count'] }} Program
+                                </span>
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-gray-100 text-gray-500 font-bold text-[10px] uppercase tracking-widest border border-gray-200">
+                                    {{ $faculty['code'] }}
+                                </span>
+                            </div>
+                        </div>
+
+                        {{-- Title & Subtitle --}}
+                        <div class="mb-5">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#C3110C] transition-colors duration-300 tracking-tight">{{ $faculty['name'] }}</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">{{ $faculty['subtitle'] }}</p>
+                        </div>
+
+                        {{-- Classes / Tags --}}
+                        <div class="flex flex-wrap gap-2 mb-7 flex-grow">
+                            @foreach($faculty['classes'] as $class)
+                            <span class="faculty-class-chip inline-flex items-center rounded-full bg-gray-50 px-3 py-1.5 text-[12px] font-semibold leading-tight text-gray-600">
+                                {{ $class }}
+                            </span>
+                            @endforeach
+                        </div>
+
+                        {{-- Footer --}}
+                        <div class="mt-auto">
+                            <div class="flex items-center justify-between rounded-xl bg-[#FAFAFA] px-4 py-3 text-sm font-extrabold text-[#C3110C] group-hover:bg-red-50">
+                                <span>Jelajahi Program</span>
+                                <svg class="faculty-card-arrow w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </div>
+                        </div>
+                    </a>
+                    @endforeach
+                </div>
+            </div>
+        </section>
 
         <!-- ============================================
                  KEUNTUNGAN PROGRAM SECTION
@@ -770,7 +1141,7 @@
             <h3 class="text-2xl md:text-3xl font-bold text-[#C3110C] text-center mb-10">Keuntungan Program</h3>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div class="dashboard-benefit-grid grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
 
             <!-- Benefit 1 -->
             <div class="reveal group relative flex flex-col items-center justify-center text-center p-6 md:p-8 bg-gray-50 border border-gray-200 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full overflow-hidden"
@@ -993,14 +1364,16 @@
             buttons.forEach(btn => {
                 const svg = btn.querySelector('svg');
                 if (btn.dataset.category === category) {
+                    btn.classList.add('active');
                     btn.style.background = 'linear-gradient(135deg, #740A03, #C3110C)';
                     btn.style.color = 'white';
                     btn.style.border = 'none';
                     if (svg) svg.style.color = 'white';
                 } else {
-                    btn.style.background = '#F3F4F6';
+                    btn.classList.remove('active');
+                    btn.style.background = '#FAFAFA';
                     btn.style.color = '#4B5563';
-                    btn.style.border = '2px solid transparent';
+                    btn.style.border = 'none';
                     if (svg) svg.style.color = '#C3110C';
                 }
             });
@@ -1088,61 +1461,6 @@
                 }
             });
         });
-         // Quota Sync Script
-         document.addEventListener('DOMContentLoaded', function() {
-             const initialQuotas = { 
-                 '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15, '7': 15,
-                 'a': 22, 'b': 25, 'c': 22, 'd': 22, 'e': 35, 'f': 15 
-             };
-             const maxQuotas = {
-                 '1': 30, '2': 30, '3': 30, '4': 30, '5': 40, '6': 20, '7': 20,
-                 'a': 30, 'b': 30
-             };
-             let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
-             
-             // Sync initial quotas
-             Object.keys(initialQuotas).forEach(key => {
-                 if (quotas[key] === undefined) quotas[key] = initialQuotas[key];
-             });
-             localStorage.setItem('uisi_quotas', JSON.stringify(quotas));
-
-             // Update UI
-             document.querySelectorAll('.program-card').forEach(card => {
-                 const id = card.dataset.id;
-                 if (id && quotas[id] !== undefined) {
-                     const q = quotas[id];
-                     const maxQ = maxQuotas[id] || 30;
-                     const ratio = q / maxQ;
-                     
-                     const numberSpan = card.querySelector('.kuota-number');
-                     if (numberSpan) {
-                         numberSpan.innerText = q;
-                         
-                         const badge = numberSpan.closest('.kuota-badge');
-                         if (badge) {
-                             badge.classList.remove(
-                                 'bg-red-50', 'text-[#C3110C]', 'border-red-100',
-                                 'text-red-700',
-                                 'bg-yellow-50', 'text-yellow-700', 'border-yellow-100',
-                                 'bg-green-50', 'text-green-700', 'border-green-100',
-                                 'bg-slate-50', 'text-slate-700', 'border-slate-100'
-                             );
-                             
-                             if (q === 0) {
-                                 badge.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-100');
-                             } else if (ratio <= 0.25) {
-                                 badge.classList.add('bg-red-50', 'text-[#C3110C]', 'border-red-100');
-                             } else if (ratio <= 0.50) {
-                                 badge.classList.add('bg-yellow-50', 'text-yellow-700', 'border-yellow-100');
-                             } else {
-                                 badge.classList.add('bg-green-50', 'text-green-700', 'border-green-100');
-                             }
-                         }
-                     }
-                 }
-             });
-         });
-
          // Reveal animation on scroll
         const reveal = () => {
             const reveals = document.querySelectorAll('.reveal, .reveal-down, .reveal-left, .reveal-right');

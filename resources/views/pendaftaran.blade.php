@@ -168,16 +168,30 @@
             background: linear-gradient(145deg, #ffffff, #f1f5f9);
             border: 1px solid rgba(226, 232, 240, 0.8);
         }
+
+        @media (max-width: 768px) {
+            .mobile-x-20 {
+                padding-left: 35px !important;
+                padding-right: 35px !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-x-20 {
+                padding-left: 60px !important;
+                padding-right: 60px !important;
+            }
+        }
     </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+<body class="antialiased min-h-screen flex flex-col lg:flex-row overflow-x-hidden">
 
     <!-- Decorative Blobs (Visible on Mobile) -->
     <div class="blob bg-red-400 w-64 h-64 rounded-full top-[-10%] left-[-10%] md:hidden"></div>
     <div class="blob bg-orange-300 w-64 h-64 rounded-full bottom-[20%] right-[-10%] md:hidden"></div>
 
-    <!-- LEFT SIDE: Branding (Hidden on small mobile, beautiful gradient on desktop) -->
-    <div class="hidden md:flex md:w-5/12 lg:w-1/2 premium-gradient relative flex-col justify-between p-12 text-white overflow-hidden">
+    <!-- LEFT SIDE: Program Detail -->
+    <div class="mobile-x-20 w-full lg:w-5/12 premium-gradient relative flex flex-col justify-between p-6 sm:p-10 lg:p-12 text-white overflow-hidden">
         
         <!-- Abstract Shapes -->
         <div class="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at 80% 20%, white 1px, transparent 1px); background-size: 40px 40px;"></div>
@@ -196,30 +210,65 @@
             </a>
         </div>
 
-        <!-- Center Content -->
-        <div class="relative z-10 max-w-md mt-20">
+        <!-- Program Detail Content -->
+        <div class="relative z-10 w-full max-w-xl mx-auto mt-6 lg:mt-10">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 mb-6">
                 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                 <span class="text-xs font-bold uppercase tracking-wider text-white">Pendaftaran Dibuka</span>
             </div>
-            <h1 class="text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-                Tingkatkan<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-100 to-white">Kariermu</span><br>
-                Sekarang!
-            </h1>
-            <p class="text-white/80 text-lg leading-relaxed mb-8">
-                Langkah pertamamu menuju kompetensi profesional. Bergabunglah dengan program pelatihan dan sertifikasi berstandar industri.
-            </p>
-            
-            <div class="flex items-center gap-4">
-                <div class="flex -space-x-4">
-                    <img data-ms-ignore="true" style="pointer-events: none;" class="w-12 h-12 rounded-full border-2 border-red-800 object-cover" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80" alt="Mahasiswa">
-                    <img data-ms-ignore="true" style="pointer-events: none;" class="w-12 h-12 rounded-full border-2 border-red-800 object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="Pekerja">
-                    <img data-ms-ignore="true" style="pointer-events: none;" class="w-12 h-12 rounded-full border-2 border-red-800 object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Mahasiswa">
+
+            <div class="rounded-3xl bg-white/95 text-gray-900 shadow-2xl shadow-red-950/20 border border-white/40 p-5 sm:p-6 lg:p-7">
+                <div class="flex items-start gap-5">
+                    <div class="w-16 h-16 rounded-2xl premium-gradient flex items-center justify-center shadow-lg shadow-red-900/20 flex-shrink-0">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <div class="min-w-0">
+                        <span class="text-xs font-bold text-red-600 uppercase tracking-widest mb-1 block" id="programCategory">MEMUAT PROGRAM...</span>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-950 leading-tight" id="programName">Harap tunggu sebentar</h1>
+                    </div>
                 </div>
-                <div class="text-sm">
-                    <p class="font-bold">+50 Anggota</p>
-                    <p class="text-white/70">Telah bergabung</p>
+
+                <div class="grid grid-cols-2 gap-3 mt-6 text-sm">
+                    <div class="rounded-2xl bg-white border border-gray-100 p-4">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Biaya</p>
+                        <p class="font-extrabold text-gray-900 mt-1" id="programPrice">-</p>
+                    </div>
+                    <div class="rounded-2xl bg-white border border-gray-100 p-4">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Sisa Kuota</p>
+                        <div id="programQuotaBadge" class="inline-flex items-center gap-2 mt-2 rounded-full border px-3 py-1.5 text-xs font-extrabold">
+                            <span class="w-2 h-2 rounded-full bg-current"></span>
+                            <span><span id="programQuota">-</span> Kursi</span>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-white border border-gray-100 p-4">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Periode</p>
+                        <p class="font-bold text-gray-800 mt-1" id="programDate">-</p>
+                    </div>
+                    <div class="rounded-2xl bg-white border border-gray-100 p-4">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Metode</p>
+                        <p class="font-bold text-gray-800 mt-1" id="programMethod">-</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 rounded-2xl bg-white border border-gray-100 p-5">
+                    <p class="text-xs font-extrabold text-gray-400 uppercase tracking-widest mb-3">Tentang Program</p>
+                    <p class="text-sm leading-relaxed text-gray-600" id="programAbout">
+                        Memuat informasi program...
+                    </p>
+                </div>
+
+                <div class="mt-6 rounded-2xl bg-red-50 border border-red-100 p-5 text-center">
+                    <div class="flex flex-col items-center justify-center gap-3">
+                        <p class="text-xs font-extrabold text-red-700 uppercase tracking-widest">Silabus / Materi Utama</p>
+                        <a href="#" id="programSyllabusPdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-bold text-red-700 border border-red-100 hover:bg-red-100 transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Unduh PDF
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -231,19 +280,8 @@
     </div>
 
     <!-- RIGHT SIDE: Form Area -->
-    <div class="w-full md:w-7/12 lg:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-20 relative z-10">
+    <div class="mobile-x-20 w-full lg:w-7/12 flex items-center justify-center p-6 sm:p-12 lg:p-16 xl:p-20 relative z-10">
         
-        <!-- Mobile Nav (Visible only on mobile) -->
-        <div class="absolute top-6 left-6 md:hidden z-20">
-            <a href="{{ url('/') }}" class="flex items-center gap-2 text-gray-600 font-semibold">
-                <div class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center">
-                    <svg class="w-5 h-5 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
-                </div>
-            </a>
-        </div>
-
         <!-- Form Container -->
         <div class="w-full max-w-xl">
             
@@ -253,20 +291,6 @@
                 <p class="text-gray-500 font-medium">Lengkapi detail di bawah ini untuk mengamankan kuotamu.</p>
             </div>
 
-            <!-- Program Card Detail -->
-            <div class="glass-panel p-5 rounded-2xl mb-8 flex items-center gap-5 relative overflow-hidden group border border-red-100">
-                <div class="absolute inset-0 bg-gradient-to-r from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="w-16 h-16 rounded-2xl premium-gradient flex items-center justify-center shadow-lg shadow-red-200 transform group-hover:scale-105 transition-transform duration-500 flex-shrink-0 z-10">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                    </svg>
-                </div>
-                <div class="z-10">
-                    <span class="text-xs font-bold text-red-600 uppercase tracking-widest mb-1 block" id="programCategory">MEMUAT PROGRAM...</span>
-                    <h3 class="text-lg font-bold text-gray-900 leading-tight" id="programName">Harap tunggu sebentar</h3>
-                </div>
-            </div>
-
             <!-- Form -->
             <form id="registrationForm" onsubmit="handleRegistration(event)" class="space-y-6">
                 
@@ -274,6 +298,12 @@
                 <div class="floating-input">
                     <input type="text" id="name" placeholder=" " required autocomplete="off">
                     <label for="name">Nama Lengkap (Sesuai KTP/KTM)</label>
+                </div>
+
+                <!-- Institution -->
+                <div class="floating-input">
+                    <input type="text" id="institution" placeholder=" " required autocomplete="off">
+                    <label for="institution">Institusi</label>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -396,18 +426,8 @@
     </div>
 
     <script>
-        // Data Program
-        const programs = {
-            '1': { name: 'Perpajakan & Asuransi', category: 'Ekonomi dan Bisnis - Pelatihan', initialQuota: 22 },
-            '2': { name: 'UI/UX Design Fundamental', category: 'Teknologi Kreatif - Pelatihan', initialQuota: 25 },
-            '3': { name: 'Sertifikasi Manajemen Proyek', category: 'Teknik & Industri - Sertifikasi', initialQuota: 22 },
-            '4': { name: 'AutoCAD for Professional', category: 'Teknik & Industri - Sertifikasi', initialQuota: 22 },
-            '5': { name: 'TOEFL Preparation Program', category: 'Unit Bahasa', initialQuota: 35 },
-            '6': { name: 'IELTS Intensive Coaching', category: 'Unit Bahasa', initialQuota: 15 },
-            '7': { name: 'Digital Marketing Specialist', category: 'Teknologi Kreatif - Pelatihan', initialQuota: 15 },
-            'a': { name: 'Corporate Tax & Risk Management', category: 'Global Economics & Business - Pelatihan', initialQuota: 22 },
-            'b': { name: 'UI/UX Design Fundamental (Intl)', category: 'Creative Technology - Pelatihan', initialQuota: 25 }
-        };
+        // Data program berasal dari database.
+        const programs = @json($programsData ?? []);
 
         // Initialize UI from URL
         document.addEventListener('DOMContentLoaded', () => {
@@ -416,22 +436,66 @@
             
             const pName = document.getElementById('programName');
             const pCat = document.getElementById('programCategory');
+            const pPrice = document.getElementById('programPrice');
+            const pQuota = document.getElementById('programQuota');
+            const pQuotaBadge = document.getElementById('programQuotaBadge');
+            const pDate = document.getElementById('programDate');
+            const pMethod = document.getElementById('programMethod');
+            const pAbout = document.getElementById('programAbout');
+            const pSyllabusPdf = document.getElementById('programSyllabusPdf');
             const sBtn = document.getElementById('submitBtn');
 
             if (programs[programId]) {
-                pName.innerText = programs[programId].name;
-                pCat.innerText = programs[programId].category;
+                const program = programs[programId];
+                const currentQuota = program.quota;
+                const totalQuota = program.totalQuota || program.quota || 1;
+
+                pName.innerText = program.name;
+                pCat.innerText = program.category;
+                pPrice.innerText = formatRupiah(program.price);
+                pQuota.innerText = currentQuota;
+                setQuotaBadge(pQuotaBadge, currentQuota, totalQuota);
+                pDate.innerText = program.date;
+                pMethod.innerText = program.method;
+                pAbout.innerText = program.about;
+                pSyllabusPdf.href = program.syllabusUrl;
             } else {
                 pName.innerText = "Program Tidak Ditemukan";
                 pCat.innerText = "ERROR 404";
+                pAbout.innerText = "Program yang dipilih tidak tersedia. Silakan kembali ke daftar program.";
+                setQuotaBadge(pQuotaBadge, 0, 1);
+                pSyllabusPdf.classList.add('hidden');
                 sBtn.disabled = true;
                 sBtn.style.opacity = '0.5';
                 sBtn.style.cursor = 'not-allowed';
             }
         });
 
+        function formatRupiah(value) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                maximumFractionDigits: 0
+            }).format(value);
+        }
+
+        function setQuotaBadge(badge, currentQuota, totalQuota) {
+            const ratio = totalQuota > 0 ? currentQuota / totalQuota : 0;
+            badge.className = 'inline-flex items-center gap-2 mt-2 rounded-full border px-3 py-1.5 text-xs font-extrabold';
+
+            if (currentQuota <= 0) {
+                badge.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+            } else if (ratio <= 0.25) {
+                badge.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
+            } else if (ratio <= 0.5) {
+                badge.classList.add('bg-yellow-50', 'text-yellow-700', 'border-yellow-200');
+            } else {
+                badge.classList.add('bg-green-50', 'text-green-700', 'border-green-200');
+            }
+        }
+
         // Handle Form Submit
-        function handleRegistration(e) {
+        async function handleRegistration(e) {
             e.preventDefault();
             
             const urlParams = new URLSearchParams(window.location.search);
@@ -439,14 +503,35 @@
             
             if (!programs[programId]) return;
 
-            // Update Quota in LocalStorage
-            let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
-            let currentQuota = quotas[programId] !== undefined ? quotas[programId] : programs[programId].initialQuota;
-            
-            if (currentQuota > 0) {
-                quotas[programId] = currentQuota - 1;
-                localStorage.setItem('uisi_quotas', JSON.stringify(quotas));
+            let quotaUpdatedOnServer = false;
+            let latestQuota = programs[programId].quota;
+
+            try {
+                const response = await fetch("{{ route('pendaftaran.decrement-quota') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({ program_id: programId })
+                });
+
+                quotaUpdatedOnServer = response.ok;
+                const result = await response.json().catch(() => null);
+                if (result && typeof result.quota === 'number') {
+                    latestQuota = result.quota;
+                }
+            } catch (error) {
+                quotaUpdatedOnServer = false;
             }
+
+            if (!quotaUpdatedOnServer) {
+                alert('Kuota gagal diperbarui. Silakan coba lagi.');
+                return;
+            }
+
+            programs[programId].quota = latestQuota;
 
             // Set Registration Status for Notifications
             const registrationData = {

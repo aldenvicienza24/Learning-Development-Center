@@ -1,4 +1,19 @@
 {{-- resources/views/program2.blade.php --}}
+@php
+    $programQuotas = $programQuotas ?? [];
+    $quotaValue = fn(string $id, int $fallback) => $programQuotas[$id]['quota'] ?? $fallback;
+    $quotaBadgeClasses = function (string $id, int $fallbackQuota, int $fallbackTotal) use ($programQuotas) {
+        $quota = $programQuotas[$id]['quota'] ?? $fallbackQuota;
+        $total = $programQuotas[$id]['total_quota'] ?? $fallbackTotal;
+        $ratio = $total > 0 ? $quota / $total : 0;
+
+        if ($quota <= 0) return 'bg-slate-50 text-slate-700 border-slate-100';
+        if ($ratio <= 0.25) return 'bg-red-50 text-[#C3110C] border-red-100';
+        if ($ratio <= 0.50) return 'bg-yellow-50 text-yellow-700 border-yellow-100';
+
+        return 'bg-green-50 text-green-700 border-green-100';
+    };
+@endphp
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -235,7 +250,7 @@ position: relative; display: inline-block; margin-bottom: 24px;
     <!-- MAIN CONTENT -->
     <main class="flex-grow">
     <!-- Header Section -->
-    <section class="px-4 md:px-8 py-16 relative overflow-hidden mt-[15px]" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
+    <section class="mobile-x-20 px-4 md:px-8 py-16 relative overflow-hidden mt-[15px]" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
         <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
         <!-- Circular White Textures - 6 Lingkaran Full -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none">
@@ -336,7 +351,7 @@ position: relative; display: inline-block; margin-bottom: 24px;
     </section>
 
 <!-- Content -->
-<div class="px-4 md:px-8 py-10 max-w-7xl mx-auto">
+<div class="mobile-x-20 px-4 md:px-8 py-10 max-w-7xl mx-auto">
 <!-- Search & Filter Bar -->
 <div class="reveal delay-300 flex flex-row gap-4 mb-10">
 <div class="flex-1 relative">
@@ -410,10 +425,10 @@ Reset Filter
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div class="kuota-badge px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
-                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">22</span></span>
+                    <div class="kuota-badge px-3 py-2.5 {{ $quotaBadgeClasses('a', 22, 30) }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">{{ $quotaValue('a', 22) }}</span></span>
                     </div>
-                    <a href="detaila" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                    <a href="{{ url('/pendaftaran') }}?id=a" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                 </div>
             </div>
         </div>
@@ -430,9 +445,11 @@ Reset Filter
     </div>
 </section>
 
+@include('partials.faculty-cards-section')
+
 <!-- Program Segera Terbuka -->
 <section class="pt-16 pb-8 border-t border-gray-200 mt-16" data-section="segera">
-<div class="max-w-7xl mx-auto px-4 md:px-8">
+<div class="mobile-x-20 max-w-7xl mx-auto px-4 md:px-8">
     <h2 class="reveal text-3xl font-bold text-center text-[#C3110C] mb-12">Program Segera Terbuka</h2>
     <div class="relative w-full group">
         <div class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-6 pb-6 pt-2 slider-container program-slider">
@@ -504,7 +521,7 @@ Reset Filter
 </div>
 </main>
 <!-- FOOTER -->
-<footer class="px-4 md:px-8 py-12 md:py-14 relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
+<footer class="mobile-x-20 px-4 md:px-8 py-12 md:py-14 relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
 <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
 <div class="relative z-10 max-w-7xl mx-auto">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
@@ -571,20 +588,6 @@ Jalan Veteran, Kompleks PT Semen Indonesia, Sidomoro,
 <!-- JAVASCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ===== QUOTA SYNC =====
-            const initialQuotas = { '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15 };
-            let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
-            
-            // For Program 2, we use data-id="a", "b", etc. Let's map them if needed or just use IDs.
-            // Currently program2 cards have data-id="a".
-            const cards = document.querySelectorAll('.program-card[data-id]');
-            cards.forEach(card => {
-                const id = card.dataset.id;
-                if(quotas[id]) {
-                    const numberSpan = card.querySelector('.kuota-number');
-                    if(numberSpan) numberSpan.innerText = quotas[id];
-                }
-            });
 // ===== FILTER VARIABLES =====
 let selectedMonth = null;
 let selectedYear = 2025;
@@ -823,66 +826,6 @@ filterPrograms();
 });
 </script>
 @include('partials.navbar-scripts')
-    <!-- Quota Sync Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const initialQuotas = { 
-                '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15, '7': 15,
-                'a': 22, 'b': 25, 'c': 22, 'd': 22, 'e': 35, 'f': 15 
-            };
-            const maxQuotas = {
-                '1': 30, '2': 30, '3': 30, '4': 30, '5': 40, '6': 20, '7': 20,
-                'a': 30, 'b': 30
-            };
-            let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
-            
-            // Sync initial quotas
-            Object.keys(initialQuotas).forEach(key => {
-                if (quotas[key] === undefined) quotas[key] = initialQuotas[key];
-            });
-            localStorage.setItem('uisi_quotas', JSON.stringify(quotas));
-
-            // Update UI
-            document.querySelectorAll('.program-card').forEach(card => {
-                const id = card.dataset.id;
-                if (id && quotas[id] !== undefined) {
-                    const q = quotas[id];
-                    const maxQ = maxQuotas[id] || 30;
-                    const ratio = q / maxQ;
-                    
-                    const numberSpan = card.querySelector('.kuota-number');
-                    if (numberSpan) {
-                        numberSpan.innerText = q;
-                        
-                        const badge = numberSpan.closest('.kuota-badge');
-                        if (badge) {
-                            badge.classList.remove(
-                                'bg-red-50', 'text-[#C3110C]', 'border-red-100',
-                                'text-red-700',
-                                'bg-yellow-50', 'text-yellow-700', 'border-yellow-100',
-                                'bg-green-50', 'text-green-700', 'border-green-100',
-                                'bg-slate-50', 'text-slate-700', 'border-slate-100'
-                            );
-                            
-                            if (q === 0) {
-                                badge.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-100');
-                            } else if (ratio <= 0.25) {
-                                badge.classList.add('bg-red-50', 'text-[#C3110C]', 'border-red-100');
-                            } else if (ratio <= 0.50) {
-                                badge.classList.add('bg-yellow-50', 'text-yellow-700', 'border-yellow-100');
-                            } else {
-                                badge.classList.add('bg-green-50', 'text-green-700', 'border-green-100');
-                            }
-                        }
-                    }
-                }
-            });
-
-            if (typeof updateNotifications === 'function') {
-                updateNotifications();
-            }
-        });
-    </script>
         <script>
         document.addEventListener('DOMContentLoaded', function() {
             const sections = document.querySelectorAll('section[data-section]');

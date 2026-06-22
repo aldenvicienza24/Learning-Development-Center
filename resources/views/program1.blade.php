@@ -1,4 +1,19 @@
 {{-- resources/views/program.blade.php --}}
+@php
+    $programQuotas = $programQuotas ?? [];
+    $quotaValue = fn(string $id, int $fallback) => $programQuotas[$id]['quota'] ?? $fallback;
+    $quotaBadgeClasses = function (string $id, int $fallbackQuota, int $fallbackTotal) use ($programQuotas) {
+        $quota = $programQuotas[$id]['quota'] ?? $fallbackQuota;
+        $total = $programQuotas[$id]['total_quota'] ?? $fallbackTotal;
+        $ratio = $total > 0 ? $quota / $total : 0;
+
+        if ($quota <= 0) return 'bg-slate-50 text-slate-700 border-slate-100';
+        if ($ratio <= 0.25) return 'bg-red-50 text-[#C3110C] border-red-100';
+        if ($ratio <= 0.50) return 'bg-yellow-50 text-yellow-700 border-yellow-100';
+
+        return 'bg-green-50 text-green-700 border-green-100';
+    };
+@endphp
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -100,11 +115,21 @@ body { overflow-x: hidden; }
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .slider-container { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+.program-filter-bar {
+    position: relative;
+    z-index: 80;
+}
+
+.programs-layer {
+    position: relative;
+    z-index: 1;
+}
+
 /* Unit Filter Dropdown */
 .unit-filter-dropdown {
     display: none; position: absolute; top: 100%; left: 0; margin-top: 8px;
     background: white; border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15); padding: 12px; z-index: 200; min-width: 100%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15); padding: 12px; z-index: 999; min-width: 100%;
 }
 .unit-filter-dropdown.active { display: block; }
 .unit-option {
@@ -230,6 +255,7 @@ position: relative; display: inline-block; margin-bottom: 24px;
 .hero-height { height: 450px !important; }
 .hero-title { font-size: 1.75rem !important; }
 .hero-text { font-size: 0.875rem !important; }
+.mobile-x-20 { padding-left: 35px !important; padding-right: 35px !important; }
 .month-filter-dropdown { min-width: 280px; grid-template-columns: repeat(2, 1fr); }
 .calendar-container { min-width: 280px; padding: 16px; }
 .calendar-day { font-size: 12px; padding: 8px 0; }
@@ -237,6 +263,9 @@ position: relative; display: inline-block; margin-bottom: 24px;
 @media (max-width: 640px) {
 .hero-height { height: 400px !important; }
 .hero-title { font-size: 1.5rem !important; }
+}
+@media (min-width: 769px) {
+.mobile-x-20 { padding-left: 60px !important; padding-right: 60px !important; }
 }
 </style>
     @include('partials.navbar-styles')
@@ -247,7 +276,7 @@ position: relative; display: inline-block; margin-bottom: 24px;
 <!-- MAIN CONTENT -->
 <main class="flex-grow">
     <!-- Header Section -->
-    <section class="px-4 md:px-8 py-16 relative overflow-hidden mt-[15px]" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
+    <section class="mobile-x-20 px-4 md:px-8 py-16 relative overflow-hidden mt-[15px]" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
         <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
         <!-- Circular White Textures - 6 Lingkaran Full -->
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none">
@@ -348,9 +377,9 @@ position: relative; display: inline-block; margin-bottom: 24px;
     </div>
 </section>
 <!-- Content -->
-<div class="px-4 md:px-8 py-10 max-w-7xl mx-auto">
+<div class="mobile-x-20 px-4 md:px-8 py-10 max-w-7xl mx-auto">
 <!-- Search & Filter Bar -->
-<div class="reveal delay-300 flex flex-row gap-4 mb-10">
+<div class="program-filter-bar reveal delay-300 flex flex-row gap-4 mb-10">
 <div class="flex-1 relative">
 <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -393,7 +422,7 @@ Reset Filter
 </button>
 </div>
 <!-- All Program Sections Container -->
-<div id="programsContainer">
+<div id="programsContainer" class="programs-layer">
     <section data-section="pelatihan">
         <h2 class="reveal-left text-2xl md:text-3xl font-bold text-gray-800 section-title pl-2.5">Pelatihan</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-6 program-grid">
@@ -402,7 +431,7 @@ Reset Filter
         data-category="Pelatihan" data-unit="Ekonomi dan Bisnis" data-month="2"
         data-date-start="2025-02-12" data-date-end="2025-03-12"  data-id="1" data-title="Perpajakan & Asuransi">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Perpajakan & Asuransi" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Perpajakan & Asuransi" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">Perpajakan & Asuransi</h4>
@@ -420,10 +449,10 @@ Reset Filter
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div class="kuota-badge px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
-                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">22</span></span>
+                    <div class="kuota-badge px-3 py-2.5 {{ $quotaBadgeClasses('1', 22, 30) }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">{{ $quotaValue('1', 22) }}</span></span>
                     </div>
-                    <a href="detail1" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                    <a href="{{ url('/pendaftaran') }}?id=1" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                 </div>
             </div>
         </div>
@@ -433,7 +462,7 @@ Reset Filter
         data-category="Pelatihan" data-unit="Teknologi Kreatif" data-month="2"
         data-date-start="2025-02-13" data-date-end="2025-03-29"  data-id="2" data-title="UI/UX Design Fundamental">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop" alt="UI/UX Design Fundamental" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop" alt="UI/UX Design Fundamental" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">UI/UX Design Fundamental</h4>
@@ -451,10 +480,10 @@ Reset Filter
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div class="kuota-badge px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
-                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">25</span></span>
+                    <div class="kuota-badge px-3 py-2.5 {{ $quotaBadgeClasses('2', 25, 30) }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">{{ $quotaValue('2', 25) }}</span></span>
                     </div>
-                    <a href="detail2" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                    <a href="{{ url('/pendaftaran') }}?id=2" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                 </div>
             </div>
         </div>
@@ -464,7 +493,7 @@ Reset Filter
         data-category="Pelatihan" data-unit="Teknologi Kreatif" data-month="3"
         data-date-start="2025-03-18" data-date-end="2025-04-20"  data-id="7" data-title="Digital Marketing Specialist">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Digital Marketing Specialist" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Digital Marketing Specialist" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">Digital Marketing Specialist</h4>
@@ -482,10 +511,10 @@ Reset Filter
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div class="kuota-badge px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
-                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">15</span></span>
+                    <div class="kuota-badge px-3 py-2.5 {{ $quotaBadgeClasses('7', 15, 20) }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">{{ $quotaValue('7', 15) }}</span></span>
                     </div>
-                    <a href="detail6" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                    <a href="{{ url('/pendaftaran') }}?id=7" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                 </div>
             </div>
         </div>
@@ -513,7 +542,7 @@ Reset Filter
         data-category="Sertifikasi" data-unit="Teknik & Industri" data-month="3"
         data-date-start="2025-03-10" data-date-end="2025-04-25"  data-id="3" data-title="Sertifikasi Manajemen Proyek">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Sertifikasi Manajemen Proyek" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Sertifikasi Manajemen Proyek" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">Sertifikasi Manajemen Proyek</h4>
@@ -531,10 +560,10 @@ Reset Filter
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div class="kuota-badge px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
-                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">22</span></span>
+                    <div class="kuota-badge px-3 py-2.5 {{ $quotaBadgeClasses('3', 22, 30) }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">{{ $quotaValue('3', 22) }}</span></span>
                     </div>
-                    <a href="detail3" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                    <a href="{{ url('/pendaftaran') }}?id=3" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                 </div>
             </div>
         </div>
@@ -544,7 +573,7 @@ Reset Filter
         data-category="Sertifikasi" data-unit="Teknik & Industri" data-month="3"
         data-date-start="2025-03-15" data-date-end="2025-04-10"  data-id="4" data-title="AutoCAD for Professional">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop" alt="AutoCAD for Professional" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop" alt="AutoCAD for Professional" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">AutoCAD for Professional</h4>
@@ -562,10 +591,10 @@ Reset Filter
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div class="kuota-badge px-3 py-2.5 bg-red-50 text-[#C3110C] border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
-                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">22</span></span>
+                    <div class="kuota-badge px-3 py-2.5 {{ $quotaBadgeClasses('4', 22, 30) }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">{{ $quotaValue('4', 22) }}</span></span>
                     </div>
-                    <a href="detail4" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                    <a href="{{ url('/pendaftaran') }}?id=4" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                 </div>
             </div>
         </div>
@@ -590,7 +619,7 @@ Reset Filter
         data-category="Bahasa" data-unit="Unit Bahasa" data-month="2"
         data-date-start="2025-02-20" data-date-end="2025-03-30"  data-id="5" data-title="TOEFL Preparation Program">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=600&fit=crop" alt="TOEFL Preparation Program" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=600&fit=crop" alt="TOEFL Preparation Program" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">TOEFL Preparation Program</h4>
@@ -608,10 +637,10 @@ Reset Filter
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div class="px-3 py-2.5 bg-red-50 text-red-700 border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
-                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">35</span></span>
+                    <div class="kuota-badge px-3 py-2.5 {{ $quotaBadgeClasses('5', 35, 40) }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">{{ $quotaValue('5', 35) }}</span></span>
                     </div>
-                    <a href="detail5" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                    <a href="{{ url('/pendaftaran') }}?id=5" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                 </div>
             </div>
         </div>
@@ -621,7 +650,7 @@ Reset Filter
         data-category="Bahasa" data-unit="Unit Bahasa" data-month="2"
         data-date-start="2025-02-28" data-date-end="2025-03-15"  data-id="6" data-title="IELTS Intensive Coaching">
             <div class="rounded-xl overflow-hidden mb-4 shadow-sm h-48">
-                <img data-ms-ignore="true" style="pointer-events: none;" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="IELTS Intensive Coaching" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="IELTS Intensive Coaching" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="px-2 pb-2 text-center sm:text-left">
                 <h4 class="text-xl font-bold text-gray-900 mb-0 line-clamp-2">IELTS Intensive Coaching</h4>
@@ -639,10 +668,10 @@ Reset Filter
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div class="px-3 py-2.5 bg-red-50 text-red-700 border-red-100 text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
-                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">15</span></span>
+                    <div class="kuota-badge px-3 py-2.5 {{ $quotaBadgeClasses('6', 15, 20) }} text-[10px] font-bold rounded-lg border flex items-center gap-1.5 shadow-sm">
+                        <span class="sisa-kuota-text">Sisa: <span class="kuota-number">{{ $quotaValue('6', 15) }}</span></span>
                     </div>
-                    <a href="detail6" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
+                    <a href="{{ url('/pendaftaran') }}?id=6" class="w-full sm:flex-1 py-3.5 bg-gradient-to-r from-[#740A03] to-[#C3110C] text-white text-xs font-bold rounded-xl hover:shadow-lg transition-all text-center shadow-md">Daftar Sekarang</a>
                 </div>
             </div>
         </div>
@@ -660,9 +689,11 @@ Reset Filter
     </section>
 </div><!-- End programsContainer -->
 
+@include('partials.faculty-cards-section')
+
 <!-- Program Segera Terbuka -->
 <section class="pt-16 pb-8 border-t border-gray-200 mt-16" data-section="segera">
-<div class="max-w-7xl mx-auto px-4 md:px-8">
+<div class="mobile-x-20 max-w-7xl mx-auto px-4 md:px-8">
     <h2 class="reveal text-3xl font-bold text-center text-[#C3110C] mb-12">Program Segera Terbuka</h2>
     <div class="relative w-full group">
         <button class="slider-btn prev-btn absolute left-0 top-1/2 -translate-y-1/2 -ml-4 md:-ml-6 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-[#C3110C] hover:bg-red-50 transition-all z-20 opacity-0 group-hover:opacity-100 disabled:cursor-not-allowed hidden md:flex">
@@ -755,13 +786,13 @@ Reset Filter
 </div>
 </main>
 <!-- FOOTER -->
-<footer class="px-4 md:px-8 py-12 md:py-14 relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
+<footer class="mobile-x-20 px-4 md:px-8 py-12 md:py-14 relative overflow-hidden" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
 <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
 <div class="relative z-10 max-w-7xl mx-auto">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 <div class="space-y-8">
 <div class="flex items-center justify-center lg:justify-start">
-<img data-ms-ignore="true" style="pointer-events: none;" src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
+<img src="/images/LogoUISI.png" alt="UISI Logo" class="w-full max-w-[250px] md:max-w-[320px] lg:max-w-[400px] h-auto object-contain">
 </div>
 <div class="rounded-xl overflow-hidden shadow-lg border-2 border-white/20" style="border-radius: 10px;">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.1234567890123!2d112.12345678901234!3d-7.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMDcnMjQuNCJTIDExMsKwMDcnMjQuNCJF!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -773,7 +804,7 @@ Reset Filter
 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-20">
 <div class="space-y-2">
 <h5 class="text-white/70 text-xs font-semibold uppercase tracking-wider">Narahubung</h5>
-<a href="tel:+62 858-0069-5077 (Rahastri Rengganis)" class="text-white font-semibold text-base hover:text-white/80 transition block">+62 849-4655-565165</a>
+<a href="tel:+628494655565165" class="text-white font-semibold text-base hover:text-white/80 transition block">+62 849-4655-565165</a>
 </div>
 <div class="space-y-2">
 <h5 class="text-white/70 text-xs font-semibold uppercase tracking-wider">Jam Operasional</h5>
@@ -1065,61 +1096,6 @@ filterPrograms();
 
     @include('partials.navbar-scripts')
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const initialQuotas = { 
-                '1': 22, '2': 25, '3': 22, '4': 22, '5': 35, '6': 15, '7': 15,
-                'a': 22, 'b': 25, 'c': 22, 'd': 22, 'e': 35, 'f': 15 
-            };
-            const maxQuotas = {
-                '1': 30, '2': 30, '3': 30, '4': 30, '5': 40, '6': 20, '7': 20,
-                'a': 30, 'b': 30
-            };
-            let quotas = JSON.parse(localStorage.getItem('uisi_quotas')) || {};
-            
-            // Sync initial quotas
-            Object.keys(initialQuotas).forEach(key => {
-                if (quotas[key] === undefined) quotas[key] = initialQuotas[key];
-            });
-            localStorage.setItem('uisi_quotas', JSON.stringify(quotas));
-
-            // Update UI
-            document.querySelectorAll('.program-card').forEach(card => {
-                const id = card.dataset.id;
-                if (id && quotas[id] !== undefined) {
-                    const q = quotas[id];
-                    const maxQ = maxQuotas[id] || 30;
-                    const ratio = q / maxQ;
-                    
-                    const numberSpan = card.querySelector('.kuota-number');
-                    if (numberSpan) {
-                        numberSpan.innerText = q;
-                        
-                        const badge = numberSpan.closest('.kuota-badge');
-                        if (badge) {
-                            badge.classList.remove(
-                                'bg-red-50', 'text-[#C3110C]', 'border-red-100',
-                                'text-red-700',
-                                'bg-yellow-50', 'text-yellow-700', 'border-yellow-100',
-                                'bg-green-50', 'text-green-700', 'border-green-100',
-                                'bg-slate-50', 'text-slate-700', 'border-slate-100'
-                            );
-                            
-                            if (q === 0) {
-                                badge.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-100');
-                            } else if (ratio <= 0.25) {
-                                badge.classList.add('bg-red-50', 'text-[#C3110C]', 'border-red-100');
-                            } else if (ratio <= 0.50) {
-                                badge.classList.add('bg-yellow-50', 'text-yellow-700', 'border-yellow-100');
-                            } else {
-                                badge.classList.add('bg-green-50', 'text-green-700', 'border-green-100');
-                            }
-                        }
-                    }
-                }
-            });
-        });
-    </script>
         <script>
         document.addEventListener('DOMContentLoaded', function() {
             const sections = document.querySelectorAll('section[data-section]');
