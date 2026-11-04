@@ -4965,10 +4965,10 @@
         }
     }
 
-    :is(.public-dashboard .program-list-section, .public-program-list #programsContainer) .program-card {
-        max-width: 320px !important;
+    :is(.public-dashboard .program-list-section, .public-program-list #programsContainer) .program-grid > .program-card {
+        max-width: 248px !important;
         justify-self: center !important;
-        padding: 8px !important;
+        padding: 0 !important;
         border: 1px solid var(--public-line) !important;
         border-radius: 14px !important;
         box-shadow: none !important;
@@ -4977,21 +4977,21 @@
     :is(.public-dashboard .program-list-section, .public-program-list #programsContainer) .program-card > div:first-child::after {
         display: none !important;
     }
-    :is(.public-dashboard .program-list-section, .public-program-list #programsContainer) .program-card > div:first-child {
-        width: min(100%,192px) !important;
-        align-self: center !important;
+    :is(.public-dashboard .program-list-section, .public-program-list #programsContainer) .program-grid > .program-card > div:first-child {
+        width: 100% !important;
+        align-self: stretch !important;
         aspect-ratio: 4 / 5 !important;
         margin-bottom: 0 !important;
-        border-radius: 8px !important;
+        border-radius: 0 !important;
         background: #f3f5fa !important;
     }
     :is(.public-dashboard .program-list-section, .public-program-list #programsContainer) .program-card > div:first-child img {
         object-fit: contain !important;
         transform: none !important;
     }
-    :is(.public-dashboard .program-list-section, .public-program-list #programsContainer) .program-card > .px-2 {
+    :is(.public-dashboard .program-list-section, .public-program-list #programsContainer) .program-grid > .program-card > .px-2 {
         gap: 0 !important;
-        padding: 10px 6px 4px !important;
+        padding: 10px 10px 12px !important;
     }
     :is(.public-dashboard .program-list-section, .public-program-list #programsContainer) .program-card h4 {
         display: block !important;
