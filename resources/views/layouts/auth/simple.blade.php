@@ -1,20 +1,53 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('partials.head')
+        <style>
+            .auth-cms-page {
+                min-height: 100vh;
+                margin: 0;
+                background:
+                    radial-gradient(circle at 12% 10%, rgba(37, 99, 235, 0.08), transparent 28%),
+                    radial-gradient(circle at 88% 90%, rgba(8, 20, 45, 0.07), transparent 30%),
+                    var(--uisi-canvas);
+                color: var(--uisi-ink);
+                font-family: var(--uisi-font-family);
+            }
+
+            .auth-cms-wrap {
+                box-sizing: border-box;
+                display: flex;
+                min-height: 100vh;
+                align-items: center;
+                justify-content: center;
+                padding: 28px 16px;
+            }
+
+            .auth-cms-stack {
+                width: 100%;
+                max-width: 460px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border-width: 0;
+            }
+        </style>
     </head>
-    <body class="min-h-screen bg-white antialiased dark:bg-linear-to-b dark:from-neutral-950 dark:to-neutral-900">
-        <div class="bg-background flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
-            <div class="flex w-full max-w-sm flex-col gap-2">
-                <a href="{{ route('home') }}" class="flex flex-col items-center gap-2 font-medium" wire:navigate>
-                    <span class="flex h-9 w-9 mb-1 items-center justify-center rounded-md">
-                        <x-app-logo-icon class="size-9 fill-current text-black dark:text-white" />
-                    </span>
-                    <span class="sr-only">{{ config('app.name', 'Laravel') }}</span>
-                </a>
-                <div class="flex flex-col gap-6">
-                    {{ $slot }}
-                </div>
+    <body class="auth-cms-page">
+        <div class="auth-cms-wrap">
+            <div class="auth-cms-stack">
+                {{ $slot }}
             </div>
         </div>
         @fluxScripts

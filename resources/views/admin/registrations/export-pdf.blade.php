@@ -2,12 +2,12 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Export Peserta</title>
+    <title>Ekspor Data Peserta</title>
     <style>
-        body { font-family: Arial, sans-serif; color: #111827; }
+        body { font-family: Inter, 'DejaVu Sans', sans-serif; color: #111827; }
         table { width: 100%; border-collapse: collapse; font-size: 12px; }
         th, td { border: 1px solid #d1d5db; padding: 8px; text-align: left; }
-        th { background: #f3f4f6; }
+        th { background: #0E214A; }
         @media print { button { display: none; } }
     </style>
 </head>

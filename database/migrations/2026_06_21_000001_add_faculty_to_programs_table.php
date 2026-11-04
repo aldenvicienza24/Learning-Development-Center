@@ -9,9 +9,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('programs', function (Blueprint $table) {
-            $table->string('faculty')->default('teknologi-kreatif')->after('category');
-        });
+        if (! Schema::hasColumn('programs', 'faculty')) {
+            Schema::table('programs', function (Blueprint $table) {
+                $table->string('faculty')->default('teknologi-kreatif')->after('category');
+            });
+        }
 
         DB::table('programs')
             ->whereIn('detail_url', ['detail1', 'detaila', 'detailb'])
@@ -28,8 +30,10 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('programs', function (Blueprint $table) {
-            $table->dropColumn('faculty');
-        });
+        if (Schema::hasColumn('programs', 'faculty')) {
+            Schema::table('programs', function (Blueprint $table) {
+                $table->dropColumn('faculty');
+            });
+        }
     }
 };

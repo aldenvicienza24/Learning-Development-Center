@@ -18,20 +18,18 @@ class HeroController extends Controller
     public function update(Request $request)
     {
         $data = $request->validate([
-            'hero_title' => ['required', 'string', 'max:160'],
-            'hero_description' => ['required', 'string', 'max:500'],
-            'hero_calendar_link' => ['nullable', 'string', 'max:500'],
-            'hero_banner' => ['nullable', 'image', 'max:2048'],
+            'hero_banner' => ['nullable', 'image', 'max:4096'],
+            'service_training_image' => ['nullable', 'image', 'max:4096'],
+            'service_certification_image' => ['nullable', 'image', 'max:4096'],
+            'service_language_image' => ['nullable', 'image', 'max:4096'],
         ]);
 
-        WebsiteSetting::setValue('hero_title', $data['hero_title']);
-        WebsiteSetting::setValue('hero_description', $data['hero_description']);
-        WebsiteSetting::setValue('hero_calendar_link', $data['hero_calendar_link'] ?: '/kalender-program');
-
-        if ($request->hasFile('hero_banner')) {
-            WebsiteSetting::setValue('hero_banner', $request->file('hero_banner')->store('cms', 'public'));
+        foreach (['hero_banner', 'service_training_image', 'service_certification_image', 'service_language_image'] as $imageKey) {
+            if ($request->hasFile($imageKey)) {
+                WebsiteSetting::setValue($imageKey, $data[$imageKey]->store('cms/homepage', 'public'));
+            }
         }
 
-        return back()->with('status', 'Hero berhasil diperbarui.');
+        return back()->with('status', 'Konten beranda berhasil diperbarui.');
     }
 }

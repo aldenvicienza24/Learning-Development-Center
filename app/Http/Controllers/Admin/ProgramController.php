@@ -4,35 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use App\Services\ProgramSeatService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
 
 class ProgramController extends Controller
 {
-    public function index(Request $request)
+    public function __construct(private ProgramSeatService $seats) {}
+
+    public function index()
     {
-        $category = strtolower((string) $request->query('category', ''));
-        $type = $request->query('type');
+        $this->seats->releaseExpired();
 
         $programs = Program::query()
             ->withCount('registrations')
-            ->when($request->filled('status'), fn ($query) => $this->applyComputedStatusFilter($query, $request->status))
-            ->when($category !== '', fn ($query) => $query->whereRaw('LOWER(category) = ?', [$category]))
-            ->when($type === 'nasional', fn ($query) => $query->where('is_international', false))
-            ->when($type === 'internasional', fn ($query) => $query->where('is_international', true))
             ->latest()
-            ->paginate(10)
-            ->withQueryString();
+            ->paginate(10);
 
-        return view('admin.programs.index', [
-            'programs' => $programs,
-            'categories' => [
-                'pelatihan' => 'Pelatihan',
-                'sertifikasi' => 'Sertifikasi',
-                'bahasa' => 'Bahasa',
-            ],
-        ]);
+        return view('admin.programs.index', compact('programs'));
     }
 
     public function create()
@@ -42,9 +31,42 @@ class ProgramController extends Controller
                 'status' => 'coming_soon',
                 'quota' => 30,
                 'total_quota' => 30,
-                'is_international' => false,
             ]),
+            'allTrainers' => \App\Models\Trainer::all(),
         ]);
+    }
+
+    public function show(Request $request, Program $program)
+    {
+        $this->seats->releaseExpired();
+
+        $program->refresh();
+        $program->loadCount('registrations');
+
+        $participantSearch = trim((string) $request->query('participant_search', ''));
+
+        $registrations = $program->registrations()
+            ->when($participantSearch !== '', function ($query) use ($participantSearch) {
+                $query->where(function ($query) use ($participantSearch) {
+                    $query->where('full_name', 'like', '%'.$participantSearch.'%')
+                        ->orWhere('email', 'like', '%'.$participantSearch.'%')
+                        ->orWhere('phone', 'like', '%'.$participantSearch.'%')
+                        ->orWhere('institution', 'like', '%'.$participantSearch.'%')
+                        ->orWhere('participant_status', 'like', '%'.$participantSearch.'%')
+                        ->orWhere('payment_status', 'like', '%'.$participantSearch.'%')
+                        ->orWhere('status', 'like', '%'.$participantSearch.'%');
+                });
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        $statusCounts = $program->registrations()
+            ->selectRaw("COALESCE(NULLIF(participant_status, ''), status, 'menunggu_verifikasi') as status_key, COUNT(*) as total")
+            ->groupBy('status_key')
+            ->pluck('total', 'status_key');
+
+        return view('admin.programs.show', compact('program', 'registrations', 'statusCounts', 'participantSearch'));
     }
 
     public function store(Request $request)
@@ -59,22 +81,34 @@ class ProgramController extends Controller
         }
 
         $data['image_url'] = $data['image_url'] ?? 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80';
-        $data['detail_url'] = $data['detail_url'] ?: $this->nextDetailUrl();
+        $data['detail_url'] = ($data['detail_url'] ?? null) ?: $this->nextDetailUrl();
         $data['slug'] = Program::uniqueSlug($data['title']);
         $data = $this->normalizeQuotaStatus($data);
 
-        Program::create($data);
+        $program = Program::create($data);
+        
+        if (isset($data['trainers'])) {
+            $program->trainers()->sync($data['trainers']);
+        }
 
         return redirect()->route('admin.programs.index')->with('status', 'Program berhasil ditambahkan.');
     }
 
     public function edit(Program $program)
     {
-        return view('admin.programs.edit', compact('program'));
+        $this->seats->releaseExpired();
+
+        $program->refresh();
+        $allTrainers = \App\Models\Trainer::all();
+
+        return view('admin.programs.edit', compact('program', 'allTrainers'));
     }
 
     public function update(Request $request, Program $program)
     {
+        $this->seats->releaseExpired();
+
+        $program->refresh();
         $data = $this->validatedData($request);
         $data = $this->normalizeProgramDates($data, $program);
 
@@ -90,9 +124,15 @@ class ProgramController extends Controller
 
         $data['image_url'] = $data['image_url'] ?? $program->image_url;
         $data['detail_url'] = $data['detail_url'] ?: $program->detail_url;
-        $data = $this->normalizeQuotaStatus($data);
+        $data = $this->normalizeQuotaStatus($data, $program);
 
         $program->update($data);
+        
+        if (isset($data['trainers'])) {
+            $program->trainers()->sync($data['trainers']);
+        } else {
+            $program->trainers()->sync([]);
+        }
 
         return redirect()->route('admin.programs.index')->with('status', 'Program berhasil diperbarui.');
     }
@@ -104,37 +144,50 @@ class ProgramController extends Controller
         return redirect()->route('admin.programs.index')->with('status', 'Program berhasil dihapus.');
     }
 
-    private function applyComputedStatusFilter(Builder $query, string $status): void
+    public function duplicate(Program $program)
     {
-        if ($status === 'closed') {
-            $query->where(fn ($inner) => $inner
-                ->where('status', 'closed')
-                ->orWhere('is_registration_closed', true)
-                ->orWhere('quota', '<=', 0));
+        $newProgram = $program->replicate();
+        
+        $newProgram->title = $program->title; // Tetap sama, tidak ada embel-embel (Copy) agar tidak terlihat publik jika lupa dihapus
+        $newProgram->slug = Program::uniqueSlug($program->title);
+        $newProgram->detail_url = strtolower(str_replace('-', '', substr($newProgram->slug, 0, 10)) . rand(100, 999));
+        $newProgram->show_in_offer = false; // Sembunyikan dari penawaran utama sementara admin mengedit
+        
+        $newProgram->save();
 
-            return;
+        return redirect()->route('admin.programs.edit', $newProgram)->with('status', 'Program berhasil diduplikasi. Silakan perbarui tanggal pendaftaran dan pelaksanaan.');
+    }
+
+    public function sendTestimonialEmails(Request $request, Program $program)
+    {
+        // Cek apakah tanggal pelaksanaan sudah lewat
+        if (now()->lessThanOrEqualTo($program->execution_date ?? $program->event_date)) {
+            return back()->with('status', 'Gagal! Form testimoni hanya bisa dikirim setelah program selesai dilaksanakan.');
         }
 
-        if ($status === 'coming_soon') {
-            $query
-                ->where('status', '!=', 'closed')
-                ->where('is_registration_closed', false)
-                ->where('quota', '>', 0)
-                ->where(fn ($inner) => $inner
-                    ->where('status', 'coming_soon')
-                    ->orWhere(fn ($dateQuery) => $dateQuery
-                        ->whereNotIn('status', ['open_registration', 'closed'])
-                        ->whereDate('registration_open_date', '>', now())));
+        $pesertaApproved = $program->registrations()
+            ->where('status', 'disetujui') // Or whatever the approved status is
+            ->get();
 
-            return;
+        if ($pesertaApproved->isEmpty()) {
+            return back()->with('status', 'Tidak ada peserta yang disetujui untuk program ini.');
         }
 
-        if ($status === 'open_registration') {
-            $query
-                ->where('status', 'open_registration')
-                ->where('is_registration_closed', false)
-                ->where('quota', '>', 0);
+        foreach ($pesertaApproved as $peserta) {
+            $token = \Illuminate\Support\Str::uuid();
+            
+            \App\Models\Testimonial::create([
+                'program_id' => $program->id,
+                'registration_id' => $peserta->id,
+                'token' => $token,
+                'status' => 'pending',
+                'is_submitted' => false,
+            ]);
+
+            \Illuminate\Support\Facades\Mail::to($peserta->email)->queue(new \App\Mail\TestimonialMail($token, $program));
         }
+
+        return back()->with('status', 'Email form testimoni sedang dikirim ke seluruh peserta terdaftar yang disetujui!');
     }
 
     private function validatedData(Request $request): array
@@ -142,10 +195,11 @@ class ProgramController extends Controller
         return $request->validate([
             'title' => ['required', 'string', 'max:180'],
             'category' => ['required', 'string', 'max:80'],
-            'faculty' => ['nullable', 'string', 'max:80'],
+            'faculty' => ['required', 'string', 'max:120'],
             'image_url' => ['nullable', 'string', 'max:500'],
             'registration_start_date' => ['nullable', 'date'],
             'registration_end_date' => ['nullable', 'date', 'after_or_equal:registration_start_date'],
+            'execution_date' => ['nullable', 'date'],
             'detail_url' => ['nullable', 'string', 'max:120'],
             'description' => ['required', 'string'],
             'syllabus' => ['required', 'string', 'max:500'],
@@ -159,13 +213,13 @@ class ProgramController extends Controller
                     }
                 },
             ],
-            'total_quota' => ['required', 'integer', 'min:1'],
-            'quota' => ['required', 'integer', 'min:0', 'lte:total_quota'],
-            'status' => ['required', 'in:coming_soon,open_registration,closed'],
+            'quota' => ['required', 'integer', 'min:0'],
             'is_registration_closed' => ['nullable', 'boolean'],
-            'is_international' => ['required', 'boolean'],
-            'thumbnail' => ['nullable', 'image', 'max:2048'],
-        ]) + ['is_registration_closed' => false];
+            'show_in_offer' => ['nullable', 'boolean'],
+            'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048', 'dimensions:max_width=2400,max_height=3000'],
+            'trainers' => ['nullable', 'array'],
+            'trainers.*' => ['exists:trainers,id'],
+        ]) + ['is_registration_closed' => false, 'show_in_offer' => false, 'status' => 'open_registration'];
     }
 
     private function normalizeProgramDates(array $data, ?Program $program = null): array
@@ -199,10 +253,11 @@ class ProgramController extends Controller
         return $data;
     }
 
-    private function normalizeQuotaStatus(array $data): array
+    private function normalizeQuotaStatus(array $data, ?Program $program = null): array
     {
         $data['quota'] = max(0, (int) $data['quota']);
-        $data['total_quota'] = max((int) $data['total_quota'], $data['quota']);
+        $reservedSeats = $program ? $this->reservedSeatCount($program) : 0;
+        $data['total_quota'] = $data['quota'] + $reservedSeats;
 
         if ($data['quota'] <= 0) {
             $data['quota'] = 0;
@@ -221,6 +276,13 @@ class ProgramController extends Controller
         $data['is_registration_closed'] = false;
 
         return $data;
+    }
+
+    private function reservedSeatCount(Program $program): int
+    {
+        return $program->registrations()
+            ->where('seat_reserved', true)
+            ->count();
     }
 
     private function nextDetailUrl(): string

@@ -1,54 +1,34 @@
 @once
 <style>
-    @keyframes facultyCardEnter {
-        from { opacity: 0; transform: translateY(18px) scale(0.98); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
     .faculty-section-card {
-        animation: facultyCardEnter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
-        transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease, background-color 220ms ease;
+        transition: background-color 160ms ease;
     }
-
-    .faculty-section-card:nth-child(2) { animation-delay: 90ms; }
-    .faculty-section-card:nth-child(3) { animation-delay: 180ms; }
-    .faculty-section-card:nth-child(4) { animation-delay: 270ms; }
 
     .faculty-section-card::before {
         content: '';
         position: absolute;
         inset: 0 0 auto 0;
         height: 4px;
-        background: linear-gradient(90deg, #740A03, #C3110C);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 220ms ease;
+        background: linear-gradient(90deg, #08142D, #2563EB);
     }
 
     .faculty-section-card:hover {
-        transform: translateY(-7px);
-        box-shadow: 0 24px 44px -20px rgba(40, 12, 12, 0.45);
+        box-shadow: 0 24px 44px -20px rgba(5, 11, 31, 0.45);
     }
-
-    .faculty-section-card:hover::before { transform: scaleX(1); }
 
     .faculty-section-card-icon,
     .faculty-section-card-arrow,
     .faculty-section-chip {
-        transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), background-color 220ms ease, color 220ms ease, box-shadow 220ms ease;
+        transition: background-color 160ms ease, color 160ms ease;
     }
 
     .faculty-section-card:hover .faculty-section-card-icon {
-        transform: translateY(-2px) scale(1.06) rotate(-2deg);
-        box-shadow: 0 14px 28px -14px rgba(195, 17, 12, 0.9);
+        box-shadow: 0 14px 28px -14px rgba(37, 99, 235, 0.9);
     }
 
-    .faculty-section-card:hover .faculty-section-card-arrow { transform: translateX(4px); }
-
     .faculty-section-card:hover .faculty-section-chip {
-        background: #FEF2F2;
-        color: #7F1D1D;
-        transform: translateX(2px);
+        background: #0E214A;
+        color: #F2F6FF;
     }
 
     @media (max-width: 768px) {
@@ -84,29 +64,29 @@
 @endonce
 
 @if(!empty($faculties))
-<section class="faculty-cards-section mobile-x-20 relative overflow-hidden py-16 md:py-20 mt-12 md:mt-16" style="background: linear-gradient(135deg, #740A03 0%, #C3110C 100%);">
+<section class="faculty-cards-section mobile-x-20 relative overflow-hidden py-16 md:py-20 mt-12 md:mt-16" style="background: linear-gradient(135deg, #08142D 0%, #2563EB 100%);">
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none">
-        <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1400px] md:h-[1400px] bg-white rounded-full" style="opacity: 0.02;"></div>
-        <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[680px] md:w-[1200px] md:h-[1200px] bg-white rounded-full" style="opacity: 0.03; animation-delay: 0.4s;"></div>
-        <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] md:w-[1000px] md:h-[1000px] bg-white rounded-full" style="opacity: 0.04; animation-delay: 0.8s;"></div>
-        <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] md:w-[800px] md:h-[800px] bg-white rounded-full" style="opacity: 0.05; animation-delay: 1.2s;"></div>
+        <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1400px] md:h-[1400px] bg-[#0E214A] rounded-full" style="opacity: 0.02;"></div>
+        <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[680px] md:w-[1200px] md:h-[1200px] bg-[#0E214A] rounded-full" style="opacity: 0.03; animation-delay: 0.4s;"></div>
+        <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] md:w-[1000px] md:h-[1000px] bg-[#0E214A] rounded-full" style="opacity: 0.04; animation-delay: 0.8s;"></div>
+        <div class="animate-ripple absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] md:w-[800px] md:h-[800px] bg-[#0E214A] rounded-full" style="opacity: 0.05; animation-delay: 1.2s;"></div>
     </div>
 
     <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
 
     <div class="faculty-cards-section-inner relative z-10 max-w-7xl mx-auto">
         <div class="reveal text-center mb-12">
-            <span class="inline-block py-1.5 px-4 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold tracking-widest uppercase mb-4 backdrop-blur-sm">Eksplorasi</span>
-            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight drop-shadow-md">Program Bidang Studi</h2>
-            <p class="text-white/80 text-sm md:text-base max-w-2xl mx-auto font-medium">Pilih program berdasarkan bidang yang paling sesuai dengan kebutuhan belajar dan kariermu.</p>
+            <span class="inline-block py-1.5 px-4 rounded-full bg-[#0E214A]/10 border border-white/20 text-white text-xs font-bold tracking-widest uppercase mb-4 backdrop-blur-sm">Exploration</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight drop-shadow-md">Academic Fields</h2>
+            <p class="text-white/80 text-sm md:text-base max-w-2xl mx-auto font-medium">Explore international programs based on the field that best matches your learning goals and career path.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8">
             @foreach($faculties as $faculty)
-            <a href="{{ route('faculty.show', $faculty['slug']) }}"
-               class="faculty-section-card group flex flex-col p-6 md:p-7 bg-white rounded-[20px] shadow-lg h-full relative overflow-hidden ring-1 ring-black/5">
+            <a href="{{ route('faculty.show', $faculty['slug']) }}?type=internasional"
+               class="faculty-section-card group flex flex-col p-6 md:p-7 bg-[#0E214A] rounded-[20px] shadow-lg h-full relative overflow-hidden ring-1 ring-black/5">
                 <div class="flex items-center justify-between mb-6">
-                    <div class="faculty-section-card-icon w-12 h-12 rounded-xl bg-gradient-to-br from-[#740A03] to-[#C3110C] shadow-sm flex items-center justify-center">
+                    <div class="faculty-section-card-icon w-12 h-12 rounded-xl bg-gradient-to-br from-[#08142D] to-[#2563EB] shadow-sm flex items-center justify-center">
                         @if($faculty['icon'] === 'finance')
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         @elseif($faculty['icon'] === 'industry')
@@ -118,25 +98,25 @@
                         @endif
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="inline-flex items-center gap-1.5 rounded-full bg-red-50 px-3 py-1.5 text-xs font-extrabold text-[#C3110C]">{{ $faculty['program_count'] }} Program</span>
-                        <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-gray-100 text-gray-500 font-bold text-[10px] uppercase tracking-widest border border-gray-200">{{ $faculty['code'] }}</span>
+                        <span class="inline-flex items-center gap-1.5 rounded-full bg-[#0E214A] px-3 py-1.5 text-xs font-extrabold text-[#9CB0CF]">{{ $faculty['program_count'] }} {{ $faculty['program_count'] == 1 ? 'Program' : 'Programs' }}</span>
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-[#0E214A] text-gray-500 font-bold text-[10px] uppercase tracking-widest border border-gray-200">{{ $faculty['code'] }}</span>
                     </div>
                 </div>
 
                 <div class="mb-5">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#C3110C] transition-colors duration-300 tracking-tight">{{ $faculty['name'] }}</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#9CB0CF] transition-colors duration-300 tracking-tight">{{ $faculty['name'] }}</h3>
                     <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">{{ $faculty['subtitle'] }}</p>
                 </div>
 
                 <div class="flex flex-wrap gap-2 mb-7 flex-grow">
                     @foreach($faculty['classes'] as $class)
-                    <span class="faculty-section-chip inline-flex items-center rounded-full bg-gray-50 px-3 py-1.5 text-[12px] font-semibold leading-tight text-gray-600">{{ $class }}</span>
+                    <span class="faculty-section-chip inline-flex items-center rounded-full bg-[#050B1F] px-3 py-1.5 text-[12px] font-semibold leading-tight text-gray-600">{{ $class }}</span>
                     @endforeach
                 </div>
 
                 <div class="mt-auto">
-                    <div class="flex items-center justify-between rounded-xl bg-[#FAFAFA] px-4 py-3 text-sm font-extrabold text-[#C3110C] group-hover:bg-red-50">
-                        <span>Jelajahi Program</span>
+                    <div class="flex items-center justify-between rounded-xl bg-[#F2F6FF] px-4 py-3 text-sm font-extrabold text-[#9CB0CF] group-hover:bg-[#0E214A]">
+                        <span>Explore Programs</span>
                         <svg class="faculty-section-card-arrow w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </div>
                 </div>

@@ -1,59 +1,231 @@
-<x-layouts::auth :title="__('Log in')">
-    <div class="flex flex-col gap-6">
-        <x-auth-header :title="__('Log in to your account')" :description="__('Enter your email and password below to log in')" />
+<x-layouts::auth :title="__('Login CMS')">
+    <style>
+        .cms-login-card {
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid var(--uisi-blue-line);
+            border-radius: 24px 0 24px 0;
+            background: var(--uisi-surface);
+            box-shadow: 0 24px 60px rgba(16, 28, 79, 0.14);
+        }
 
-        <!-- Session Status -->
-        <x-auth-session-status class="text-center" :status="session('status')" />
+        .cms-login-header {
+            padding: 30px;
+            background: linear-gradient(135deg, var(--uisi-navy) 0%, var(--uisi-blue) 100%);
+            color: var(--uisi-on-brand);
+        }
 
-        <form method="POST" action="{{ route('login.store') }}" class="flex flex-col gap-6">
-            @csrf
+        .cms-login-kicker {
+            margin: 0;
+            color: var(--uisi-blue-soft);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
 
-            <!-- Email Address -->
-            <flux:input
-                name="email"
-                :label="__('Email address')"
-                :value="old('email')"
-                type="email"
-                required
-                autofocus
-                autocomplete="email"
-                placeholder="email@example.com"
-            />
+        .cms-login-title {
+            margin: 8px 0 0;
+            font-size: 28px;
+            line-height: 1.15;
+            font-weight: 900;
+            letter-spacing: 0;
+        }
 
-            <!-- Password -->
-            <div class="relative">
-                <flux:input
-                    name="password"
-                    :label="__('Password')"
-                    type="password"
-                    required
-                    autocomplete="current-password"
-                    :placeholder="__('Password')"
-                    viewable
-                />
+        .cms-login-copy {
+            margin: 12px 0 0;
+            color: var(--uisi-blue-soft);
+            font-size: 14px;
+            line-height: 1.7;
+        }
 
-                @if (Route::has('password.request'))
-                    <flux:link class="absolute top-0 text-sm end-0" :href="route('password.request')" wire:navigate>
-                        {{ __('Forgot your password?') }}
-                    </flux:link>
-                @endif
-            </div>
+        .cms-login-body {
+            padding: 30px;
+        }
 
-            <!-- Remember Me -->
-            <flux:checkbox name="remember" :label="__('Remember me')" :checked="old('remember')" />
+        .cms-login-form {
+            display: grid;
+            gap: 18px;
+        }
 
-            <div class="flex items-center justify-end">
-                <flux:button variant="primary" type="submit" class="w-full" data-test="login-button">
-                    {{ __('Log in') }}
-                </flux:button>
-            </div>
-        </form>
+        .cms-login-field {
+            display: grid;
+            gap: 8px;
+            min-width: 0;
+        }
 
-        @if (Route::has('register'))
-            <div class="space-x-1 text-sm text-center rtl:space-x-reverse text-zinc-600 dark:text-zinc-400">
-                <span>{{ __('Don\'t have an account?') }}</span>
-                <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
-            </div>
-        @endif
-    </div>
+        .cms-login-label {
+            color: var(--uisi-ink);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .cms-login-input {
+            box-sizing: border-box;
+            display: block;
+            width: 100%;
+            height: 48px;
+            margin: 0;
+            border: 1px solid var(--uisi-control-line);
+            border-radius: 12px;
+            background: var(--uisi-blue-subtle);
+            color: var(--uisi-ink);
+            padding: 0 14px;
+            font-size: 14px;
+            line-height: 1.5;
+            outline: none;
+            appearance: none;
+            transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+        }
+
+        .cms-login-input::placeholder {
+            color: var(--uisi-muted);
+            opacity: 1;
+        }
+
+        .cms-login-input:hover {
+            border-color: var(--color-uisi-300);
+        }
+
+        .cms-login-input:focus {
+            border-color: var(--uisi-blue);
+            box-shadow: 0 0 0 3px rgba(59, 91, 255, 0.14);
+        }
+
+        .cms-login-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .cms-login-check {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--uisi-muted);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .cms-login-link {
+            color: var(--uisi-blue);
+            font-size: 13px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .cms-login-link:hover {
+            text-decoration: underline;
+        }
+
+        .cms-login-button {
+            width: 100%;
+            min-height: 48px;
+            border: 0;
+            border-radius: 12px 0 12px 0;
+            background: linear-gradient(135deg, var(--uisi-cobalt), var(--uisi-blue));
+            color: var(--uisi-on-brand);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 900;
+            transition: background 150ms ease, transform 150ms ease;
+        }
+
+        .cms-login-button:hover {
+            background: var(--uisi-navy);
+            transform: translateY(-1px);
+        }
+
+        .cms-login-error {
+            color: var(--uisi-danger);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 480px) {
+            .cms-login-header,
+            .cms-login-body {
+                padding: 22px;
+            }
+
+            .cms-login-title {
+                font-size: 24px;
+            }
+        }
+
+        /* Autofill Overrides */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px var(--uisi-blue-subtle) inset !important;
+            -webkit-text-fill-color: var(--uisi-ink) !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    </style>
+
+    <section class="cms-login-card" aria-label="Masuk ke CMS UISI">
+        <header class="cms-login-header">
+            <p class="cms-login-kicker">UISI CMS</p>
+            <h1 class="cms-login-title">Masuk sebagai Admin</h1>
+            <p class="cms-login-copy">Kelola gambar hero, program, peserta, dan pengaturan situs web melalui panel CMS.</p>
+        </header>
+
+        <div class="cms-login-body">
+            <x-auth-session-status class="mb-4 text-center" :status="session('status')" />
+
+            <form method="POST" action="{{ route('login.store') }}" class="cms-login-form">
+                @csrf
+
+                <label class="cms-login-field">
+                    <span class="cms-login-label">Email Admin</span>
+                    <input
+                        class="cms-login-input"
+                        name="email"
+                        value="{{ old('email') }}"
+                        type="email"
+                        required
+                        autofocus
+                        autocomplete="email"
+                        placeholder="Masukkan email admin"
+                    >
+                    @error('email')
+                        <span class="cms-login-error">{{ $message }}</span>
+                    @enderror
+                </label>
+
+                <label class="cms-login-field">
+                    <span class="cms-login-label">Kata Sandi Admin</span>
+                    <input
+                        class="cms-login-input"
+                        name="password"
+                        type="password"
+                        required
+                        autocomplete="current-password"
+                        placeholder="Masukkan kata sandi"
+                    >
+                    @error('password')
+                        <span class="cms-login-error">{{ $message }}</span>
+                    @enderror
+                </label>
+
+                <div class="cms-login-row">
+                    <label class="cms-login-check">
+                        <input name="remember" type="checkbox" @checked(old('remember'))>
+                        <span>Ingat perangkat ini</span>
+                    </label>
+
+                    @if (Route::has('password.request'))
+                        <a class="cms-login-link" href="{{ route('password.request') }}">Lupa kata sandi?</a>
+                    @endif
+                </div>
+
+                <button type="submit" class="cms-login-button" data-test="login-button">
+                    Masuk ke CMS
+                </button>
+            </form>
+        </div>
+    </section>
 </x-layouts::auth>

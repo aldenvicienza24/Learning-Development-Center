@@ -1,0 +1,28 @@
+PAKET LENGKAP UPDATE HOSTING UISI
+
+Paket ini untuk website yang sudah terpasang di biz.partnership.uisi.ac.id.
+Perbaikan migrasi MariaDB 5.5, aplikasi, aset, library produksi, dan aktivator
+sudah digabung dalam satu ZIP. Tidak perlu mengunggah ZIP patch terpisah.
+Database, .env, dan unggahan server tidak disertakan dan tidak ditimpa ZIP.
+
+1. Upload ZIP ke /home/biz.partnership.
+2. Extract di folder itu dan pilih Overwrite/Replace.
+   Folder laravel dan public_html harus menyatu dengan folder yang sudah ada.
+3. Buka https://biz.partnership.uisi.ac.id/aktifkan-update-uisi-20260918.php
+4. Masukkan kunci aktivasi sebelumnya dari PETUNJUK.txt di laptop.
+   Pastikan backup database hosting masih tersedia, centang konfirmasi,
+   lalu klik Aktifkan pembaruan. Tunggu tulisan BERHASIL.
+5. Buka website dan CMS. Setelah berhasil, hapus ZIP dan file periksa-update-uisi*.php
+   dari server. File aktivator menghapus dirinya sendiri setelah berhasil.
+
+Jangan extract ZIP ke dalam public_html atau laravel.
+Tidak perlu terminal, npm, atau Composer di server.
+Jangan upload PETUNJUK.txt yang memuat kunci aktivasi ke folder publik.
+
+Jika aktivasi gagal, kirim tahap kegagalan dan kode error yang tampil.
+Paket menerapkan migrasi tertunda pada database yang sama. Migrasi lama mengisi
+nominal pembayaran disetujui yang masih kosong menggunakan tarif program saat ini.
+Backup MySQL/MariaDB tetap menggunakan backup hosting yang telah disiapkan.
+Pengingat saat browser ditutup membutuhkan worker/cron; email membutuhkan SMTP.
+Paket ini memperbaiki kendala yang sudah terdiagnosis, bukan jaminan seluruh
+fitur Laravel mendukung MariaDB 5.5. Upgrade database perlu direncanakan admin.

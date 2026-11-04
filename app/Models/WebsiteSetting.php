@@ -23,6 +23,12 @@ class WebsiteSetting extends Model
         Cache::forget('website_settings');
     }
 
+    public static function forgetValue(string $key): void
+    {
+        static::query()->where('key', $key)->delete();
+        Cache::forget('website_settings');
+    }
+
     public static function allAsArray(): array
     {
         return Cache::rememberForever('website_settings', fn () => static::query()

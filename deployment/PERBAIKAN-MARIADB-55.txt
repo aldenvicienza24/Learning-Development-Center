@@ -1,0 +1,36 @@
+PERBAIKAN MIGRASI HOSTING UISI - MariaDB 5.5.68
+
+Paket kecil ini digunakan SETELAH ZIP update utama sudah diekstrak.
+Isi: dua file migrasi yang diperbaiki dan aktivator browser yang diperbarui.
+Tidak berisi database, .env, vendor, atau unggahan pengguna.
+
+1. Pastikan backup MySQL/MariaDB produksi sebelum update masih tersedia.
+2. Upload ZIP patch ke /home/biz.partnership.
+3. Extract di /home/biz.partnership dan pilih Overwrite/Replace.
+   Hasilnya langsung menyatu dengan laravel/ dan public_html/ yang ada.
+4. Buka https://biz.partnership.uisi.ac.id/aktifkan-update-uisi-20260918.php
+5. Gunakan kunci aktivasi sebelumnya. Centang konfirmasi sesuai kondisi backup.
+6. Klik Aktifkan pembaruan dan tunggu BERHASIL.
+   Jika gagal, kirim tahap migrasi, SQLSTATE, dan kode driver yang ditampilkan.
+7. Setelah berhasil, buka website dan CMS, lalu periksa data, galeri, dan pembayaran.
+8. Hapus ZIP patch, ZIP update, dan file periksa-update-uisi*.php dari server.
+   Aktivator menghapus dirinya sendiri setelah berhasil.
+
+Perbaikan:
+- Pengecekan is_international memakai metadata dasar yang ada di MariaDB 5.5.
+- photos dan comments memakai LONGTEXT; model tetap menyimpan/membaca array JSON.
+- Aktivator menyebut migrasi dan kode database jika proses gagal lagi.
+
+Aktivator melanjutkan migrasi yang belum tercatat, bukan memasang ulang database.
+Migrasi tetap menghapus kolom is_international yang sudah tidak dipakai aplikasi,
+menambah kolom/tabel baru, dan mengisi nominal pembayaran lama yang disetujui
+tetapi belum tercatat berdasarkan tarif program, sesuai update utama.
+Aktivator tidak membuat backup MySQL/MariaDB; gunakan backup hosting yang tersedia.
+SMTP dan worker/cron masih diperlukan untuk pengingat pembayaran.
+
+Pengujian lokal: kompilasi SQL MySQL dengan simulasi metadata MariaDB lama;
+tes fungsional galeri, Web Push, dan analitik pada SQLite. Belum diuji langsung
+pada server MariaDB 5.5.68. Patch ini tidak menjamin seluruh kompatibilitas Laravel
+dengan MariaDB lama. Laravel 12 mendukung MariaDB 10.3+:
+https://laravel.com/docs/12.x/database
+Mintalah pengelola hosting merencanakan upgrade MariaDB ke versi yang didukung.

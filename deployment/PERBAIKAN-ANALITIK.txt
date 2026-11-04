@@ -1,0 +1,17 @@
+PERBAIKAN ANALITIK UISI - 19 September 2026
+
+1. Upload ZIP perbaikan analitik ke /home/biz.partnership.
+2. Extract di folder tersebut, pilih Overwrite/Replace.
+3. Buka https://biz.partnership.uisi.ac.id/aktifkan-analitik-uisi.php
+4. Masukkan kunci aktivasi sebelumnya, lalu klik Aktifkan analitik.
+5. Setelah BERHASIL, buka Dashboard Analitik dan klik Muat ulang atau Ctrl + F5.
+6. Hapus ZIP dari server. File aktivasi terhapus otomatis setelah berhasil.
+
+Paket tidak mengubah database, data peserta, unggahan, atau .env.
+Tidak perlu migrasi, terminal, instalasi Python, atau pengaturan ulang database.
+Analitik sekarang dihitung menggunakan PHP. Grafik tetap memakai Plotly yang
+sudah ada dalam aset frontend, sehingga tidak perlu upload ulang seluruh website.
+
+Validasi: 10 tes fitur (113 assertions), 18 skenario kesetaraan metrik/grafik
+dengan Python, dan API analitik HTTP 200 pada PHP 8.2.12 + MariaDB 5.5.68
+dengan Python tidak tersedia dan proc_open dinonaktifkan.

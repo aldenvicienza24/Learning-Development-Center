@@ -30,7 +30,7 @@
             <label class="block">
                 <span class="cms-label">Status Peserta</span>
                 <select name="participant_status" class="cms-input mt-2 w-full px-3 py-2.5 text-sm">
-                    @foreach (['menunggu_verifikasi' => 'Menunggu Verifikasi', 'diproses' => 'Diproses', 'diterima' => 'Diterima', 'ditolak' => 'Ditolak'] as $status => $label)
+                    @foreach (['menunggu_pembayaran' => 'Menunggu Pembayaran', 'menunggu_verifikasi' => 'Menunggu Verifikasi', 'diproses' => 'Diproses', 'diterima' => 'Diterima', 'ditolak' => 'Ditolak'] as $status => $label)
                         <option value="{{ $status }}" @selected(old('participant_status', $registration->participant_status ?: $registration->status) === $status)>{{ $label }}</option>
                     @endforeach
                 </select>
@@ -38,7 +38,7 @@
             <label class="block">
                 <span class="cms-label">Status Pembayaran</span>
                 <select name="payment_status" class="cms-input mt-2 w-full px-3 py-2.5 text-sm">
-                    @foreach (['menunggu_verifikasi' => 'Menunggu Verifikasi', 'disetujui' => 'Disetujui', 'ditolak' => 'Ditolak'] as $status => $label)
+                    @foreach (['menunggu_pembayaran' => 'Belum Bayar', 'menunggu_verifikasi' => 'Menunggu Verifikasi', 'disetujui' => 'Disetujui', 'ditolak' => 'Ditolak'] as $status => $label)
                         <option value="{{ $status }}" @selected(old('payment_status', $registration->payment_status ?? 'menunggu_verifikasi') === $status)>{{ $label }}</option>
                     @endforeach
                 </select>
@@ -47,17 +47,18 @@
                 <span class="cms-label">Bukti Pembayaran</span>
                 <input type="file" name="payment_proof" accept="image/*,.pdf" class="cms-input mt-2 w-full px-3 py-2.5 text-sm">
                 @if ($proofUrl)
-                    <a href="{{ $proofUrl }}" target="_blank" class="mt-2 inline-block text-sm font-bold text-[#C3110C]">Lihat file saat ini</a>
+                    <a href="{{ $proofUrl }}" target="_blank" class="mt-2 inline-block text-sm font-bold text-[#9CB0CF]">Lihat berkas saat ini</a>
                     @if ($isProofImage)
                         <img src="{{ $proofUrl }}" alt="Bukti pembayaran {{ $registration->full_name }}" class="mt-3 h-32 w-full rounded-lg border border-slate-200 object-contain">
                     @endif
                 @endif
             </label>
+            @include('admin.registrations.receipt-fields')
         </div>
 
         <div class="mt-6 flex gap-3">
             <button class="cms-btn cms-btn-primary">Simpan</button>
-            <a href="{{ route('admin.registrations.index') }}" class="cms-btn cms-btn-secondary">Batal</a>
+            <a href="{{ $registration->program ? route('admin.programs.show', $registration->program) : route('admin.programs.index') }}" class="cms-btn cms-btn-secondary">Batal</a>
         </div>
     </form>
 @endsection

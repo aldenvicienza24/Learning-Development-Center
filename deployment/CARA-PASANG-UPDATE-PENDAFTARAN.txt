@@ -1,0 +1,10 @@
+UPDATE PENDAFTARAN UISI - TANPA DATABASE
+
+1. Upload ZIP ke /home/biz.partnership.
+2. Extract tepat di /home/biz.partnership dan pilih Overwrite/Replace.
+3. Jangan extract di dalam public_html atau laravel.
+4. Buka URL clear-update-cache.php yang diberikan.
+5. Setelah muncul tulisan berhasil, buka website dengan Ctrl + F5.
+6. Uji pendaftaran baru.
+
+Paket tidak berisi database, .env, storage, bukti pembayaran, atau migration.

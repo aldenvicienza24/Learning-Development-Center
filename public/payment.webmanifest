@@ -1,0 +1,10 @@
+{
+    "id": "/",
+    "name": "UISI Learning & Development",
+    "short_name": "UISI",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "theme_color": "#b91c1c",
+    "background_color": "#ffffff"
+}

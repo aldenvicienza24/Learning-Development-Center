@@ -1,0 +1,41 @@
+VALIDASI PAKET LENGKAP UISI - 19 September 2026
+
+Pengujian integrasi lokal menggunakan MariaDB 5.5.68 asli dari arsip resmi
+dan PHP 8.2.12 (Windows). Hosting melaporkan PHP 8.2.20 dan MariaDB 5.5.68.
+Pengujian ini tidak terhubung ke database produksi.
+
+Fixture mereproduksi keadaan migrasi hosting: 18 migrasi sudah selesai,
+enam migrasi terbaru masih tertunda, ada peserta, program, dan unggahan contoh.
+Fixture lama dibuat dengan adapter metadata khusus pengujian. Saat menjalankan
+aktivator, adapter tidak dimuat: aplikasi memakai library produksi dalam ZIP.
+
+Hasil:
+- Aktivator selesai dengan BERHASIL pada PHP 8.2 dan MariaDB 5.5.68.
+- Seluruh 24 migrasi tercatat selesai.
+- Kunci aplikasi, koneksi database, peserta, dan unggahan lama tetap utuh.
+- Nominal pembayaran lama yang disetujui diisi sesuai migrasi, tanpa menebak tanggal.
+- Array foto dan komentar berhasil disimpan/dibaca melalui kolom LONGTEXT.
+- Web Push key generation, cache cleanup, package discovery, view compilation,
+  queue restart, dan keluar dari maintenance berhasil.
+- Aktivator menghapus dirinya setelah selesai.
+- Dashboard, login CMS, detail program, pendaftaran, dan dua halaman fakultas
+  mengembalikan HTTP 200.
+- Tes regresi halaman, pencarian, dan pendaftaran: 10 lulus, 92 assertions.
+
+Perbaikan paket:
+- Metadata kolom dasar untuk migrasi penghapusan is_international.
+- Penyimpanan galeri tidak memerlukan tipe JSON native database.
+- Kueri detail dan fakultas tidak lagi memakai kolom is_international yang dihapus.
+- Aktivator sudah ada di public_html; tidak perlu ZIP patch atau file PHP terpisah.
+
+Batas pengujian: SMTP nyata, izin filesystem hosting, dan cron/worker belum
+diverifikasi. Pengingat saat browser ditutup membutuhkan
+worker/cron, dan pengiriman email membutuhkan SMTP valid.
+Paket tidak mengganti database, .env, atau unggahan dengan data laptop.
+
+Perbaikan analitik 19 September:
+- Analitik default berjalan langsung di PHP, tanpa Python atau proc_open.
+- API analitik HTTP 200 pada PHP 8.2.12 + MariaDB 5.5.68, proc_open dinonaktifkan,
+  executable Python tidak tersedia; filter tanggal/program/status tetap berfungsi.
+- 18 skenario hasil metrik dan grafik dibandingkan dengan mesin Python: cocok.
+- 10 tes fitur analitik lulus (113 assertions).

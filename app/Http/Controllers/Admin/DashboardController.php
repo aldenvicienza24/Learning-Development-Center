@@ -10,17 +10,23 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $programs = Program::query()->withCount('registrations')->latest()->get();
+        $activeRegistrationClosure = function ($query) {
+            $query->whereRaw("COALESCE(NULLIF(participant_status, ''), status, 'menunggu_verifikasi') != 'ditolak'");
+        };
+
+        $programs = Program::query()->withCount(['registrations' => $activeRegistrationClosure])->latest()->get();
 
         return view('admin.dashboard', [
             'totalPrograms' => $programs->count(),
-            'totalRegistrations' => Registration::query()->count(),
+            'totalRegistrations' => Registration::query()
+                ->whereRaw("COALESCE(NULLIF(participant_status, ''), status, 'menunggu_verifikasi') != 'ditolak'")
+                ->count(),
             'activePrograms' => $programs->where('computed_status', 'open_registration')->count(),
             'comingSoonPrograms' => $programs->where('computed_status', 'coming_soon')->count(),
             'latestRegistrations' => Registration::query()->with('program')->latest()->limit(5)->get(),
             'latestPrograms' => $programs->take(5),
             'upcomingPrograms' => Program::query()
-                ->withCount('registrations')
+                ->withCount(['registrations' => $activeRegistrationClosure])
                 ->whereNotNull('event_date')
                 ->whereDate('event_date', '>=', today())
                 ->orderBy('event_date')

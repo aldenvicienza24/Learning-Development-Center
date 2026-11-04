@@ -1,0 +1,414 @@
+PANDUAN HOSTING DAN UPDATE WEBSITE UISI
+=======================================
+
+Website:
+https://biz.partnership.uisi.ac.id
+
+Login CMS:
+https://biz.partnership.uisi.ac.id/cms/login
+
+
+1. STRUKTUR WEBSITE
+===================
+
+Lokasi proyek pada laptop/Laragon:
+C:\UISI\web-uisi\web-uisi
+
+Lokasi pada server Virtualmin:
+
+/home/biz.partnership/
+|-- laravel/                 Kode aplikasi Laravel
+|   |-- app/
+|   |-- config/
+|   |-- database/
+|   |   `-- database.sqlite Database produksi
+|   |-- resources/
+|   |-- routes/
+|   |-- storage/
+|   `-- vendor/
+`-- public_html/             File yang dapat diakses browser
+    |-- build/
+    |-- images/
+    |-- storage/             Gambar dan bukti pembayaran
+    |-- vendor/
+    |-- .htaccess
+    `-- index.php
+
+Aplikasi saat ini memakai SQLite. Data website berada di:
+/home/biz.partnership/laravel/database/database.sqlite
+
+Menu Edit Databases di Virtualmin menampilkan MariaDB, tetapi MariaDB tersebut
+belum digunakan oleh aplikasi ini.
+
+
+2. DEPLOYMENT PERTAMA DARI AWAL
+===============================
+
+Bagian ini hanya dipakai untuk pemasangan pada server kosong.
+
+A. Persiapan di Laragon
+
+1. Buka terminal pada folder:
+   C:\UISI\web-uisi\web-uisi
+
+2. Jalankan:
+
+   composer install
+   npm install
+   php artisan migrate
+   npm run build
+   php artisan test
+
+3. Jika website lokal berjalan, buat paket hosting:
+
+   powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\deployment\build-virtualmin-package.ps1
+
+4. Paket penuh hanya dipakai untuk deployment pertama. Jangan gunakan paket
+   penuh untuk update website yang sudah menerima data pendaftaran.
+
+B. Upload ke Virtualmin
+
+1. Buka File Manager.
+2. Masuk ke folder home /home/biz.partnership.
+3. Upload ZIP hosting.
+4. Extract di folder home tersebut.
+5. Pastikan folder laravel sejajar dengan public_html.
+6. Gunakan PHP 8.2 atau lebih baru.
+7. Pastikan modul berikut aktif:
+   - pdo_sqlite
+   - sqlite3
+   - mbstring
+   - fileinfo
+   - gd
+   - xml
+   - zip
+
+8. Permission yang diperlukan:
+
+   laravel/storage                 0775
+   laravel/bootstrap/cache         0775
+   database/database.sqlite        0664
+   public_html/storage             0775
+   Direktori aplikasi lainnya      0755
+   File PHP lainnya                0644
+   laravel/.env                    0600
+
+9. Buka website dan halaman login CMS.
+10. Setelah berhasil, hapus ZIP dari server.
+
+
+3. MEMPERBARUI DATA MELALUI CMS
+===============================
+
+Perubahan melalui CMS langsung tersimpan pada database produksi. Tidak perlu
+membuat ZIP atau upload ulang.
+
+Login:
+https://biz.partnership.uisi.ac.id/cms/login
+
+Halaman CMS:
+
+/admin                  Dashboard CMS
+/admin/hero             Hero website
+/admin/profile          Konten profil
+/admin/programs         Program dan kuota
+/admin/registrations    Peserta dan pendaftaran
+/admin/settings         Pengaturan website
+/admin/calendar         Kalender program
+
+Langkah umum:
+
+1. Login CMS.
+2. Buka menu yang ingin diperbarui.
+3. Tambah atau edit data.
+4. Klik Simpan.
+5. Perubahan langsung tampil di website.
+
+Data yang dapat berubah langsung melalui CMS antara lain:
+
+- Hero dan teks website
+- Program
+- Kuota
+- Kalender
+- Profil
+- Peserta
+- Status pembayaran
+- Kontak dan media sosial
+
+PENTING:
+Jangan upload database.sqlite dari laptop setelah website aktif. Tindakan itu
+dapat menghapus pendaftaran dan perubahan CMS terbaru di server.
+
+
+4. MEMPERBARUI TAMPILAN ATAU UI DARI LARAGON
+============================================
+
+Gunakan langkah ini untuk perubahan Blade, CSS, JavaScript, navbar, halaman
+admin, dan desain lainnya.
+
+A. File UI utama
+
+resources/views/             Semua halaman Blade
+resources/views/admin/       Tampilan CMS
+resources/views/partials/    Navbar, footer, dan komponen umum
+resources/css/app.css        CSS utama
+resources/js/admin-analytics.js  JavaScript analitik admin
+public/images/               Gambar bawaan
+
+B. Ubah dan tes secara lokal
+
+1. Lakukan perubahan di Laragon.
+2. Buka dan periksa website lokal.
+3. Jalankan:
+
+   npm.cmd run build
+   php artisan test
+
+4. Hasil build frontend terbaru berada di:
+
+   public/build
+
+C. Struktur ZIP update UI
+
+Siapkan struktur berikut:
+
+update-ui/
+|-- laravel/
+|   |-- app/                 Jika controller atau model berubah
+|   |-- config/              Jika konfigurasi berubah
+|   |-- resources/
+|   `-- routes/              Jika route berubah
+`-- public_html/
+    |-- build/
+    `-- images/              Hanya jika gambar bawaan berubah
+
+Di dalam ZIP, level paling atas harus langsung berisi:
+
+laravel/
+public_html/
+
+Jangan sampai hasil extract menjadi:
+
+/home/biz.partnership/update-ui/laravel
+
+D. File yang tidak boleh dimasukkan ke ZIP update
+
+.env
+database/database.sqlite
+laravel/storage
+public_html/storage
+node_modules
+vendor
+tests
+logs
+scratch
+
+Jangan upload public/index.php lokal secara langsung. Versi server memiliki
+path khusus menuju /home/biz.partnership/laravel.
+
+E. Upload update UI
+
+1. Backup database dan storage terlebih dahulu.
+2. Upload ZIP ke /home/biz.partnership.
+3. Extract di folder tersebut.
+4. Pilih Replace atau Overwrite jika diminta.
+5. Jangan menghapus folder storage.
+6. Jika tersedia Terminal, jalankan:
+
+   cd /home/biz.partnership/laravel
+   php artisan optimize:clear
+
+7. Buka website dengan Ctrl + F5.
+8. Periksa halaman utama dan CMS.
+9. Setelah berhasil, hapus ZIP update dari server.
+
+
+5. MEMPERBARUI LOGIKA BACKEND
+=============================
+
+Jika perubahan mencakup controller, model, middleware, atau route, masukkan
+file terkait ke dalam ZIP update:
+
+laravel/app/
+laravel/config/
+laravel/routes/
+laravel/resources/
+
+Contoh file:
+
+app/Http/Controllers/Admin/ProgramController.php
+app/Models/Program.php
+routes/web.php
+resources/views/admin/programs/
+
+Jika CSS atau JavaScript ikut berubah, jalankan npm run build dan sertakan:
+
+public_html/build/
+
+
+6. MEMPERBARUI STRUKTUR DATABASE
+===============================
+
+Gunakan migration untuk menambah kolom atau tabel. Jangan mengubah database
+produksi secara manual jika perubahan dapat dibuat dengan migration.
+
+A. Membuat migration lokal
+
+Contoh:
+
+php artisan make:migration add_location_to_programs_table
+
+Edit file migration baru di:
+
+database/migrations/
+
+Tes secara lokal:
+
+php artisan migrate
+php artisan test
+
+B. Struktur ZIP update database
+
+laravel/
+|-- app/                     Model atau controller yang berubah
+|-- database/
+|   `-- migrations/          Migration baru
+|-- resources/               Form atau tampilan baru
+`-- routes/                  Jika route berubah
+
+public_html/
+`-- build/                   Jika UI berubah
+
+Jangan sertakan:
+
+laravel/database/database.sqlite
+
+C. Menjalankan migration pada server
+
+1. Backup database terlebih dahulu.
+2. Upload dan extract ZIP update.
+3. Buka Terminal atau SSH.
+4. Jalankan:
+
+   cd /home/biz.partnership/laravel
+   php artisan migrate --force
+   php artisan optimize:clear
+
+5. Jika perintah php bukan PHP 8.2, gunakan:
+
+   php8.2 artisan migrate --force
+   php8.2 artisan optimize:clear
+
+Jika Virtualmin tidak menyediakan Terminal, minta administrator server atau
+buat runner migration sekali pakai yang memakai kunci dan menghapus dirinya
+setelah selesai.
+
+
+7. MENGELOLA AKUN ADMIN
+=======================
+
+Login CMS:
+https://biz.partnership.uisi.ac.id/cms/login
+
+Mengubah profil akun:
+https://biz.partnership.uisi.ac.id/settings/profile
+
+Mengubah password:
+https://biz.partnership.uisi.ac.id/settings/security
+
+Setelah login pertama, segera ganti password bawaan dengan password yang kuat.
+
+Fitur lupa password memerlukan konfigurasi SMTP di file .env. Jika SMTP belum
+dikonfigurasi, email reset password tidak akan terkirim karena mail production
+masih menggunakan log.
+
+
+8. MENAMBAHKAN DEPENDENSI COMPOSER
+==================================
+
+Jika menjalankan:
+
+composer require nama/package
+
+maka file berikut berubah:
+
+composer.json
+composer.lock
+vendor/
+
+Pada server jalankan:
+
+cd /home/biz.partnership/laravel
+composer install --no-dev --optimize-autoloader
+php artisan optimize:clear
+
+Jika server tidak memiliki Composer atau SSH, buat paket update yang sudah
+menyertakan vendor produksi.
+
+
+9. BACKUP SEBELUM UPDATE
+========================
+
+Minimal backup file berikut:
+
+/home/biz.partnership/laravel/database/database.sqlite
+/home/biz.partnership/public_html/storage
+/home/biz.partnership/laravel/.env
+
+Sebaiknya gunakan fitur Backup and Restore Virtualmin untuk membackup seluruh
+virtual server.
+
+Database berisi:
+
+- Akun admin
+- Program
+- Peserta
+- Pendaftaran
+- Pengaturan website
+- Status pembayaran
+
+Folder public_html/storage berisi:
+
+- Gambar program
+- Dokumen
+- Bukti pembayaran
+
+Database dan storage harus dibackup bersama agar data dan file unggahan tetap
+sesuai.
+
+
+10. CHECKLIST SETIAP UPDATE
+==========================
+
+Sebelum upload:
+
+[ ] Backup database dan storage
+[ ] Perubahan sudah dites di Laragon
+[ ] npm run build sudah dijalankan
+[ ] ZIP tidak berisi .env
+[ ] ZIP tidak berisi database.sqlite
+[ ] ZIP tidak berisi storage produksi
+[ ] Struktur ZIP langsung berisi laravel dan public_html
+
+Setelah upload:
+
+[ ] Extract ke /home/biz.partnership
+[ ] Jalankan migration jika ada
+[ ] Jalankan php artisan optimize:clear
+[ ] Buka halaman utama
+[ ] Login CMS
+[ ] Periksa CSS, gambar, dan JavaScript
+[ ] Coba form yang diubah
+[ ] Hapus ZIP update dari server
+
+
+RINGKASAN PALING PENTING
+========================
+
+1. Perubahan melalui CMS langsung live dan tidak perlu upload.
+2. Perubahan kode dari Laragon harus di-build dan di-upload.
+3. Jalankan npm run build jika CSS atau JavaScript berubah.
+4. Jangan pernah menimpa database.sqlite produksi dengan versi lokal.
+5. Jangan pernah menimpa public_html/storage dengan versi lokal.
+6. Selalu backup database, storage, dan .env sebelum update.
+7. Hapus ZIP update dari server setelah update berhasil.

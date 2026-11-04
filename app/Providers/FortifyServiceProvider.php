@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Laravel\Fortify\Contracts\LoginResponse;
+use Laravel\Fortify\Contracts\LogoutResponse;
+use Laravel\Fortify\Contracts\TwoFactorLoginResponse;
 use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -18,7 +21,29 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(LoginResponse::class, fn () => new class implements LoginResponse
+        {
+            public function toResponse($request)
+            {
+                return redirect()->route('admin.dashboard');
+            }
+        });
+
+        $this->app->singleton(TwoFactorLoginResponse::class, fn () => new class implements TwoFactorLoginResponse
+        {
+            public function toResponse($request)
+            {
+                return redirect()->route('admin.dashboard');
+            }
+        });
+
+        $this->app->singleton(LogoutResponse::class, fn () => new class implements LogoutResponse
+        {
+            public function toResponse($request)
+            {
+                return redirect('/cms/login');
+            }
+        });
     }
 
     /**
